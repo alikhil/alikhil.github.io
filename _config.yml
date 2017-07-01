@@ -4,6 +4,7 @@ description: > # this means to ignore newlines until "github_username:"
   Insights, hacks, tutorials and other things which were discovered by me.
 github_username:  alikhil
 theme: jekyll-theme-hacker
+future: true
 # twitter_username: jekyllrb
 # baseurl: "" # the subpath of your site, e.g. /blog
 # url: "" # the base hostname & protocol for your site, e.g. http://example.com
