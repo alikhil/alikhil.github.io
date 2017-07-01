@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hello, World!"
-date:   2017-07-01 06:38:01 +0300
+date:   2017-07-01 01:38:01 +0300
 categories: jekyll hack
 ---
 
