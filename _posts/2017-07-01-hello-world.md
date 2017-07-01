@@ -10,7 +10,7 @@ If you want to create blog with Jekyll, then **use github [tutorial](https://hel
 
 I tried 2 or three different tutorials, they were complicated and non of them worked for me. But when I used github tutorial, it took 5 minutes for me to make it working!
 
-Quick overview of tutorial:
+### Quick overview of tutorial:
 
 1. Create new repository with name like `username.github.io`.
 2. Navigate to repository **Settings**
