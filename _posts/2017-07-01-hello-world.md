@@ -3,6 +3,7 @@ layout: post
 title:  "Hello, World!"
 date:   2017-07-01 01:38:01 +0300
 categories: jekyll hack
+comments: true
 ---
 
 This is my first post here. And after spending about 4 hours on making blog work I want to share with you first hack.
