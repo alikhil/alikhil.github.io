@@ -7,18 +7,18 @@ comments: true
 ---
 
 Hi folks! 
-It's been a long time since I have publish last post, but now I came back with short quickstart guide in **Go**.
+It's been a long time since I have published the last post, but now I came back with short quickstart guide in **Go**.
 
-In this tutorial we will configure Go environment in VS Code and write our first program in Go.
+In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
 
 ### Install Go
 
-First thing that you need to do it's to install Go into your computer. To do so, dowload installer for your operating system from  [here](https://golang.org/dl/) and then run installer.
+The first thing that you need to do it's to install Go on your computer. To do so, download installer for your operating system from  [here](https://golang.org/dl/) and then run the installer.
 
 
 ### Configure GOPATH
 
-By language convention Go developers store all their code in single place called *workspace*. Go also puts dependency packages in workspace. So, in order to Go perform correctly we need to set `GOPATH` variable with path to workspace. 
+By language convention, Go developers store all their code in a single place called *workspace*. Go also puts dependency packages in the workspace. So, in order to Go perform correctly, we need to set `GOPATH` variable with the path to the workspace. 
 
 #### MacOS and Linux
 
@@ -28,7 +28,7 @@ Set the `GOPATH` envar with workspace
 export GOPATH=$HOME/go
 ```
 
-Also we need to add `GOPATH/bin` to `PATH` in order to run compiler Go programs:
+Also, we need to add `GOPATH/bin` to `PATH` in order to run compiler Go programs:
 
 ```bash
 export PATH=$PATH:$GOPATH/bin
@@ -44,7 +44,7 @@ Install delve debugger:
 go get -u github.com/derekparker/delve/cmd/dlv
 ```
 
-I reccomend you to add following lines to your VS Code user settings:
+I recommend you to add the following lines to your VS Code user settings:
 
 ```json
 {
@@ -61,7 +61,7 @@ Create `GOPATH` envar:
 set GOPATH=c:\Users\%USERNAME%\go
 ```
 
-Also we need to add `GOPATH\bin` to `PATH` in order to run compiler Go programs:
+Also, we need to add `GOPATH\bin` to `PATH` in order to run compiler Go programs:
 
 ```sh
 set PATH=%PATH%;%GOPATH%\bin
@@ -69,7 +69,7 @@ set PATH=%PATH%;%GOPATH%\bin
 
 ### Create project
 
-Move to your `GOPATH/src` directory. Create directory for your project:
+Move to your `GOPATH/src` directory. Create a directory for your project:
 
 ```bash
 cd $GOPATH/src
@@ -84,7 +84,7 @@ code github.com/alikhil/hello-world-with-go
 
 ### Hello World!
 
-Let's create file named `program.go` and put following code there:
+Let's create a file named `program.go` and put the following code there:
 
 ```go
 package main
@@ -99,13 +99,13 @@ func main() {
 
 ### Run the program
 
-Finally, to run the program by pressing F5 button in VS Code and you should see message printed to *Debuge Console*.
+Finally, to run the program by pressing the `F5` button in VS Code and you should see the message printed to *Debug Console*.
 
 That's all! My congratulations, you have just written your first program in Go! 
 
-### Troubleshouting
+### Troubleshooting
 
-If you fail to run your program and there is some message like **"Cannot find path to `go`"**.
+If you fail to run your program and there is some message like **"Cannot find a path to `go`"**.
 Try to add to your `PATH` envar with path directory where `go` binary is stored.
 
 For example in MacOS I have added following line to my `~/.bash_profile`:
