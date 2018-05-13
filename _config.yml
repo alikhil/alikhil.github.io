@@ -9,3 +9,6 @@ markdown: kramdown
 # twitter_username: jekyllrb
 # baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://alikhil.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+tag_page_layout: tag_page
+tag_page_dir: tag
+tag_permalink_style: pretty

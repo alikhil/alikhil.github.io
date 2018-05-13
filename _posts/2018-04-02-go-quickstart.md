@@ -2,7 +2,7 @@
 layout: post
 title:  "Go Quickstart"
 date:   2018-04-06 15:56:57 +0300
-categories: Go Tutuorial vscode
+tags: Go vscode tutorial
 comments: true
 ---
 
