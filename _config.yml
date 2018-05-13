@@ -12,3 +12,5 @@ url: "https://alikhil.github.io" # the base hostname & protocol for your site, e
 tag_page_layout: tag_page
 tag_page_dir: tag
 tag_permalink_style: pretty
+plugins:
+  - jekyll-tagging
