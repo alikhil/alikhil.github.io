@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Alik&#39;s blog</title>
+    <link>http://alikhil.github.io/tags/go/</link>
+    <description>Recent content in Go on Alik&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate>
+    
+	<atom:link href="http://alikhil.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Quickstart</title>
+      <link>http://alikhil.github.io/2018/04/go-quickstart/</link>
+      <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
+      
+      <guid>http://alikhil.github.io/2018/04/go-quickstart/</guid>
+      <description>&lt;p&gt;Hi folks!
+It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
