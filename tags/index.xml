@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Alik&#39;s blog</title>
-    <link>http://alikhil.github.io/tags/</link>
+    <link>https://alikhil.github.io/tags/</link>
     <description>Recent content in Tags on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate>
     
-	<atom:link href="http://alikhil.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://alikhil.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Go</title>
-      <link>http://alikhil.github.io/tags/go/</link>
+      <link>https://alikhil.github.io/tags/go/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>http://alikhil.github.io/tags/go/</guid>
+      <guid>https://alikhil.github.io/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>http://alikhil.github.io/tags/hugo/</link>
+      <link>https://alikhil.github.io/tags/hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>http://alikhil.github.io/tags/hugo/</guid>
+      <guid>https://alikhil.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tutorial</title>
-      <link>http://alikhil.github.io/tags/tutorial/</link>
+      <link>https://alikhil.github.io/tags/tutorial/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>http://alikhil.github.io/tags/tutorial/</guid>
+      <guid>https://alikhil.github.io/tags/tutorial/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vscode</title>
-      <link>http://alikhil.github.io/tags/vscode/</link>
+      <link>https://alikhil.github.io/tags/vscode/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>http://alikhil.github.io/tags/vscode/</guid>
+      <guid>https://alikhil.github.io/tags/vscode/</guid>
       <description></description>
     </item>
     

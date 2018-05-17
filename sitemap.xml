@@ -3,76 +3,76 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://alikhil.github.io/2018/05/say-hello-to-hugo/</loc>
+    <loc>https://alikhil.github.io/2018/05/say-hello-to-hugo/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/2018/04/go-quickstart/</loc>
+    <loc>https://alikhil.github.io/2018/04/go-quickstart/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/</loc>
+    <loc>https://alikhil.github.io/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/archives/</loc>
+    <loc>https://alikhil.github.io/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/categories/blogging/</loc>
+    <loc>https://alikhil.github.io/categories/blogging/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/categories/</loc>
+    <loc>https://alikhil.github.io/categories/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/tags/go/</loc>
-    <lastmod>2018-04-06T16:22:35+03:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://alikhil.github.io/tags/hugo/</loc>
-    <lastmod>2018-05-17T16:03:44+03:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://alikhil.github.io/post/</loc>
-    <lastmod>2018-05-17T16:03:44+03:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://alikhil.github.io/categories/programming/</loc>
+    <loc>https://alikhil.github.io/tags/go/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/tags/</loc>
+    <loc>https://alikhil.github.io/tags/hugo/</loc>
+    <lastmod>2018-05-17T16:03:44+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alikhil.github.io/post/</loc>
+    <lastmod>2018-05-17T16:03:44+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alikhil.github.io/categories/programming/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/tags/tutorial/</loc>
+    <loc>https://alikhil.github.io/tags/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://alikhil.github.io/tags/vscode/</loc>
+    <loc>https://alikhil.github.io/tags/tutorial/</loc>
+    <lastmod>2018-04-06T16:22:35+03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://alikhil.github.io/tags/vscode/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
     <priority>0</priority>
   </url>

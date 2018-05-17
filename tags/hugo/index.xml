@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on Alik&#39;s blog</title>
-    <link>http://alikhil.github.io/tags/hugo/</link>
+    <link>https://alikhil.github.io/tags/hugo/</link>
     <description>Recent content in Hugo on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 May 2018 16:03:44 +0300</lastBuildDate>
     
-	<atom:link href="http://alikhil.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://alikhil.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Say hello to Hugo</title>
-      <link>http://alikhil.github.io/2018/05/say-hello-to-hugo/</link>
+      <link>https://alikhil.github.io/2018/05/say-hello-to-hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>http://alikhil.github.io/2018/05/say-hello-to-hugo/</guid>
+      <guid>https://alikhil.github.io/2018/05/say-hello-to-hugo/</guid>
       <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

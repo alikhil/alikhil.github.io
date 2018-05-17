@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorial on Alik&#39;s blog</title>
-    <link>http://alikhil.github.io/tags/tutorial/</link>
+    <link>https://alikhil.github.io/tags/tutorial/</link>
     <description>Recent content in Tutorial on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate>
     
-	<atom:link href="http://alikhil.github.io/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://alikhil.github.io/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Go Quickstart</title>
-      <link>http://alikhil.github.io/2018/04/go-quickstart/</link>
+      <link>https://alikhil.github.io/2018/04/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>http://alikhil.github.io/2018/04/go-quickstart/</guid>
+      <guid>https://alikhil.github.io/2018/04/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
 
