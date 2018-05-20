@@ -6,7 +6,7 @@
     <description>Recent content in Google Cloud on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 May 2018 20:24:36 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 20 May 2018 21:30:36 +0300</lastBuildDate>
     
 	<atom:link href="https://alikhil.github.io/tags/google-cloud/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
       <link>https://alikhil.github.io/2018/05/oauth2-proxy-for-kubernetes-services/</link>
-      <pubDate>Thu, 17 May 2018 20:24:36 +0300</pubDate>
+      <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
       <guid>https://alikhil.github.io/2018/05/oauth2-proxy-for-kubernetes-services/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
