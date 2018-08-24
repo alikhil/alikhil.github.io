@@ -303,7 +303,8 @@ ga('send', 'pageview');
 <ul>
 <li><a href="#update">Update</a>
 <ul>
-<li><a href="#upd-1-0">UPD 1.0</a></li>
+<li><a href="#upd-1-0-07-30-18">UPD 1.0(07/30/18)</a></li>
+<li><a href="#upd-2-0-08-24-18">UPD 2.0(08/24/18)</a></li>
 </ul></li>
 <li><a href="#kubernetes">Kubernetes</a>
 <ul>
@@ -352,9 +353,16 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 
 <h2 id="update">Update</h2>
 
-<h3 id="upd-1-0">UPD 1.0</h3>
+<h3 id="upd-1-0-07-30-18">UPD 1.0(07/30/18)</h3>
 
 <p>Using kube-lego for configuring Let&rsquo;s Encrypt certificates is depricated now. Consider using <a href="https://github.com/jetstack/cert-manager">cert-manager</a> instead.</p>
+
+<h3 id="upd-2-0-08-24-18">UPD 2.0(08/24/18)</h3>
+
+<p>Initialy, when I was writing this post I was using old version of nginx 0.9.0, because it did not work correctly on newer version. Now, I found the problem and it have been fixed in 0.18.0 release. But ingress exposing private services should be updated(<a href="https://github.com/helm/charts/issues/5958#issuecomment-408457931">more details</a>):</p>
+
+<pre><code class="language-yaml">    nginx.ingress.kubernetes.io/auth-url: http://oauth2-proxy.oauth-proxy.svc.cluster.local:4180/oauth2/auth 
+</code></pre>
 
 <h2 id="kubernetes">Kubernetes</h2>
 
