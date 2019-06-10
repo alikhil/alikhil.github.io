@@ -22,38 +22,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.40.3 with theme Tranquilpeak 0.4.3-BETA">
-    <title>Go Quickstart</title>
+    <title>Deploy SPA application to Kubernetes</title>
     <meta name="author" content="Alik Khilazhev">
-    <meta name="keywords" content="go, vscode, tutorial, quickstart">
+    <meta name="keywords" content="spa, tutorial, k8s, kubernetes, docker">
 
     <link rel="icon" href="https://alikhil.github.io/favicon.png">
     
 
     
-    <meta name="description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
-
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
-
-">
-    <meta property="og:description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
-
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
-
-">
+    <meta name="description" content="Hello, folks!
+Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.
+Dockerize the application I expect that you have docker installed in your machine. If it isn&rsquo;t you can install it by following official installation guide.
+As SPA project I will use vue-realworld-example-app as SPA project.">
+    <meta property="og:description" content="Hello, folks!
+Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.
+Dockerize the application I expect that you have docker installed in your machine. If it isn&rsquo;t you can install it by following official installation guide.
+As SPA project I will use vue-realworld-example-app as SPA project.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Go Quickstart">
-    <meta property="og:url" content="/2018/04/go-quickstart/">
+    <meta property="og:title" content="Deploy SPA application to Kubernetes">
+    <meta property="og:url" content="/2019/06/deploy-spa-application-to-kubernetes/">
     <meta property="og:site_name" content="Alik&#39;s blog">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alik&#39;s blog">
-    <meta name="twitter:description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
-
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
-
-">
+    <meta name="twitter:description" content="Hello, folks!
+Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.
+Dockerize the application I expect that you have docker installed in your machine. If it isn&rsquo;t you can install it by following official installation guide.
+As SPA project I will use vue-realworld-example-app as SPA project.">
     
     
 
@@ -65,10 +59,10 @@ In this tutorial, we will configure Go environment in VS Code and write our firs
     
 
     
-      <meta property="og:image" content="https://alikhil.github.io/images/gopher.png">
+      <meta property="og:image" content="https://alikhil.github.io/images/posts/k8s_logo.png">
     
     
-      <meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png">
+      <meta property="og:image" content="https://user-images.githubusercontent.com/7482065/59222933-5f047a00-8bd3-11e9-87c1-e2571645832d.jpg">
     
     
 
@@ -242,7 +236,7 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               post-header-cover--partial"
-       style="background-image:url('https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png')"
+       style="background-image:url('https://user-images.githubusercontent.com/7482065/59222933-5f047a00-8bd3-11e9-87c1-e2571645832d.jpg')"
        data-behavior="4">
     
   </div>
@@ -251,26 +245,28 @@ ga('send', 'pageview');
       <div id="main" data-behavior="4"
         class="hasCover
                hasCoverMetaOut
-               ">
+               hasCoverCaption">
         <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+            <span class="post-header-cover-caption caption">Photo by Calebe Miranda from Pexels</span>
           
           
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Go Quickstart
+      Deploy SPA application to Kubernetes
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-04-06T16:22:35&#43;03:00">
+      <time itemprop="datePublished" datetime="2019-06-08T22:30:00&#43;03:00">
         
   
   
   
   
-    6 April 2018
+    8 June 2019
   
 
       </time>
@@ -280,7 +276,7 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://alikhil.github.io/categories/programming">programming</a>
+      <a class="category-link" href="https://alikhil.github.io/categories/devops">devops</a>
     
   
 
@@ -290,43 +286,30 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in <strong>Go</strong>.</p>
+              
 
-<p>In this tutorial, we will configure Go environment in VS Code and write our first program in Go.</p>
+<p>Hello, folks!</p>
 
-<p></p>
+<p>Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.</p>
 
-<h3 id="install-go">Install Go</h3>
+<h3 id="dockerize-the-application">Dockerize the application</h3>
 
-<p>The first thing that you need to do it&rsquo;s to install Go on your computer. To do so, download installer for your operating system from  <a href="https://golang.org/dl/">here</a> and then run the installer.</p>
+<p>I expect that you have docker installed in your machine. If it isn&rsquo;t you can install it by following <a href="https://docs.docker.com/install/">official installation guide</a>.</p>
 
-<h3 id="configure-gopath">Configure GOPATH</h3>
+<p>As SPA project I will use <a href="https://github.com/gothinkster/vue-realworld-example-app">vue-realworld-example-app</a> as SPA project. You can your own SPA project if you have one.</p>
 
-<p>By language convention, Go developers store all their code in a single place called <em>workspace</em>. Go also puts dependency packages in the workspace. So, in order to Go perform correctly, we need to set <code>GOPATH</code> variable with the path to the workspace.</p>
+<p>So, I have cloned it, installed dependencies and built:</p>
 
-<h4 id="macos-and-linux">MacOS and Linux</h4>
+<pre><code class="language-bash">git clone https://github.com/gothinkster/vue-realworld-example-app
 
-<p>Set the <code>GOPATH</code> envar with workspace</p>
+yarn
 
-<pre><code class="language-bash">export GOPATH=$HOME/go
+yarn build
 </code></pre>
 
-<p>Also, we need to add <code>GOPATH/bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
+<p>Next step is to decide how our application will be served. There are bunch of possible solutions but I decided to use <a href="https://nginx.org/en/">nginx</a> since it recommends itself as one of the best http servers.</p>
 
-<pre><code class="language-bash">export PATH=$PATH:$GOPATH/bin
-</code></pre>
-
-<h3 id="configure-vs-code">Configure VS Code</h3>
-
-<p>Install <a href="https://github.com/Microsoft/vscode-go">official Go extension</a>.</p>
-
-<p>Install delve debugger:</p>
-
-<pre><code class="language-bash">go get -u github.com/derekparker/delve/cmd/dlv
-</code></pre>
-
-<p>I recommend you to add the following lines to your VS Code user settings:</p>
+<p>To serve SPA we need to return all requested files if they exist or otherwise fallback to index.html. To do so I wrote the following nginx config:</p>
 
 
   
@@ -339,10 +322,57 @@ It&rsquo;s been a long time since I have published the last post, but now I came
   
 
 
-<figure class="highlight json language-json">
+<figure class="highlight nginx language-nginx">
   <figcaption>
     
-      <span>settings.json</span>
+      <span>nginx.conf</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-nginx"><code class="nginx"># ...
+# other configs
+
+server {
+  listen 80;
+  root /app;
+
+  location / {
+    alias /app/;
+    try_files $uri /index.html;
+  }
+
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>Full config file can be found in <a href="https://github.com/alikhil/vue-realworld-example-app/blob/master/nginx.conf">my fork of the repo</a></p>
+
+<p>Then, we need to write <strong>Dockerfile</strong> for building image with our application. Here it is:</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+  
+
+
+<figure class="highlight docker language-docker">
+  <figcaption>
+    
+      <span>Dockerfile</span>
     
   </figcaption>
   <table>
@@ -352,44 +382,42 @@ It&rsquo;s been a long time since I have published the last post, but now I came
           <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-json"><code class="json">{
-    &#34;go.autocompleteUnimportedPackages&#34;: true,
-    &#34;go.formatTool&#34;: &#34;gofmt&#34;
-}</code></pre>
+          <pre class="code-highlight language-docker"><code class="docker">FROM nginx
+WORKDIR /root/
+COPY ./dist /app
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure>
 
-<h4 id="windows">Windows</h4>
+<p>We assume that artifacts of build placed in the <code>dist</code> directory and so that during the docker build the content of <code>dist</code> directory copied into containers <code>/app</code> directory.</p>
 
-<p>Create <code>GOPATH</code> envar:</p>
+<p>Now, we are ready to build it:</p>
 
-<pre><code class="language-sh">set GOPATH=c:\Users\%USERNAME%\go
+<pre><code class="language-bash">docker build -t alikhil/my-spa:0.1 .
 </code></pre>
 
-<p>Also, we need to add <code>GOPATH\bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
+<p>And run it:</p>
 
-<pre><code class="language-sh">set PATH=%PATH%;%GOPATH%\bin
+<pre><code class="language-bash">docker run -p 8080:80 alikhil/my-spa:0.1
 </code></pre>
 
-<h3 id="create-project">Create project</h3>
+<p>Then if we open <a href="http://localhost:8080">http://localhost:8080</a> we will see something similar to:</p>
 
-<p>Move to your <code>GOPATH/src</code> directory. Create a directory for your project:</p>
+<p><img width="1279" alt="Screen Shot 2019-06-09 at 14 21 09" src="https://user-images.githubusercontent.com/7482065/59158361-e792f580-8ac1-11e9-9cd0-de309c697c12.png"></p>
 
-<pre><code class="language-bash">cd $GOPATH/src
-mkdir -p github.com/alikhil/hello-world-with-go
+<p>Cool! It works!</p>
+
+<p>We will need to use our newly builded docker image to deploy to k8s. So, we need to make it available from the k8s cluster by pulling to some docker registry. I will push image to <a href="http://hub.docker.com/">DockerHub</a>:</p>
+
+<pre><code class="language-bash">docker push alikhil/my-spa:0.1
 </code></pre>
 
-<p>Open it using vscode:</p>
+<h3 id="deploy-to-k8s">Deploy to k8s</h3>
 
-<pre><code class="language-bash">code github.com/alikhil/hello-world-with-go
-</code></pre>
-
-<h3 id="hello-world">Hello World!</h3>
-
-<p>Let&rsquo;s create a file named <code>program.go</code> and put the following code there:</p>
+<p>To run the application in k8s we will use <code>Deployment</code> resource type. Here it is:</p>
 
 
   
@@ -402,66 +430,164 @@ mkdir -p github.com/alikhil/hello-world-with-go
   
 
 
-<figure class="highlight go language-go">
+<figure class="highlight yml language-yml">
   <figcaption>
     
-      <span>program.go</span>
+      <span>deployment.yaml</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-go"><code class="go">package main
-
-import &#34;fmt&#34;
-
-func main() {
-    fmt.Println(&#34;¡Hola, mundo!&#34;)
-}</code></pre>
+          <pre class="code-highlight language-yml"><code class="yml">apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-spa
+  labels:
+    app: my-spa
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-spa
+    spec:
+      containers:
+      - image: alikhil/my-spa:0.1
+        name: spa
+        ports:
+          - containerPort: 80
+        resources:
+          limits:
+            cpu: 150m
+            memory: 250Mi</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure>
 
-<h3 id="run-the-program">Run the program</h3>
+<p>Then we create deployment by running <code>kubectl apply -f deployment.yaml</code> and newly created pods can found:</p>
 
-<p>Finally, to run the program by pressing the <code>F5</code> button in VS Code and you should see the message printed to <em>Debug Console</em>.</p>
-
-<p>That&rsquo;s all! My congratulations, you have just written your first program in Go!</p>
-
-<h3 id="troubleshooting">Troubleshooting</h3>
-
-<p>If you fail to run your program and there is some message like <strong>&ldquo;Cannot find a path to <code>go</code>&ldquo;</strong>.
-Try to add to your <code>PATH</code> envar with path directory where <code>go</code> binary is stored.</p>
-
-<p>For example in MacOS I have added following line to my <code>~/.bash_profile</code>:</p>
-
-<pre><code class="language-bash">export PATH=/usr/local/go/bin:$PATH
+<pre><code class="language-bash">$ kubectl get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+my-spa-84b6dcd48d-mhv9f   1/1     Running   0          18s
 </code></pre>
+
+<p>Then we need to expose our app to the world. It can be done by using service of type NodePort or via Ingress. We will do it with Ingress. For that we will need service:</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+  
+
+
+<figure class="highlight yaml language-yaml">
+  <figcaption>
+    
+      <span>service.yaml</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-yaml"><code class="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: my-spa
+  labels:
+    app: my-spa
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: my-spa</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>And ingress itself:</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+  
+
+
+<figure class="highlight yaml language-yaml">
+  <figcaption>
+    
+      <span>ingress.yaml</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-yaml"><code class="yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-spa-ing
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts:
+    - my-spa.example.com
+    secretName: my-spa-cert-secret
+  rules:
+  - host: my-spa.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-spa
+          servicePort: 80</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<pre><code class="language-bash">kubectl apply -f ingress.yaml -f service.yaml
+</code></pre>
+
+<p>And here it is! Our SPA runs in the k8s!</p>
+
+<p><img width="1253" alt="Screen Shot 2019-06-10 at 22 39 00" src="https://user-images.githubusercontent.com/7482065/59221731-a1788780-8bd0-11e9-806b-734048d3a291.png"></p>
+
               
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
             
-              
-                
-                
-                  <div class="post-footer-tags">
-                    <span class="text-color-light text-small">TAGGED IN</span><br/>
-                    
-  <a class="tag tag--primary tag--small" href="https://alikhil.github.io/tags/go/">Go</a>
-
-  <a class="tag tag--primary tag--small" href="https://alikhil.github.io/tags/vscode/">vscode</a>
-
-  <a class="tag tag--primary tag--small" href="https://alikhil.github.io/tags/tutorial/">tutorial</a>
-
-                  </div>
-                
               
             
             
@@ -471,7 +597,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -479,7 +605,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/10/tips-for-language-learners/" data-tooltip="Tips for language learners">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -497,19 +623,19 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -557,7 +683,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -565,7 +691,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/10/tips-for-language-learners/" data-tooltip="Tips for language learners">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -583,19 +709,19 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -625,19 +751,19 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Falikhil.github.io%2F2019%2F06%2Fdeploy-spa-application-to-kubernetes%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Falikhil.github.io%2F2019%2F06%2Fdeploy-spa-application-to-kubernetes%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Falikhil.github.io%2F2019%2F06%2Fdeploy-spa-application-to-kubernetes%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -846,9 +972,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/alikhil.github.io\/2018\/04\/go-quickstart\/';
+          this.page.url = 'https:\/\/alikhil.github.io\/2019\/06\/deploy-spa-application-to-kubernetes\/';
           
-            this.page.identifier = '\/2018\/04\/go-quickstart\/'
+            this.page.identifier = '\/2019\/06\/deploy-spa-application-to-kubernetes\/'
           
         };
         (function() {
