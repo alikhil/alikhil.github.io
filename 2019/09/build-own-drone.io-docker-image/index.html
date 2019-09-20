@@ -22,36 +22,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.40.3 with theme Tranquilpeak 0.4.3-BETA">
-    <title>Go Quickstart</title>
+    <title>Build own drone.io docker image</title>
     <meta name="author" content="Alik Khilazhev">
-    <meta name="keywords" content="go, vscode, tutorial, quickstart">
+    <meta name="keywords" content="ci/cd, tutorial, drone.io, docker">
 
     <link rel="icon" href="https://alikhil.github.io/favicon.ico">
     
 
     
-    <meta name="description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+    <meta name="description" content="¡Hola, amigos!
 
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
+In this post, I will quickly descibe how you can build your own drone.io docker image.
 
 ">
-    <meta property="og:description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+    <meta property="og:description" content="¡Hola, amigos!
 
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
+In this post, I will quickly descibe how you can build your own drone.io docker image.
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Go Quickstart">
-    <meta property="og:url" content="/2018/04/go-quickstart/">
+    <meta property="og:title" content="Build own drone.io docker image">
+    <meta property="og:url" content="/2019/09/build-own-drone.io-docker-image/">
     <meta property="og:site_name" content="Alik&#39;s blog">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alik&#39;s blog">
-    <meta name="twitter:description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+    <meta name="twitter:description" content="¡Hola, amigos!
 
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
+In this post, I will quickly descibe how you can build your own drone.io docker image.
 
 ">
     
@@ -65,10 +62,10 @@ In this tutorial, we will configure Go environment in VS Code and write our firs
     
 
     
-      <meta property="og:image" content="https://alikhil.github.io/images/gopher.png">
+      <meta property="og:image" content="https://alikhil.github.io/images/posts/drone-logo.png">
     
     
-      <meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png">
+      <meta property="og:image" content="https://user-images.githubusercontent.com/7482065/65316587-eda96f80-dba2-11e9-81cf-2df2e0ce0309.png">
     
     
 
@@ -252,7 +249,7 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               post-header-cover--partial"
-       style="background-image:url('https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png')"
+       style="background-image:url('https://user-images.githubusercontent.com/7482065/65316587-eda96f80-dba2-11e9-81cf-2df2e0ce0309.png')"
        data-behavior="4">
     
   </div>
@@ -261,26 +258,28 @@ ga('send', 'pageview');
       <div id="main" data-behavior="4"
         class="hasCover
                hasCoverMetaOut
-               ">
+               hasCoverCaption">
         <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+            <span class="post-header-cover-caption caption">Old drone logo</span>
           
           
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Go Quickstart
+      Build own drone.io docker image
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-04-06T16:22:35&#43;03:00">
+      <time itemprop="datePublished" datetime="2019-09-20T12:30:00&#43;03:00">
         
   
   
   
   
-    6 April 2018
+    20 September 2019
   
 
       </time>
@@ -290,7 +289,7 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://alikhil.github.io/categories/programming">programming</a>
+      <a class="category-link" href="https://alikhil.github.io/categories/devops">devops</a>
     
   
 
@@ -300,43 +299,37 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in <strong>Go</strong>.</p>
+              <p>¡Hola, amigos!</p>
 
-<p>In this tutorial, we will configure Go environment in VS Code and write our first program in Go.</p>
+<p>In this post, I will quickly descibe how you can build your own <a href="https://drone.io">drone.io</a> docker image.</p>
 
 <p></p>
 
-<h3 id="install-go">Install Go</h3>
+<p>Drone is very popular container native CI/CD platform. Not long time ago, there was release of new <a href="https://blog.drone.io/drone-1/">1.0 version</a> of drone. Which brang a lot of cool features and new <a href="https://discourse.drone.io/t/licensing-and-subscription-faq/3839">license</a>. The license tells that we can use Enterprise version of drone for free without any limits by building our own docker image if we are individuals or startup (read the licence for more detail).</p>
 
-<p>The first thing that you need to do it&rsquo;s to install Go on your computer. To do so, download installer for your operating system from  <a href="https://golang.org/dl/">here</a> and then run the installer.</p>
+<p>So, how to build it?</p>
 
-<h3 id="configure-gopath">Configure GOPATH</h3>
+<h1 id="instructions">Instructions</h1>
 
-<p>By language convention, Go developers store all their code in a single place called <em>workspace</em>. Go also puts dependency packages in the workspace. So, in order to Go perform correctly, we need to set <code>GOPATH</code> variable with the path to the workspace.</p>
+<p>First, clone the drone repo to your local machine.</p>
 
-<h4 id="macos-and-linux">MacOS and Linux</h4>
-
-<p>Set the <code>GOPATH</code> envar with workspace</p>
-
-<pre><code class="language-bash">export GOPATH=$HOME/go
+<pre><code class="language-bash">git clone git@github.com:drone/drone.git
 </code></pre>
 
-<p>Also, we need to add <code>GOPATH/bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
+<p>Second, checkout to version of drone you want to build. For example, I want to build <a href="https://github.com/drone/drone/tag/v1.3.1">v1.3.1</a>:</p>
 
-<pre><code class="language-bash">export PATH=$PATH:$GOPATH/bin
+<pre><code class="language-bash">git checkout v1.3.1
 </code></pre>
 
-<h3 id="configure-vs-code">Configure VS Code</h3>
+<p>We will use single dockerfile to build the image. To do so, we need to add extra step to existing dockerfile which is in <code>docker</code> directory. Let&rsquo;s say we want to build docker image for <code>linux</code> OS and <code>amd64</code> architecture, then we will edit <code>docker/Dockerfile.server.linux.amd64</code>.</p>
 
-<p>Install <a href="https://github.com/Microsoft/vscode-go">official Go extension</a>.</p>
+<!-- Original drone docker images built in drone itself. To check how they built you can check `drone.yml`. -->
 
-<p>Install delve debugger:</p>
+<p>If you check the dockerfile you will see, that binaries are just copied into docker image during the build and they are built outside of the docker build. So, the step we will add to dockerfile is <code>go build</code> step.</p>
 
-<pre><code class="language-bash">go get -u github.com/derekparker/delve/cmd/dlv
-</code></pre>
+<p>To build the binary, we need to know what version of go is used for building binary in original docker image. We can find it in <code>drone.yml</code> <strong>build</strong> step. For version 1.3.1 of drone <code>golang:1.12.9</code> docker image is used for building binaries.</p>
 
-<p>I recommend you to add the following lines to your VS Code user settings:</p>
+<p>Then, we use same image to build binary in our dockerfile:</p>
 
 
   
@@ -349,129 +342,70 @@ It&rsquo;s been a long time since I have published the last post, but now I came
   
 
 
-<figure class="highlight json language-json">
+<figure class="highlight dockerfile language-dockerfile">
   <figcaption>
     
-      <span>settings.json</span>
+      <span>docker/Dockerfile.server.linux.amd64</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-json"><code class="json">{
-    &#34;go.autocompleteUnimportedPackages&#34;: true,
-    &#34;go.formatTool&#34;: &#34;gofmt&#34;
-}</code></pre>
+          <pre class="code-highlight language-dockerfile"><code class="dockerfile">FROM golang:1.12.9 as builder
+
+WORKDIR /go/src/github.com/drone/drone
+COPY . .
+
+ENV GOOS linux
+ENV GOARCH amd64
+ENV CGO_ENABLED 1
+ENV REPO github.com/drone/drone
+ENV GO111MODULE on
+RUN go build -tags nolimit -ldflags &#34;-extldflags \&#34;-static\&#34;&#34; -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server
+
+FROM alpine:3.9 as alpine
+RUN apk add -U --no-cache ca-certificates
+
+FROM alpine:3.9
+EXPOSE 80 443
+VOLUME /data
+
+ENV GODEBUG netdns=go
+ENV XDG_CACHE_HOME /data
+ENV DRONE_DATABASE_DRIVER sqlite3
+ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
+ENV DRONE_RUNNER_OS=linux
+ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_SERVER_PORT=:80
+ENV DRONE_SERVER_HOST=localhost
+ENV DRONE_DATADOG_ENABLED=true
+ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
+
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
+COPY --from=builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/
+ENTRYPOINT [&#34;/bin/drone-server&#34;]</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure>
 
-<h4 id="windows">Windows</h4>
+<p>Then we build docker image like:</p>
 
-<p>Create <code>GOPATH</code> envar:</p>
-
-<pre><code class="language-sh">set GOPATH=c:\Users\%USERNAME%\go
+<pre><code class="language-bash">docker build -t alikhil/drone:1.3.1 -f docker/Dockerfile.server.linux.amd64 .
 </code></pre>
 
-<p>Also, we need to add <code>GOPATH\bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
-
-<pre><code class="language-sh">set PATH=%PATH%;%GOPATH%\bin
-</code></pre>
-
-<h3 id="create-project">Create project</h3>
-
-<p>Move to your <code>GOPATH/src</code> directory. Create a directory for your project:</p>
-
-<pre><code class="language-bash">cd $GOPATH/src
-mkdir -p github.com/alikhil/hello-world-with-go
-</code></pre>
-
-<p>Open it using vscode:</p>
-
-<pre><code class="language-bash">code github.com/alikhil/hello-world-with-go
-</code></pre>
-
-<h3 id="hello-world">Hello World!</h3>
-
-<p>Let&rsquo;s create a file named <code>program.go</code> and put the following code there:</p>
-
-
-  
-    
-  
-  
-    
-  
-  
-  
-
-
-<figure class="highlight go language-go">
-  <figcaption>
-    
-      <span>program.go</span>
-    
-  </figcaption>
-  <table>
-    <tbody>
-      <tr>
-        <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
-        </td>
-        <td class="code">
-          <pre class="code-highlight language-go"><code class="go">package main
-
-import &#34;fmt&#34;
-
-func main() {
-    fmt.Println(&#34;¡Hola, mundo!&#34;)
-}</code></pre>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
-<h3 id="run-the-program">Run the program</h3>
-
-<p>Finally, to run the program by pressing the <code>F5</code> button in VS Code and you should see the message printed to <em>Debug Console</em>.</p>
-
-<p>That&rsquo;s all! My congratulations, you have just written your first program in Go!</p>
-
-<h3 id="troubleshooting">Troubleshooting</h3>
-
-<p>If you fail to run your program and there is some message like <strong>&ldquo;Cannot find a path to <code>go</code>&ldquo;</strong>.
-Try to add to your <code>PATH</code> envar with path directory where <code>go</code> binary is stored.</p>
-
-<p>For example in MacOS I have added following line to my <code>~/.bash_profile</code>:</p>
-
-<pre><code class="language-bash">export PATH=/usr/local/go/bin:$PATH
-</code></pre>
+<p>That&rsquo;s all! Now you can use own newly built docker image instead of official one if your use case meet license conditions.</p>
               
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
             
-              
-                
-                
-                  <div class="post-footer-tags">
-                    <span class="text-color-light text-small">TAGGED IN</span><br/>
-                    
-  <a class="tag tag--primary tag--small" href="https://alikhil.github.io/tags/go/">Go</a>
-
-  <a class="tag tag--primary tag--small" href="https://alikhil.github.io/tags/vscode/">vscode</a>
-
-  <a class="tag tag--primary tag--small" href="https://alikhil.github.io/tags/tutorial/">tutorial</a>
-
-                  </div>
-                
               
             
             
@@ -481,7 +415,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -489,7 +423,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/" data-tooltip="Deploy SPA application to Kubernetes">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -507,19 +441,19 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -567,7 +501,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -575,7 +509,7 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/" data-tooltip="Deploy SPA application to Kubernetes">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -593,19 +527,19 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -635,19 +569,19 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Falikhil.github.io%2F2019%2F09%2Fbuild-own-drone.io-docker-image%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Falikhil.github.io%2F2019%2F09%2Fbuild-own-drone.io-docker-image%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Falikhil.github.io%2F2019%2F09%2Fbuild-own-drone.io-docker-image%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -878,9 +812,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/alikhil.github.io\/2018\/04\/go-quickstart\/';
+          this.page.url = 'https:\/\/alikhil.github.io\/2019\/09\/build-own-drone.io-docker-image\/';
           
-            this.page.identifier = '\/2018\/04\/go-quickstart\/'
+            this.page.identifier = '\/2019\/09\/build-own-drone.io-docker-image\/'
           
         };
         (function() {
