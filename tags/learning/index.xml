@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Learning on Alik&#39;s blog</title>
+    <title>learning on Alik&#39;s blog</title>
     <link>https://alikhil.github.io/tags/learning/</link>
-    <description>Recent content in Learning on Alik&#39;s blog</description>
+    <description>Recent content in learning on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Oct 2018 22:42:44 +0300</lastBuildDate>
-    
-	<atom:link href="https://alikhil.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 21 Oct 2018 22:42:44 +0300</lastBuildDate><atom:link href="https://alikhil.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tips for language learners</title>
       <link>https://alikhil.github.io/2018/10/tips-for-language-learners/</link>
@@ -18,9 +14,7 @@
       
       <guid>https://alikhil.github.io/2018/10/tips-for-language-learners/</guid>
       <description>&lt;p&gt;If you expected only post on IT topics on this blog, I am sorry :(
-Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;</description>
     </item>
     
   </channel>

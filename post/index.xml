@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Alik&#39;s blog</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Posts on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Sep 2019 10:30:00 +0300</lastBuildDate>
-    
-	<atom:link href="https://alikhil.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 20 Sep 2019 10:30:00 +0300</lastBuildDate><atom:link href="https://alikhil.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Build own drone.io docker image</title>
       <link>https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/</link>
@@ -18,10 +14,7 @@
       
       <guid>https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/</guid>
       <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
-
-&lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,10 +24,7 @@
       
       <guid>https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
-
-&lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,9 +34,7 @@
       
       <guid>https://alikhil.github.io/2018/10/tips-for-language-learners/</guid>
       <description>&lt;p&gt;If you expected only post on IT topics on this blog, I am sorry :(
-Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -56,10 +44,7 @@ Today I&amp;rsquo;ll share you my experience in learning a new language. I am pr
       
       <guid>https://alikhil.github.io/2018/05/oauth2-proxy-for-kubernetes-services/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
-
-&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -68,9 +53,7 @@ Today I&amp;rsquo;ll share you my experience in learning a new language. I am pr
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
       <guid>https://alikhil.github.io/2018/05/say-hello-to-hugo/</guid>
-      <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -81,10 +64,7 @@ Today I&amp;rsquo;ll share you my experience in learning a new language. I am pr
       <guid>https://alikhil.github.io/2018/04/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>
     </item>
     
   </channel>

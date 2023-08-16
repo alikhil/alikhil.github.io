@@ -1,101 +1,133 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/alikhil.github.io\/",
+  "author": {
+    "@type": "Person",
+    "name": "Alik Khilazhev",
+    
+    "image": "https://www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c"
+    
+  },
+  "name":"Alik\u0027s blog",
+  "description":"\u003cp\u003eHi folks!\nIt\u0026rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in \u003cstrong\u003eGo\u003c\/strong\u003e.\u003c\/p\u003e\n\u003cp\u003eIn this tutorial, we will configure Go environment in VS Code and write our first program in Go.\u003c\/p\u003e",
+  "url":"https:\/\/alikhil.github.io\/2018\/04\/go-quickstart\/",
+  "keywords":"[go, vscode, tutorial, quickstart]"
+}
+
+</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.40.3 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.117.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Alik Khilazhev">
+<meta name="keywords" content="go, vscode, tutorial, quickstart">
+<meta name="description" content="Hi folks!
+It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+In this tutorial, we will configure Go environment in VS Code and write our first program in Go.">
+
+
+<meta property="og:description" content="Hi folks!
+It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+In this tutorial, we will configure Go environment in VS Code and write our first program in Go.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go Quickstart">
+<meta name="twitter:title" content="Go Quickstart">
+<meta property="og:url" content="https://alikhil.github.io/2018/04/go-quickstart/">
+<meta property="twitter:url" content="https://alikhil.github.io/2018/04/go-quickstart/">
+<meta property="og:site_name" content="Alik&#39;s blog">
+<meta property="og:description" content="Hi folks!
+It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+In this tutorial, we will configure Go environment in VS Code and write our first program in Go.">
+<meta name="twitter:description" content="Hi folks!
+It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
+In this tutorial, we will configure Go environment in VS Code and write our first program in Go.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2018-04-06T16:22:35">
+  
+  
+    <meta property="article:modified_time" content="2018-04-06T16:22:35">
+  
+  
+  
+    
+      <meta property="article:section" content="programming">
+    
+  
+  
+    
+      <meta property="article:tag" content="Go">
+    
+      <meta property="article:tag" content="vscode">
+    
+      <meta property="article:tag" content="tutorial">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=640">
+
+
+
+
+  <meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png">
+  <meta property="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png">
+
+
+  <meta property="og:image" content="https://alikhil.github.io/images/gopher.png">
+  <meta property="twitter:image" content="https://alikhil.github.io/images/gopher.png">
+
+
     <title>Go Quickstart</title>
-    <meta name="author" content="Alik Khilazhev">
-    <meta name="keywords" content="go, vscode, tutorial, quickstart">
 
     <link rel="icon" href="https://alikhil.github.io/favicon.ico">
     
 
     
-    <meta name="description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
 
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
-
-">
-    <meta property="og:description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
-
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Go Quickstart">
-    <meta property="og:url" content="/2018/04/go-quickstart/">
-    <meta property="og:site_name" content="Alik&#39;s blog">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Alik&#39;s blog">
-    <meta name="twitter:description" content="Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.
-
-In this tutorial, we will configure Go environment in VS Code and write our first program in Go.
-
-">
-    
-    
+    <link rel="canonical" href="https://alikhil.github.io/2018/04/go-quickstart/">
 
     
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=640">
-    
-
-    
-      <meta property="og:image" content="https://alikhil.github.io/images/gopher.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     
-      <meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*y4l5IIUkJj5uP9RGM8U-Fg.png">
     
-    
-
-    
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
-    
-    
-    <link rel="stylesheet" href="https://alikhil.github.io/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="https://alikhil.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-119385062-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-119385062-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-
     
     
   </head>
@@ -105,17 +137,17 @@ ga('send', 'pageview');
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://alikhil.github.io/">Alik&#39;s blog</a>
+    <a class="header-title-link" href="https://alikhil.github.io/" aria-label="Go to homepage">Alik&#39;s blog</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://alikhil.github.io/#about">
+         href="https://alikhil.github.io/#about" aria-label="Open the link: /#about">
     
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=90" alt="Author&#39;s picture" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=90" alt="Author&#39;s picture" />
       
     
     </a>
@@ -126,18 +158,20 @@ ga('send', 'pageview');
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="https://alikhil.github.io/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=110" alt="Author&#39;s picture" />
+        <a href="https://alikhil.github.io/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=110" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Alik Khilazhev</h4>
-          <h5 class="sidebar-profile-bio">Backend Developer and DevOps evangelist at Marketplace Technologies</h5>
+        
+          <h5 class="sidebar-profile-bio">DevOps engineer and Golang enthusiast</h5>
+        
       </div>
     
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://alikhil.github.io/">
+      <a class="sidebar-button-link " href="https://alikhil.github.io/" title="Home">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -147,7 +181,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://alikhil.github.io/categories">
+      <a class="sidebar-button-link " href="https://alikhil.github.io/categories" title="Categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -157,7 +191,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://alikhil.github.io/tags">
+      <a class="sidebar-button-link " href="https://alikhil.github.io/tags" title="Tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -167,7 +201,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://alikhil.github.io/archives">
+      <a class="sidebar-button-link " href="https://alikhil.github.io/archives" title="Archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -177,7 +211,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://alikhil.github.io/#about">
+      <a class="sidebar-button-link " href="https://alikhil.github.io/#about" title="About">
     
       <i class="sidebar-button-icon fa fa-lg fa-user"></i>
       
@@ -191,9 +225,9 @@ ga('send', 'pageview');
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/alikhil" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/alikhil" target="_blank" rel="noopener" title="GitHub">
     
-      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
       
       <span class="sidebar-button-desc">GitHub</span>
     </a>
@@ -201,9 +235,9 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://stackoverflow.com/users/4731371/alik-khilazhev" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/4731371/alik-khilazhev" target="_blank" rel="noopener" title="Stack Overflow">
     
-      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      <i class="sidebar-button-icon fab fa-lg fa-stack-overflow" aria-hidden="true"></i>
       
       <span class="sidebar-button-desc">Stack Overflow</span>
     </a>
@@ -211,9 +245,9 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.linkedin.com/in/akhilazhev/" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/akhilazhev/" target="_blank" rel="noopener" title="LinkedIn">
     
-      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      <i class="sidebar-button-icon fab fa-lg fa-linkedin" aria-hidden="true"></i>
       
       <span class="sidebar-button-desc">LinkedIn</span>
     </a>
@@ -221,9 +255,9 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://t.me/alikhil" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://t.me/alikhil" target="_blank" rel="noopener" title="Telegram">
     
-      <i class="sidebar-button-icon fa fa-lg fa-telegram"></i>
+      <i class="sidebar-button-icon fab fa-lg fa-telegram" aria-hidden="true"></i>
       
       <span class="sidebar-button-desc">Telegram</span>
     </a>
@@ -235,7 +269,7 @@ ga('send', 'pageview');
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://alikhil.github.io/index.xml">
+      <a class="sidebar-button-link " href="https://alikhil.github.io/index.xml" title="RSS">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -262,19 +296,19 @@ ga('send', 'pageview');
         class="hasCover
                hasCoverMetaOut
                ">
-        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        <article class="post" id="top">
           
           
             <div class="post-header main-content-wrap text-left">
   
-    <h1 class="post-title" itemprop="headline">
+    <h1 class="post-title">
       Go Quickstart
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-04-06T16:22:35&#43;03:00">
+      <time datetime="2018-04-06T16:22:35&#43;03:00">
         
   
   
@@ -298,46 +332,25 @@ ga('send', 'pageview');
 
 </div>
           
-          <div class="post-content markdown" itemprop="articleBody">
+          <div class="post-content markdown">
             <div class="main-content-wrap">
               <p>Hi folks!
 It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in <strong>Go</strong>.</p>
-
 <p>In this tutorial, we will configure Go environment in VS Code and write our first program in Go.</p>
-
-<p></p>
-
 <h3 id="install-go">Install Go</h3>
-
 <p>The first thing that you need to do it&rsquo;s to install Go on your computer. To do so, download installer for your operating system from  <a href="https://golang.org/dl/">here</a> and then run the installer.</p>
-
 <h3 id="configure-gopath">Configure GOPATH</h3>
-
 <p>By language convention, Go developers store all their code in a single place called <em>workspace</em>. Go also puts dependency packages in the workspace. So, in order to Go perform correctly, we need to set <code>GOPATH</code> variable with the path to the workspace.</p>
-
 <h4 id="macos-and-linux">MacOS and Linux</h4>
-
 <p>Set the <code>GOPATH</code> envar with workspace</p>
-
-<pre><code class="language-bash">export GOPATH=$HOME/go
-</code></pre>
-
-<p>Also, we need to add <code>GOPATH/bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
-
-<pre><code class="language-bash">export PATH=$PATH:$GOPATH/bin
-</code></pre>
-
-<h3 id="configure-vs-code">Configure VS Code</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export GOPATH<span style="color:#f92672">=</span>$HOME/go
+</span></span></code></pre></div><p>Also, we need to add <code>GOPATH/bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:$GOPATH/bin
+</span></span></code></pre></div><h3 id="configure-vs-code">Configure VS Code</h3>
 <p>Install <a href="https://github.com/Microsoft/vscode-go">official Go extension</a>.</p>
-
 <p>Install delve debugger:</p>
-
-<pre><code class="language-bash">go get -u github.com/derekparker/delve/cmd/dlv
-</code></pre>
-
-<p>I recommend you to add the following lines to your VS Code user settings:</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get -u github.com/derekparker/delve/cmd/dlv
+</span></span></code></pre></div><p>I recommend you to add the following lines to your VS Code user settings:</p>
 
   
     
@@ -362,7 +375,7 @@ It&rsquo;s been a long time since I have published the last post, but now I came
           <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-json"><code class="json">{
+          <pre class="code-highlight language-json json"><code class="json">{
     &#34;go.autocompleteUnimportedPackages&#34;: true,
     &#34;go.formatTool&#34;: &#34;gofmt&#34;
 }</code></pre>
@@ -373,34 +386,18 @@ It&rsquo;s been a long time since I have published the last post, but now I came
 </figure>
 
 <h4 id="windows">Windows</h4>
-
 <p>Create <code>GOPATH</code> envar:</p>
-
-<pre><code class="language-sh">set GOPATH=c:\Users\%USERNAME%\go
-</code></pre>
-
-<p>Also, we need to add <code>GOPATH\bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
-
-<pre><code class="language-sh">set PATH=%PATH%;%GOPATH%\bin
-</code></pre>
-
-<h3 id="create-project">Create project</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>set GOPATH<span style="color:#f92672">=</span>c:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\%</span>USERNAME%<span style="color:#ae81ff">\g</span>o
+</span></span></code></pre></div><p>Also, we need to add <code>GOPATH\bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>set PATH<span style="color:#f92672">=</span>%PATH%;%GOPATH%<span style="color:#ae81ff">\b</span>in
+</span></span></code></pre></div><h3 id="create-project">Create project</h3>
 <p>Move to your <code>GOPATH/src</code> directory. Create a directory for your project:</p>
-
-<pre><code class="language-bash">cd $GOPATH/src
-mkdir -p github.com/alikhil/hello-world-with-go
-</code></pre>
-
-<p>Open it using vscode:</p>
-
-<pre><code class="language-bash">code github.com/alikhil/hello-world-with-go
-</code></pre>
-
-<h3 id="hello-world">Hello World!</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd $GOPATH/src
+</span></span><span style="display:flex;"><span>mkdir -p github.com/alikhil/hello-world-with-go
+</span></span></code></pre></div><p>Open it using vscode:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>code github.com/alikhil/hello-world-with-go
+</span></span></code></pre></div><h3 id="hello-world">Hello World!</h3>
 <p>Let&rsquo;s create a file named <code>program.go</code> and put the following code there:</p>
-
 
   
     
@@ -425,7 +422,7 @@ mkdir -p github.com/alikhil/hello-world-with-go
           <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-go"><code class="go">package main
+          <pre class="code-highlight language-go go"><code class="go">package main
 
 import &#34;fmt&#34;
 
@@ -439,21 +436,17 @@ func main() {
 </figure>
 
 <h3 id="run-the-program">Run the program</h3>
-
 <p>Finally, to run the program by pressing the <code>F5</code> button in VS Code and you should see the message printed to <em>Debug Console</em>.</p>
-
 <p>That&rsquo;s all! My congratulations, you have just written your first program in Go!</p>
-
 <h3 id="troubleshooting">Troubleshooting</h3>
-
-<p>If you fail to run your program and there is some message like <strong>&ldquo;Cannot find a path to <code>go</code>&ldquo;</strong>.
+<p>If you fail to run your program and there is some message like <strong>&ldquo;Cannot find a path to <code>go</code>&rdquo;</strong>.
 Try to add to your <code>PATH</code> envar with path directory where <code>go</code> binary is stored.</p>
-
 <p>For example in MacOS I have added following line to my <code>~/.bash_profile</code>:</p>
-
-<pre><code class="language-bash">export PATH=/usr/local/go/bin:$PATH
-</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>/usr/local/go/bin:$PATH
+</span></span></code></pre></div>
               
+
+
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
@@ -475,389 +468,225 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
               
             
             
-  <div class="post-actions-wrap">
-      <nav >
-        <ul class="post-actions post-action-nav">
-          
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo">
-              
-                  <i class="fa fa-angle-left"></i>
-                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
-                </a>
-            </li>
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--disabled">
-              
-                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-          
-        </ul>
-      </nav>
-    <ul class="post-actions post-action-share" >
-      
-        <li class="post-action hide-lg hide-md hide-sm">
-          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-            <i class="fa fa-share-alt"></i>
-          </a>
-        </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        
-      
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
       
         <li class="post-action">
-          <a class="post-action-btn btn btn--default" href="#disqus_thread">
-            <i class="fa fa-comment-o"></i>
-          </a>
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo" aria-label="NEXT: Say hello to Hugo">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
         </li>
       
-      <li class="post-action">
-        
-          <a class="post-action-btn btn btn--default" href="#">
-        
-          <i class="fa fa-list"></i>
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
-    </ul>
-  </div>
-
-
-            
-              
-                <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/" title="Share on Google&#43;" aria-label="Share on Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
 </div>
-              
+
+
             
+  
+
+
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2020 Alik Khilazhev. All Rights Reserved
+    &copy; 2023 Alik Khilazhev. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         
-  <div class="post-actions-wrap">
-      <nav >
-        <ul class="post-actions post-action-nav">
-          
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo">
-              
-                  <i class="fa fa-angle-left"></i>
-                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
-                </a>
-            </li>
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--disabled">
-              
-                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-          
-        </ul>
-      </nav>
-    <ul class="post-actions post-action-share" >
-      
-        <li class="post-action hide-lg hide-md hide-sm">
-          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-            <i class="fa fa-share-alt"></i>
-          </a>
-        </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        
-      
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
       
         <li class="post-action">
-          <a class="post-action-btn btn btn--default" href="#disqus_thread">
-            <i class="fa fa-comment-o"></i>
-          </a>
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/" data-tooltip="Say hello to Hugo" aria-label="NEXT: Say hello to Hugo">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
         </li>
       
-      <li class="post-action">
-        
-          <a class="post-action-btn btn btn--default" href="#">
-        
-          <i class="fa fa-list"></i>
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://alikhil.github.io/2018/04/go-quickstart/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
-    </ul>
-  </div>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://alikhil.github.io/2018/04/go-quickstart/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://alikhil.github.io/2018/04/go-quickstart/" title="Share on Google&#43;" aria-label="Share on Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
 
 
       </div>
-      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
-  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
-          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
-          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F">
-          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Falikhil.github.io%2F2018%2F04%2Fgo-quickstart%2F" aria-label="Share on Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google&#43;</span>
         </a>
       </li>
     
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
+
+
     </div>
     
     <div id="about">
   <div id="about-card">
     <div id="about-btn-close">
-      <i class="fa fa-remove"></i>
+      <i class="fa fa-times"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=110" alt="Author&#39;s picture" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/2a5db881730f94c9ff8f04a8456ffa8c?s=110" alt="Author&#39;s picture" />
     
     <h4 id="about-card-name">Alik Khilazhev</h4>
     
-      <div id="about-card-bio">He likes learning new languages (tambien lenguajes de programación), programming, orchestration with Kubernetes and to dance Salsa. Also he likes to write about himself in third person 🙃</div>
+      <div id="about-card-bio">DevOps engineer and Golang enthusiast</div>
     
     
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Backend Developer at Marketplace Technologies
+        Lead DevOps Engineer @ Uzum Market
       </div>
     
     
       <div id="about-card-location">
-        <i class="fa fa-map-marker"></i>
+        <i class="fa fa-map-marker-alt"></i>
         <br/>
-        Innopolis, Russia
+        Barcelona, Spain
       </div>
     
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="Search" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center">no post found</div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://alikhil.github.io/2019/09/build-own-drone.io-docker-image/">
-                <h3 class="media-heading">Build own drone.io docker image</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>¡Hola, amigos!</p>
+    
 
-<p>In this post, I will quickly descibe how you can build your own <a href="https://drone.io">drone.io</a> docker image.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/">
-                <h3 class="media-heading">Deploy SPA application to Kubernetes</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Hello, folks!</p>
-
-<p>Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://alikhil.github.io/2018/10/tips-for-language-learners/">
-                <h3 class="media-heading">Tips for language learners</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>If you expected only post on IT topics on this blog, I am sorry :(
-Today I&rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://alikhil.github.io/2018/05/oauth2-proxy-for-kubernetes-services/">
-                <h3 class="media-heading">Oauth2 Proxy for Kubernetes Services</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Hello, folks!</p>
-
-<p>In this post, I will go through configuring <a href="https://github.com/bitly/oauth2_proxy">Bitly OAuth2 proxy</a> in a kubernetes cluster.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://alikhil.github.io/2018/05/say-hello-to-hugo/">
-                <h3 class="media-heading">Say hello to Hugo</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Today I migrated my blog to <a href="https://gohugo.io">Hugo</a> engine. So, it&rsquo;s my first post here, yaay!</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://alikhil.github.io/2018/04/go-quickstart/">
-                <h3 class="media-heading">Go Quickstart</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Hi folks!
-It&rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in <strong>Go</strong>.</p>
-
-<p>In this tutorial, we will configure Go environment in VS Code and write our first program in Go.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero="no post found"
-         data-message-one="1 post found"
-         data-message-other="{n} posts found">
-         6 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
     
-    <div id="cover" style="background-image:url('https://alikhil.github.io/images/cover3.jpg');"></div>
+      
+      <div id="cover" style="background-image:url('https://alikhil.github.io/images/cover3.jpg');"></div>
+    
   
 
 
     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-<script src="https://alikhil.github.io/js/highlight.pack.js"><</script>
-<script src="https://alikhil.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="https://alikhil.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
 
 
 
@@ -873,32 +702,6 @@ $(document).ready(function() {
 });
 </script>
 
-
-  
-    
-      <script>
-        var disqus_config = function () {
-          this.page.url = 'https:\/\/alikhil.github.io\/2018\/04\/go-quickstart\/';
-          
-            this.page.identifier = '\/2018\/04\/go-quickstart\/'
-          
-        };
-        (function() {
-          
-          
-          if (window.location.hostname == "localhost") {
-            return;
-          }
-          var d = document, s = d.createElement('script');
-          var disqus_shortname = 'alikhil';
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      </script>
-    
-  
 
 
 
