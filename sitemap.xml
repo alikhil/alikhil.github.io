@@ -17,10 +17,13 @@
     <loc>https://alikhil.github.io/post/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.github.io/pages/projects/</loc>
+    <loc>https://alikhil.github.io/pages/cv/</loc>
     <lastmod>2019-06-10T23:10:25+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.github.io/pages/</loc>
+    <lastmod>2019-06-10T23:10:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.github.io/pages/talks/</loc>
     <lastmod>2019-06-10T23:10:25+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.github.io/2019/06/deploy-spa-application-to-kubernetes/</loc>

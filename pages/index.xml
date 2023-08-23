@@ -8,16 +8,31 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 10 Jun 2019 23:10:25 +0300</lastBuildDate><atom:link href="https://alikhil.github.io/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My projects</title>
-      <link>https://alikhil.github.io/pages/projects/</link>
+      <title>CV</title>
+      <link>https://alikhil.github.io/pages/cv/</link>
       <pubDate>Mon, 10 Jun 2019 23:10:25 +0300</pubDate>
       
-      <guid>https://alikhil.github.io/pages/projects/</guid>
-      <description>Here is a list of some projects that I took part in.
+      <guid>https://alikhil.github.io/pages/cv/</guid>
+      <description>Education Here is a list of some projects that I took part in.
 PostgreSQL Contributions during the summer internship in Postgres Professional:
 Generator of random numbers from Zipfian distribution for pgbench Command to show access methods info Louis Service for processing images and uploading them to S3 storage.
 Language: GoLang
 Repo: KazanExpress/louis</description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>https://alikhil.github.io/pages/talks/</link>
+      <pubDate>Mon, 10 Jun 2019 23:10:25 +0300</pubDate>
+      
+      <guid>https://alikhil.github.io/pages/talks/</guid>
+      <description>Here is a list of talks I gave in different conferences and meetups:
+CI/CD for golang projects with drone.io Avito.Tech meetup in Kazan, 2020
+Drone.io #101 Golang Meetup in Yoshkar-Ola, 2020
+Configuring CI/CD for IaC Innopolis DevOps Meetup, 2022
+Link to timecode: https://www.youtube.com/watch?v=bZXlizneB8U&amp;amp;t=2840s
+IaC with Terraform and drone.io YandexScale in Moscow, 2022
+Link to timecode: https://www.youtube.com/watch?v=5wZ2G5idK1w&amp;amp;t=2318s</description>
     </item>
     
   </channel>
