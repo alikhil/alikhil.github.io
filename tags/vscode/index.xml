@@ -6,17 +6,14 @@
     <description>Recent content in vscode on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate><atom:link href="https://alik.page/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate>
+    <atom:link href="https://alik.page/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go Quickstart</title>
       <link>https://alik.page/2018/04/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
       <guid>https://alik.page/2018/04/go-quickstart/</guid>
-      <description>&lt;p&gt;Hi folks!
-It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi folks!&#xA;It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

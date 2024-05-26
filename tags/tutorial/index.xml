@@ -6,27 +6,21 @@
     <description>Recent content in tutorial on Alik&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 May 2018 21:30:36 +0300</lastBuildDate><atom:link href="https://alik.page/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 May 2018 21:30:36 +0300</lastBuildDate>
+    <atom:link href="https://alik.page/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
       <link>https://alik.page/2018/05/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
-      
       <guid>https://alik.page/2018/05/oauth2-proxy-for-kubernetes-services/</guid>
-      <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
-&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hello, folks!&lt;/p&gt;&#xA;&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Go Quickstart</title>
       <link>https://alik.page/2018/04/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
       <guid>https://alik.page/2018/04/go-quickstart/</guid>
-      <description>&lt;p&gt;Hi folks!
-It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi folks!&#xA;It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
