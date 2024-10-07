@@ -1,3 +1,3 @@
-## alikhil.github.io
+## alik.page
 
-It is my personal [blog](https://alikhil.github.io) repository powered by [Hugo](https://gohugo.io) engine and [Tranquilpeak](https://tranquilpeak.kakawait.com/) theme
+It is my personal [blog](https://alik.page) repository powered by [Hugo](https://gohugo.io) engine and [PaperModX](https://reorx.github.io/hugo-PaperModX/docs/f) theme
