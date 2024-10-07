@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Categories on Alik&#39;s blog</title>
+    <title>Categories on alikhil</title>
     <link>https://alik.page/categories/</link>
-    <description>Recent content in Categories on Alik&#39;s blog</description>
+    <description>Recent content in Categories on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Sep 2019 10:30:00 +0300</lastBuildDate>
-    <atom:link href="https://alik.page/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Sep 2019 10:30:00 +0300</lastBuildDate><atom:link href="https://alik.page/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>devops</title>
+      <title>Devops</title>
       <link>https://alik.page/categories/devops/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
+      
       <guid>https://alik.page/categories/devops/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
+    
     <item>
-      <title>languages</title>
+      <title>Languages</title>
       <link>https://alik.page/categories/languages/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
+      
       <guid>https://alik.page/categories/languages/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
+    
     <item>
-      <title>blogging</title>
+      <title>Blogging</title>
       <link>https://alik.page/categories/blogging/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
+      
       <guid>https://alik.page/categories/blogging/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
+    
     <item>
-      <title>programming</title>
+      <title>Programming</title>
       <link>https://alik.page/categories/programming/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
+      
       <guid>https://alik.page/categories/programming/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
+    
   </channel>
 </rss>

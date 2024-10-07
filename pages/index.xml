@@ -1,19 +1,86 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Pages on Alik&#39;s blog</title>
+    <title>Pages on alikhil</title>
     <link>https://alik.page/pages/</link>
-    <description>Recent content in Pages on Alik&#39;s blog</description>
+    <description>Recent content in Pages on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Jun 2019 23:10:25 +0300</lastBuildDate>
-    <atom:link href="https://alik.page/pages/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Jun 2019 23:10:25 +0300</lastBuildDate><atom:link href="https://alik.page/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Talks</title>
       <link>https://alik.page/pages/talks/</link>
       <pubDate>Mon, 10 Jun 2019 23:10:25 +0300</pubDate>
+      
       <guid>https://alik.page/pages/talks/</guid>
-      <description>Here is a list of talks I gave in different conferences and meetups:&#xA;CI/CD for golang projects with drone.io Avito.Tech meetup in Kazan, 2020&#xA;Drone.io #101 Golang Meetup in Yoshkar-Ola, 2020&#xA;Configuring CI/CD for IaC Innopolis DevOps Meetup, 2022&#xA;Link to timecode: https://www.youtube.com/watch?v=bZXlizneB8U&amp;amp;t=2840s&#xA;IaC with Terraform and drone.io YandexScale in Moscow, 2022&#xA;Link to timecode: https://www.youtube.com/watch?v=5wZ2G5idK1w&amp;amp;t=2318s</description>
+      <description>&lt;p&gt;Here is a list of talks I gave in different conferences and meetups:&lt;/p&gt;
+&lt;h4 id=&#34;cicd-for-golang-projects-with-droneio&#34;&gt;CI/CD for golang projects with drone.io&lt;/h4&gt;
+&lt;p&gt;Avito.Tech meetup in Kazan, 2020&lt;/p&gt;
+
+
+    
+    &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/mKT-bLdRGvQ?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
+      &gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+
+&lt;h4 id=&#34;droneio-101&#34;&gt;Drone.io #101&lt;/h4&gt;
+&lt;p&gt;Golang Meetup in Yoshkar-Ola, 2020&lt;/p&gt;
+
+
+    
+    &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/MSsHRo9CYvk?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
+      &gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+
+&lt;h4 id=&#34;configuring-cicd-for-iac&#34;&gt;Configuring CI/CD for IaC&lt;/h4&gt;
+&lt;p&gt;Innopolis DevOps Meetup, 2022&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Here is a list of talks I gave in different conferences and meetups:</p>
+<h4 id="cicd-for-golang-projects-with-droneio">CI/CD for golang projects with drone.io</h4>
+<p>Avito.Tech meetup in Kazan, 2020</p>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mKT-bLdRGvQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<h4 id="droneio-101">Drone.io #101</h4>
+<p>Golang Meetup in Yoshkar-Ola, 2020</p>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/MSsHRo9CYvk?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<h4 id="configuring-cicd-for-iac">Configuring CI/CD for IaC</h4>
+<p>Innopolis DevOps Meetup, 2022</p>
+<p>Link to timecode: <a href="https://www.youtube.com/watch?v=bZXlizneB8U&amp;t=2840s">https://www.youtube.com/watch?v=bZXlizneB8U&amp;t=2840s</a></p>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/bZXlizneB8U?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<h4 id="iac-with-terraform-and-droneio">IaC with Terraform and drone.io</h4>
+<p>YandexScale in Moscow, 2022</p>
+<p>Link to timecode: <a href="https://www.youtube.com/watch?v=5wZ2G5idK1w&amp;t=2318s">https://www.youtube.com/watch?v=5wZ2G5idK1w&amp;t=2318s</a></p>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5wZ2G5idK1w?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+]]></content:encoded>
     </item>
+    
   </channel>
 </rss>
