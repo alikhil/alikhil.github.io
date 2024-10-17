@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Pages on </title>
-    <link>/pages/</link>
-    <description>Recent content in Pages on </description>
+    <title>Pages on alikhil</title>
+    <link>https://alik.page/pages/</link>
+    <description>Recent content in Pages on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 10 Jun 2019 23:10:25 +0300</lastBuildDate><atom:link href="/pages/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Jun 2019 23:10:25 +0300</lastBuildDate><atom:link href="https://alik.page/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Talks</title>
-      <link>/pages/talks/</link>
+      <link>https://alik.page/pages/talks/</link>
       <pubDate>Mon, 10 Jun 2019 23:10:25 +0300</pubDate>
       
-      <guid>/pages/talks/</guid>
+      <guid>https://alik.page/pages/talks/</guid>
       <description>&lt;p&gt;Here is a list of talks I gave in different conferences and meetups:&lt;/p&gt;
 &lt;h4 id=&#34;cicd-for-golang-projects-with-droneio&#34;&gt;CI/CD for golang projects with drone.io&lt;/h4&gt;
 &lt;p&gt;Avito.Tech meetup in Kazan, 2020&lt;/p&gt;

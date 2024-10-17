@@ -1,19 +1,99 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Mac on </title>
-    <link>//localhost:1313/categories/mac/</link>
-    <description>Recent content in Mac on </description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate>
-    <atom:link href="//localhost:1313/categories/mac/index.xml" rel="self" type="application/rss+xml" />
+    <title>Mac on alikhil</title>
+    <link>https://alik.page/categories/mac/</link>
+    <description>Recent content in Mac on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="https://alik.page/categories/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Monitor input source control on Mac</title>
-      <link>//localhost:1313/posts/monitor-input-source-control-mac/</link>
+      <link>https://alik.page/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      <guid>//localhost:1313/posts/monitor-input-source-control-mac/</guid>
-      <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;&#xA;&lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
+      
+      <guid>https://alik.page/posts/monitor-input-source-control-mac/</guid>
+      <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
+&lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
+<p>In this post I will show you how to configure hotkeys for that.</p>
+<h2 id="hardware">Hardware</h2>
+<p>You will need a monitor with <strong>multiple input sources</strong>.
+For example, I have Dell S2722QC tt has 2 HDMI ports and 1 USB-C port where:</p>
+<ul>
+<li>Macbook Air connected to port HDMI-2</li>
+<li>Mac Mini connected to port USB-C-1</li>
+</ul>
+<h2 id="software">Software</h2>
+<p>There is app called <a href="https://github.com/waydabber/BetterDisplay">BetterDisplay</a> that has a lot of powerful features. But for our case we need only one feature - <strong>change display inputs using DDC</strong>.</p>
+<p>Install it on both Macs. You will have 14 days trial period with all PRO features.</p>
+<p><strong>Enable Accessibility for BetterDisplay in System Settings -&gt; Privacy &amp; Security -&gt; Accessibility.</strong></p>
+<p>Then try to switch input source by clicking on BetterDisplay icon in the menu bar -&gt; <em>DDC Input Source -&gt; Select next port.</em></p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
+          <td style="text-align: left"><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
+      </tr>
+  </tbody>
+</table>
+<p>If it works, you can continue to the next step.
+Otherwise check if your monitor supports DDC protocol and ensure Accessibility is enabled for BetterDisplay.</p>
+<h3 id="paid-option">Paid option</h3>
+<p>If you are ready to pay 19$/19€ x2 for both Macs you can <a href="https://betterdisplay.pro/buy/">buy BetterDisplay</a>. And then configure hotkeys in the app settings <em>Settings -&gt; Keyboards -&gt; Custom keyboard shortcuts -&gt; DDC Input Source</em>.</p>
+<p>Click &ldquo;Record Shortcut&rdquo; and press the key combination you want to use, for example <code>CMD + F1</code> and <code>CMD + F2</code>.</p>
+<p><img loading="lazy" src="/images/posts/shortcuts.png" type="" alt="alt text"  /></p>
+<h3 id="free-option">Free option</h3>
+<p>If you like me don&rsquo;t want to pay for 40$ for single feature there is a hacky way to do it.</p>
+<p>We need an app that can handle hotkeys and run shell commands. I use <a href="https://www.raycast.com/">Raycast</a>, so called &ldquo;Spotlight on steroids&rdquo; and it can handle custom hotkeys. Or you can use any other app you like.</p>
+<h4 id="configuring-shell-command">Configuring shell command</h4>
+<p>Before configuring <strong>Raycast</strong> we need to know <code>ddc</code> value for each input source. To do so, go to <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em>, and save IDs from <strong>Value</strong> column for each input source:</p>
+<p><img loading="lazy" src="/images/posts/ddc-input-sources.png" type="" alt="alt text"  /></p>
+<p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
+<p>Then create a directory <code>~/raycast-scripts</code> and put there a script <code>change-input-source.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># See full documentation here: https://github.com/raycast/script-commands</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Required parameters:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.schemaVersion 1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.title Switch Monitor Input Source</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.mode silent</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Optional parameters:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.icon 🖥️</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.packageName Raycast Scripts</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">DEST_ID</span><span class="o">=</span><span class="m">18</span> &lt;PUT YOUR DDC ID HERE&gt;
+</span></span><span class="line"><span class="cl"><span class="nv">DEST_NAME</span><span class="o">=</span><span class="s2">&#34;Home Mac Mini&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># PUT YOUR ACTUAL HOSTNAME</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>hostname<span class="sb">`</span> <span class="o">==</span> <span class="s2">&#34;Aliks-Mac-mini.local&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">DEST_ID</span><span class="o">=</span><span class="m">25</span> &lt;PUT YOUR SECOND DDC ID HERE&gt;
+</span></span><span class="line"><span class="cl">  <span class="nv">DEST_NAME</span><span class="o">=</span><span class="s2">&#34;Work Macbook Air&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Switching monitor input source to </span><span class="nv">$DEST_NAME</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -ddc<span class="o">=</span><span class="nv">$DEST_ID</span> -vcp<span class="o">=</span>inputSelect
+</span></span></code></pre></div><p>After that try to run it in terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x ~/raycast-scripts/change-input-source.sh
+</span></span><span class="line"><span class="cl">~/raycast-scripts/change-input-source.sh
+</span></span></code></pre></div><p>If it works, you can continue to the next step.</p>
+<h4 id="configuring-raycast">Configuring Raycast</h4>
+<ol>
+<li>Open Raycast and go to <em>Settings -&gt; Extensions -&gt; Search for Scripts</em></li>
+<li>Click on <em>Add Script Directory</em> and select <code>~/raycast-scripts</code></li>
+<li>Click on <em>Record Shortcut</em> for newly added script and press the key combination you want to use, for example <code>CMD + F1</code> on first Mac and <code>CMD + F2</code> on second.</li>
+</ol>
+<p><img loading="lazy" src="/images/posts/raycast-settings.png" type="" alt="alt text"  /></p>
+<p>And that&rsquo;s it! Now you can switch input source using hotkeys.</p>]]></content:encoded>
     </item>
+    
   </channel>
 </rss>

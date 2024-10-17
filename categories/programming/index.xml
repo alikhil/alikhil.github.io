@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Programming on </title>
-    <link>/categories/programming/</link>
-    <description>Recent content in Programming on </description>
+    <title>Programming on alikhil</title>
+    <link>https://alik.page/categories/programming/</link>
+    <description>Recent content in Programming on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate><atom:link href="/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate><atom:link href="https://alik.page/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go Quickstart</title>
-      <link>/posts/go-quickstart/</link>
+      <link>https://alik.page/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>/posts/go-quickstart/</guid>
+      <guid>https://alik.page/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>
@@ -25,40 +25,40 @@ It&rsquo;s been a long time since I have published the last post, but now I came
 <p>By language convention, Go developers store all their code in a single place called <em>workspace</em>. Go also puts dependency packages in the workspace. So, in order to Go perform correctly, we need to set <code>GOPATH</code> variable with the path to the workspace.</p>
 <h4 id="macos-and-linux">MacOS and Linux</h4>
 <p>Set the <code>GOPATH</code> envar with workspace</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export GOPATH<span style="color:#f92672">=</span>$HOME/go
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/go
 </span></span></code></pre></div><p>Also, we need to add <code>GOPATH/bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:$GOPATH/bin
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOPATH</span>/bin
 </span></span></code></pre></div><h3 id="configure-vs-code">Configure VS Code</h3>
 <p>Install <a href="https://github.com/Microsoft/vscode-go">official Go extension</a>.</p>
 <p>Install delve debugger:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get -u github.com/derekparker/delve/cmd/dlv
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go get -u github.com/derekparker/delve/cmd/dlv
 </span></span></code></pre></div><p>I recommend you to add the following lines to your VS Code user settings:</p>
 <p><strong>settings.json</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;go.autocompleteUnimportedPackages&#34;</span>: <span style="color:#66d9ef">true</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;go.formatTool&#34;</span>: <span style="color:#e6db74">&#34;gofmt&#34;</span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go.autocompleteUnimportedPackages&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go.formatTool&#34;</span><span class="p">:</span> <span class="s2">&#34;gofmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="windows">Windows</h4>
 <p>Create <code>GOPATH</code> envar:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>set GOPATH<span style="color:#f92672">=</span>c:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\%</span>USERNAME%<span style="color:#ae81ff">\g</span>o
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">GOPATH</span><span class="o">=</span>c:<span class="se">\U</span>sers<span class="se">\%</span>USERNAME%<span class="se">\g</span>o
 </span></span></code></pre></div><p>Also, we need to add <code>GOPATH\bin</code> to <code>PATH</code> in order to run compiler Go programs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>set PATH<span style="color:#f92672">=</span>%PATH%;%GOPATH%<span style="color:#ae81ff">\b</span>in
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">PATH</span><span class="o">=</span>%PATH%<span class="p">;</span>%GOPATH%<span class="se">\b</span>in
 </span></span></code></pre></div><h3 id="create-project">Create project</h3>
 <p>Move to your <code>GOPATH/src</code> directory. Create a directory for your project:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd $GOPATH/src
-</span></span><span style="display:flex;"><span>mkdir -p github.com/alikhil/hello-world-with-go
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$GOPATH</span>/src
+</span></span><span class="line"><span class="cl">mkdir -p github.com/alikhil/hello-world-with-go
 </span></span></code></pre></div><p>Open it using vscode:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>code github.com/alikhil/hello-world-with-go
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">code github.com/alikhil/hello-world-with-go
 </span></span></code></pre></div><h3 id="hello-world">Hello World</h3>
 <p>Let&rsquo;s create a file named <code>program.go</code> and put the following code there:</p>
 <p><strong>program.go</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;¡Hola, mundo!&#34;</span>)
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;¡Hola, mundo!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="run-the-program">Run the program</h3>
 <p>Finally, to run the program by pressing the <code>F5</code> button in VS Code and you should see the message printed to <em>Debug Console</em>.</p>
 <p>That&rsquo;s all! My congratulations, you have just written your first program in Go!</p>
@@ -66,7 +66,7 @@ It&rsquo;s been a long time since I have published the last post, but now I came
 <p>If you fail to run your program and there is some message like <strong>&ldquo;Cannot find a path to <code>go</code>&rdquo;</strong>.
 Try to add to your <code>PATH</code> envar with path directory where <code>go</code> binary is stored.</p>
 <p>For example in MacOS I have added following line to my <code>~/.bash_profile</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>/usr/local/go/bin:$PATH
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/local/go/bin:<span class="nv">$PATH</span>
 </span></span></code></pre></div>]]></content:encoded>
     </item>
     
