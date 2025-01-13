@@ -59,7 +59,7 @@ If you’re dealing with multiple SIM cards and want to receive SMS in Telegram,
   "keywords": [
     "sim", "sms", "telegram"
   ],
-  "wordCount" : "582",
+  "wordCount" : "581",
   "inLanguage": "en-us",
   "datePublished": "2024-10-26T14:11:43+03:00",
   "dateModified": "2024-10-26T14:11:43+03:00",
@@ -328,9 +328,7 @@ function toggleThemeListener() {
 <p>Using Docker Compose, set up your configuration:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gammu</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/kutovoys/sms-to-telegram.git#main</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile.alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ghcr.io/alikhil/sms-to-telegram:latest</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">bind</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</span><span class="w"> </span><span class="c"># Change this to your device path</span><span class="w">
@@ -341,6 +339,7 @@ function toggleThemeListener() {
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PIN=&lt;your sim card pin&gt;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">CHAT_ID=&lt;telegram chat/channel ID&gt;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DEVICE=/dev/modem</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PROTOCOL=at</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">NET_ADMIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">SYS_MODULE</span><span class="w">
@@ -359,9 +358,9 @@ function toggleThemeListener() {
 <p><img loading="lazy" src="/images/posts/sms-to-telegram/screenshot.png" type="" alt="Telegram Screenshot"  /></p>
 <h2 id="how-it-works">How It Works<a hidden class="anchor" aria-hidden="true" href="#how-it-works">¶</a></h2>
 <p>The <a href="https://wammu.eu/libgammu/">Gammu library</a> provides a unified interface for working with phones and modems from various manufacturers.</p>
-<p>On top of that, there&rsquo;s the <a href="https://wammu.eu/smsd/">Gammu SMS Daemon</a>, which receives SMS messages and triggers a custom script—in our case, <a href="https://github.com/kutovoys/sms-to-telegram/blob/main/sms_to_telegram.sh">script</a> to send the messages to Telegram.</p>
+<p>On top of that, there&rsquo;s the <a href="https://wammu.eu/smsd/">Gammu SMS Daemon</a>, which receives SMS messages and triggers a custom script—in our case, <a href="https://github.com/alikhil/sms-to-telegram/blob/main/sms_to_telegram.sh">script</a> to send the messages to Telegram.</p>
 <h2 id="final-thoughts">Final Thoughts<a hidden class="anchor" aria-hidden="true" href="#final-thoughts">¶</a></h2>
-<p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and Docker image!</p>
+<p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
 <p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
 <blockquote>
 <p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p>
