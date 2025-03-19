@@ -59,7 +59,7 @@ Today I want to share with you another reason why you should avoid using http.De
   "keywords": [
     "Go", "http"
   ],
-  "wordCount" : "241",
+  "wordCount" : "245",
   "inLanguage": "en-us",
   "datePublished": "2025-03-19T19:20:45+03:00",
   "dateModified": "2025-03-19T19:20:45+03:00",
@@ -266,10 +266,26 @@ function toggleThemeListener() {
       
       
     </div>
-  </header> 
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#the-story" aria-label="The Story">The Story</a></li>
+                <li>
+                    <a href="#the-fix" aria-label="The Fix">The Fix</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
 
   <div class="post-content"><p>The Internet is plenty of articles that telling why you should not be using <code>http.DefaultClient</code> in Golang (<a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779">one</a>, <a href="https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/">two</a>) but they refer to <code>Timeout</code> and <code>MaxIdleConns</code> settings.</p>
 <p>Today I want to share with you another reason why you should avoid using <code>http.DefaultClient</code> in your code.</p>
+<h2 id="the-story">The Story<a hidden class="anchor" aria-hidden="true" href="#the-story">¶</a></h2>
 <p>As an SRE at Criteo, I both read and write code. Last week, I worked on patching <a href="https://github.com/updatecli/updatecli">Updatecli</a> — an upgrade automation tool written in Go.</p>
 <p>The <a href="https://github.com/updatecli/updatecli/pull/4432">patch</a> itself was just ~15 lines of code. But then I spent three days debugging a strange authorization bug in an unrelated part of the code.</p>
 <p>It happened because of code like this:</p>
@@ -289,7 +305,8 @@ function toggleThemeListener() {
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span> <span class="p">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>To prevent this, I had to change the code to:</p>
+</span></span></code></pre></div><h2 id="the-fix">The Fix<a hidden class="anchor" aria-hidden="true" href="#the-fix">¶</a></h2>
+<p>To prevent this, I had to change the code to:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
