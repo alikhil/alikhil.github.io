@@ -6,23 +6,33 @@
     <description>Recent content in Categories on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Oct 2024 14:11:43 +0300</lastBuildDate><atom:link href="https://alik.page/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alik.page/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Opensource</title>
+      <link>https://alik.page/categories/opensource/</link>
+      <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
+      
+      <guid>https://alik.page/categories/opensource/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://alik.page/categories/programming/</link>
+      <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
+      
+      <guid>https://alik.page/categories/programming/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Linux</title>
       <link>https://alik.page/categories/linux/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
       <guid>https://alik.page/categories/linux/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Opensource</title>
-      <link>https://alik.page/categories/opensource/</link>
-      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
-      <guid>https://alik.page/categories/opensource/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -73,16 +83,6 @@
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
       <guid>https://alik.page/categories/blogging/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Programming</title>
-      <link>https://alik.page/categories/programming/</link>
-      <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
-      <guid>https://alik.page/categories/programming/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

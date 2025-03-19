@@ -6,7 +6,47 @@
     <description>Recent content in Posts on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Oct 2024 14:11:43 +0300</lastBuildDate><atom:link href="https://alik.page/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alik.page/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
+      <link>https://alik.page/posts/go-global-http-client-gotcha/</link>
+      <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
+      
+      <guid>https://alik.page/posts/go-global-http-client-gotcha/</guid>
+      <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
+&lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>The Internet is plenty of articles that telling why you should not be using <code>http.DefaultClient</code> in Golang (<a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779">one</a>, <a href="https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/">two</a>) but they refer to <code>Timeout</code> and <code>MaxIdleConns</code> settings.</p>
+<p>Today I want to share with you another reason why you should avoid using <code>http.DefaultClient</code> in your code.</p>
+<p>As an SRE at Criteo, I both read and write code. Last week, I worked on patching <a href="https://github.com/updatecli/updatecli">Updatecli</a> — an upgrade automation tool written in Go.</p>
+<p>The <a href="https://github.com/updatecli/updatecli/pull/4432">patch</a> itself was just ~15 lines of code. But then I spent three days debugging a strange authorization bug in an unrelated part of the code.</p>
+<p>It happened because of code like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span>
+</span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Base</span><span class="p">:</span>  <span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Since <code>http.DefaultClient</code> is a reference, not a value:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">DefaultClient</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Client</span><span class="p">{}</span>
+</span></span></code></pre></div><p>The code above is effectively the same as:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Base</span><span class="p">:</span>  <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Later, in a third-party library, I found this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span> <span class="p">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>To prevent this, I had to change the code to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Base</span><span class="p">:</span>  <span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>As a result, the patched client with the authorization transport got injected into the third-party library, causing unexpected failures.</p>
+<p>Bugs like this are hard to catch just by reading the code, since they involve global state mutation. But could they be detected by linters?</p>
+<p>What do you think? How do you find or prevent such issues in your projects?</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Forwarding SMS to Telegram</title>
       <link>https://alik.page/posts/forwarding-sms-to-telegram/</link>
@@ -117,14 +157,14 @@ For example, I have Dell S2722QC tt has 2 HDMI ports and 1 USB-C port where:</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left"></th>
-          <th style="text-align: left"></th>
+          <th></th>
+          <th></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
-          <td style="text-align: left"><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
+          <td><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
+          <td><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
       </tr>
   </tbody>
 </table>

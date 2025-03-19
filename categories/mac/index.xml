@@ -32,14 +32,14 @@ For example, I have Dell S2722QC tt has 2 HDMI ports and 1 USB-C port where:</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left"></th>
-          <th style="text-align: left"></th>
+          <th></th>
+          <th></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
-          <td style="text-align: left"><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
+          <td><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
+          <td><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
       </tr>
   </tbody>
 </table>
