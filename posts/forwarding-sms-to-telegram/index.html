@@ -16,6 +16,20 @@ If you’re dealing with multiple SIM cards and want to receive SMS in Telegram,
 <link rel="apple-touch-icon" href="https://alik.page/apple-touch-icon.png">
 <link rel="alternate" hreflang="en-us" href="https://alik.page/posts/forwarding-sms-to-telegram/">
 
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RSGLKK3DPR');
+        }
+      </script>
 <meta name="twitter:title" content="Forwarding SMS to Telegram | alikhil" />
 <meta name="twitter:description" content="After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.
 If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10." />
@@ -307,8 +321,7 @@ function toggleThemeListener() {
 </ul>
 <h2 id="finding-the-right-modem">Finding the Right Modem<a hidden class="anchor" aria-hidden="true" href="#finding-the-right-modem">¶</a></h2>
 <blockquote>
-<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p>
-</blockquote>
+<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p></blockquote>
 <p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
 <p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
 <p>For instance:
@@ -318,8 +331,7 @@ function toggleThemeListener() {
 <p>If the device meets these requirements, it’s good to go!</p>
 <h2 id="setup-instructions">Setup Instructions<a hidden class="anchor" aria-hidden="true" href="#setup-instructions">¶</a></h2>
 <blockquote>
-<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p>
-</blockquote>
+<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p></blockquote>
 <h3 id="identify-device-path">Identify Device Path<a hidden class="anchor" aria-hidden="true" href="#identify-device-path">¶</a></h3>
 <p>Run the following command to identify the device path:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
@@ -368,8 +380,7 @@ function toggleThemeListener() {
 <p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
 <p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
 <blockquote>
-<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p>
-</blockquote>
+<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p></blockquote>
 
   </div>
 

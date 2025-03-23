@@ -16,6 +16,20 @@ Today I want to share with you another reason why you should avoid using http.De
 <link rel="apple-touch-icon" href="https://alik.page/apple-touch-icon.png">
 <link rel="alternate" hreflang="en-us" href="https://alik.page/posts/go-global-http-client-gotcha/">
 
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RSGLKK3DPR');
+        }
+      </script>
 <meta name="twitter:title" content="Unintended Side Effects of Using http.DefaultClient in Go | alikhil" />
 <meta name="twitter:description" content="The Internet is plenty of articles that telling why you should not be using http.DefaultClient in Golang (one, two) but they refer to Timeout and MaxIdleConns settings.
 Today I want to share with you another reason why you should avoid using http.DefaultClient in your code." />
