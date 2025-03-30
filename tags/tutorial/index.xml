@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tutorial on alikhil</title>
-    <link>http://localhost:1313/tags/tutorial/</link>
+    <link>https://alik.page/tags/tutorial/</link>
     <description>Recent content in Tutorial on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="https://alik.page/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Monitor input source control on Mac</title>
-      <link>http://localhost:1313/posts/monitor-input-source-control-mac/</link>
+      <link>https://alik.page/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/monitor-input-source-control-mac/</guid>
+      <guid>https://alik.page/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
@@ -97,10 +97,10 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     
     <item>
       <title>Build own drone.io docker image</title>
-      <link>http://localhost:1313/posts/build-own-drone-image/</link>
+      <link>https://alik.page/posts/build-own-drone-image/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/build-own-drone-image/</guid>
+      <guid>https://alik.page/posts/build-own-drone-image/</guid>
       <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
 &lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>¡Hola, amigos!</p>
@@ -161,10 +161,10 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     
     <item>
       <title>Deploy SPA application to Kubernetes</title>
-      <link>http://localhost:1313/posts/deploy-spa-to-k8s/</link>
+      <link>https://alik.page/posts/deploy-spa-to-k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/deploy-spa-to-k8s/</guid>
+      <guid>https://alik.page/posts/deploy-spa-to-k8s/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>
@@ -282,31 +282,16 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     
     <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
-      <link>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</link>
+      <link>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</guid>
-      <description>&lt;p&gt;o, folks!&lt;/p&gt;
-&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;
-&lt;!--m
-
-
-
- days ago I was configuring [SSO](https://en.wikipedia.org/wiki/Single_sign-on) for our internal dev-services in [KE Technologies](https://github.com/KazanExpress).
-
-And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.
-&lt;!-- toc --&gt;
-&lt;h1 id=&#34;what-do-we-want&#34;&gt;What do we want?&lt;/h1&gt;
-&lt;p&gt;We have internal services in our k8s cluster that we want to be accessible for developers.
-It can be &lt;em&gt;kubernetes-dashboard&lt;/em&gt; or &lt;em&gt;kibana&lt;/em&gt; or anything else.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>o, folks!</p>
+      <guid>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</guid>
+      <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
+&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hello, folks!</p>
 <p>In this post, I will go through configuring <a href="https://github.com/bitly/oauth2_proxy">Bitly OAuth2 proxy</a> in a kubernetes cluster.</p>
-<!--m
-
-
- days ago I was configuring [SSO](https://en.wikipedia.org/wiki/Single_sign-on) for our internal dev-services in [KE Technologies](https://github.com/KazanExpress).
-
-And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.
+<p>A few days ago I was configuring <a href="https://en.wikipedia.org/wiki/Single_sign-on">SSO</a> for our internal dev-services in <a href="https://github.com/KazanExpress">KE Technologies</a>.</p>
+<p>And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.</p>
 <!-- toc -->
 <h1 id="what-do-we-want">What do we want?</h1>
 <p>We have internal services in our k8s cluster that we want to be accessible for developers.
@@ -399,7 +384,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">ing-tls</span><span class="w">
 </span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f example-ing.yaml
 </span></span></code></pre></div><p>Wait for a few seconds and open <a href="https://service.example.com">https://service.example.com</a> and you should see something similar to this:</p>
-<p>{{&lt; i
+
 
 
 <div class="figure " >
@@ -410,11 +395,12 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     <span class="caption">Example</span>
   
 </div>
-GitHub application</p>
+
+<h2 id="github-application">GitHub application</h2>
 <p>In this post, we will use GitHub accounts for authentication.</p>
 <p>So, go to <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> and create new OAuth application</p>
 <p>Fill <strong>Authorization callback URL</strong> field with <a href="https://auth.example.com/oauth2/callback">https://auth.example.com/oauth2/callback</a> where <em>example.com</em> is your domain name.</p>
-<p>{{&lt; i
+
 
 
 <div class="figure [classes]" >
@@ -425,7 +411,8 @@ GitHub application</p>
     <span class="caption">GitHub Application</span>
   
 </div>
-er creating an application you will have <strong>Client ID</strong> and <strong>Client Secret</strong> which we will need in next step.</p>
+
+<p>After creating an application you will have <strong>Client ID</strong> and <strong>Client Secret</strong> which we will need in next step.</p>
 <h1 id="deploy-oauth-proxy">Deploy OAuth Proxy</h1>
 <p>There are a lot of docker images for OAuth proxy, but we can not use them because they do not support domain white-listing. The problem is that such functionality has not implemented yet.</p>
 <p>Actualy there are several PRs that solve that problem but seems to be they frozen for an unknown amount of time.</p>
@@ -572,7 +559,7 @@ er creating an application you will have <strong>Client ID</strong> and <strong>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">ing-tls</span><span class="w">
 </span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f example-ing.yml
 </span></span></code></pre></div><p>Then visit service.example.com and you will be redirected to GitHub authorization page:</p>
-<p>{{&lt; i
+
 
 
 <div class="figure " >
@@ -583,24 +570,24 @@ er creating an application you will have <strong>Client ID</strong> and <strong>
     <span class="caption">GitHub Authorization page</span>
   
 </div>
- once you authenticate, you will have access to all your services under ingress that point to auth.example.com until cookie expires.</p>
+
+<p>And once you authenticate, you will have access to all your services under ingress that point to auth.example.com until cookie expires.</p>
 <p>And that&rsquo;s it! Now you can put any of your internal services behind ingress with OAuth.</p>
 <h2 id="resources">Resources</h2>
 <p>Here is a list of resources that helped me to go through this proccess first time:</p>
 <ul>
 <li><a href="https://eng.fromatob.com/post/2017/02/lets-encrypt-oauth-2-and-kubernetes-ingress/">https://eng.fromatob.com/post/2017/02/lets-encrypt-oauth-2-and-kubernetes-ingress/</a></li>
 <li><a href="https://www.midnightfreddie.com/oauth2-proxy.html">https://www.midnightfreddie.com/oauth2-proxy.html</a></li>
-<li><a href="https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/">https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/</a>
-�����</li>
+<li><a href="https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/">https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/</a></li>
 </ul>]]></content:encoded>
     </item>
     
     <item>
       <title>Go Quickstart</title>
-      <link>http://localhost:1313/posts/go-quickstart/</link>
+      <link>https://alik.page/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/go-quickstart/</guid>
+      <guid>https://alik.page/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>

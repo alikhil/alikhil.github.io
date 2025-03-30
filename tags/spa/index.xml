@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Spa on alikhil</title>
-    <link>http://localhost:1313/tags/spa/</link>
+    <link>https://alik.page/tags/spa/</link>
     <description>Recent content in Spa on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jun 2019 22:30:00 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/spa/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jun 2019 22:30:00 +0300</lastBuildDate><atom:link href="https://alik.page/tags/spa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploy SPA application to Kubernetes</title>
-      <link>http://localhost:1313/posts/deploy-spa-to-k8s/</link>
+      <link>https://alik.page/posts/deploy-spa-to-k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/deploy-spa-to-k8s/</guid>
+      <guid>https://alik.page/posts/deploy-spa-to-k8s/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>

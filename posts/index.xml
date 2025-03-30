@@ -2,127 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on alikhil</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://alik.page/posts/</link>
     <description>Recent content in Posts on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Storing and using secrets in Mikrotik RouterOS</title>
-      <link>http://localhost:1313/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
-      <pubDate>Sun, 30 Mar 2025 16:01:25 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
-      <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;
-&lt;p&gt;When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>Recently I have replaced my stock ISP router with <a href="https://mikrotik.com/product/hex_s">Mikrotik Hex S</a>. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.</p>
-<p>When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Let&rsquo;s say I want to write a script that will send me telegram notifications. To do so I need to store my telegram bot token and chat id. Since I keep my RouterOS configuration in a git repository, I don&rsquo;t want to hardcode my secrets in the script.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">:</span><span class="n">global</span> <span class="n">sendTelegramMessage</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">botToken</span> <span class="s2">&#34;1234567890:ABCDEFGHIJKLMN&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">chatId</span> <span class="s2">&#34;10000000&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">message</span> <span class="s2">&#34;$1&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># telegram notification</span>
-</span></span><span class="line"><span class="cl">    <span class="o">/</span><span class="k">tool</span> <span class="n">fetch</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://api.telegram.org/bot$botToken/sendMessage\?chat_id=$chatId&amp;text=$message&#34;</span> <span class="n">keep</span><span class="o">-</span><span class="n">result</span><span class="o">=</span><span class="n">no</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="the-solution">The solution</h2>
-<p>RouterOS has low level feature <code>/ppp secret</code> which can be used to store secrets. However, it could be inconvenient and a bit messy to use it directly in scripts. Instead, I would like to have more high level API to store and use secrets.</p>
-<p>And, I have one. There is post in <a href="https://forum.mikrotik.com/viewtopic.php?p=916159#p916159">mikrotik forum</a> by user with nickname <strong>Amm0</strong>. Ammo has shared a script of global function which can be used to store and retrieve secrets like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$SECRET set mySecret password=&#34;mySecretPassword&#34;
-</span></span><span class="line"><span class="cl">:put [$SECRET get mySecret]
-</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mirotik-secrets/terminal.png" type="" alt="Terminal Screenshot"  /></p>
-<p>Now, I modify my script to use this function to keep it clean and secure:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">:</span><span class="n">global</span> <span class="n">sendTelegramMessage</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">botToken</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">set</span> <span class="n">botToken</span> <span class="s2">&#34;$[$SECRET get TELEGRAM_TOKEN]&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">chatId</span> <span class="s2">&#34;$[$SECRET get CHAT_ID]&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">message</span> <span class="s2">&#34;$1&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># telegram notification</span>
-</span></span><span class="line"><span class="cl">    <span class="o">/</span><span class="k">tool</span> <span class="n">fetch</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://api.telegram.org/bot$botToken/sendMessage\?chat_id=$chatId&amp;text=$message&#34;</span> <span class="n">keep</span><span class="o">-</span><span class="n">result</span><span class="o">=</span><span class="n">no</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><details>
-  <summary>global SECRET function source code</summary>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">### $SECRET
-</span></span><span class="line"><span class="cl">#   get &lt;name&gt;
-</span></span><span class="line"><span class="cl">#   set &lt;name&gt; password=&lt;password&gt;
-</span></span><span class="line"><span class="cl">#   remove &lt;name
-</span></span><span class="line"><span class="cl">#   print
-</span></span><span class="line"><span class="cl">:global SECRET
-</span></span><span class="line"><span class="cl">:set $SECRET do={
-</span></span><span class="line"><span class="cl">    :global SECRET
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    # helpers
-</span></span><span class="line"><span class="cl">    :local fixprofile do={
-</span></span><span class="line"><span class="cl">        :if ([/ppp profile find name=&#34;null&#34;]) do={:put &#34;nothing&#34;} else={
-</span></span><span class="line"><span class="cl">            /ppp profile add bridge-learning=no change-tcp-mss=no local-address=0.0.0.0 name=&#34;null&#34; only-one=yes remote-address=0.0.0.0 session-timeout=1s use-compression=no use-encryption=no use-mpls=no use-upnp=no
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    :local lppp [:len [/ppp secret find where name=$2]]
-</span></span><span class="line"><span class="cl">    :local checkexist do={
-</span></span><span class="line"><span class="cl">        :if (lppp=0) do={
-</span></span><span class="line"><span class="cl">            :error &#34;\$SECRET: cannot find $2 in secret store&#34;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    # $SECRET
-</span></span><span class="line"><span class="cl">    :if ([:typeof $1]!=&#34;str&#34;) do={
-</span></span><span class="line"><span class="cl">        :put &#34;\$SECRET&#34;
-</span></span><span class="line"><span class="cl">        :put &#34;   uses /ppp/secrets to store stuff like REST apikeys, or other sensative data&#34;
-</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET print - prints stored secret passwords&#34;
-</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET get &lt;name&gt; - gets a stored secret&#34;
-</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET set &lt;name&gt; password=\&#34;YOUR_SECRET\&#34; - sets a secret password&#34;
-</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET remove &lt;name&gt; - removes a secret&#34;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    # $SECRET print
-</span></span><span class="line"><span class="cl">    :if ($1~&#34;^pr&#34;) do={
-</span></span><span class="line"><span class="cl">        /ppp secret print where comment~&#34;\\\$SECRET&#34;
-</span></span><span class="line"><span class="cl">        :return [:nothing]
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    # $SECRET get
-</span></span><span class="line"><span class="cl">    :if ($1~&#34;get&#34;) do={
-</span></span><span class="line"><span class="cl">        $checkexist
-</span></span><span class="line"><span class="cl">       :return [/ppp secret get $2 password]
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    # $SECRET set
-</span></span><span class="line"><span class="cl">    :if ($1~&#34;set|add&#34;) do={
-</span></span><span class="line"><span class="cl">        :if ([:typeof $password]=&#34;str&#34;) do={} else={:error &#34;\$SECRET: password= required&#34;}
-</span></span><span class="line"><span class="cl">        :if (lppp=0) do={
-</span></span><span class="line"><span class="cl">            /ppp secret add name=$2 password=$password
-</span></span><span class="line"><span class="cl">        } else={
-</span></span><span class="line"><span class="cl">            /ppp secret set $2 password=$password
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        $fixprofile
-</span></span><span class="line"><span class="cl">        /ppp secret set $2 comment=&#34;used by \$SECRET&#34;
-</span></span><span class="line"><span class="cl">        /ppp secret set $2 profile=&#34;null&#34;
-</span></span><span class="line"><span class="cl">        /ppp secret set $2 service=&#34;async&#34;
-</span></span><span class="line"><span class="cl">        :return [$SECRET get $2]
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    # $SECRET remove
-</span></span><span class="line"><span class="cl">    :if ($1~&#34;rm|rem|del&#34;) do={
-</span></span><span class="line"><span class="cl">        $checkexist
-</span></span><span class="line"><span class="cl">        :return [/ppp secret remove $2]
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    :error &#34;\$SECRET: bad command&#34;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></div></details>
-<h2 id="conclusion">Conclusion</h2>
-<p>The good thing about this approach is that secrets storing and retrieving mechanism encapsulated and can be easily changed in the future without changing the scripts. Also, it is easy to use and understand.</p>
-<p>Keep your secrets safe and happy scripting!</p>]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0000</lastBuildDate><atom:link href="https://alik.page/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
-      <link>http://localhost:1313/posts/go-global-http-client-gotcha/</link>
+      <link>https://alik.page/posts/go-global-http-client-gotcha/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/go-global-http-client-gotcha/</guid>
+      <guid>https://alik.page/posts/go-global-http-client-gotcha/</guid>
       <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
 &lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>The Internet is plenty of articles that telling why you should not be using <code>http.DefaultClient</code> in Golang (<a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779">one</a>, <a href="https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/">two</a>) but they refer to <code>Timeout</code> and <code>MaxIdleConns</code> settings.</p>
@@ -161,10 +51,10 @@
     
     <item>
       <title>Forwarding SMS to Telegram</title>
-      <link>http://localhost:1313/posts/forwarding-sms-to-telegram/</link>
+      <link>https://alik.page/posts/forwarding-sms-to-telegram/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/forwarding-sms-to-telegram/</guid>
+      <guid>https://alik.page/posts/forwarding-sms-to-telegram/</guid>
       <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
 &lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.</p>
@@ -243,10 +133,10 @@
     
     <item>
       <title>Monitor input source control on Mac</title>
-      <link>http://localhost:1313/posts/monitor-input-source-control-mac/</link>
+      <link>https://alik.page/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/monitor-input-source-control-mac/</guid>
+      <guid>https://alik.page/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
@@ -330,76 +220,11 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     </item>
     
     <item>
-      <title>Introduction to Drone.io</title>
-      <link>http://localhost:1313/posts/intro-to-drone/</link>
-      <pubDate>Sun, 24 May 2020 15:12:41 +0300</pubDate>
-      
-      <guid>http://localhost:1313/posts/intro-to-drone/</guid>
-      <description>&lt;p&gt;his post I have tried to structure the content of my talks about &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; CI/CD platform. I hope, this will be useful for those who are not familiar with it.&lt;/p&gt;
-&lt;!--m
-
-
-
-u know Russian language, you can watch one of my talks about drone.io [here](https://www.youtube.com/watch?v=MSsHRo9CYvk) or [there](https://www.youtube.com/watch?v=mKT-bLdRGvQ).
-
-
-# Overview
-
-Drone.io is worth a closer look because:
-
-- It is an [opensource](https://github.com/drone/drone) project, written in GoLang. You can check the sources, you can contribute.
-
-- It is a container native. Everything executed in an isolated Docker container. All native and custom plugins are docker images. And drone.io can be [easily](/#installation) run using docker.
-
-- Pipelines are simply configurable using drone.yml. You don’t need to learn new DSL. drone.yml’s structure is intuitive and it’s similar to the format of other popular platforms (Circle CI, Travis CI, Gitlab). Moreover, if you don’t like YML, drone supports Jsonnet and Starlark configuration languages.
-
-- Support of popular git providers (GitHub, BitBucket, GitLab, Gogs, Gitea, etc).
-
-- Powerful plugin system. Using them you can customize the scenario of your pipeline or extend the system’s functionality.
-
-- Kubernetes support. You can run your pipelines in your kubernetes cluster.
-
-# License
-
-Drone.io has enterprise and community (open source) licenses.
-
-[Here](https://drone.io/enterprise/features/) you can find the list of features available in both editions. As you see, the most interesting features are available only in the enterprise edition.�����</description>
-      <content:encoded><![CDATA[<p>his post I have tried to structure the content of my talks about <a href="https://drone.io">drone.io</a> CI/CD platform. I hope, this will be useful for those who are not familiar with it.</p>
-<!--m
-
-
-u know Russian language, you can watch one of my talks about drone.io [here](https://www.youtube.com/watch?v=MSsHRo9CYvk) or [there](https://www.youtube.com/watch?v=mKT-bLdRGvQ).
-
-
-# Overview
-
-Drone.io is worth a closer look because:
-
-- It is an [opensource](https://github.com/drone/drone) project, written in GoLang. You can check the sources, you can contribute.
-
-- It is a container native. Everything executed in an isolated Docker container. All native and custom plugins are docker images. And drone.io can be [easily](/#installation) run using docker.
-
-- Pipelines are simply configurable using drone.yml. You don’t need to learn new DSL. drone.yml’s structure is intuitive and it’s similar to the format of other popular platforms (Circle CI, Travis CI, Gitlab). Moreover, if you don’t like YML, drone supports Jsonnet and Starlark configuration languages.
-
-- Support of popular git providers (GitHub, BitBucket, GitLab, Gogs, Gitea, etc).
-
-- Powerful plugin system. Using them you can customize the scenario of your pipeline or extend the system’s functionality.
-
-- Kubernetes support. You can run your pipelines in your kubernetes cluster.
-
-# License
-
-Drone.io has enterprise and community (open source) licenses.
-
-[Here](https://drone.io/enterprise/features/) you can find the list of features available in both editions. As you see, the most interesting features are available only in the enterprise edition.�����]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Build own drone.io docker image</title>
-      <link>http://localhost:1313/posts/build-own-drone-image/</link>
+      <link>https://alik.page/posts/build-own-drone-image/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/build-own-drone-image/</guid>
+      <guid>https://alik.page/posts/build-own-drone-image/</guid>
       <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
 &lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>¡Hola, amigos!</p>
@@ -460,10 +285,10 @@ Drone.io has enterprise and community (open source) licenses.
     
     <item>
       <title>Deploy SPA application to Kubernetes</title>
-      <link>http://localhost:1313/posts/deploy-spa-to-k8s/</link>
+      <link>https://alik.page/posts/deploy-spa-to-k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/deploy-spa-to-k8s/</guid>
+      <guid>https://alik.page/posts/deploy-spa-to-k8s/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>
@@ -581,86 +406,41 @@ Drone.io has enterprise and community (open source) licenses.
     
     <item>
       <title>Tips for language learners</title>
-      <link>http://localhost:1313/posts/how-to-start-learning-new-language/</link>
+      <link>https://alik.page/posts/how-to-start-learning-new-language/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/how-to-start-learning-new-language/</guid>
-      <description>&lt;p&gt;u expected only post on IT topics on this blog, I am sorry :(
-Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;
-&lt;!--m
-
-
-
-ification
-
-If you are only starting to learn then this will be helpful for you in double. Most of the people give up learning after several weeks or even days after they begin. It&#39;s because of their motivation. It becomes lower with time. And in the beginning when you know almost nothing and understand that you should work hard and work a lot to learn. It really demotivates. And I think elements of gamification will help to increase motivation and turn learning process to habit. You can gamify your learning in any way you want. I recommend:
-
-* [Duolingo](https://www.duolingo.com/) or [Linguoleo](https://lingualeo.com/) - good for learning the basics of the language
-* [Tinycard](https://tinycards.duolingo.com/) - for learning/memorizing new words
-
-# Listen
-
-As soon as you have learned basics, start listening to podcasts. There are some free audio podcasts oriented for beginners. For example, in Spanish, it&#39;s a [Notes in Spanish](https://www.notesinspanish.com/).
-
-Create a playlist with up to 20 songs you like on language you learn and listen to them regularly. And keep listening until you will understand what a song about. You don&#39;t have to translate all the words in each song. In fact, It is not very useful. But opposite, when you learn new words from textbook, tinycard or from anywhere else and you hear this word while you are listening to your playlist you learn better.
-
-&gt; -- Oh, wait. I know what this word means ...
-
-# Watch
-If you are fun of TV-shows, you can start watching them in the language you learn. With subtitles or without them. Of course, it requires some basic knowledge. If you care that you will miss some key points of the story and prefer to fully understand it, you can watch sitcoms which don&#39;t have almost anything in common between series.
-�����</description>
-      <content:encoded><![CDATA[<p>u expected only post on IT topics on this blog, I am sorry :(
+      <guid>https://alik.page/posts/how-to-start-learning-new-language/</guid>
+      <description>&lt;p&gt;If you expected only post on IT topics on this blog, I am sorry :(
+Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>If you expected only post on IT topics on this blog, I am sorry :(
 Today I&rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.</p>
-<!--m
-
-
-ification
-
-If you are only starting to learn then this will be helpful for you in double. Most of the people give up learning after several weeks or even days after they begin. It's because of their motivation. It becomes lower with time. And in the beginning when you know almost nothing and understand that you should work hard and work a lot to learn. It really demotivates. And I think elements of gamification will help to increase motivation and turn learning process to habit. You can gamify your learning in any way you want. I recommend:
-
-* [Duolingo](https://www.duolingo.com/) or [Linguoleo](https://lingualeo.com/) - good for learning the basics of the language
-* [Tinycard](https://tinycards.duolingo.com/) - for learning/memorizing new words
-
-# Listen
-
-As soon as you have learned basics, start listening to podcasts. There are some free audio podcasts oriented for beginners. For example, in Spanish, it's a [Notes in Spanish](https://www.notesinspanish.com/).
-
-Create a playlist with up to 20 songs you like on language you learn and listen to them regularly. And keep listening until you will understand what a song about. You don't have to translate all the words in each song. In fact, It is not very useful. But opposite, when you learn new words from textbook, tinycard or from anywhere else and you hear this word while you are listening to your playlist you learn better.
-
-> -- Oh, wait. I know what this word means ...
-
-# Watch
-If you are fun of TV-shows, you can start watching them in the language you learn. With subtitles or without them. Of course, it requires some basic knowledge. If you care that you will miss some key points of the story and prefer to fully understand it, you can watch sitcoms which don't have almost anything in common between series.
-�����]]></content:encoded>
+<h1 id="gamification">Gamification</h1>
+<p>If you are only starting to learn then this will be helpful for you in double. Most of the people give up learning after several weeks or even days after they begin. It&rsquo;s because of their motivation. It becomes lower with time. And in the beginning when you know almost nothing and understand that you should work hard and work a lot to learn. It really demotivates. And I think elements of gamification will help to increase motivation and turn learning process to habit. You can gamify your learning in any way you want. I recommend:</p>
+<ul>
+<li><a href="https://www.duolingo.com/">Duolingo</a> or <a href="https://lingualeo.com/">Linguoleo</a> - good for learning the basics of the language</li>
+<li><a href="https://tinycards.duolingo.com/">Tinycard</a> - for learning/memorizing new words</li>
+</ul>
+<h1 id="listen">Listen</h1>
+<p>As soon as you have learned basics, start listening to podcasts. There are some free audio podcasts oriented for beginners. For example, in Spanish, it&rsquo;s a <a href="https://www.notesinspanish.com/">Notes in Spanish</a>.</p>
+<p>Create a playlist with up to 20 songs you like on language you learn and listen to them regularly. And keep listening until you will understand what a song about. You don&rsquo;t have to translate all the words in each song. In fact, It is not very useful. But opposite, when you learn new words from textbook, tinycard or from anywhere else and you hear this word while you are listening to your playlist you learn better.</p>
+<blockquote>
+<p>&ndash; Oh, wait. I know what this word means &hellip;</p></blockquote>
+<h1 id="watch">Watch</h1>
+<p>If you are fun of TV-shows, you can start watching them in the language you learn. With subtitles or without them. Of course, it requires some basic knowledge. If you care that you will miss some key points of the story and prefer to fully understand it, you can watch sitcoms which don&rsquo;t have almost anything in common between series.</p>]]></content:encoded>
     </item>
     
     <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
-      <link>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</link>
+      <link>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</guid>
-      <description>&lt;p&gt;o, folks!&lt;/p&gt;
-&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;
-&lt;!--m
-
-
-
- days ago I was configuring [SSO](https://en.wikipedia.org/wiki/Single_sign-on) for our internal dev-services in [KE Technologies](https://github.com/KazanExpress).
-
-And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.
-&lt;!-- toc --&gt;
-&lt;h1 id=&#34;what-do-we-want&#34;&gt;What do we want?&lt;/h1&gt;
-&lt;p&gt;We have internal services in our k8s cluster that we want to be accessible for developers.
-It can be &lt;em&gt;kubernetes-dashboard&lt;/em&gt; or &lt;em&gt;kibana&lt;/em&gt; or anything else.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>o, folks!</p>
+      <guid>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</guid>
+      <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
+&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hello, folks!</p>
 <p>In this post, I will go through configuring <a href="https://github.com/bitly/oauth2_proxy">Bitly OAuth2 proxy</a> in a kubernetes cluster.</p>
-<!--m
-
-
- days ago I was configuring [SSO](https://en.wikipedia.org/wiki/Single_sign-on) for our internal dev-services in [KE Technologies](https://github.com/KazanExpress).
-
-And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.
+<p>A few days ago I was configuring <a href="https://en.wikipedia.org/wiki/Single_sign-on">SSO</a> for our internal dev-services in <a href="https://github.com/KazanExpress">KE Technologies</a>.</p>
+<p>And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.</p>
 <!-- toc -->
 <h1 id="what-do-we-want">What do we want?</h1>
 <p>We have internal services in our k8s cluster that we want to be accessible for developers.
@@ -753,7 +533,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">ing-tls</span><span class="w">
 </span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f example-ing.yaml
 </span></span></code></pre></div><p>Wait for a few seconds and open <a href="https://service.example.com">https://service.example.com</a> and you should see something similar to this:</p>
-<p>{{&lt; i
+
 
 
 <div class="figure " >
@@ -764,11 +544,12 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     <span class="caption">Example</span>
   
 </div>
-GitHub application</p>
+
+<h2 id="github-application">GitHub application</h2>
 <p>In this post, we will use GitHub accounts for authentication.</p>
 <p>So, go to <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> and create new OAuth application</p>
 <p>Fill <strong>Authorization callback URL</strong> field with <a href="https://auth.example.com/oauth2/callback">https://auth.example.com/oauth2/callback</a> where <em>example.com</em> is your domain name.</p>
-<p>{{&lt; i
+
 
 
 <div class="figure [classes]" >
@@ -779,7 +560,8 @@ GitHub application</p>
     <span class="caption">GitHub Application</span>
   
 </div>
-er creating an application you will have <strong>Client ID</strong> and <strong>Client Secret</strong> which we will need in next step.</p>
+
+<p>After creating an application you will have <strong>Client ID</strong> and <strong>Client Secret</strong> which we will need in next step.</p>
 <h1 id="deploy-oauth-proxy">Deploy OAuth Proxy</h1>
 <p>There are a lot of docker images for OAuth proxy, but we can not use them because they do not support domain white-listing. The problem is that such functionality has not implemented yet.</p>
 <p>Actualy there are several PRs that solve that problem but seems to be they frozen for an unknown amount of time.</p>
@@ -926,7 +708,7 @@ er creating an application you will have <strong>Client ID</strong> and <strong>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">ing-tls</span><span class="w">
 </span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f example-ing.yml
 </span></span></code></pre></div><p>Then visit service.example.com and you will be redirected to GitHub authorization page:</p>
-<p>{{&lt; i
+
 
 
 <div class="figure " >
@@ -937,24 +719,24 @@ er creating an application you will have <strong>Client ID</strong> and <strong>
     <span class="caption">GitHub Authorization page</span>
   
 </div>
- once you authenticate, you will have access to all your services under ingress that point to auth.example.com until cookie expires.</p>
+
+<p>And once you authenticate, you will have access to all your services under ingress that point to auth.example.com until cookie expires.</p>
 <p>And that&rsquo;s it! Now you can put any of your internal services behind ingress with OAuth.</p>
 <h2 id="resources">Resources</h2>
 <p>Here is a list of resources that helped me to go through this proccess first time:</p>
 <ul>
 <li><a href="https://eng.fromatob.com/post/2017/02/lets-encrypt-oauth-2-and-kubernetes-ingress/">https://eng.fromatob.com/post/2017/02/lets-encrypt-oauth-2-and-kubernetes-ingress/</a></li>
 <li><a href="https://www.midnightfreddie.com/oauth2-proxy.html">https://www.midnightfreddie.com/oauth2-proxy.html</a></li>
-<li><a href="https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/">https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/</a>
-�����</li>
+<li><a href="https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/">https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/</a></li>
 </ul>]]></content:encoded>
     </item>
     
     <item>
       <title>Say hello to Hugo</title>
-      <link>http://localhost:1313/posts/say-hello-to-hugo/</link>
+      <link>https://alik.page/posts/say-hello-to-hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/say-hello-to-hugo/</guid>
+      <guid>https://alik.page/posts/say-hello-to-hugo/</guid>
       <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Today I migrated my blog to <a href="https://gohugo.io">Hugo</a> engine. So, it&rsquo;s my first post here, yaay!</p>
 <p>There were only 2 posts in my last blog and I decided to not migrate the one about creating blog in Jekyll. Since it is not actual now.</p>]]></content:encoded>
@@ -962,10 +744,10 @@ er creating an application you will have <strong>Client ID</strong> and <strong>
     
     <item>
       <title>Go Quickstart</title>
-      <link>http://localhost:1313/posts/go-quickstart/</link>
+      <link>https://alik.page/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/go-quickstart/</guid>
+      <guid>https://alik.page/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>

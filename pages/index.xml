@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Pages on alikhil</title>
-    <link>http://localhost:1313/pages/</link>
+    <link>https://alik.page/pages/</link>
     <description>Recent content in Pages on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2025 23:10:25 +0300</lastBuildDate><atom:link href="http://localhost:1313/pages/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Mar 2025 23:10:25 +0300</lastBuildDate><atom:link href="https://alik.page/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Projects</title>
-      <link>http://localhost:1313/pages/projects/</link>
+      <link>https://alik.page/pages/projects/</link>
       <pubDate>Wed, 19 Mar 2025 23:10:25 +0300</pubDate>
       
-      <guid>http://localhost:1313/pages/projects/</guid>
+      <guid>https://alik.page/pages/projects/</guid>
       <description>&lt;h2 id=&#34;my-projects&#34;&gt;My Projects&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://1mgr.xyz&#34;&gt;1mgr.xyz&lt;/a&gt; - On-demand mirror for images from dockerhub based on GitHub Actions and GitHub package registry.&lt;/li&gt;
@@ -63,10 +63,10 @@
     
     <item>
       <title>Talks</title>
-      <link>http://localhost:1313/pages/talks/</link>
+      <link>https://alik.page/pages/talks/</link>
       <pubDate>Wed, 19 Mar 2025 23:10:25 +0300</pubDate>
       
-      <guid>http://localhost:1313/pages/talks/</guid>
+      <guid>https://alik.page/pages/talks/</guid>
       <description>&lt;p&gt;Here is a list of talks I gave in different conferences and meetups:&lt;/p&gt;
 &lt;h4 id=&#34;cicd-for-golang-projects-with-droneio&#34;&gt;CI/CD for golang projects with drone.io&lt;/h4&gt;
 &lt;p&gt;Avito.Tech meetup in Kazan, 2020&lt;/p&gt;

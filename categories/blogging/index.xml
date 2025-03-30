@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Blogging on alikhil</title>
-    <link>http://localhost:1313/categories/blogging/</link>
+    <link>https://alik.page/categories/blogging/</link>
     <description>Recent content in Blogging on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 May 2018 16:03:44 +0300</lastBuildDate><atom:link href="http://localhost:1313/categories/blogging/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 May 2018 16:03:44 +0300</lastBuildDate><atom:link href="https://alik.page/categories/blogging/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Say hello to Hugo</title>
-      <link>http://localhost:1313/posts/say-hello-to-hugo/</link>
+      <link>https://alik.page/posts/say-hello-to-hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/say-hello-to-hugo/</guid>
+      <guid>https://alik.page/posts/say-hello-to-hugo/</guid>
       <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Today I migrated my blog to <a href="https://gohugo.io">Hugo</a> engine. So, it&rsquo;s my first post here, yaay!</p>
 <p>There were only 2 posts in my last blog and I decided to not migrate the one about creating blog in Jekyll. Since it is not actual now.</p>]]></content:encoded>
