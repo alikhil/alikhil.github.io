@@ -5,11 +5,12 @@
     <link>https://alik.page/tags/mikrotik/</link>
     <description>Recent content in Mikrotik on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://alik.page/tags/mikrotik/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alik.page/tags/mikrotik/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Storing and using secrets in Mikrotik RouterOS</title>
       <link>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
       
       <guid>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
       <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;

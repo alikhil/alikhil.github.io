@@ -6,93 +6,11 @@
     <description>Recent content in Selfhosting on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Oct 2024 14:11:43 +0300</lastBuildDate><atom:link href="https://alik.page/categories/selfhosting/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Forwarding SMS to Telegram</title>
-      <link>https://alik.page/posts/forwarding-sms-to-telegram/</link>
-      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
-      <guid>https://alik.page/posts/forwarding-sms-to-telegram/</guid>
-      <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
-&lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.</p>
-<p>If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.</p>
-<h2 id="what-youll-need">What You’ll Need</h2>
-<ul>
-<li>A physical SIM card</li>
-<li>A USB modem that’s supported by the <a href="https://wammu.eu/phones/">Gammu library</a></li>
-<li>A Telegram bot token, chat or channel ID</li>
-<li>A Linux machine with a free USB port</li>
-<li>Docker and Docker Compose installed</li>
-</ul>
-<h2 id="finding-the-right-modem">Finding the Right Modem</h2>
-<blockquote>
-<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p></blockquote>
-<p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
-<p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
-<p>For instance:
-<img loading="lazy" src="/images/posts/sms-to-telegram/ebay.png" type="" alt="Ebay Screenshot"  /></p>
-<p>Next, go to the <a href="https://wammu.eu/phones/">Gammu</a> website and look up the device. Make sure it appears on the list and that “SMS” is included in the &ldquo;Supported features&rdquo; column:</p>
-<p><img loading="lazy" src="/images/posts/sms-to-telegram/e3131.png" type="" alt="E3131"  /></p>
-<p>If the device meets these requirements, it’s good to go!</p>
-<h2 id="setup-instructions">Setup Instructions</h2>
-<blockquote>
-<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p></blockquote>
-<h3 id="identify-device-path">Identify Device Path</h3>
-<p>Run the following command to identify the device path:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
-</span></span></code></pre></div><p>You should see a paths similar to:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">/dev/serial/by-id
-</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if00-port0 -&gt; ../../ttyUSB0
-</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if02-port0 -&gt; ../../ttyUSB1
-</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if03-port0 -&gt; ../../ttyUSB2
-</span></span></code></pre></div><p>Choose a path that ends with <code>ttyUSB0</code>, in my case it&rsquo;s <code>/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</code>.</p>
-<h3 id="running-the-service">Running the Service</h3>
-<p>Using Docker Compose, set up your configuration:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gammu</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ghcr.io/alikhil/sms-to-telegram:latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">bind</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</span><span class="w"> </span><span class="c"># Change this to your device path</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/modem</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">BOT_TOKEN=&lt;put your telegram bot token here&gt;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PIN=&lt;your sim card pin&gt;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">CHAT_ID=&lt;telegram chat/channel ID&gt;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DEVICE=/dev/modem</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PROTOCOL=at</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">NET_ADMIN</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">SYS_MODULE</span><span class="w">
-</span></span></span></code></pre></div><p>Save the configuration to a <code>docker-compose.yml</code> file and run:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose up -d
-</span></span><span class="line"><span class="cl">docker compose logs -f gammu
-</span></span></code></pre></div><p>If everything is set up correctly, you should see the following log messages:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:50:56 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Created POSIX RW shared memory at 0x7fcf90b21000
-</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:50:56 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Starting phone communication...
-</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:30 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Ignoring incoming SMS info as not a Status Report in SR memory.
-</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Read <span class="m">1</span> messages
-</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Received IN20241004_195517_00_Celerity_00.txt
-</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>13<span class="o">]</span>: Starting run on receive: /etc/sms_to_telegram.sh IN20241004_195517_00_Celerity_00.txt
-</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Process finished successfully
-</span></span></code></pre></div><p>To test SMS reception, you can use free online SMS-sending services (search for &ldquo;send SMS for free&rdquo;) or try logging into Telegram, your bank account, etc.</p>
-<p><img loading="lazy" src="/images/posts/sms-to-telegram/screenshot.png" type="" alt="Telegram Screenshot"  /></p>
-<h2 id="how-it-works">How It Works</h2>
-<p>The <a href="https://wammu.eu/libgammu/">Gammu library</a> provides a unified interface for working with phones and modems from various manufacturers.</p>
-<p>On top of that, there&rsquo;s the <a href="https://wammu.eu/smsd/">Gammu SMS Daemon</a>, which receives SMS messages and triggers a custom script—in our case, <a href="https://github.com/alikhil/sms-to-telegram/blob/main/sms_to_telegram.sh">script</a> to send the messages to Telegram.</p>
-<h2 id="final-thoughts">Final Thoughts</h2>
-<p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
-<p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
-<blockquote>
-<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p></blockquote>]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alik.page/categories/selfhosting/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Storing and using secrets in Mikrotik RouterOS</title>
       <link>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
       
       <guid>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
       <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;
@@ -197,6 +115,88 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>The good thing about this approach is that secrets storing and retrieving mechanism encapsulated and can be easily changed in the future without changing the scripts. Also, it is easy to use and understand.</p>
 <p>Keep your secrets safe and happy scripting!</p>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Forwarding SMS to Telegram</title>
+      <link>https://alik.page/posts/forwarding-sms-to-telegram/</link>
+      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
+      
+      <guid>https://alik.page/posts/forwarding-sms-to-telegram/</guid>
+      <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
+&lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.</p>
+<p>If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.</p>
+<h2 id="what-youll-need">What You’ll Need</h2>
+<ul>
+<li>A physical SIM card</li>
+<li>A USB modem that’s supported by the <a href="https://wammu.eu/phones/">Gammu library</a></li>
+<li>A Telegram bot token, chat or channel ID</li>
+<li>A Linux machine with a free USB port</li>
+<li>Docker and Docker Compose installed</li>
+</ul>
+<h2 id="finding-the-right-modem">Finding the Right Modem</h2>
+<blockquote>
+<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p></blockquote>
+<p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
+<p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
+<p>For instance:
+<img loading="lazy" src="/images/posts/sms-to-telegram/ebay.png" type="" alt="Ebay Screenshot"  /></p>
+<p>Next, go to the <a href="https://wammu.eu/phones/">Gammu</a> website and look up the device. Make sure it appears on the list and that “SMS” is included in the &ldquo;Supported features&rdquo; column:</p>
+<p><img loading="lazy" src="/images/posts/sms-to-telegram/e3131.png" type="" alt="E3131"  /></p>
+<p>If the device meets these requirements, it’s good to go!</p>
+<h2 id="setup-instructions">Setup Instructions</h2>
+<blockquote>
+<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p></blockquote>
+<h3 id="identify-device-path">Identify Device Path</h3>
+<p>Run the following command to identify the device path:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
+</span></span></code></pre></div><p>You should see a paths similar to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">/dev/serial/by-id
+</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if00-port0 -&gt; ../../ttyUSB0
+</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if02-port0 -&gt; ../../ttyUSB1
+</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if03-port0 -&gt; ../../ttyUSB2
+</span></span></code></pre></div><p>Choose a path that ends with <code>ttyUSB0</code>, in my case it&rsquo;s <code>/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</code>.</p>
+<h3 id="running-the-service">Running the Service</h3>
+<p>Using Docker Compose, set up your configuration:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gammu</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ghcr.io/alikhil/sms-to-telegram:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">bind</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</span><span class="w"> </span><span class="c"># Change this to your device path</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/modem</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">BOT_TOKEN=&lt;put your telegram bot token here&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PIN=&lt;your sim card pin&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">CHAT_ID=&lt;telegram chat/channel ID&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DEVICE=/dev/modem</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PROTOCOL=at</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">SYS_MODULE</span><span class="w">
+</span></span></span></code></pre></div><p>Save the configuration to a <code>docker-compose.yml</code> file and run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose up -d
+</span></span><span class="line"><span class="cl">docker compose logs -f gammu
+</span></span></code></pre></div><p>If everything is set up correctly, you should see the following log messages:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:50:56 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Created POSIX RW shared memory at 0x7fcf90b21000
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:50:56 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Starting phone communication...
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:30 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Ignoring incoming SMS info as not a Status Report in SR memory.
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Read <span class="m">1</span> messages
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Received IN20241004_195517_00_Celerity_00.txt
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>13<span class="o">]</span>: Starting run on receive: /etc/sms_to_telegram.sh IN20241004_195517_00_Celerity_00.txt
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Process finished successfully
+</span></span></code></pre></div><p>To test SMS reception, you can use free online SMS-sending services (search for &ldquo;send SMS for free&rdquo;) or try logging into Telegram, your bank account, etc.</p>
+<p><img loading="lazy" src="/images/posts/sms-to-telegram/screenshot.png" type="" alt="Telegram Screenshot"  /></p>
+<h2 id="how-it-works">How It Works</h2>
+<p>The <a href="https://wammu.eu/libgammu/">Gammu library</a> provides a unified interface for working with phones and modems from various manufacturers.</p>
+<p>On top of that, there&rsquo;s the <a href="https://wammu.eu/smsd/">Gammu SMS Daemon</a>, which receives SMS messages and triggers a custom script—in our case, <a href="https://github.com/alikhil/sms-to-telegram/blob/main/sms_to_telegram.sh">script</a> to send the messages to Telegram.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
+<p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
+<blockquote>
+<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p></blockquote>]]></content:encoded>
     </item>
     
   </channel>

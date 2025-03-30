@@ -3,7 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alik.page/</loc>
-    <lastmod>2025-03-19T23:10:25+03:00</lastmod>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/categories/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/tags/mikrotik/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/categories/networking/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/posts/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/tags/routeros/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/tags/secrets/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/categories/selfhosting/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/tags/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/tags/telegram/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+  </url><url>
+    <loc>https://alik.page/tags/tutorial/</loc>
+    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
   </url><url>
     <loc>https://alik.page/pages/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>
@@ -14,9 +47,6 @@
     <loc>https://alik.page/pages/talks/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
-  </url><url>
     <loc>https://alik.page/tags/go/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
@@ -26,13 +56,7 @@
     <loc>https://alik.page/categories/opensource/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
-  </url><url>
     <loc>https://alik.page/categories/programming/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/tags/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
     <loc>https://alik.page/posts/go-global-http-client-gotcha/</loc>
@@ -44,16 +68,10 @@
     <loc>https://alik.page/categories/linux/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/selfhosting/</loc>
-    <lastmod>2024-10-26T14:11:43+03:00</lastmod>
-  </url><url>
     <loc>https://alik.page/tags/sim/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alik.page/tags/sms/</loc>
-    <lastmod>2024-10-26T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/tags/telegram/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alik.page/categories/mac/</loc>
@@ -66,9 +84,6 @@
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alik.page/tags/tips/</loc>
-    <lastmod>2024-10-16T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/tags/tutorial/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alik.page/posts/build-own-drone-image/</loc>
@@ -142,16 +157,6 @@
   </url><url>
     <loc>https://alik.page/archives/</loc>
   </url><url>
-    <loc>https://alik.page/tags/mikrotik/</loc>
-  </url><url>
-    <loc>https://alik.page/categories/networking/</loc>
-  </url><url>
-    <loc>https://alik.page/tags/routeros/</loc>
-  </url><url>
     <loc>https://alik.page/search/</loc>
-  </url><url>
-    <loc>https://alik.page/tags/secrets/</loc>
-  </url><url>
-    <loc>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</loc>
   </url>
 </urlset>

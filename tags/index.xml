@@ -6,7 +6,57 @@
     <description>Recent content in Tags on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alik.page/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alik.page/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mikrotik</title>
+      <link>https://alik.page/tags/mikrotik/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      
+      <guid>https://alik.page/tags/mikrotik/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Routeros</title>
+      <link>https://alik.page/tags/routeros/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      
+      <guid>https://alik.page/tags/routeros/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Secrets</title>
+      <link>https://alik.page/tags/secrets/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      
+      <guid>https://alik.page/tags/secrets/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Telegram</title>
+      <link>https://alik.page/tags/telegram/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      
+      <guid>https://alik.page/tags/telegram/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://alik.page/tags/tutorial/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      
+      <guid>https://alik.page/tags/tutorial/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Go</title>
       <link>https://alik.page/tags/go/</link>
@@ -48,16 +98,6 @@
     </item>
     
     <item>
-      <title>Telegram</title>
-      <link>https://alik.page/tags/telegram/</link>
-      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
-      <guid>https://alik.page/tags/telegram/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Mac</title>
       <link>https://alik.page/tags/mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
@@ -73,16 +113,6 @@
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
       <guid>https://alik.page/tags/tips/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Tutorial</title>
-      <link>https://alik.page/tags/tutorial/</link>
-      <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      
-      <guid>https://alik.page/tags/tutorial/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -223,36 +253,6 @@
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
       <guid>https://alik.page/tags/vscode/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Mikrotik</title>
-      <link>https://alik.page/tags/mikrotik/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://alik.page/tags/mikrotik/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Routeros</title>
-      <link>https://alik.page/tags/routeros/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://alik.page/tags/routeros/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Secrets</title>
-      <link>https://alik.page/tags/secrets/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://alik.page/tags/secrets/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
