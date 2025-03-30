@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -10,11 +10,11 @@
 <meta name="description" content="Hello, folks!
 Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.">
 <meta name="author" content="Alik Khilazhev">
-<link rel="canonical" href="https://alik.page/posts/deploy-spa-to-k8s/">
+<link rel="canonical" href="http://localhost:1313/posts/deploy-spa-to-k8s/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.7da7716a1f2d0725f74c6ae7f8d6adafc43aabe2b366b65bfbf433448e2a2001.css" integrity="sha256-fadxah8tByX3TGrn&#43;Natr8Q6q&#43;KzZrZb&#43;/QzRI4qIAE=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://alik.page/favicon.ico">
-<link rel="apple-touch-icon" href="https://alik.page/apple-touch-icon.png">
-<link rel="alternate" hreflang="en-us" href="https://alik.page/posts/deploy-spa-to-k8s/">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/posts/deploy-spa-to-k8s/">
 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
       <script>
@@ -37,7 +37,7 @@ Today I want you to share with you tutorial on how to deploy your SPA applicatio
 <meta property="og:description" content="Hello, folks!
 Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://alik.page/posts/deploy-spa-to-k8s/" />
+<meta property="og:url" content="http://localhost:1313/posts/deploy-spa-to-k8s/" />
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2019-06-08T22:30:00&#43;03:00" />
   <meta property="article:modified_time" content="2019-06-08T22:30:00&#43;03:00" />
@@ -52,13 +52,13 @@ Today I want you to share with you tutorial on how to deploy your SPA applicatio
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://alik.page/posts/"
+      "item": "http://localhost:1313/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Deploy SPA application to Kubernetes",
-      "item": "https://alik.page/posts/deploy-spa-to-k8s/"
+      "item": "http://localhost:1313/posts/deploy-spa-to-k8s/"
     }
   ]
 }
@@ -83,14 +83,14 @@ Today I want you to share with you tutorial on how to deploy your SPA applicatio
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://alik.page/posts/deploy-spa-to-k8s/"
+    "@id": "http://localhost:1313/posts/deploy-spa-to-k8s/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "alikhil",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://alik.page/favicon.ico"
+      "url": "http://localhost:1313/favicon.ico"
     }
   }
 }
@@ -206,7 +206,7 @@ function toggleThemeListener() {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://alik.page/" accesskey="h" title="alikhil (Alt + H)">alikhil</a>
+            <a href="http://localhost:1313/" accesskey="h" title="alikhil (Alt + H)">alikhil</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -232,32 +232,32 @@ function toggleThemeListener() {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://alik.page/" title="Home" class="active"
+                <a href="http://localhost:1313/" title="Home" class="active"
                 >Home
                 </a>
             </li>
             <li>
-                <a href="https://alik.page/posts/" title="Posts" class="active"
+                <a href="http://localhost:1313/posts/" title="Posts" class="active"
                 >Posts
                 </a>
             </li>
             <li>
-                <a href="https://alik.page/pages/projects/" title="Projects"
+                <a href="http://localhost:1313/pages/projects/" title="Projects"
                 >Projects
                 </a>
             </li>
             <li>
-                <a href="https://alik.page/pages/talks/" title="Talks"
+                <a href="http://localhost:1313/pages/talks/" title="Talks"
                 >Talks
                 </a>
             </li>
             <li>
-                <a href="https://alik.page/archives/" title="Archives"
+                <a href="http://localhost:1313/archives/" title="Archives"
                 >Archives
                 </a>
             </li>
             <li>
-                <a href="https://alik.page/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
                 >Search
                 </a>
             </li>
@@ -268,10 +268,12 @@ function toggleThemeListener() {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://alik.page/">Home</a>&nbsp;»&nbsp;<a href="https://alik.page/posts/">Posts</a></div><h1 class="post-title">Deploy SPA application to Kubernetes</h1>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div><h1 class="post-title">Deploy SPA application to Kubernetes</h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>8 June 2019</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
+  <span class="post-tags"><a href="http://localhost:1313/tags/spa/">Spa</a><a href="http://localhost:1313/tags/tutorial/">Tutorial</a><a href="http://localhost:1313/tags/k8s/">K8s</a><a href="http://localhost:1313/tags/kubernetes/">Kubernetes</a><a href="http://localhost:1313/tags/docker/">Docker</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>3 min</span></span>
 
@@ -411,13 +413,13 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://alik.page/posts/build-own-drone-image/">
+  <a class="prev" href="http://localhost:1313/posts/build-own-drone-image/">
     <span class="title">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;</span>
     <br>
     <span>Build own drone.io docker image</span>
   </a>
-  <a class="next" href="https://alik.page/posts/how-to-start-learning-new-language/">
+  <a class="next" href="http://localhost:1313/posts/how-to-start-learning-new-language/">
     <span class="title">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
@@ -440,7 +442,7 @@ function toggleThemeListener() {
     </main>
     
 <footer class="footer">
-  <span>&copy; 2025 <a href="https://alik.page/">alikhil</a></span><span style="display: inline-block; margin-left: 1em;">
+  <span>&copy; 2025 <a href="http://localhost:1313/">alikhil</a></span><span style="display: inline-block; margin-left: 1em;">
     <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
   </span>
   <span style="display: inline-block; margin-left: 1em;">

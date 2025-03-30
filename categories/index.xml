@@ -2,87 +2,87 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on alikhil</title>
-    <link>https://alik.page/categories/</link>
+    <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alik.page/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Selfhosting</title>
+      <link>http://localhost:1313/categories/selfhosting/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0000</pubDate>
+      
+      <guid>http://localhost:1313/categories/selfhosting/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Opensource</title>
-      <link>https://alik.page/categories/opensource/</link>
+      <link>http://localhost:1313/categories/opensource/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>https://alik.page/categories/opensource/</guid>
+      <guid>http://localhost:1313/categories/opensource/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>https://alik.page/categories/programming/</link>
+      <link>http://localhost:1313/categories/programming/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>https://alik.page/categories/programming/</guid>
+      <guid>http://localhost:1313/categories/programming/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://alik.page/categories/linux/</link>
+      <link>http://localhost:1313/categories/linux/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>https://alik.page/categories/linux/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Selfhosting</title>
-      <link>https://alik.page/categories/selfhosting/</link>
-      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
-      <guid>https://alik.page/categories/selfhosting/</guid>
+      <guid>http://localhost:1313/categories/linux/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Mac</title>
-      <link>https://alik.page/categories/mac/</link>
+      <link>http://localhost:1313/categories/mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/categories/mac/</guid>
+      <guid>http://localhost:1313/categories/mac/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Devops</title>
-      <link>https://alik.page/categories/devops/</link>
-      <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
+      <link>http://localhost:1313/categories/devops/</link>
+      <pubDate>Sun, 24 May 2020 15:12:41 +0300</pubDate>
       
-      <guid>https://alik.page/categories/devops/</guid>
+      <guid>http://localhost:1313/categories/devops/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Languages</title>
-      <link>https://alik.page/categories/languages/</link>
+      <link>http://localhost:1313/categories/languages/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>https://alik.page/categories/languages/</guid>
+      <guid>http://localhost:1313/categories/languages/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Blogging</title>
-      <link>https://alik.page/categories/blogging/</link>
+      <link>http://localhost:1313/categories/blogging/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>https://alik.page/categories/blogging/</guid>
+      <guid>http://localhost:1313/categories/blogging/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

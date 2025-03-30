@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sms on alikhil</title>
-    <link>https://alik.page/tags/sms/</link>
+    <link>http://localhost:1313/tags/sms/</link>
     <description>Recent content in Sms on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Oct 2024 14:11:43 +0300</lastBuildDate><atom:link href="https://alik.page/tags/sms/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Oct 2024 14:11:43 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/sms/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Forwarding SMS to Telegram</title>
-      <link>https://alik.page/posts/forwarding-sms-to-telegram/</link>
+      <link>http://localhost:1313/posts/forwarding-sms-to-telegram/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>https://alik.page/posts/forwarding-sms-to-telegram/</guid>
+      <guid>http://localhost:1313/posts/forwarding-sms-to-telegram/</guid>
       <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
 &lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.</p>

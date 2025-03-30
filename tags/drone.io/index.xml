@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Drone.io on alikhil</title>
+    <link>http://localhost:1313/tags/drone.io/</link>
+    <description>Recent content in Drone.io on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Sep 2019 10:30:00 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/drone.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Build own drone.io docker image</title>
+      <link>http://localhost:1313/posts/build-own-drone-image/</link>
+      <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/build-own-drone-image/</guid>
+      <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
+&lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>¡Hola, amigos!</p>
+<p>In this post, I will quickly descibe how you can build your own <a href="https://drone.io">drone.io</a> docker image.</p>
+<p>Drone is very popular container native CI/CD platform. Not long time ago, there was release of new <a href="https://blog.drone.io/drone-1/">1.0 version</a> of drone. Which brang a lot of cool features and new <a href="https://discourse.drone.io/t/licensing-and-subscription-faq/3839">license</a>. The license tells that we can use Enterprise version of drone for free without any limits by building our own docker image if we are individuals or startup (read the licence for more detail).</p>
+<p>So, how to build it?</p>
+<h1 id="instructions">Instructions</h1>
+<p>First, clone the drone repo to your local machine.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git@github.com:drone/drone.git
+</span></span></code></pre></div><p>Second, checkout to version of drone you want to build. For example, I want to build <a href="https://github.com/drone/drone/tag/v1.3.1">v1.3.1</a>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout v1.3.1
+</span></span></code></pre></div><p>We will use single dockerfile to build the image. To do so, we need to add extra step to existing dockerfile which is in <code>docker</code> directory. Let&rsquo;s say we want to build docker image for <code>linux</code> OS and <code>amd64</code> architecture, then we will edit <code>docker/Dockerfile.server.linux.amd64</code>.</p>
+<!-- Original drone docker images built in drone itself. To check how they built you can check `drone.yml`. -->
+<p>If you check the dockerfile you will see, that binaries are just copied into docker image during the build and they are built outside of the docker build. So, the step we will add to dockerfile is <code>go build</code> step.</p>
+<p>To build the binary, we need to know what version of go is used for building binary in original docker image. We can find it in <code>drone.yml</code> <strong>build</strong> step. For version 1.3.1 of drone <code>golang:1.12.9</code> docker image is used for building binaries.</p>
+<p>Then, we use same image to build binary in our dockerfile:</p>
+<p><strong>docker/Dockerfile.server.linux.amd64</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:1.12.9 as builder</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /go/src/github.com/drone/drone</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOOS linux<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOARCH amd64<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> CGO_ENABLED <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> REPO github.com/drone/drone<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GO111MODULE on<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.9 as alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.9</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 80 443</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="s"> /data</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DRIVER sqlite3<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DATASOURCE /data/database.sqlite<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_OS</span><span class="o">=</span>linux
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_ARCH</span><span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_SERVER_PORT</span><span class="o">=</span>:80<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_SERVER_HOST</span><span class="o">=</span>localhost
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENABLED</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENDPOINT</span><span class="o">=</span>https://stats.drone.ci/api/v1/series<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/drone-server&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>Also we need to delete .dockerignore file from root of the repo.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .dockerignore
+</span></span></code></pre></div><p>Then we build docker image like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t alikhil/drone:1.3.1 -f docker/Dockerfile.server.linux.amd64 .
+</span></span></code></pre></div><p>That&rsquo;s all! Now you can use own newly built docker image instead of official one if your use case meet license conditions.</p>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

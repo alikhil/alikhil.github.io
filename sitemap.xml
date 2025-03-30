@@ -2,131 +2,137 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://alik.page/</loc>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-03-30T16:01:25+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2025-03-30T16:01:25+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-03-30T16:01:25+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/selfhosting/</loc>
+    <lastmod>2025-03-30T16:01:25+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/saving-and-using-secrets-in-mikrotitk-routeros/</loc>
+    <lastmod>2025-03-30T16:01:25+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pages/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/pages/</loc>
+    <loc>http://localhost:1313/pages/projects/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/pages/projects/</loc>
+    <loc>http://localhost:1313/pages/talks/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/pages/talks/</loc>
-    <lastmod>2025-03-19T23:10:25+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/categories/</loc>
+    <loc>http://localhost:1313/tags/go/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/go/</loc>
+    <loc>http://localhost:1313/tags/http/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/http/</loc>
+    <loc>http://localhost:1313/categories/opensource/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/opensource/</loc>
+    <loc>http://localhost:1313/categories/programming/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/programming/</loc>
+    <loc>http://localhost:1313/posts/go-global-http-client-gotcha/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/posts/go-global-http-client-gotcha/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/posts/forwarding-sms-to-telegram/</loc>
+    <loc>http://localhost:1313/posts/forwarding-sms-to-telegram/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/linux/</loc>
+    <loc>http://localhost:1313/categories/linux/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/selfhosting/</loc>
+    <loc>http://localhost:1313/tags/sim/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/sim/</loc>
+    <loc>http://localhost:1313/tags/sms/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/sms/</loc>
+    <loc>http://localhost:1313/tags/telegram/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/telegram/</loc>
-    <lastmod>2024-10-26T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/tags/mac/</loc>
+    <loc>http://localhost:1313/categories/mac/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/mac/</loc>
+    <loc>http://localhost:1313/tags/mac/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/monitor-input-source-control-mac/</loc>
+    <loc>http://localhost:1313/posts/monitor-input-source-control-mac/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/tips/</loc>
+    <loc>http://localhost:1313/tags/tips/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/tutorial/</loc>
+    <loc>http://localhost:1313/tags/tutorial/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/build-own-drone-image/</loc>
+    <loc>http://localhost:1313/categories/devops/</loc>
+    <lastmod>2020-05-24T15:12:41+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/intro-to-drone/</loc>
+    <lastmod>2020-05-24T15:12:41+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/build-own-drone-image/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/devops/</loc>
-    <lastmod>2019-09-20T10:30:00+03:00</lastmod>
-  </url><url>
-    <loc>https://alik.page/posts/deploy-spa-to-k8s/</loc>
+    <loc>http://localhost:1313/posts/deploy-spa-to-k8s/</loc>
     <lastmod>2019-06-08T22:30:00+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/languages/</loc>
+    <loc>http://localhost:1313/categories/languages/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/languages/</loc>
+    <loc>http://localhost:1313/tags/languages/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/learning/</loc>
+    <loc>http://localhost:1313/tags/learning/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/spanish/</loc>
+    <loc>http://localhost:1313/tags/spanish/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/how-to-start-learning-new-language/</loc>
+    <loc>http://localhost:1313/posts/how-to-start-learning-new-language/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/authentication/</loc>
+    <loc>http://localhost:1313/tags/authentication/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/google-cloud/</loc>
+    <loc>http://localhost:1313/tags/google-cloud/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/kubernetes/</loc>
+    <loc>http://localhost:1313/tags/kubernetes/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</loc>
+    <loc>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/oauth2-proxy/</loc>
+    <loc>http://localhost:1313/tags/oauth2-proxy/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/categories/blogging/</loc>
+    <loc>http://localhost:1313/categories/blogging/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/hugo/</loc>
+    <loc>http://localhost:1313/tags/hugo/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/say-hello-to-hugo/</loc>
+    <loc>http://localhost:1313/posts/say-hello-to-hugo/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/posts/go-quickstart/</loc>
+    <loc>http://localhost:1313/posts/go-quickstart/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/tags/vscode/</loc>
+    <loc>http://localhost:1313/tags/vscode/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
   </url><url>
-    <loc>https://alik.page/archives/</loc>
+    <loc>http://localhost:1313/archives/</loc>
   </url><url>
-    <loc>https://alik.page/search/</loc>
+    <loc>http://localhost:1313/search/</loc>
   </url>
 </urlset>

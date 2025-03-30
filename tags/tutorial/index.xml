@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tutorial on alikhil</title>
-    <link>https://alik.page/tags/tutorial/</link>
+    <link>http://localhost:1313/tags/tutorial/</link>
     <description>Recent content in Tutorial on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="https://alik.page/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Monitor input source control on Mac</title>
-      <link>https://alik.page/posts/monitor-input-source-control-mac/</link>
+      <link>http://localhost:1313/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/posts/monitor-input-source-control-mac/</guid>
+      <guid>http://localhost:1313/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
@@ -96,17 +96,217 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     </item>
     
     <item>
+      <title>Build own drone.io docker image</title>
+      <link>http://localhost:1313/posts/build-own-drone-image/</link>
+      <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/build-own-drone-image/</guid>
+      <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
+&lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>¡Hola, amigos!</p>
+<p>In this post, I will quickly descibe how you can build your own <a href="https://drone.io">drone.io</a> docker image.</p>
+<p>Drone is very popular container native CI/CD platform. Not long time ago, there was release of new <a href="https://blog.drone.io/drone-1/">1.0 version</a> of drone. Which brang a lot of cool features and new <a href="https://discourse.drone.io/t/licensing-and-subscription-faq/3839">license</a>. The license tells that we can use Enterprise version of drone for free without any limits by building our own docker image if we are individuals or startup (read the licence for more detail).</p>
+<p>So, how to build it?</p>
+<h1 id="instructions">Instructions</h1>
+<p>First, clone the drone repo to your local machine.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git@github.com:drone/drone.git
+</span></span></code></pre></div><p>Second, checkout to version of drone you want to build. For example, I want to build <a href="https://github.com/drone/drone/tag/v1.3.1">v1.3.1</a>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout v1.3.1
+</span></span></code></pre></div><p>We will use single dockerfile to build the image. To do so, we need to add extra step to existing dockerfile which is in <code>docker</code> directory. Let&rsquo;s say we want to build docker image for <code>linux</code> OS and <code>amd64</code> architecture, then we will edit <code>docker/Dockerfile.server.linux.amd64</code>.</p>
+<!-- Original drone docker images built in drone itself. To check how they built you can check `drone.yml`. -->
+<p>If you check the dockerfile you will see, that binaries are just copied into docker image during the build and they are built outside of the docker build. So, the step we will add to dockerfile is <code>go build</code> step.</p>
+<p>To build the binary, we need to know what version of go is used for building binary in original docker image. We can find it in <code>drone.yml</code> <strong>build</strong> step. For version 1.3.1 of drone <code>golang:1.12.9</code> docker image is used for building binaries.</p>
+<p>Then, we use same image to build binary in our dockerfile:</p>
+<p><strong>docker/Dockerfile.server.linux.amd64</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:1.12.9 as builder</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /go/src/github.com/drone/drone</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOOS linux<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOARCH amd64<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> CGO_ENABLED <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> REPO github.com/drone/drone<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GO111MODULE on<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.9 as alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.9</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 80 443</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="s"> /data</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DRIVER sqlite3<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DATASOURCE /data/database.sqlite<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_OS</span><span class="o">=</span>linux
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_ARCH</span><span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_SERVER_PORT</span><span class="o">=</span>:80<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_SERVER_HOST</span><span class="o">=</span>localhost
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENABLED</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENDPOINT</span><span class="o">=</span>https://stats.drone.ci/api/v1/series<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/drone-server&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>Also we need to delete .dockerignore file from root of the repo.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .dockerignore
+</span></span></code></pre></div><p>Then we build docker image like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t alikhil/drone:1.3.1 -f docker/Dockerfile.server.linux.amd64 .
+</span></span></code></pre></div><p>That&rsquo;s all! Now you can use own newly built docker image instead of official one if your use case meet license conditions.</p>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Deploy SPA application to Kubernetes</title>
+      <link>http://localhost:1313/posts/deploy-spa-to-k8s/</link>
+      <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
+      
+      <guid>http://localhost:1313/posts/deploy-spa-to-k8s/</guid>
+      <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
+&lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hello, folks!</p>
+<p>Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&rsquo;t very familiar with docker and k8s but want their single page application run in k8s.</p>
+<h3 id="dockerize-the-application">Dockerize the application</h3>
+<p>I expect that you have docker installed in your machine. If it isn&rsquo;t you can install it by following <a href="https://docs.docker.com/install/">official installation guide</a>.</p>
+<p>As SPA project I will use <a href="https://github.com/gothinkster/vue-realworld-example-app">vue-realworld-example-app</a> as SPA project. You can your own SPA project if you have one.</p>
+<p>So, I have cloned it, installed dependencies and built:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/gothinkster/vue-realworld-example-app
+</span></span><span class="line"><span class="cl">yarn
+</span></span><span class="line"><span class="cl">yarn build
+</span></span></code></pre></div><p>Next step is to decide how our application will be served. There are bunch of possible solutions but I decided to use <a href="https://nginx.org/en/">nginx</a> since it recommends itself as one of the best http servers.</p>
+<p>To serve SPA we need to return all requested files if they exist or otherwise fallback to index.html. To do so I wrote the following nginx config:</p>
+<p><strong>nginx.conf</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"># other configs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">root</span> <span class="s">/app</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">alias</span> <span class="s">/app/</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="s">/index.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Full config file can be found in <a href="https://github.com/alikhil/vue-realworld-example-app/blob/master/nginx.conf">my fork of the repo</a></p>
+<p>Then, we need to write <strong>Dockerfile</strong> for building image with our application. Here it is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> nginx</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /root/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./dist /app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./nginx.conf /etc/nginx/conf.d/default.conf<span class="err">
+</span></span></span></code></pre></div><p>We assume that artifacts of build placed in the <code>dist</code> directory and so that during the docker build the content of <code>dist</code> directory copied into containers <code>/app</code> directory.</p>
+<p>Now, we are ready to build it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t alikhil/my-spa:0.1 .
+</span></span></code></pre></div><p>And run it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -p 8080:80 alikhil/my-spa:0.1
+</span></span></code></pre></div><p>Then if we open http://localhost:8080 we will see something similar to:</p>
+<img width="1279" alt="Screen Shot 2019-06-09 at 14 21 09" src="https://user-images.githubusercontent.com/7482065/59158361-e792f580-8ac1-11e9-9cd0-de309c697c12.png">
+<p>Cool! It works!</p>
+<p>We will need to use our newly builded docker image to deploy to k8s. So, we need to make it available from the k8s cluster by pulling to some docker registry. I will push image to <a href="http://hub.docker.com/">DockerHub</a>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker push alikhil/my-spa:0.1
+</span></span></code></pre></div><h3 id="deploy-to-k8s">Deploy to k8s</h3>
+<p>To run the application in k8s we will use <code>Deployment</code> resource type. Here it is:</p>
+<p><strong>deployment.yaml</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">alikhil/my-spa:0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">150m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">250Mi</span><span class="w">
+</span></span></span></code></pre></div><p>Then we create deployment by running <code>kubectl apply -f deployment.yaml</code> and newly created pods can found:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                      READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">my-spa-84b6dcd48d-mhv9f   1/1     Running   <span class="m">0</span>          18s
+</span></span></code></pre></div><p>Then we need to expose our app to the world. It can be done by using service of type NodePort or via Ingress. We will do it with Ingress. For that we will need service:</p>
+<p><strong>service.yaml</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span></code></pre></div><p>And ingress itself:</p>
+<p><strong>ingress.yaml</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa-ing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">my-spa.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa-cert-secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">serviceName</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">servicePort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f ingress.yaml -f service.yaml
+</span></span></code></pre></div><p>And here it is! Our SPA runs in the k8s!</p>
+<img width="1253" alt="Screen Shot 2019-06-10 at 22 39 00" src="https://user-images.githubusercontent.com/7482065/59221731-a1788780-8bd0-11e9-806b-734048d3a291.png">]]></content:encoded>
+    </item>
+    
+    <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
-      <link>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</link>
+      <link>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</guid>
-      <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
-&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>Hello, folks!</p>
+      <guid>http://localhost:1313/posts/oauth2-proxy-for-kubernetes-services/</guid>
+      <description>&lt;p&gt;o, folks!&lt;/p&gt;
+&lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;
+&lt;!--m
+
+
+
+ days ago I was configuring [SSO](https://en.wikipedia.org/wiki/Single_sign-on) for our internal dev-services in [KE Technologies](https://github.com/KazanExpress).
+
+And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.
+&lt;!-- toc --&gt;
+&lt;h1 id=&#34;what-do-we-want&#34;&gt;What do we want?&lt;/h1&gt;
+&lt;p&gt;We have internal services in our k8s cluster that we want to be accessible for developers.
+It can be &lt;em&gt;kubernetes-dashboard&lt;/em&gt; or &lt;em&gt;kibana&lt;/em&gt; or anything else.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>o, folks!</p>
 <p>In this post, I will go through configuring <a href="https://github.com/bitly/oauth2_proxy">Bitly OAuth2 proxy</a> in a kubernetes cluster.</p>
-<p>A few days ago I was configuring <a href="https://en.wikipedia.org/wiki/Single_sign-on">SSO</a> for our internal dev-services in <a href="https://github.com/KazanExpress">KE Technologies</a>.</p>
-<p>And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.</p>
+<!--m
+
+
+ days ago I was configuring [SSO](https://en.wikipedia.org/wiki/Single_sign-on) for our internal dev-services in [KE Technologies](https://github.com/KazanExpress).
+
+And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.
 <!-- toc -->
 <h1 id="what-do-we-want">What do we want?</h1>
 <p>We have internal services in our k8s cluster that we want to be accessible for developers.
@@ -199,7 +399,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">ing-tls</span><span class="w">
 </span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f example-ing.yaml
 </span></span></code></pre></div><p>Wait for a few seconds and open <a href="https://service.example.com">https://service.example.com</a> and you should see something similar to this:</p>
-
+<p>{{&lt; i
 
 
 <div class="figure " >
@@ -210,12 +410,11 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     <span class="caption">Example</span>
   
 </div>
-
-<h2 id="github-application">GitHub application</h2>
+GitHub application</p>
 <p>In this post, we will use GitHub accounts for authentication.</p>
 <p>So, go to <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> and create new OAuth application</p>
 <p>Fill <strong>Authorization callback URL</strong> field with <a href="https://auth.example.com/oauth2/callback">https://auth.example.com/oauth2/callback</a> where <em>example.com</em> is your domain name.</p>
-
+<p>{{&lt; i
 
 
 <div class="figure [classes]" >
@@ -226,8 +425,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     <span class="caption">GitHub Application</span>
   
 </div>
-
-<p>After creating an application you will have <strong>Client ID</strong> and <strong>Client Secret</strong> which we will need in next step.</p>
+er creating an application you will have <strong>Client ID</strong> and <strong>Client Secret</strong> which we will need in next step.</p>
 <h1 id="deploy-oauth-proxy">Deploy OAuth Proxy</h1>
 <p>There are a lot of docker images for OAuth proxy, but we can not use them because they do not support domain white-listing. The problem is that such functionality has not implemented yet.</p>
 <p>Actualy there are several PRs that solve that problem but seems to be they frozen for an unknown amount of time.</p>
@@ -374,7 +572,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">ing-tls</span><span class="w">
 </span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f example-ing.yml
 </span></span></code></pre></div><p>Then visit service.example.com and you will be redirected to GitHub authorization page:</p>
-
+<p>{{&lt; i
 
 
 <div class="figure " >
@@ -385,24 +583,24 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     <span class="caption">GitHub Authorization page</span>
   
 </div>
-
-<p>And once you authenticate, you will have access to all your services under ingress that point to auth.example.com until cookie expires.</p>
+ once you authenticate, you will have access to all your services under ingress that point to auth.example.com until cookie expires.</p>
 <p>And that&rsquo;s it! Now you can put any of your internal services behind ingress with OAuth.</p>
 <h2 id="resources">Resources</h2>
 <p>Here is a list of resources that helped me to go through this proccess first time:</p>
 <ul>
 <li><a href="https://eng.fromatob.com/post/2017/02/lets-encrypt-oauth-2-and-kubernetes-ingress/">https://eng.fromatob.com/post/2017/02/lets-encrypt-oauth-2-and-kubernetes-ingress/</a></li>
 <li><a href="https://www.midnightfreddie.com/oauth2-proxy.html">https://www.midnightfreddie.com/oauth2-proxy.html</a></li>
-<li><a href="https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/">https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/</a></li>
+<li><a href="https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/">https://thenewstack.io/single-sign-on-for-kubernetes-dashboard-experience/</a>
+�����</li>
 </ul>]]></content:encoded>
     </item>
     
     <item>
       <title>Go Quickstart</title>
-      <link>https://alik.page/posts/go-quickstart/</link>
+      <link>http://localhost:1313/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>https://alik.page/posts/go-quickstart/</guid>
+      <guid>http://localhost:1313/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>

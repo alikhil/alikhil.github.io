@@ -2,177 +2,177 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on alikhil</title>
-    <link>https://alik.page/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alik.page/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go</title>
-      <link>https://alik.page/tags/go/</link>
+      <link>http://localhost:1313/tags/go/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>https://alik.page/tags/go/</guid>
+      <guid>http://localhost:1313/tags/go/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Http</title>
-      <link>https://alik.page/tags/http/</link>
+      <link>http://localhost:1313/tags/http/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>https://alik.page/tags/http/</guid>
+      <guid>http://localhost:1313/tags/http/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Sim</title>
-      <link>https://alik.page/tags/sim/</link>
+      <link>http://localhost:1313/tags/sim/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>https://alik.page/tags/sim/</guid>
+      <guid>http://localhost:1313/tags/sim/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Sms</title>
-      <link>https://alik.page/tags/sms/</link>
+      <link>http://localhost:1313/tags/sms/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>https://alik.page/tags/sms/</guid>
+      <guid>http://localhost:1313/tags/sms/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Telegram</title>
-      <link>https://alik.page/tags/telegram/</link>
+      <link>http://localhost:1313/tags/telegram/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>https://alik.page/tags/telegram/</guid>
+      <guid>http://localhost:1313/tags/telegram/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Mac</title>
-      <link>https://alik.page/tags/mac/</link>
+      <link>http://localhost:1313/tags/mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/tags/mac/</guid>
+      <guid>http://localhost:1313/tags/mac/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Tips</title>
-      <link>https://alik.page/tags/tips/</link>
+      <link>http://localhost:1313/tags/tips/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/tags/tips/</guid>
+      <guid>http://localhost:1313/tags/tips/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Tutorial</title>
-      <link>https://alik.page/tags/tutorial/</link>
+      <link>http://localhost:1313/tags/tutorial/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/tags/tutorial/</guid>
+      <guid>http://localhost:1313/tags/tutorial/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Languages</title>
-      <link>https://alik.page/tags/languages/</link>
+      <link>http://localhost:1313/tags/languages/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>https://alik.page/tags/languages/</guid>
+      <guid>http://localhost:1313/tags/languages/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Learning</title>
-      <link>https://alik.page/tags/learning/</link>
+      <link>http://localhost:1313/tags/learning/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>https://alik.page/tags/learning/</guid>
+      <guid>http://localhost:1313/tags/learning/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Spanish</title>
-      <link>https://alik.page/tags/spanish/</link>
+      <link>http://localhost:1313/tags/spanish/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>https://alik.page/tags/spanish/</guid>
+      <guid>http://localhost:1313/tags/spanish/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Authentication</title>
-      <link>https://alik.page/tags/authentication/</link>
+      <link>http://localhost:1313/tags/authentication/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/tags/authentication/</guid>
+      <guid>http://localhost:1313/tags/authentication/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Google Cloud</title>
-      <link>https://alik.page/tags/google-cloud/</link>
+      <link>http://localhost:1313/tags/google-cloud/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/tags/google-cloud/</guid>
+      <guid>http://localhost:1313/tags/google-cloud/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Kubernetes</title>
-      <link>https://alik.page/tags/kubernetes/</link>
+      <link>http://localhost:1313/tags/kubernetes/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/tags/kubernetes/</guid>
+      <guid>http://localhost:1313/tags/kubernetes/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Oauth2-Proxy</title>
-      <link>https://alik.page/tags/oauth2-proxy/</link>
+      <link>http://localhost:1313/tags/oauth2-proxy/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/tags/oauth2-proxy/</guid>
+      <guid>http://localhost:1313/tags/oauth2-proxy/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>https://alik.page/tags/hugo/</link>
+      <link>http://localhost:1313/tags/hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>https://alik.page/tags/hugo/</guid>
+      <guid>http://localhost:1313/tags/hugo/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Vscode</title>
-      <link>https://alik.page/tags/vscode/</link>
+      <link>http://localhost:1313/tags/vscode/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>https://alik.page/tags/vscode/</guid>
+      <guid>http://localhost:1313/tags/vscode/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
