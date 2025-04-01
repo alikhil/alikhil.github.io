@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Mac on alikhil</title>
-    <link>https://alik.page/categories/mac/</link>
+    <link>https://alikhil.dev/categories/mac/</link>
     <description>Recent content in Mac on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="https://alik.page/categories/mac/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Monitor input source control on Mac</title>
-      <link>https://alik.page/posts/monitor-input-source-control-mac/</link>
+      <link>https://alikhil.dev/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/posts/monitor-input-source-control-mac/</guid>
+      <guid>https://alikhil.dev/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Http on alikhil</title>
-    <link>https://alik.page/tags/http/</link>
+    <link>https://alikhil.dev/tags/http/</link>
     <description>Recent content in Http on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alik.page/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Mar 2025 19:20:45 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
-      <link>https://alik.page/posts/go-global-http-client-gotcha/</link>
+      <link>https://alikhil.dev/posts/go-global-http-client-gotcha/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>https://alik.page/posts/go-global-http-client-gotcha/</guid>
+      <guid>https://alikhil.dev/posts/go-global-http-client-gotcha/</guid>
       <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
 &lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>The Internet is plenty of articles that telling why you should not be using <code>http.DefaultClient</code> in Golang (<a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779">one</a>, <a href="https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/">two</a>) but they refer to <code>Timeout</code> and <code>MaxIdleConns</code> settings.</p>

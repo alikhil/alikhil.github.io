@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>alikhil</title>
-    <link>https://alik.page/</link>
+    <link>https://alikhil.dev/</link>
     <description>Recent content on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alik.page/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Storing and using secrets in Mikrotik RouterOS</title>
-      <link>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
+      <link>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
       <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
       
-      <guid>https://alik.page/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
+      <guid>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
       <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;
 &lt;p&gt;When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently I have replaced my stock ISP router with <a href="https://mikrotik.com/product/hex_s">Mikrotik Hex S</a>. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.</p>
@@ -119,10 +119,10 @@
     
     <item>
       <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
-      <link>https://alik.page/posts/go-global-http-client-gotcha/</link>
+      <link>https://alikhil.dev/posts/go-global-http-client-gotcha/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
-      <guid>https://alik.page/posts/go-global-http-client-gotcha/</guid>
+      <guid>https://alikhil.dev/posts/go-global-http-client-gotcha/</guid>
       <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
 &lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>The Internet is plenty of articles that telling why you should not be using <code>http.DefaultClient</code> in Golang (<a href="https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779">one</a>, <a href="https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/">two</a>) but they refer to <code>Timeout</code> and <code>MaxIdleConns</code> settings.</p>
@@ -161,10 +161,10 @@
     
     <item>
       <title>Forwarding SMS to Telegram</title>
-      <link>https://alik.page/posts/forwarding-sms-to-telegram/</link>
+      <link>https://alikhil.dev/posts/forwarding-sms-to-telegram/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
-      <guid>https://alik.page/posts/forwarding-sms-to-telegram/</guid>
+      <guid>https://alikhil.dev/posts/forwarding-sms-to-telegram/</guid>
       <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
 &lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.</p>
@@ -243,10 +243,10 @@
     
     <item>
       <title>Monitor input source control on Mac</title>
-      <link>https://alik.page/posts/monitor-input-source-control-mac/</link>
+      <link>https://alikhil.dev/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       
-      <guid>https://alik.page/posts/monitor-input-source-control-mac/</guid>
+      <guid>https://alikhil.dev/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
@@ -331,10 +331,10 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     
     <item>
       <title>Build own drone.io docker image</title>
-      <link>https://alik.page/posts/build-own-drone-image/</link>
+      <link>https://alikhil.dev/posts/build-own-drone-image/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
       
-      <guid>https://alik.page/posts/build-own-drone-image/</guid>
+      <guid>https://alikhil.dev/posts/build-own-drone-image/</guid>
       <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
 &lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>¡Hola, amigos!</p>
@@ -395,10 +395,10 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     
     <item>
       <title>Deploy SPA application to Kubernetes</title>
-      <link>https://alik.page/posts/deploy-spa-to-k8s/</link>
+      <link>https://alikhil.dev/posts/deploy-spa-to-k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
       
-      <guid>https://alik.page/posts/deploy-spa-to-k8s/</guid>
+      <guid>https://alikhil.dev/posts/deploy-spa-to-k8s/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>
@@ -516,10 +516,10 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
     
     <item>
       <title>Tips for language learners</title>
-      <link>https://alik.page/posts/how-to-start-learning-new-language/</link>
+      <link>https://alikhil.dev/posts/how-to-start-learning-new-language/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>https://alik.page/posts/how-to-start-learning-new-language/</guid>
+      <guid>https://alikhil.dev/posts/how-to-start-learning-new-language/</guid>
       <description>&lt;p&gt;If you expected only post on IT topics on this blog, I am sorry :(
 Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>If you expected only post on IT topics on this blog, I am sorry :(
@@ -541,10 +541,10 @@ Today I&rsquo;ll share you my experience in learning a new language. I am practi
     
     <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
-      <link>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</link>
+      <link>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</guid>
+      <guid>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>
@@ -843,10 +843,10 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     
     <item>
       <title>Say hello to Hugo</title>
-      <link>https://alik.page/posts/say-hello-to-hugo/</link>
+      <link>https://alikhil.dev/posts/say-hello-to-hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
-      <guid>https://alik.page/posts/say-hello-to-hugo/</guid>
+      <guid>https://alikhil.dev/posts/say-hello-to-hugo/</guid>
       <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Today I migrated my blog to <a href="https://gohugo.io">Hugo</a> engine. So, it&rsquo;s my first post here, yaay!</p>
 <p>There were only 2 posts in my last blog and I decided to not migrate the one about creating blog in Jekyll. Since it is not actual now.</p>]]></content:encoded>
@@ -854,10 +854,10 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
     
     <item>
       <title>Go Quickstart</title>
-      <link>https://alik.page/posts/go-quickstart/</link>
+      <link>https://alikhil.dev/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
       
-      <guid>https://alik.page/posts/go-quickstart/</guid>
+      <guid>https://alikhil.dev/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In this tutorial, we will configure Go environment in VS Code and write our first program in Go.&lt;/p&gt;</description>

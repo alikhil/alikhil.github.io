@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Google Cloud on alikhil</title>
-    <link>https://alik.page/tags/google-cloud/</link>
+    <link>https://alikhil.dev/tags/google-cloud/</link>
     <description>Recent content in Google Cloud on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 May 2018 21:30:36 +0300</lastBuildDate><atom:link href="https://alik.page/tags/google-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 May 2018 21:30:36 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/google-cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Oauth2 Proxy for Kubernetes Services</title>
-      <link>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</link>
+      <link>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alik.page/posts/oauth2-proxy-for-kubernetes-services/</guid>
+      <guid>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>
