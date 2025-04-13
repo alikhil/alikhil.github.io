@@ -3,19 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/linux/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/mikrotik/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/networking/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/opensource/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/selfhosting/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/tutorial/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/vpn/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/wireguard/</loc>
+    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/routeros/</loc>
     <lastmod>2025-03-30T16:01:25+03:00</lastmod>
@@ -23,19 +47,10 @@
     <loc>https://alikhil.dev/tags/secrets/</loc>
     <lastmod>2025-03-30T16:01:25+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/selfhosting/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</loc>
     <lastmod>2025-03-30T16:01:25+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/telegram/</loc>
-    <lastmod>2025-03-30T16:01:25+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/tutorial/</loc>
     <lastmod>2025-03-30T16:01:25+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/pages/</loc>
@@ -53,9 +68,6 @@
     <loc>https://alikhil.dev/tags/http/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/opensource/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/categories/programming/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
@@ -63,9 +75,6 @@
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/forwarding-sms-to-telegram/</loc>
-    <lastmod>2024-10-26T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/linux/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/sim/</loc>

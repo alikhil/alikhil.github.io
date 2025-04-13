@@ -6,7 +6,281 @@
     <description>Recent content in Tutorial on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Apr 2025 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Remote LAN access with WireGuard and Mikrotik</title>
+      <link>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</link>
+      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</guid>
+      <description>&lt;p&gt;Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.</p>
+<h2 id="requirements">Requirements</h2>
+<h3 id="what-i-have">What I have</h3>
+<ul>
+<li>
+<p>A Mikrotik Hex S router with a dynamic public IP address.</p>
+</li>
+<li>
+<p>Services in a cloud VM (Ubuntu 22) with a static public IP address.</p>
+</li>
+<li>
+<p>Services in a VM on my home network.</p>
+</li>
+<li>
+<p>Clients - laptops and phones - that need to access the services in my home and cloud network.</p>
+</li>
+</ul>
+<h3 id="what-i-want">What I want</h3>
+<ul>
+<li>
+<p>Clients outside of my home network should be able to access services both on my home and cloud network.</p>
+</li>
+<li>
+<p>Only traffic to my home and cloud network should be routed through the VPN.</p>
+</li>
+<li>
+<p>Clients inside my home network should be able to access services on my cloud network without additional configuration.</p>
+</li>
+<li>
+<p>No external centralized service should be used.</p>
+</li>
+<li>
+<p>No open ports on my home router.</p>
+</li>
+</ul>
+<p><img loading="lazy" src="/images/posts/mikrotik-wg/final.png" type="" alt="Final configuration"  /></p>
+<h2 id="implementation">Implementation</h2>
+<blockquote>
+<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p></blockquote>
+<p>Because of last requirement, it&rsquo;s obvious that traffic to home network should be routed though my cloud server.<br>
+So, I will use WireGuard to create a tunnel between mikrotik router and cloud server.<br>
+This way, I can access my home network from anywhere without exposing any ports on my home router.</p>
+<h3 id="i-initial-configuration-of-wireguard-on-cloud-vm">I. Initial configuration of WireGuard on cloud VM</h3>
+<blockquote>
+<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p></blockquote>
+<h4 id="1-install-wireguard-on-ubuntu-2204">1. Install wireguard on Ubuntu 22.04</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install wireguard -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Edit the configuration file</span>
+</span></span><span class="line"><span class="cl">sudo nano /etc/sysctl.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Find and uncomment the line:</span>
+</span></span><span class="line"><span class="cl">net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Then apply the changes:</span>
+</span></span><span class="line"><span class="cl">sudo sysctl -p
+</span></span></code></pre></div><h4 id="2-create-public-and-private-key">2. Create public and private key</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo su -
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /etc/wireguard
+</span></span><span class="line"><span class="cl"><span class="c1"># Generate private and public keys</span>
+</span></span><span class="line"><span class="cl">wg genkey <span class="p">|</span> tee privatekey <span class="p">|</span> wg pubkey &gt; publickey
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check the keys</span>
+</span></span><span class="line"><span class="cl">cat privatekey
+</span></span><span class="line"><span class="cl">cat publickey
+</span></span></code></pre></div><h4 id="3-create-the-configuration-file">3. Create the configuration file</h4>
+<p>I will use <code>172.16.10.0/24</code> subnet for Wireguard network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the following lines:</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Interface<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Address</span> <span class="o">=</span> 172.16.10.1/24
+</span></span><span class="line"><span class="cl"><span class="nv">ListenPort</span> <span class="o">=</span> <span class="m">27277</span> <span class="c1"># You can choose any port you want</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Privatekey</span> <span class="o">=</span> &lt;your_private_key&gt; <span class="c1"># from previous step</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># These are placeholder lines for next steps, keep them commented for now</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># # Mikrotik peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># [Peer]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># AllowedIPs = 172.16.10.0/24,192.168.0.0/16</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># PublicKey = mikrotik public key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># # client peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># [Peer]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># AllowedIPs = 172.16.10.2/32</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># PublicKey = first client device public key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># CRTL+X: save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Change the permissions of the configuration file</span>
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> wg0.conf
+</span></span></code></pre></div><h4 id="4-start-the-wireguard-interface">4. Start the WireGuard interface</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Enable service to start on boot</span>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> wg-quick@wg0.service
+</span></span><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Start the service</span>
+</span></span><span class="line"><span class="cl">systemctl start wg-quick@wg0
+</span></span><span class="line"><span class="cl"><span class="c1"># Check wg status</span>
+</span></span><span class="line"><span class="cl">wg
+</span></span></code></pre></div><p>It should show the interface is up like this</p>
+<p><img loading="lazy" src="/images/posts/mikrotik-wg/wg.png" type="" alt="WireGuard status"  /></p>
+<p>More commands to check the status of the service:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check the status of the service</span>
+</span></span><span class="line"><span class="cl">systemctl status wg-quick@wg0
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the service if needed</span>
+</span></span><span class="line"><span class="cl">systemctl restart wg-quick@wg0
+</span></span></code></pre></div><h3 id="ii-mikrotik-configuration">II. Mikrotik configuration</h3>
+<p>I will use Mikrotik command line interface (CLI) to configure the router. You can use Winbox or WebFig if you prefer.</p>
+<h4 id="1-create-wireguard-interface">1. Create WireGuard interface</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create WireGuard interface and it will automatically generate private and public keys</span>
+</span></span><span class="line"><span class="cl">/interface wireguard add listen-port<span class="o">=</span><span class="m">13231</span> <span class="nv">mtu</span><span class="o">=</span><span class="m">1420</span> <span class="nv">name</span><span class="o">=</span>cloud-wg
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the IP address to the interface</span>
+</span></span><span class="line"><span class="cl">/ip add <span class="nv">address</span><span class="o">=</span>172.16.10.3/24 <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="nv">network</span><span class="o">=</span>172.16.10.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Print the keys, you will need only the public key later</span>
+</span></span><span class="line"><span class="cl">/interface/wireguard/print
+</span></span></code></pre></div><h4 id="2-create-the-peer">2. Create the peer</h4>
+<p>Here we add cloud vm as a peer to the Mikrotik router&rsquo;s wireguard. The public key of the cloud server is needed here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># In allowed-address we add IP ranges which will be routed through this peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 172.21.0.0/16 - subnet of docker containers on cloud server</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 172.16.10.0/16 - subnet of wireguard network</span>
+</span></span><span class="line"><span class="cl">/interface wireguard peers add allowed-address<span class="o">=</span>172.16.10.0/24,172.21.0.0/16 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Here is a tricky part</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Routing rule for subnet of wireguard network is added automatically on adding IP address to the interface</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># But we need to add explicitly the route for docker containers subnet</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># You may need to adjust the distance and routing-table values</span>
+</span></span><span class="line"><span class="cl">/ip route <span class="nv">disabled</span><span class="o">=</span>no <span class="nv">distance</span><span class="o">=</span><span class="m">1</span> dst-address<span class="o">=</span>172.21.0.0/16 <span class="nv">gateway</span><span class="o">=</span>cloud-wg routing-table<span class="o">=</span>main <span class="nv">scope</span><span class="o">=</span><span class="m">30</span> suppress-hw-offload<span class="o">=</span>no target-scope<span class="o">=</span><span class="m">10</span>
+</span></span></code></pre></div><h3 id="3-add-wireguard-peer-vm">3. Add WireGuard peer (VM)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Uncomment the lines for Mikrotik peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Mikrotik peer</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Peer<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">AllowedIPs</span> <span class="o">=</span> 172.16.10.0/24,192.168.0.0/16
+</span></span><span class="line"><span class="cl"><span class="nv">PublicKey</span> <span class="o">=</span> mikrotik public key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the WireGuard service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl restart wg-quick@wg0
+</span></span><span class="line"><span class="cl"><span class="c1"># Check if changes are applied</span>
+</span></span><span class="line"><span class="cl">wg show
+</span></span></code></pre></div><p>You should see the Mikrotik peer in the list of peers.
+<img loading="lazy" src="/images/posts/mikrotik-wg/wg-show-2.png" type="" alt="WireGuard peers"  /></p>
+<details>
+<summary>More commands to tests connection between cloud vm and mikrotik wg</summary>
+<h5 id="run-in-mikrotik-cli">Run in mikrotik CLI</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ping wireguard IP of cloud server</span>
+</span></span><span class="line"><span class="cl">ping 172.16.10.1
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mikrotik-ping.png" type="" alt="WireGuard ping"  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># resolve google.com via adguard container on cloud vm</span>
+</span></span><span class="line"><span class="cl">put <span class="o">[</span>resolve google.com server 172.21.0.114<span class="o">]</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mikrotik-resolve.png" type="" alt="Wireguard resolve"  /></p>
+<h5 id="run-in-cloud-server">Run in cloud server</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ping wireguard IP of Mikrotik router</span>
+</span></span><span class="line"><span class="cl">ping 172.168.10.3
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/vm-ping.png" type="" alt="VM ping"  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># resolve google.com via adguard container on home adguard</span>
+</span></span><span class="line"><span class="cl">dig google.com @192.168.11.2
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/vm-resolve.png" type="" alt="VM resolve"  /></p>
+<h5 id="run-on-my-mac-connected-to-home-network">Run on my Mac connected to home network</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ping wireguard IP of cloud server</span>
+</span></span><span class="line"><span class="cl">ping 172.16.10.1
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mac-ping.png" type="" alt="mac ping"  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># resolve google.com via adguard container on cloud adguard</span>
+</span></span><span class="line"><span class="cl">dig google.com @172.121.0.114
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mac-resolve.png" type="" alt="mac resolve"  /></p>
+</details>
+<h2 id="iv-add-first-client-device-as-a-peer">IV. Add first client device as a peer</h2>
+<p>I recommend you to use your smartphone as first client device, because it can work from both home WiFi and mobile data. This way you can test the connection from both networks.</p>
+<p>Also, install on your smartphone:</p>
+<ul>
+<li>WireGuard app (<a href="https://apps.apple.com/us/app/wireguard/id1441195209">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.wireguard.android&amp;hl=en&amp;pli=1">Android</a>)</li>
+<li>Network debugging app (<a href="https://apps.apple.com/bo/app/inettools-ping-dns-port-scan/id561659975">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.ulfdittmer.android.ping&amp;hl=en">Android</a>)</li>
+</ul>
+<h3 id="1-create-keys-for-the-client">1. Create keys for the client</h3>
+<p>Install Wireguard app for your client OS.</p>
+<p>Then, generate public and private keys on the device, for that create config from scratch in the app and then click on <strong>Generate keypair</strong> button.</p>
+<p>Or you can generate keys on the cloud server and then copy them to the client device.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wg genkey <span class="p">|</span> tee peer-privatekey <span class="p">|</span> wg pubkey &gt; peer-publickey
+</span></span></code></pre></div><h3 id="2-add-the-client-as-a-peer-to-wireguard-config-on-cloud-server">2. Add the client as a peer to WireGuard config on cloud server</h3>
+<p>On the cloud server, edit the WireGuard config file and add the client as a peer.</p>
+<p>Each time increment previous peer address by 1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Uncomment the lines for client peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># client peer</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Peer<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">AllowedIPs</span> <span class="o">=</span> 172.16.10.2/32
+</span></span><span class="line"><span class="cl"><span class="nv">PublicKey</span> <span class="o">=</span> put public key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># CRTL+X: save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the WireGuard service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl restart wg-quick@wg0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check if changes are applied</span>
+</span></span><span class="line"><span class="cl">wg show
+</span></span></code></pre></div><h3 id="3-continue-configuring-the-client-device">3. Continue configuring the client device</h3>
+<p>You already have public and private keys for the client device, other configuration parameters are:</p>
+<h4 id="interface">Interface</h4>
+<ul>
+<li><strong>Address</strong> - It&rsquo;s address of peer in wireguard subnet. Put the same address you set in <code>AllowedIPs</code> field in previous step.</li>
+<li><strong>DNS servers</strong> - if you have adguard/pihole running on the cloud server, you can use it as a DNS server. Put it&rsquo;s IP address here.</li>
+<li><strong>MTU</strong> and <strong>ListenPort</strong> - you can leave them empty, they will be set automatically.</li>
+</ul>
+<h4 id="peer">Peer</h4>
+<ul>
+<li><strong>Endpoint</strong> - cloud server IP address and port (27277)</li>
+<li><strong>Public key</strong> - public key of the cloud server</li>
+<li><strong>AllowedIPs</strong> - here we put all subnets that we want to access from this current client device</li>
+</ul>
+<p>Here is an example of the configuration file for the client device:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Interface]</span>
+</span></span><span class="line"><span class="cl"><span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">private-key-of-client-device</span>
+</span></span><span class="line"><span class="cl"><span class="na">Address</span> <span class="o">=</span> <span class="s">172.16.10.2/32</span>
+</span></span><span class="line"><span class="cl"><span class="na">DNS</span> <span class="o">=</span> <span class="s">172.21.0.114 # IP of adguard container on cloud server</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Peer]</span>
+</span></span><span class="line"><span class="cl"><span class="na">PublicKey</span> <span class="o">=</span> <span class="s">public-key-of-cloud-server</span>
+</span></span><span class="line"><span class="cl"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.168.0.0/16, 172.16.10.0/24, 172.21.0.0/16 # subnets of home, cloud and wireguard network</span>
+</span></span><span class="line"><span class="cl"><span class="na">Endpoint</span> <span class="o">=</span> <span class="s">ip.of.cloud.servner:27277</span>
+</span></span></code></pre></div><p>That&rsquo;s it! Disconnect your device from the home Wi-Fi, switch to mobile data and connect to the VPN.</p>
+<p>Then try to:</p>
+<ul>
+<li>ping the cloud server and Mikrotik router IP addresses in wireguard subnet.</li>
+<li>check ports of services in docker containers on cloud and home server VM.</li>
+</ul>
+<style>
+td, th {
+   border: none!important;
+}
+</style>
+<table>
+  <thead>
+      <tr>
+          <th>ping cloud</th>
+          <th>ping home</th>
+          <th>check adguard port</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-vm.jpeg" type="" alt="ping cloud"  /></td>
+          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-home.jpeg" type="" alt="ping home"  /></td>
+          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-port-scan.jpeg" type="" alt="port scan"  /></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="v-bonus-dns-configuration">V. Bonus. DNS configuration</h2>
+<p>Since I have 2 adguard instances and I use them as DNS servers everywhere, I will add DNS records for accessing my services:</p>
+<ul>
+<li>*<strong>.cloud.domain.com</strong> - pointing to traefik docker container on cloud server</li>
+<li>*<strong>.home.domain.com</strong> - pointing to traefik docker container on home server</li>
+</ul>
+<p>Thus, I can access my services using domain names instead of IP addresses.</p>
+<img src="/images/posts/mikrotik-wg/dns.png" width="30%">
+<h2 id="vi-final-thoughts">VI. Final thoughts</h2>
+<p>I hope this tutorial was helpful for you. I will keep it updated if I find any issues or improvements.</p>
+<p>If you have any questions or suggestions, feel free to leave a comment below.</p>
+<p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Storing and using secrets in Mikrotik RouterOS</title>
       <link>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>

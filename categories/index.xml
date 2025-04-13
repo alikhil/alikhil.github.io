@@ -6,11 +6,21 @@
     <description>Recent content in Categories on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Mar 2025 16:01:25 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Apr 2025 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://alikhil.dev/categories/linux/</link>
+      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/categories/linux/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Networking</title>
       <link>https://alikhil.dev/categories/networking/</link>
-      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
       
       <guid>https://alikhil.dev/categories/networking/</guid>
       <description></description>
@@ -18,21 +28,21 @@
     </item>
     
     <item>
-      <title>Selfhosting</title>
-      <link>https://alikhil.dev/categories/selfhosting/</link>
-      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      <title>Opensource</title>
+      <link>https://alikhil.dev/categories/opensource/</link>
+      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
       
-      <guid>https://alikhil.dev/categories/selfhosting/</guid>
+      <guid>https://alikhil.dev/categories/opensource/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
-      <title>Opensource</title>
-      <link>https://alikhil.dev/categories/opensource/</link>
-      <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
+      <title>Selfhosting</title>
+      <link>https://alikhil.dev/categories/selfhosting/</link>
+      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
       
-      <guid>https://alikhil.dev/categories/opensource/</guid>
+      <guid>https://alikhil.dev/categories/selfhosting/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -43,16 +53,6 @@
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
       <guid>https://alikhil.dev/categories/programming/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://alikhil.dev/categories/linux/</link>
-      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/categories/linux/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
