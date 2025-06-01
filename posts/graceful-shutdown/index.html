@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -12,11 +12,11 @@ There is a common misconception in the Kubernetes world that bothers me. The off
 And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.
 In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.">
 <meta name="author" content="Alik Khilazhev">
-<link rel="canonical" href="http://localhost:1313/posts/graceful-shutdown/">
+<link rel="canonical" href="https://alikhil.dev/posts/graceful-shutdown/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.24117e94f7185554bf370e131546657a05d72834bf02c67c2a4215d5cf110a80.css" integrity="sha256-JBF&#43;lPcYVVS/Nw4TFUZlegXXKDS/AsZ8KkIV1c8RCoA=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="alternate" hreflang="en-us" href="http://localhost:1313/posts/graceful-shutdown/">
+<link rel="icon" href="https://alikhil.dev/favicon.ico">
+<link rel="apple-touch-icon" href="https://alikhil.dev/apple-touch-icon.png">
+<link rel="alternate" hreflang="en-us" href="https://alikhil.dev/posts/graceful-shutdown/">
 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
       <script>
@@ -43,10 +43,10 @@ There is a common misconception in the Kubernetes world that bothers me. The off
 And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.
 In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/graceful-shutdown/" />
+<meta property="og:url" content="https://alikhil.dev/posts/graceful-shutdown/" />
 <meta property="article:section" content="posts" />
-  <meta property="article:published_time" content="2025-06-01T20:34:03&#43;00:00" />
-  <meta property="article:modified_time" content="2025-06-01T20:34:03&#43;00:00" />
+  <meta property="article:published_time" content="2025-06-01T20:31:06&#43;03:00" />
+  <meta property="article:modified_time" content="2025-06-01T20:31:06&#43;03:00" />
 
 
 <script type="application/ld+json">
@@ -58,13 +58,13 @@ In this post, I will share what I have learned about implementing proper gracefu
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://alikhil.dev/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Why Graceful Shutdown Matters in Kubernetes",
-      "item": "http://localhost:1313/posts/graceful-shutdown/"
+      "item": "https://alikhil.dev/posts/graceful-shutdown/"
     }
   ]
 }
@@ -81,22 +81,22 @@ In this post, I will share what I have learned about implementing proper gracefu
   ],
   "wordCount" : "1784",
   "inLanguage": "en-us",
-  "datePublished": "2025-06-01T20:34:03Z",
-  "dateModified": "2025-06-01T20:34:03Z",
+  "datePublished": "2025-06-01T20:31:06+03:00",
+  "dateModified": "2025-06-01T20:31:06+03:00",
   "author":[{
     "@type": "Person",
     "name": "Alik Khilazhev"
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/graceful-shutdown/"
+    "@id": "https://alikhil.dev/posts/graceful-shutdown/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "alikhil",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "https://alikhil.dev/favicon.ico"
     }
   }
 }
@@ -212,7 +212,7 @@ function toggleThemeListener() {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="alikhil (Alt + H)">alikhil</a>
+            <a href="https://alikhil.dev/" accesskey="h" title="alikhil (Alt + H)">alikhil</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -238,32 +238,32 @@ function toggleThemeListener() {
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/" title="Home" class="active"
+                <a href="https://alikhil.dev/" title="Home" class="active"
                 >Home
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/" title="Posts" class="active"
+                <a href="https://alikhil.dev/posts/" title="Posts" class="active"
                 >Posts
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/pages/projects/" title="Projects"
+                <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/pages/talks/" title="Talks"
+                <a href="https://alikhil.dev/pages/talks/" title="Talks"
                 >Talks
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives"
+                <a href="https://alikhil.dev/archives/" title="Archives"
                 >Archives
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                <a href="https://alikhil.dev/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
                 >Search
                 </a>
             </li>
@@ -274,12 +274,12 @@ function toggleThemeListener() {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div><h1 class="post-title">Why Graceful Shutdown Matters in Kubernetes</h1>
+    <div class="breadcrumbs"><a href="https://alikhil.dev/">Home</a>&nbsp;»&nbsp;<a href="https://alikhil.dev/posts/">Posts</a></div><h1 class="post-title">Why Graceful Shutdown Matters in Kubernetes</h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>1 June 2025</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
-  <span class="post-tags"><a href="http://localhost:1313/tags/go/">Go</a><a href="http://localhost:1313/tags/kubernetes/">Kubernetes</a><a href="http://localhost:1313/tags/tutorial/">Tutorial</a></span></span><span class="meta-item">
+  <span class="post-tags"><a href="https://alikhil.dev/tags/go/">Go</a><a href="https://alikhil.dev/tags/kubernetes/">Kubernetes</a><a href="https://alikhil.dev/tags/tutorial/">Tutorial</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>9 min</span></span>
 
@@ -547,7 +547,7 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="next" href="http://localhost:1313/posts/remote-lan-access-with-wireguard-and-mikrotik/">
+  <a class="next" href="https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/">
     <span class="title">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
@@ -570,7 +570,7 @@ function toggleThemeListener() {
     </main>
     
 <footer class="footer">
-  <span>&copy; 2025 <a href="http://localhost:1313/">alikhil</a></span><span style="display: inline-block; margin-left: 1em;">
+  <span>&copy; 2025 <a href="https://alikhil.dev/">alikhil</a></span><span style="display: inline-block; margin-left: 1em;">
     <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
   </span>
   <span style="display: inline-block; margin-left: 1em;">

@@ -3,13 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2025-06-01T20:34:03+00:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2025-06-01T20:34:03+00:00</lastmod>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/devops/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/go/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/kubernetes/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/sre/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/tutorial/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/graceful-shutdown/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/linux/</loc>
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
@@ -27,12 +48,6 @@
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/selfhosting/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/tutorial/</loc>
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/vpn/</loc>
@@ -61,9 +76,6 @@
   </url><url>
     <loc>https://alikhil.dev/pages/talks/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/go/</loc>
-    <lastmod>2025-03-19T19:20:45+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/http/</loc>
     <lastmod>2025-03-19T19:20:45+03:00</lastmod>
@@ -101,9 +113,6 @@
     <loc>https://alikhil.dev/tags/ci/cd/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/devops/</loc>
-    <lastmod>2019-09-20T10:30:00+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/docker/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>
   </url><url>
@@ -114,9 +123,6 @@
     <lastmod>2019-06-08T22:30:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/k8s/</loc>
-    <lastmod>2019-06-08T22:30:00+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/kubernetes/</loc>
     <lastmod>2019-06-08T22:30:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/spa/</loc>

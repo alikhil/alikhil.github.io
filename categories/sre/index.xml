@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sre on alikhil</title>
-    <link>http://localhost:1313/categories/sre/</link>
+    <link>https://alikhil.dev/categories/sre/</link>
     <description>Recent content in Sre on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 20:34:03 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/sre/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/sre/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
-      <link>http://localhost:1313/posts/graceful-shutdown/</link>
-      <pubDate>Sun, 01 Jun 2025 20:34:03 +0000</pubDate>
+      <link>https://alikhil.dev/posts/graceful-shutdown/</link>
+      <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
       
-      <guid>http://localhost:1313/posts/graceful-shutdown/</guid>
+      <guid>https://alikhil.dev/posts/graceful-shutdown/</guid>
       <description>&lt;p&gt;Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.&lt;/p&gt;
 &lt;p&gt;There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/&#34;&gt;documentation&lt;/a&gt; and most guides claim that &amp;ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&amp;rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are &lt;strong&gt;NOT enough&lt;/strong&gt; for true zero-downtime deployments.&lt;/p&gt;
 &lt;p&gt;And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.&lt;/p&gt;

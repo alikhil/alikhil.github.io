@@ -6,7 +6,228 @@
     <description>Recent content in Tutorial on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Apr 2025 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why Graceful Shutdown Matters in Kubernetes</title>
+      <link>https://alikhil.dev/posts/graceful-shutdown/</link>
+      <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/graceful-shutdown/</guid>
+      <description>&lt;p&gt;Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.&lt;/p&gt;
+&lt;p&gt;There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/&#34;&gt;documentation&lt;/a&gt; and most guides claim that &amp;ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&amp;rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are &lt;strong&gt;NOT enough&lt;/strong&gt; for true zero-downtime deployments.&lt;/p&gt;
+&lt;p&gt;And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.&lt;/p&gt;
+&lt;p&gt;In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.</p>
+<p>There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/">documentation</a> and most guides claim that &ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are <strong>NOT enough</strong> for true zero-downtime deployments.</p>
+<p>And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.</p>
+<p>In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.</p>
+<h2 id="the-problem-hidden-errors-during-pod-termination">The Problem: Hidden Errors During Pod Termination</h2>
+<figure class="align-center ">
+    <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"/> <figcaption>
+            ChatGPT: draw funny picture of Kubernetes pod gracefully shutting down
+        </figcaption>
+</figure>
+
+<p>If you are running services on Kubernetes, you have probably noticed that even with rolling updates (where Kubernetes gradually replaces pods), you might still see errors during deployment. This is especially annoying when you are trying to maintain &ldquo;zero-downtime&rdquo; systems.</p>
+<p>When Kubernetes needs to terminate a pod (for any reason), it follows this sequence:</p>
+<ol>
+<li>Sends a SIGTERM signal to your container</li>
+<li>Waits for a grace period (30 seconds by default)</li>
+<li>If the container does not exit after the grace period, it gets brutal and sends a SIGKILL signal</li>
+</ol>
+<p>The problem? Most applications do not properly handle that SIGTERM signal. They just die immediately, dropping any in-flight requests. In the real world, while most API requests complete in 100-300ms, there are often those long-running operations that take 5-15 seconds or more. Think about processing uploads, generating reports, or running complex database queries. When these longer operations get cut off, that&rsquo;s when users really feel the pain.</p>
+<h3 id="when-does-kubernetes-terminate-pods">When Does Kubernetes Terminate Pods?</h3>
+<p>Rolling updates are just one scenario where your pods might be terminated. Here are other common situations that can lead to pod terminations:</p>
+<ul>
+<li>
+<p><strong>Horizontal Pod Autoscaler Events</strong>: When HPA scales down during low-traffic periods, some pods get terminated.</p>
+</li>
+<li>
+<p><strong>Resource Pressure</strong>: If your nodes are under resource pressure, the Kubernetes scheduler might decide to evict certain pods.</p>
+</li>
+<li>
+<p><strong>Node Maintenance</strong>: During cluster upgrades, node draining causes many pods to be evicted.</p>
+</li>
+<li>
+<p><strong>Spot/Preemptible Instances</strong>: If you are using cost-saving node types like spot instances, these can be reclaimed with minimal notice.</p>
+</li>
+</ul>
+<p>All these scenarios follow the same termination process, so implementing proper graceful shutdown handling protects you from errors in all of these cases - not just during upgrades.</p>
+<h2 id="lets-test-it-basic-vs-graceful-service">Let&rsquo;s Test It: Basic vs. Graceful Service</h2>
+<p>Instead of just talking about theory, I built a small lab to demonstrate the difference between proper and improper shutdown handling. I created two nearly identical Go services:</p>
+<ul>
+<li><strong>Basic Service</strong>: A standard HTTP server with no special shutdown handling</li>
+<li><strong>Graceful Service</strong>: The same service but with proper SIGTERM handling</li>
+</ul>
+<p>Both services:</p>
+<ul>
+<li>Process requests that take about 4 seconds to complete (intentionally configured for easier demonstration)</li>
+<li>Run in the same Kubernetes cluster with identical configurations</li>
+<li>Serve the same endpoints</li>
+</ul>
+<p>I specifically chose a 4-second processing time to make the problem obvious. While this might seem long compared to typical 100-300ms API calls, it perfectly simulates those problematic long-running operations that occur in real-world applications. The only difference between the services is how they respond to termination signals.</p>
+<p>To test them, I wrote a simple k6 script that hammers both services with requests while triggering rolling restart of service&rsquo;s deployment. Here is what happened:</p>
+<h3 id="basic-service-the-error-prone-one">Basic Service: The Error-Prone One</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">checks_total.......................: 695    11.450339/s
+</span></span><span class="line"><span class="cl">checks_succeeded...................: 97.98% 681 out of 695
+</span></span><span class="line"><span class="cl">checks_failed......................: 2.01%  14 out of 695
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✗ status is 200
+</span></span><span class="line"><span class="cl">  ↳  97% — ✓ 681 / ✗ 14
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http_req_failed....................: 2.01%  14 out of 696
+</span></span></code></pre></div><h3 id="graceful-service-the-reliable-one">Graceful Service: The Reliable One</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">checks_total.......................: 750     11.724824/s
+</span></span><span class="line"><span class="cl">checks_succeeded...................: 100.00% 750 out of 750
+</span></span><span class="line"><span class="cl">checks_failed......................: 0.00%   0 out of 750
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✓ status is 200
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http_req_failed........... ........: 0.00%  0 out of 751
+</span></span></code></pre></div><p>The results speak for themselves. The basic service dropped 14 requests during the update (that is 2% of all traffic), while the graceful service handled everything perfectly without a single error.</p>
+<p>You might think &ldquo;2% it is not that bad&rdquo; — but if you are doing several deployments per day and have thousands of users, that adds up to a lot of errors. Plus, in my experience, these errors tend to happen at the worst possible times.</p>
+<h2 id="so-how-do-we-fix-it-the-graceful-shutdown-recipe">So How Do We Fix It? The Graceful Shutdown Recipe</h2>
+<p>After digging into this problem and testing different solutions, I have put together a simple recipe for proper graceful shutdown. While my examples are in Go, the fundamental principles apply to any language or framework you are using.</p>
+<p>Here are the key ingredients:</p>
+<h3 id="1-listen-for-sigterm-signals">1. Listen for SIGTERM Signals</h3>
+<p>First, your app needs to catch that SIGTERM signal instead of ignoring it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Set up channel for shutdown signals</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stop</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Signal</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">signal</span><span class="p">.</span><span class="nf">Notify</span><span class="p">(</span><span class="nx">stop</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Interrupt</span><span class="p">,</span> <span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGTERM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Block until we receive a shutdown signal</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;-</span><span class="nx">stop</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Shutdown signal received&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>This part is easy - you are just telling your app to wake up when Kubernetes asks it to shut down.</p>
+<h3 id="2-track-your-in-flight-requests">2. Track Your In-Flight Requests</h3>
+<p>You need to know when it is safe to shut down, so keep track of ongoing requests:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Create a request counter</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">inFlightRequests</span> <span class="nx">atomic</span><span class="p">.</span><span class="nx">Int64</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/process&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Increment counter when request starts</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">inFlightRequests</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// do not forget to decrement when done!</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">inFlightRequests</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Your normal request handling...</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>  <span class="c1">// Simulating long-running work</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>This counter lets you check if there are still requests being processed before shutting down. it is especially important for those long-running operations that users have already waited several seconds for - the last thing they want is to see an error right before completion!</p>
+<h3 id="3-separate-your-health-checks">3. Separate Your Health Checks</h3>
+<p>Here is a commonly overlooked trick - you need different health check endpoints for liveness and readiness:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Track shutdown state</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">isShuttingDown</span> <span class="nx">atomic</span><span class="p">.</span><span class="nx">Bool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Readiness probe - returns 503 when shutting down</span>
+</span></span><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/ready&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">isShuttingDown</span><span class="p">.</span><span class="nf">Load</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusServiceUnavailable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;Shutting down, not ready&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;Ready for traffic&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Liveness probe - always returns 200 (we are still alive!)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/alive&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;I&#39;m alive&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>This separation is crucial. The readiness probe tells Kubernetes to stop sending new traffic, while the liveness probe says &ldquo;do not kill me yet, I&rsquo;m still working!&rdquo;</p>
+<h3 id="4-the-shutdown-dance">4. The Shutdown Dance</h3>
+<p>Now for the most important part - the shutdown sequence:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Step 1: Mark service as shutting down</span>
+</span></span><span class="line"><span class="cl"><span class="nx">isShuttingDown</span><span class="p">.</span><span class="nf">Store</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Step 2: Let Kubernetes notice the readiness probe failing</span>
+</span></span><span class="line"><span class="cl"><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Step 3: Wait for in-flight requests to finish</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">inFlightRequests</span><span class="p">.</span><span class="nf">Load</span><span class="p">()</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Step 4: Finally, shut down the server gracefully</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">server</span><span class="p">.</span><span class="nf">Shutdown</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Forced shutdown: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>I&rsquo;ve found this sequence to be optimal. First, we mark ourselves as &ldquo;not ready&rdquo; but keep running. We pause to give Kubernetes time to notice and update its routing. Then we patiently wait until all in-flight requests finish before actually shutting down the server.</p>
+<h3 id="5-configure-kubernetes-correctly">5. Configure Kubernetes Correctly</h3>
+<p>Do not forget to adjust your Kubernetes configuration:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Use different probes for liveness and readiness</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/alive </span><span class="w"> </span><span class="c"># Always returns OK</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/ready </span><span class="w"> </span><span class="c"># Returns 503 during shutdown</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Give pods enough time to shut down gracefully</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="c"># Stops routing traffic after 2 failed checks (6 seconds)</span><span class="w">
+</span></span></span></code></pre></div><p>This tells Kubernetes to wait up to 30 seconds for your app to finish processing requests before forcefully terminating it.</p>
+<h2 id="tl-dr-quick-tips">TL; DR; Quick Tips</h2>
+<p>If you are in a hurry, here are the key takeaways:</p>
+<ol>
+<li>
+<p><strong>Catch SIGTERM Signals</strong>: Do not let your app be surprised when Kubernetes wants it to shut down.</p>
+</li>
+<li>
+<p><strong>Track In-Flight Requests</strong>: Know when it is safe to exit by counting active requests.</p>
+</li>
+<li>
+<p><strong>Split Your Health Checks</strong>: Use separate endpoints for liveness (am I running?) and readiness (can I take traffic?).</p>
+</li>
+<li>
+<p><strong>Fail Readiness First</strong>: As soon as shutdown begins, start returning &ldquo;not ready&rdquo; on your readiness endpoint.</p>
+</li>
+<li>
+<p><strong>Wait for Requests</strong>: Do not just shut down - wait for all active requests to complete first.</p>
+</li>
+<li>
+<p><strong>Use Built-In Shutdown</strong>: Most modern web frameworks have graceful shutdown options; use them!</p>
+</li>
+<li>
+<p><strong>Configure Terminaton Grace Period</strong>: Give your pods enough time to complete the shutdown sequence.</p>
+</li>
+<li>
+<p><strong>Test Under Load</strong>: You will not catch these issues in simple tests - you need realistic traffic patterns.</p>
+</li>
+</ol>
+<h2 id="wrap-up-is-it-worth-the-extra-code">Wrap Up: Is It Worth the Extra Code?</h2>
+<p>You might be wondering if adding all this extra code is really worth it. After all, we&rsquo;re only talking about a 2% error rate during pod termination events.</p>
+<p>From my experience working with high-traffic services, I would say absolutely yes - for three reasons:</p>
+<ol>
+<li>
+<p><strong>User Experience</strong>: Even small error rates look bad to users. Nobody wants to see &ldquo;Something went wrong&rdquo; messages, especially after waiting 10+ seconds for a long-running operation to complete.</p>
+</li>
+<li>
+<p><strong>Cascading Failures</strong>: Those errors can cascade through your system, especially if services depend on each other. Long-running requests often touch multiple critical systems.</p>
+</li>
+<li>
+<p><strong>Deployment Confidence</strong>: With proper graceful shutdown, you can deploy more frequently without worrying about causing problems.</p>
+</li>
+</ol>
+<p>The good news is that once you have implemented this pattern once, it is easy to reuse across your services. You can even create a small library or template for your organization.</p>
+<p>In production environments where I have implemented these patterns, we have gone from seeing a spike of errors with every deployment to deploying multiple times per day with zero impact on users. that is a win in my book!</p>
+<h2 id="further-reading">Further Reading</h2>
+<p>If you want to dive deeper into this topic, I recommend checking out the article <a href="https://learnk8s.io/graceful-shutdown">Graceful shutdown and zero downtime deployments in Kubernetes</a> from learnk8s.io. It provides additional technical details about graceful shutdown in Kubernetes, though it does not emphasize the critical role of readiness probes in properly implementing the pattern as we have discussed here.</p>
+<hr>
+<p>For those interested in seeing the actual code I used in my testing lab, I&rsquo;ve published it on <a href="https://github.com/alikhil/gracefull-shutdown-lab">GitHub</a> with instructions for running the demo yourself.</p>
+<p>Have you implemented graceful shutdown in your services? Did you encounter any other edge cases I didn&rsquo;t cover? Let me know in the comments how this pattern has worked for you!</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Remote LAN access with WireGuard and Mikrotik</title>
       <link>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</link>
