@@ -73,43 +73,47 @@
       <description>&lt;p&gt;Here is a list of talks I gave in different conferences and meetups:&lt;/p&gt;
 &lt;h4 id=&#34;cicd-for-golang-projects-with-droneio&#34;&gt;CI/CD for golang projects with drone.io&lt;/h4&gt;
 &lt;p&gt;Avito.Tech meetup in Kazan, 2020&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A deep dive into building efficient CI/CD pipelines for Go using drone.io, featuring Docker-in-Docker workflows, custom plugins, and caching strategies that cut build times by 40%.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/mKT-bLdRGvQ?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/mKT-bLdRGvQ?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
 
 &lt;h4 id=&#34;droneio-101&#34;&gt;Drone.io #101&lt;/h4&gt;
-&lt;p&gt;Golang Meetup in Yoshkar-Ola, 2020&lt;/p&gt;
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/MSsHRo9CYvk?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
-    &lt;/div&gt;
-
-&lt;h4 id=&#34;configuring-cicd-for-iac&#34;&gt;Configuring CI/CD for IaC&lt;/h4&gt;
-&lt;p&gt;Innopolis DevOps Meetup, 2022&lt;/p&gt;</description>
+&lt;p&gt;Golang Meetup in Yoshkar-Ola, 2020&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Here is a list of talks I gave in different conferences and meetups:</p>
 <h4 id="cicd-for-golang-projects-with-droneio">CI/CD for golang projects with drone.io</h4>
 <p>Avito.Tech meetup in Kazan, 2020</p>
+<blockquote>
+<p>A deep dive into building efficient CI/CD pipelines for Go using drone.io, featuring Docker-in-Docker workflows, custom plugins, and caching strategies that cut build times by 40%.</p></blockquote>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mKT-bLdRGvQ?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mKT-bLdRGvQ?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 <h4 id="droneio-101">Drone.io #101</h4>
 <p>Golang Meetup in Yoshkar-Ola, 2020</p>
+<blockquote>
+<p>An intro to adopting drone.io in CI environments with real-world tips on Kubernetes runners, Vault secrets, and multi-arch Docker builds—achieving simpler, faster pipelines than Jenkins.</p></blockquote>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/MSsHRo9CYvk?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/MSsHRo9CYvk?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 <h4 id="configuring-cicd-for-iac">Configuring CI/CD for IaC</h4>
 <p>Innopolis DevOps Meetup, 2022</p>
 <p>Link to timecode: <a href="https://www.youtube.com/watch?v=bZXlizneB8U&amp;t=2840s">https://www.youtube.com/watch?v=bZXlizneB8U&amp;t=2840s</a></p>
+<blockquote>
+<p>Advanced CI/CD for infrastructure teams using Terraform, with automated plan/apply stages, secure staging promotions, and IaC validation pipelines powering zero-downtime updates.</p></blockquote>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/bZXlizneB8U?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/bZXlizneB8U?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 <h4 id="iac-with-terraform-and-droneio">IaC with Terraform and drone.io</h4>
 <p>YandexScale in Moscow, 2022</p>
 <p>Link to timecode: <a href="https://www.youtube.com/watch?v=5wZ2G5idK1w&amp;t=2318s">https://www.youtube.com/watch?v=5wZ2G5idK1w&amp;t=2318s</a></p>
+<blockquote>
+<p>Case study of managing Terraform and Terragrunt at scale, including modular repo strategies, drift detection, and S3-backed state—resulting in a 92% drop in drift incidents across 40+ microservices.</p></blockquote>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5wZ2G5idK1w?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5wZ2G5idK1w?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content:encoded>
