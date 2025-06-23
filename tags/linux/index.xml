@@ -102,6 +102,7 @@
 <h3 id="cons">Cons</h3>
 <ul>
 <li>Switching the mouse takes longer since there is only one way iteration over the connected devices.</li>
+<li>Three actions are needed to switch all peripheral devices, as opposed to one action with a KVM.</li>
 <li>I still need to manually reconnect other peripheral devices, e.g. web camera.</li>
 </ul>
 <h2 id="final-thoughts">Final thoughts</h2>
