@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch | alikhil</title>
+<meta name="keywords" content="Tutorial, Tips, Mac, Linux, KVM, DDC">
+<meta name="description" content="Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.">
+<meta name="author" content="Alik Khilazhev">
+<link rel="canonical" href="https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.24117e94f7185554bf370e131546657a05d72834bf02c67c2a4215d5cf110a80.css" integrity="sha256-JBF&#43;lPcYVVS/Nw4TFUZlegXXKDS/AsZ8KkIV1c8RCoA=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://alikhil.dev/favicon.ico">
+<link rel="apple-touch-icon" href="https://alikhil.dev/apple-touch-icon.png">
+<link rel="alternate" hreflang="en-us" href="https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/">
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RSGLKK3DPR');
+        }
+      </script>
+<meta name="twitter:title" content="How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch | alikhil" />
+<meta name="twitter:description" content="Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor." />
+<meta property="og:title" content="How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch | alikhil" />
+<meta property="og:description" content="Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/" />
+<meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2025-06-23T15:00:00&#43;03:00" />
+  <meta property="article:modified_time" content="2025-06-23T15:00:00&#43;03:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://alikhil.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch",
+      "item": "https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch | alikhil",
+  "name": "How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch",
+  "description": "Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.\n",
+  "keywords": [
+    "Tutorial", "Tips", "Mac", "Linux", "KVM", "DDC"
+  ],
+  "wordCount" : "723",
+  "inLanguage": "en-us",
+  "datePublished": "2025-06-23T15:00:00+03:00",
+  "dateModified": "2025-06-23T15:00:00+03:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "alikhil",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://alikhil.dev/favicon.ico"
+    }
+  }
+}
+</script>
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list-page {
+                background: var(--theme);
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://alikhil.dev/" accesskey="h" title="alikhil (Alt + H)">alikhil</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://alikhil.dev/" title="Home" class="active"
+                >Home
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/posts/" title="Posts" class="active"
+                >Posts
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/pages/projects/" title="Projects"
+                >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/pages/talks/" title="Talks"
+                >Talks
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/archives/" title="Archives"
+                >Archives
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://alikhil.dev/">Home</a>&nbsp;»&nbsp;<a href="https://alikhil.dev/posts/">Posts</a></div><h1 class="post-title">How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch</h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>23 June 2025</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
+  <span class="post-tags"><a href="https://alikhil.dev/tags/tutorial/">Tutorial</a><a href="https://alikhil.dev/tags/tips/">Tips</a><a href="https://alikhil.dev/tags/mac/">Mac</a><a href="https://alikhil.dev/tags/linux/">Linux</a><a href="https://alikhil.dev/tags/kvm/">KVM</a><a href="https://alikhil.dev/tags/ddc/">DDC</a></span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>4 min</span></span>
+
+      
+      
+    </div>
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#my-devices" aria-label="My devices">My devices</a><ul>
+                        
+                <li>
+                    <a href="#computers" aria-label="Computers">Computers</a></li>
+                <li>
+                    <a href="#peripheral-devices" aria-label="Peripheral devices">Peripheral devices</a></li></ul>
+                </li>
+                <li>
+                    <a href="#connecting-devices" aria-label="Connecting devices">Connecting devices</a><ul>
+                        
+                <li>
+                    <a href="#keyboard" aria-label="Keyboard">Keyboard</a></li>
+                <li>
+                    <a href="#mouse" aria-label="Mouse">Mouse</a></li>
+                <li>
+                    <a href="#monitor" aria-label="Monitor">Monitor</a><ul>
+                        
+                <li>
+                    <a href="#easiest-way-to-switch-devices" aria-label="Easiest way to switch devices">Easiest way to switch devices</a></li>
+                <li>
+                    <a href="#the-comfortable-way-to-switch-devices" aria-label="The comfortable way to switch devices">The comfortable way to switch devices</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#switch-sequence" aria-label="Switch sequence">Switch sequence</a></li>
+                <li>
+                    <a href="#pros-and-cons" aria-label="Pros and Cons">Pros and Cons</a><ul>
+                        
+                <li>
+                    <a href="#pros" aria-label="Pros">Pros</a></li>
+                <li>
+                    <a href="#cons" aria-label="Cons">Cons</a></li></ul>
+                </li>
+                <li>
+                    <a href="#final-thoughts" aria-label="Final thoughts">Final thoughts</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.</p>
+<h2 id="my-devices">My devices<a hidden class="anchor" aria-hidden="true" href="#my-devices">¶</a></h2>
+<h3 id="computers">Computers<a hidden class="anchor" aria-hidden="true" href="#computers">¶</a></h3>
+<ul>
+<li>Macbook Air M2 14&quot; – work Laptop.</li>
+<li>Mac Mini M1 – my personal computer.</li>
+<li><a href="https://www.clockworkpi.com/uconsole">ClockworkPi uConsole</a>, based on <a href="https://www.raspberrypi.com/products/compute-module-4/">RPI CM4</a> is a portable device for Linux tinkering.</li>
+</ul>
+<h3 id="peripheral-devices">Peripheral devices<a hidden class="anchor" aria-hidden="true" href="#peripheral-devices">¶</a></h3>
+<ul>
+<li>The <a href="https://www.amazon.com/UGREEN-Bluetooth-Ergonomic-Prevention-Compatible/dp/B0CM6FSPY3">UGREEN Vertical Wireless</a> - can connect up to three devices: Two via Bluetooth and one via a 2.4GHz USB dongle.</li>
+<li>The <a href="https://www.keychron.com/products/keychron-k15-max-alice-layout-qmk-wireless-custom-mechanical-keyboard?srsltid=AfmBOoo83yQiVI4ctH1noZzohk5v1fqAPMx_RbL86q7PxBWGvmSdUtw1">Keychrone K15 Max</a> allows me to connect up to three devices via Bluetooth.</li>
+<li>The <a href="https://www.dell.com/es-es/shop/monitor-dell-27-4k-uhd-con-usb-c-s2722qc/apd/210-bbrq/monitores-y-accesorios">Monitor Dell 27 4K UHD con USB-C (S2722QC)</a> with two HDMI inputs and one USB-C port which allows me to connect it up to three devices.</li>
+</ul>
+<p>As you can see, all peripheral devices could connect to all my computers. At least in theory.</p>
+<h2 id="connecting-devices">Connecting devices<a hidden class="anchor" aria-hidden="true" href="#connecting-devices">¶</a></h2>
+<p>Historically my devices were numbered as follows:</p>
+<ol>
+<li>uConsole</li>
+<li>Macbook Air</li>
+<li>Mac Mini</li>
+</ol>
+<h3 id="keyboard">Keyboard<a hidden class="anchor" aria-hidden="true" href="#keyboard">¶</a></h3>
+<p>The keyboard connection scheme is straightforward: uConsole connects via Bluetooth to the first device, the MacBook Air, as the second device, and the Mac Mini as the third device.</p>
+<p>Later, I can use the <code>Fn + 1/2/3</code> hotkey to switch the keyboard between devices.</p>
+<p><img loading="lazy" src="/images/posts/kvm/kvm-keyboard.png" type="" alt="Switching devices for keyboard"  /></p>
+<h3 id="mouse">Mouse<a hidden class="anchor" aria-hidden="true" href="#mouse">¶</a></h3>
+<p>The first connection of the Ugreen mouse is reserved for the 2.4 GHz USB dongle. I plugged it into my uConsole, and then my MacBook Air and Mac mini connected as the second and third devices, respectively.</p>
+<p>To switch devices with the mouse, press the red button on the bottom.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Dk_LNbkvECs?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h3 id="monitor">Monitor<a hidden class="anchor" aria-hidden="true" href="#monitor">¶</a></h3>
+<p>The MacBook Air is connected to the USB-C port, which charges the computer.</p>
+<p>The Mac Mini connects via HDMI-1, and the uConsole connects via HDMI-2.</p>
+<h4 id="easiest-way-to-switch-devices">Easiest way to switch devices<a hidden class="anchor" aria-hidden="true" href="#easiest-way-to-switch-devices">¶</a></h4>
+<p>The easiest way to switch devices on the monitor is to press the small, round button in the bottom right corner to open the settings menu.</p>
+<p><img loading="lazy" src="/images/posts/kvm/kvm-monitor-2.jpg" type="" alt="Bottom corner buttons"  /></p>
+<p>Then, choose the desired port.</p>
+<p><img loading="lazy" src="/images/posts/kvm/kvm-monitor.jpg" type="" alt="Monitor menu"  /></p>
+<p>However, <strong>&ldquo;easiest&rdquo;</strong> does not mean <strong>&ldquo;most comfortable&rdquo;</strong>. Changing the monitor&rsquo;s input source this way requires pressing these small buttons several times. You also need to keep track of which devices are connected to HDMI-1 and HDMI-2.</p>
+<h4 id="the-comfortable-way-to-switch-devices">The comfortable way to switch devices<a hidden class="anchor" aria-hidden="true" href="#the-comfortable-way-to-switch-devices">¶</a></h4>
+<p>Instead of pressing buttons on the monitor and navigating its menu, I could press a hotkey on my keyboard to trigger the monitor to change input sources via its API (Display Data Channel/Command Interface Standard (DDC/CI).).</p>
+<p>I have explained in detail how one could do it on a Mac in my another post - <a href="https://alikhil.dev/posts/monitor-input-source-control-mac/">Monitor input source control on Mac</a>.</p>
+<p>I won&rsquo;t go into detail here. I&rsquo;ll just say that on my Mac Mini and MacBook Air, I have configured the following:</p>
+<p><strong>Mac Mini (#3)</strong></p>
+<ul>
+<li>On <code>CMD + F1</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor-to-uconsole.sh">uConsole</a></li>
+<li>On <code>CMD + F2</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor.sh">Macbook Air</a></li>
+</ul>
+<p><strong>Macbook Air (#2)</strong></p>
+<ul>
+<li>On <code>CMD + F1</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor-to-uconsole.sh">uConsole</a></li>
+<li>On <code>CMD + F3</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor.sh">Mac mini</a></li>
+</ul>
+<p>For <strong>uConsole Linux machine (#1)</strong> I used <a href="https://github.com/rockowitz/ddcutil">ddcutil</a> and configured the following hotkeys:</p>
+<ul>
+<li><code>Ctrl + F2</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/linux/switch-to-macbook.sh">Macbook Air</a></li>
+<li><code>Ctrl + F3</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/linux/switch-to-mac-mini.sh">Mac Mini</a></li>
+</ul>
+<h2 id="switch-sequence">Switch sequence<a hidden class="anchor" aria-hidden="true" href="#switch-sequence">¶</a></h2>
+<p>Once all the devices are connected and the hotkeys are configured, the following sequence of actions is needed to switch to device <code>#N</code> (where N is 1, 2, or 3):</p>
+<ol>
+<li>Switch the monitor input source by pressing <code>CMD + F#N</code>.</li>
+<li>Switch the keyboard device by pressing <code>Fn + #N</code>.</li>
+<li>Switch the mouse by pressing red button on the bottom of it until the indicator is under <code>#N</code> is blinking.</li>
+</ol>
+<p>For example, let&rsquo;s assume I am currently using my third device – Mac Mini, to switch to Macbook Air (#2) I do:</p>
+<ol>
+<li>Press <code>CMD + F2</code></li>
+<li>Press <code>Fn + 2</code></li>
+<li>Press red button on the bottom of the mouse until indicator under 2 is on.</li>
+</ol>
+<p>Here is a demo video:</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/NgVESzIzpw4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h2 id="pros-and-cons">Pros and Cons<a hidden class="anchor" aria-hidden="true" href="#pros-and-cons">¶</a></h2>
+<h3 id="pros">Pros<a hidden class="anchor" aria-hidden="true" href="#pros">¶</a></h3>
+<ul>
+<li>I don&rsquo;t need a special KVM switch to switch between devices.</li>
+<li>I use my keyboard to switch (for two-thirds of the KVM).</li>
+</ul>
+<h3 id="cons">Cons<a hidden class="anchor" aria-hidden="true" href="#cons">¶</a></h3>
+<ul>
+<li>Switching the mouse takes longer since there is only one way iteration over the connected devices.</li>
+<li>I still need to manually reconnect other peripheral devices, e.g. web camera.</li>
+</ul>
+<h2 id="final-thoughts">Final thoughts<a hidden class="anchor" aria-hidden="true" href="#final-thoughts">¶</a></h2>
+<p>It has some limitations, but if you have a keyboard and mouse that support multiple connected devices, as well as a monitor, you won&rsquo;t need a special KVM switch to switch between computers.</p>
+<p>Thank you for reading this!</p>
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://alikhil.dev/posts/graceful-shutdown/">
+    <span class="title">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>Why Graceful Shutdown Matters in Kubernetes</span>
+  </a>
+</nav>
+
+  </footer>
+    <div class="comments-separator"></div>
+
+<script src="https://utteranc.es/client.js"
+        repo="alikhil/alikhil.github.io"
+        issue-term="pathname"
+        label="comment"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2025 <a href="https://alikhil.dev/">alikhil</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+
+</body>
+
+</html>

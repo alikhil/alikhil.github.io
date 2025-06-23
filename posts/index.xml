@@ -6,7 +6,109 @@
     <description>Recent content in Posts on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Jun 2025 15:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch</title>
+      <link>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</guid>
+      <description>&lt;p&gt;Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.</p>
+<h2 id="my-devices">My devices</h2>
+<h3 id="computers">Computers</h3>
+<ul>
+<li>Macbook Air M2 14&quot; – work Laptop.</li>
+<li>Mac Mini M1 – my personal computer.</li>
+<li><a href="https://www.clockworkpi.com/uconsole">ClockworkPi uConsole</a>, based on <a href="https://www.raspberrypi.com/products/compute-module-4/">RPI CM4</a> is a portable device for Linux tinkering.</li>
+</ul>
+<h3 id="peripheral-devices">Peripheral devices</h3>
+<ul>
+<li>The <a href="https://www.amazon.com/UGREEN-Bluetooth-Ergonomic-Prevention-Compatible/dp/B0CM6FSPY3">UGREEN Vertical Wireless</a> - can connect up to three devices: Two via Bluetooth and one via a 2.4GHz USB dongle.</li>
+<li>The <a href="https://www.keychron.com/products/keychron-k15-max-alice-layout-qmk-wireless-custom-mechanical-keyboard?srsltid=AfmBOoo83yQiVI4ctH1noZzohk5v1fqAPMx_RbL86q7PxBWGvmSdUtw1">Keychrone K15 Max</a> allows me to connect up to three devices via Bluetooth.</li>
+<li>The <a href="https://www.dell.com/es-es/shop/monitor-dell-27-4k-uhd-con-usb-c-s2722qc/apd/210-bbrq/monitores-y-accesorios">Monitor Dell 27 4K UHD con USB-C (S2722QC)</a> with two HDMI inputs and one USB-C port which allows me to connect it up to three devices.</li>
+</ul>
+<p>As you can see, all peripheral devices could connect to all my computers. At least in theory.</p>
+<h2 id="connecting-devices">Connecting devices</h2>
+<p>Historically my devices were numbered as follows:</p>
+<ol>
+<li>uConsole</li>
+<li>Macbook Air</li>
+<li>Mac Mini</li>
+</ol>
+<h3 id="keyboard">Keyboard</h3>
+<p>The keyboard connection scheme is straightforward: uConsole connects via Bluetooth to the first device, the MacBook Air, as the second device, and the Mac Mini as the third device.</p>
+<p>Later, I can use the <code>Fn + 1/2/3</code> hotkey to switch the keyboard between devices.</p>
+<p><img loading="lazy" src="/images/posts/kvm/kvm-keyboard.png" type="" alt="Switching devices for keyboard"  /></p>
+<h3 id="mouse">Mouse</h3>
+<p>The first connection of the Ugreen mouse is reserved for the 2.4 GHz USB dongle. I plugged it into my uConsole, and then my MacBook Air and Mac mini connected as the second and third devices, respectively.</p>
+<p>To switch devices with the mouse, press the red button on the bottom.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Dk_LNbkvECs?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h3 id="monitor">Monitor</h3>
+<p>The MacBook Air is connected to the USB-C port, which charges the computer.</p>
+<p>The Mac Mini connects via HDMI-1, and the uConsole connects via HDMI-2.</p>
+<h4 id="easiest-way-to-switch-devices">Easiest way to switch devices</h4>
+<p>The easiest way to switch devices on the monitor is to press the small, round button in the bottom right corner to open the settings menu.</p>
+<p><img loading="lazy" src="/images/posts/kvm/kvm-monitor-2.jpg" type="" alt="Bottom corner buttons"  /></p>
+<p>Then, choose the desired port.</p>
+<p><img loading="lazy" src="/images/posts/kvm/kvm-monitor.jpg" type="" alt="Monitor menu"  /></p>
+<p>However, <strong>&ldquo;easiest&rdquo;</strong> does not mean <strong>&ldquo;most comfortable&rdquo;</strong>. Changing the monitor&rsquo;s input source this way requires pressing these small buttons several times. You also need to keep track of which devices are connected to HDMI-1 and HDMI-2.</p>
+<h4 id="the-comfortable-way-to-switch-devices">The comfortable way to switch devices</h4>
+<p>Instead of pressing buttons on the monitor and navigating its menu, I could press a hotkey on my keyboard to trigger the monitor to change input sources via its API (Display Data Channel/Command Interface Standard (DDC/CI).).</p>
+<p>I have explained in detail how one could do it on a Mac in my another post - <a href="https://alikhil.dev/posts/monitor-input-source-control-mac/">Monitor input source control on Mac</a>.</p>
+<p>I won&rsquo;t go into detail here. I&rsquo;ll just say that on my Mac Mini and MacBook Air, I have configured the following:</p>
+<p><strong>Mac Mini (#3)</strong></p>
+<ul>
+<li>On <code>CMD + F1</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor-to-uconsole.sh">uConsole</a></li>
+<li>On <code>CMD + F2</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor.sh">Macbook Air</a></li>
+</ul>
+<p><strong>Macbook Air (#2)</strong></p>
+<ul>
+<li>On <code>CMD + F1</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor-to-uconsole.sh">uConsole</a></li>
+<li>On <code>CMD + F3</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor.sh">Mac mini</a></li>
+</ul>
+<p>For <strong>uConsole Linux machine (#1)</strong> I used <a href="https://github.com/rockowitz/ddcutil">ddcutil</a> and configured the following hotkeys:</p>
+<ul>
+<li><code>Ctrl + F2</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/linux/switch-to-macbook.sh">Macbook Air</a></li>
+<li><code>Ctrl + F3</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/linux/switch-to-mac-mini.sh">Mac Mini</a></li>
+</ul>
+<h2 id="switch-sequence">Switch sequence</h2>
+<p>Once all the devices are connected and the hotkeys are configured, the following sequence of actions is needed to switch to device <code>#N</code> (where N is 1, 2, or 3):</p>
+<ol>
+<li>Switch the monitor input source by pressing <code>CMD + F#N</code>.</li>
+<li>Switch the keyboard device by pressing <code>Fn + #N</code>.</li>
+<li>Switch the mouse by pressing red button on the bottom of it until the indicator is under <code>#N</code> is blinking.</li>
+</ol>
+<p>For example, let&rsquo;s assume I am currently using my third device – Mac Mini, to switch to Macbook Air (#2) I do:</p>
+<ol>
+<li>Press <code>CMD + F2</code></li>
+<li>Press <code>Fn + 2</code></li>
+<li>Press red button on the bottom of the mouse until indicator under 2 is on.</li>
+</ol>
+<p>Here is a demo video:</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/NgVESzIzpw4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h2 id="pros-and-cons">Pros and Cons</h2>
+<h3 id="pros">Pros</h3>
+<ul>
+<li>I don&rsquo;t need a special KVM switch to switch between devices.</li>
+<li>I use my keyboard to switch (for two-thirds of the KVM).</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>Switching the mouse takes longer since there is only one way iteration over the connected devices.</li>
+<li>I still need to manually reconnect other peripheral devices, e.g. web camera.</li>
+</ul>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>It has some limitations, but if you have a keyboard and mouse that support multiple connected devices, as well as a monitor, you won&rsquo;t need a special KVM switch to switch between computers.</p>
+<p>Thank you for reading this!</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
       <link>https://alikhil.dev/posts/graceful-shutdown/</link>

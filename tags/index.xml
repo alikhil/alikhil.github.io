@@ -6,7 +6,67 @@
     <description>Recent content in Tags on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Jun 2025 15:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DDC</title>
+      <link>https://alikhil.dev/tags/ddc/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/ddc/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>KVM</title>
+      <link>https://alikhil.dev/tags/kvm/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/kvm/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://alikhil.dev/tags/linux/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/linux/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>https://alikhil.dev/tags/mac/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/mac/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>https://alikhil.dev/tags/tips/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/tips/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://alikhil.dev/tags/tutorial/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/tutorial/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Go</title>
       <link>https://alikhil.dev/tags/go/</link>
@@ -23,16 +83,6 @@
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
       
       <guid>https://alikhil.dev/tags/kubernetes/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Tutorial</title>
-      <link>https://alikhil.dev/tags/tutorial/</link>
-      <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/tutorial/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -123,26 +173,6 @@
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
       
       <guid>https://alikhil.dev/tags/sms/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Mac</title>
-      <link>https://alikhil.dev/tags/mac/</link>
-      <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/mac/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Tips</title>
-      <link>https://alikhil.dev/tags/tips/</link>
-      <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/tips/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

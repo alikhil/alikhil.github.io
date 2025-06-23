@@ -6,7 +6,27 @@
     <description>Recent content in Categories on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Jun 2025 15:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://alikhil.dev/categories/linux/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/categories/linux/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>https://alikhil.dev/categories/mac/</link>
+      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/categories/mac/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Devops</title>
       <link>https://alikhil.dev/categories/devops/</link>
@@ -23,16 +43,6 @@
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
       
       <guid>https://alikhil.dev/categories/sre/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://alikhil.dev/categories/linux/</link>
-      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/categories/linux/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -73,16 +83,6 @@
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
       
       <guid>https://alikhil.dev/categories/programming/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Mac</title>
-      <link>https://alikhil.dev/categories/mac/</link>
-      <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/categories/mac/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

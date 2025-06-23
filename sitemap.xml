@@ -3,10 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/ddc/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/kvm/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/linux/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/linux/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/mac/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/mac/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/tips/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/tutorial/</loc>
+    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/devops/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
@@ -17,23 +50,11 @@
     <loc>https://alikhil.dev/tags/kubernetes/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/categories/sre/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/tutorial/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/graceful-shutdown/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/linux/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/mikrotik/</loc>
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
@@ -95,16 +116,7 @@
     <loc>https://alikhil.dev/tags/sms/</loc>
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/mac/</loc>
-    <lastmod>2024-10-16T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/mac/</loc>
-    <lastmod>2024-10-16T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/posts/monitor-input-source-control-mac/</loc>
-    <lastmod>2024-10-16T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/tips/</loc>
     <lastmod>2024-10-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/build-own-drone-image/</loc>
