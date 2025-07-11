@@ -6,7 +6,76 @@
     <description>Recent content in Tips on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Jun 2025 15:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Jul 2025 20:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Note on cable management for standing desk</title>
+      <link>https://alikhil.dev/posts/cable-management-for-standing-desk/</link>
+      <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/cable-management-for-standing-desk/</guid>
+      <description>&lt;p&gt;Hey!
+Eventually, my desk got pretty messy with all the cables and other stuff piled up on it. Also, my cats started playing with and gnawing on wires. So, I decided to reorganize everything on my desk. Check it out!&lt;/p&gt;
+&lt;!---more---&gt;
+&lt;p&gt;I&amp;rsquo;ve got a medium-sized table, about 120 by 80 cm. It&amp;rsquo;s wide (deep) but not too long. I need to keep everything in order and clean so I can work comfortably.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hey!
+Eventually, my desk got pretty messy with all the cables and other stuff piled up on it. Also, my cats started playing with and gnawing on wires. So, I decided to reorganize everything on my desk. Check it out!</p>
+<!---more--->
+<p>I&rsquo;ve got a medium-sized table, about 120 by 80 cm. It&rsquo;s wide (deep) but not too long. I need to keep everything in order and clean so I can work comfortably.</p>
+<p>Here&rsquo;s what my setup looked like before I made all the changes I mentioned.</p>
+<p><img loading="lazy" src="/images/posts/cable-management/before-front.jpg" type="" alt="setup before reorganization"  /></p>
+<p>As you can see, I&rsquo;ve got a work laptop, a Mac mini, a monitor on its own stand, a journal, AirPods, and a few other things. I also bought a USB switch at some point because I got tired of plugging and unplugging my webcam manually in my <a href="https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/">KVM-less setup</a>.</p>
+<h2 id="heres-what-ive-done">Here&rsquo;s what I&rsquo;ve done</h2>
+<ul>
+<li>I mounted the monitor to the arm, which freed up space below the screen.</li>
+<li>I set up my Mac mini under the table.</li>
+<li>I&rsquo;ve got my MacBook pro mounted under the table.</li>
+<li>I installed the USB hub into the monitor arm. It&rsquo;s a solid connection point, but the switch button on it is a bit uncomfortable to press. So,</li>
+<li>Put the extended switch button under the table, close to the chair.</li>
+<li>There&rsquo;s a mounted headphones holder under the table.</li>
+<li>The cables that ran next to each other were routed through the sleeves.</li>
+<li>Bind cables together with hook and loops tie</li>
+</ul>
+<h2 id="list-of-things-that-ive-used">List of things that I&rsquo;ve used</h2>
+<ul>
+<li><a href="https://a.aliexpress.com/_Ewdgm1c">The cable sleeve</a> is super handy for binding the cables together!</li>
+<li><a href="https://a.aliexpress.com/_EvYuv3M">This cable sleeve</a> is a bit pricey, but it lets you pull cables out from the middle without damaging it.</li>
+<li><a href="https://a.aliexpress.com/_EyRlHBM">MacBook under desk mount support</a>. Antiscratch stickers came loose at the second day. So don’t recommend this one.</li>
+<li><a href="https://a.aliexpress.com/_EuW6yMS">Mac Mini under desk support</a></li>
+<li><a href="https://a.aliexpress.com/_EJvesWI">Hook and loops tie</a></li>
+<li><a href="https://a.aliexpress.com/_EQ3DlES">Cable clips</a></li>
+<li><a href="https://www.flexispot.es/monitor-mount-fits-10-27.html">Adjustable monitor support arm</a></li>
+</ul>
+<h2 id="what-ive-got">What I&rsquo;ve got</h2>
+<style>
+td, th {
+   border: none!important;
+}
+</style>
+<table>
+  <thead>
+      <tr>
+          <th>Before</th>
+          <th>After</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="/images/posts/cable-management/before-front.jpg" type="" alt="front picture before"  /></td>
+          <td><img loading="lazy" src="/images/posts/cable-management/after-front.jpg" type="" alt="front picture after"  /></td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="/images/posts/cable-management/before-under-table.jpg" type="" alt="under table picture before"  /></td>
+          <td><img loading="lazy" src="/images/posts/cable-management/after-under-table.jpg" type="" alt="under table picture after"  /></td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="/images/posts/cable-management/before-side.jpg" type="" alt="side picture before"  /></td>
+          <td><img loading="lazy" src="/images/posts/cable-management/after-side.jpg" type="" alt="side picture after"  /></td>
+      </tr>
+  </tbody>
+</table>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch</title>
       <link>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</link>
