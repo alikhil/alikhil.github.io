@@ -234,8 +234,8 @@
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
       
       <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
-      <description>&lt;p&gt;The original post  wrote &lt;a href=&#34;https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/&#34;&gt;about oauth2-proxy&lt;/a&gt; over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>The original post  wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
+      <description>&lt;p&gt;The original post wrote &lt;a href=&#34;https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/&#34;&gt;about oauth2-proxy&lt;/a&gt; over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>The original post wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
 <h2 id="what-we-have">What we have</h2>
 <p>We have a Kubernetes cluster with several web services deployed for internal use.</p>
 <h2 id="what-we-want-to-achieve">What we want to achieve</h2>
@@ -1424,6 +1424,9 @@ Today I&rsquo;ll share you my experience in learning a new language. I am practi
 &lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hello, folks!</p>
 <p>In this post, I will go through configuring <a href="https://github.com/bitly/oauth2_proxy">Bitly OAuth2 proxy</a> in a kubernetes cluster.</p>
+<h3 id="upd-5082025">UPD 5/08/2025</h3>
+<p>There is a fresh tutorial about <a href="https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/">oauth2-proxy</a></p>
+<hr>
 <p>A few days ago I was configuring <a href="https://en.wikipedia.org/wiki/Single_sign-on">SSO</a> for our internal dev-services in <a href="https://github.com/KazanExpress">KE Technologies</a>.</p>
 <p>And I spent the whole to make it work properly, and at the end I decided that I will share my experience by writing this post, hoping that it will help others(and possibly me in the future) to go through this process.</p>
 <!-- toc -->
