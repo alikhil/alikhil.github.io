@@ -6,7 +6,57 @@
     <description>Recent content in Tags on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Jul 2025 20:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Aug 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Authentication</title>
+      <link>https://alikhil.dev/tags/authentication/</link>
+      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/authentication/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>https://alikhil.dev/tags/kubernetes/</link>
+      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/kubernetes/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Oauth2-Proxy</title>
+      <link>https://alikhil.dev/tags/oauth2-proxy/</link>
+      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/oauth2-proxy/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Passkey</title>
+      <link>https://alikhil.dev/tags/passkey/</link>
+      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/passkey/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Pocket-Id</title>
+      <link>https://alikhil.dev/tags/pocket-id/</link>
+      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/pocket-id/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Cable Management</title>
       <link>https://alikhil.dev/tags/cable-management/</link>
@@ -93,16 +143,6 @@
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
       
       <guid>https://alikhil.dev/tags/go/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Kubernetes</title>
-      <link>https://alikhil.dev/tags/kubernetes/</link>
-      <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/kubernetes/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -278,31 +318,11 @@
     </item>
     
     <item>
-      <title>Authentication</title>
-      <link>https://alikhil.dev/tags/authentication/</link>
-      <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/authentication/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Google Cloud</title>
       <link>https://alikhil.dev/tags/google-cloud/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
       <guid>https://alikhil.dev/tags/google-cloud/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Oauth2-Proxy</title>
-      <link>https://alikhil.dev/tags/oauth2-proxy/</link>
-      <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/oauth2-proxy/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

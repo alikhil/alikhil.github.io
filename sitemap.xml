@@ -6,12 +6,45 @@
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2025-07-11T20:00:00+03:00</lastmod>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/cable-management/</loc>
-    <lastmod>2025-07-11T20:00:00+03:00</lastmod>
+    <loc>https://alikhil.dev/tags/authentication/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/devops/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/kubernetes/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/networking/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/oauth2-proxy/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/opensource/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/passkey/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/pocket-id/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/cable-management/</loc>
     <lastmod>2025-07-11T20:00:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/desk/</loc>
@@ -23,13 +56,7 @@
     <loc>https://alikhil.dev/posts/cable-management-for-standing-desk/</loc>
     <lastmod>2025-07-11T20:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2025-07-11T20:00:00+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/standing-desk/</loc>
-    <lastmod>2025-07-11T20:00:00+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
     <lastmod>2025-07-11T20:00:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/tips/</loc>
@@ -59,25 +86,13 @@
     <loc>https://alikhil.dev/tags/tutorial/</loc>
     <lastmod>2025-06-23T15:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/devops/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/go/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/kubernetes/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/sre/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/mikrotik/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/networking/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/opensource/</loc>
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</loc>
@@ -170,16 +185,10 @@
     <loc>https://alikhil.dev/posts/how-to-start-learning-new-language/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/authentication/</loc>
-    <lastmod>2018-05-20T21:30:36+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/google-cloud/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</loc>
-    <lastmod>2018-05-20T21:30:36+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/oauth2-proxy/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/blogging/</loc>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pocket-Id on alikhil</title>
+    <link>https://alikhil.dev/tags/pocket-id/</link>
+    <description>Recent content in Pocket-Id on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Aug 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/pocket-id/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OAuth2-proxy: protect services in kubernetes</title>
+      <link>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</link>
+      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
+      <description>&lt;p&gt;The original post  wrote &lt;a href=&#34;https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/&#34;&gt;about oauth2-proxy&lt;/a&gt; over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>The original post  wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
+<h2 id="what-we-have">What we have</h2>
+<p>We have a Kubernetes cluster with several web services deployed for internal use.</p>
+<h2 id="what-we-want-to-achieve">What we want to achieve</h2>
+<p>We want to expose our internal web services to the Internet, but restrict access by requiring authorization. Access should be granted only to users authenticated through our Identity Provider (such as Google, GitHub, Keycloak, etc.).</p>
+<h2 id="assumptions">Assumptions</h2>
+<p>For simplicity, let&rsquo;s assume that both <a href="https://github.com/kubernetes/ingress-nginx">ingress-nginx</a> and <a href="https://cert-manager.io/">cert-manager</a> are already deployed in the cluster.</p>
+<p>I will use <a href="https://github.com/pocket-id/pocket-id">Pocket ID</a> as Identity Provider in this tutorial. Configuration slightly differs for different providers. Check the <a href="https://oauth2-proxy.github.io/oauth2-proxy/configuration/providers/">official documentation</a> for your provider.</p>
+<p>For the examples in this guide, I’ll use my <code>alikhil.dev</code> domain:</p>
+<p>– <code>pocket-id.k8s.alikhil.dev</code> - will be used for Pocket ID</p>
+<ul>
+<li>
+<p><code>k8s.alikhil.dev</code> - will be used for oauth2-proxy. I recommend to have higher domain for oauth2-proxy service for easier cookie setup.</p>
+</li>
+<li>
+<p><code>*.k8s.alikhil.dev</code> - reserved for services deployed for internal usage</p>
+</li>
+</ul>
+<h2 id="preparation">Preparation</h2>
+<h3 id="dns">DNS</h3>
+<p>I have added two DNS records:</p>
+<ol>
+<li><code>A</code> record for k8s.alikhil.dev pointing to ingress-nginx <code>LoadBalancer</code> IP address in the cluster (<code>kubectl get svc -n ingress-nginx | grep LoadBalancer</code>)</li>
+<li><code>CNAME</code> record for <code>*.k8s.alikhil.dev</code> pointing to <code>k8s.alikhil.dev</code></li>
+</ol>
+<h3 id="install-pocket-id">Install Pocket ID</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm repo add anza-labs https://anza-labs.github.io/charts
+</span></span><span class="line"><span class="cl">helm upgrade --install pocket-id anza-labs/pocket-id -f ./values/pocket-id.yaml
+</span></span></code></pre></div><details>
+    <summary>Values for pocket-id</summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">persistence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Specifies whether ingress should be enabled.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress class name.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Annotations to add to the ingress.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.allow-http</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress host configuration.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">pocket-id.k8s.alikhil.dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">ImplementationSpecific</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- List of TLS configurations for the ingress.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span>- <span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">pocket-id-tls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span>- <span class="l">pocket-id.k8s.alikhil.dev</span><span class="w">
+</span></span></span></code></pre></div></details>
+<h3 id="configure-pocketid">Configure PocketID</h3>
+<p>Go to <a href="https://pocket-id.k8s.alikhil.dev/signup/setup">https://pocket-id.k8s.alikhil.dev/signup/setup</a> and set initial configuration for Pocket ID.</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-setup.png" type="" alt="Initial setup page"  /></p>
+<p>Then add your passkey.</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-pass.png" type="" alt="Add passkey"  /></p>
+<p>Create <strong>developers</strong> group and add yourself to the list of members.
+<img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-groups.png" type="" alt="Create group"  /></p>
+<p>After that, go to <strong>OIDC clients</strong> page and create one for oauth2-proxy. Set proper callback url.</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-client.png" type="" alt="PocketID client creation"  /></p>
+<p>Save generated <strong>Client ID</strong> and <strong>Client Secret</strong> for later use.</p>
+<h2 id="installing-oauth2-proxy">Installing oauth2-proxy</h2>
+<p>I am using raw k8s secrets in this tutorial, but I highly recommend storing secrets in Vault or similar services and use <a href="https://external-secrets.io/latest/">External Secretes Operator</a> to deliver them to kubernetes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl create secret generic oauth2-proxy-secrets --from-literal<span class="o">=</span>client-id<span class="o">=</span><span class="nv">$CLIENT_ID</span> --from-literal<span class="o">=</span>client-secret<span class="o">=</span><span class="nv">$CLIENT_SECRET</span> --from-literal<span class="o">=</span>cookie-secret<span class="o">=</span><span class="k">$(</span>openssl rand -base64 <span class="m">32</span> <span class="p">|</span> head -c <span class="m">32</span> <span class="p">|</span> base64<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
+</span></span><span class="line"><span class="cl">helm install oauth2-proxy oauth2-proxy/oauth2-proxy -f values/oauth2-proxy.yaml
+</span></span></code></pre></div><details>
+    <summary>Adjust domains in values for oauth2-proxy</summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Oauth client configuration specifics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;general-oauth2&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Default configuration, to be overridden</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">configFile</span><span class="p">:</span><span class="w"> </span><span class="p">|-</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    email_domains = [ &#34;*&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    upstreams = [ &#34;file:///dev/null&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    skip_provider_button = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    allowed_groups = [ &#34;developers&#34;, &#34;admins&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_secure = false
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_domains = [&#34;.k8s.alikhil.dev&#34;, &#34;k8s.alikhil.dev&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    whitelist_domains = [ &#34;*.k8s.alikhil.dev&#34;, &#34;k8s.alikhil.dev&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_samesite = &#34;lax&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_csrf_per_request = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_csrf_expire = &#34;15m&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    pass_access_token = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    pass_authorization_header = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    provider = &#34;oidc&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    provider_display_name = &#34;PocketID&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    reverse_proxy = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    scope = &#34;openid profile email groups&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    session_store_type = &#34;redis&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    set_xauthrequest = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    set_authorization_header = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    silence_ping_logging = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    skip_auth_preflight = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    ssl_insecure_skip_verify = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    ssl_upstream_insecure_skip_verify = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    insecure_oidc_allow_unverified_email = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    oidc_issuer_url = &#34;https://pocket-id.k8s.alikhil.dev&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    redirect_url = &#34;https://k8s.alikhil.dev/oauth2/callback&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    # to reduce log amount
+</span></span></span><span class="line"><span class="cl"><span class="sd">    request_logging = false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Only used if API capabilities (networking.k8s.io/v1) allow it</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">ImplementationSpecific</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Used to create an Ingress record.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/cors-allow-origin</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/enable-cors</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.allow-http</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Secrets must be manually created in the namespace.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-tls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Can be one of the supported session storage cookie|redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-password&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;standalone&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># provision an instance of the redis sub-chart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l">standalone</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">auth</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">master</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">persistence</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">100m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">128Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span></span></span></code></pre></div></details>
+<h2 id="testing">Testing</h2>
+<h3 id="install-whoami">Install whoami</h3>
+<p>To check oauth2-proxy we need a dummy service. I will use <a href="https://artifacthub.io/packages/helm/cowboysysop/whoami">whoami</a> helm chart for this.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add cowboysysop https://cowboysysop.github.io/charts/
+</span></span><span class="line"><span class="cl">helm install whoami cowboysysop/whoami
+</span></span></code></pre></div><details>
+    <summary>Values for whoami helm chart</summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.allow-http</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># put oauth2-proxy domain here</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://k8s.alikhil.dev/oauth2/start?rd=https://$host$request_uri$is_args$args&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># service-name.namespace-name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="l">http://oauth2-proxy.oauth-example.svc.cluster.local:80/oauth2/auth</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">whoami.k8s.alikhil.dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">whoami.k8s.alikhil.dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">whoami-cert</span><span class="w">
+</span></span></span></code></pre></div></details>
+<h3 id="perform-test">Perform test</h3>
+<p>Go to whoami url and check if oauth2-proxy redirects you to Pocket ID like in the demo:</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/demo.gif" type="" alt="Demo"  /></p>
+<h2 id="takeaways">Takeaways</h2>
+<p>Later, when you need to protect any service in Kubernetes with oauth2-proxy, you simply need to add two annotations to your Ingress resource:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx.ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://k8s.alikhil.dev/oauth2/start?rd=https://$host$request_uri$is_args$args&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nginx.ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="l">http://oauth2-proxy.oauth-example.svc.cluster.local:80/oauth2/auth</span><span class="w">
+</span></span></span></code></pre></div>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
