@@ -15,7 +15,12 @@
       <guid>https://alikhil.dev/pages/projects/</guid>
       <description>&lt;h2 id=&#34;my-projects&#34;&gt;My Projects&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://1mgr.xyz&#34;&gt;1mgr.xyz&lt;/a&gt; - On-demand mirror for images from dockerhub based on GitHub Actions and GitHub package registry.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://1mgr.xyz&#34;&gt;1mgr.xyz&lt;/a&gt; - On-demand mirror for images from dockerhub based on GitHub Actions and GitHub package registry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/alikhil/kubectl-find&#34;&gt;kubectl-find&lt;/a&gt; - missing plugin for kubectl to find resources in k8s using name pattern, age and many other properties.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;open-source-contributions&#34;&gt;Open Source Contributions&lt;/h2&gt;
 &lt;p&gt;Here is a list of opensource projects I&amp;rsquo;ve worked on:&lt;/p&gt;
@@ -24,13 +29,15 @@
 &lt;p&gt;PostgreSQL - implemented random numbers generator from &lt;a href=&#34;https://commitfest.postgresql.org/16/1379/&#34;&gt;Zipfian distribution for pgbench&lt;/a&gt; and psql command to &lt;a href=&#34;https://commitfest.postgresql.org/22/1689/&#34;&gt;show access methods info&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/pulls?q=is%3Amerged+is%3Apr+author%3Aalikhil+archived%3Afalse+user%3Aupdatecli&#34;&gt;updatecli&lt;/a&gt; - enhanced helm chart changelog generation and GitLab plugin.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/pulls?q=is%3Amerged+is%3Apr+author%3Aalikhil+archived%3Afalse+user%3Agruntwork-io+&#34;&gt;gruntwork-io/terragrunt&lt;/a&gt; - made a few improvements on builtin functions and CLI commands.&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;https://github.com/pulls?q=is%3Amerged+is%3Apr+author%3Aalikhil+archived%3Afalse+user%3Aupdatecli&#34;&gt;updatecli&lt;/a&gt; - enhanced helm chart changelog generation and GitLab plugin.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="my-projects">My Projects</h2>
 <ul>
-<li><a href="https://1mgr.xyz">1mgr.xyz</a> - On-demand mirror for images from dockerhub based on GitHub Actions and GitHub package registry.</li>
+<li>
+<p><a href="https://1mgr.xyz">1mgr.xyz</a> - On-demand mirror for images from dockerhub based on GitHub Actions and GitHub package registry.</p>
+</li>
+<li>
+<p><a href="https://github.com/alikhil/kubectl-find">kubectl-find</a> - missing plugin for kubectl to find resources in k8s using name pattern, age and many other properties.</p>
+</li>
 </ul>
 <h2 id="open-source-contributions">Open Source Contributions</h2>
 <p>Here is a list of opensource projects I&rsquo;ve worked on:</p>
