@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Why Graceful Shutdown Matters in Kubernetes | alikhil</title>
+<title>Why Graceful Shutdown Matters in Kubernetes | alikhil | software engineering, kubernetes &amp; self-hosting</title>
 <meta name="keywords" content="go, kubernetes, tutorial">
 <meta name="description" content="Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.
 There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes documentation and most guides claim that &ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are NOT enough for true zero-downtime deployments.
@@ -32,12 +32,12 @@ In this post, I will share what I have learned about implementing proper gracefu
           gtag('config', 'G-RSGLKK3DPR');
         }
       </script><script async src="https://api.cdnpulse.io/api/apps/alikhil-dev/cdnpulse.js" defer></script>
-<meta name="twitter:title" content="Why Graceful Shutdown Matters in Kubernetes | alikhil" />
+<meta name="twitter:title" content="Why Graceful Shutdown Matters in Kubernetes | alikhil | software engineering, kubernetes &amp; self-hosting" />
 <meta name="twitter:description" content="Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.
 There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes documentation and most guides claim that &ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are NOT enough for true zero-downtime deployments.
 And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.
 In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference." />
-<meta property="og:title" content="Why Graceful Shutdown Matters in Kubernetes | alikhil" />
+<meta property="og:title" content="Why Graceful Shutdown Matters in Kubernetes | alikhil | software engineering, kubernetes &amp; self-hosting" />
 <meta property="og:description" content="Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.
 There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes documentation and most guides claim that &ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are NOT enough for true zero-downtime deployments.
 And it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.
@@ -73,7 +73,7 @@ In this post, I will share what I have learned about implementing proper gracefu
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Why Graceful Shutdown Matters in Kubernetes | alikhil",
+  "headline": "Why Graceful Shutdown Matters in Kubernetes | alikhil | software engineering, kubernetes \u0026 self-hosting",
   "name": "Why Graceful Shutdown Matters in Kubernetes",
   "description": "Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.\nThere is a common misconception in the Kubernetes world that bothers me. The official Kubernetes documentation and most guides claim that \u0026ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments\u0026rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are NOT enough for true zero-downtime deployments.\nAnd it is not just about deployments. Your pods can be terminated for many other reasons: scaling events, node maintenance, preemption, resource constraints, and more. Without proper graceful shutdown handling, any of these events can lead to dropped requests and frustrated users.\nIn this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.\n",
   "keywords": [
