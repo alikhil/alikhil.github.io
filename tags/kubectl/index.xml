@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kubectl on alikhil</title>
+    <link>https://alikhil.dev/tags/kubectl/</link>
+    <description>Recent content in Kubectl on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Oct 2025 19:27:24 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/kubectl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubectl-find - UNIX-find-like plugin to find resources and perform action on them</title>
+      <link>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</link>
+      <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</guid>
+      <description>&lt;p&gt;Recently, I have developed a plugin for &lt;code&gt;kubectl&lt;/code&gt; inspired by UNIX &lt;code&gt;find&lt;/code&gt; utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&amp;rsquo;s a good moment to tell more about the project.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Recently, I have developed a plugin for <code>kubectl</code> inspired by UNIX <code>find</code> utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&rsquo;s a good moment to tell more about the project.</p>
+<h2 id="the-problem">The problem</h2>
+<p>As engineer who works with kubernetes everyday I use kubectl a lot. Actually, more than 50% of my terminal history commands are related to kubernetes. Here is a top 10 commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1	<span class="m">2079</span>  46.7611%    kubectl
+</span></span><span class="line"><span class="cl">2	<span class="m">425</span>   9.55915%    git
+</span></span><span class="line"><span class="cl">3	<span class="m">324</span>   7.28745%    helm
+</span></span><span class="line"><span class="cl">4	<span class="m">156</span>   3.50877%    <span class="nb">cd</span>
+</span></span><span class="line"><span class="cl">5	<span class="m">146</span>   3.28385%    ssh
+</span></span><span class="line"><span class="cl">6	<span class="m">130</span>   2.92398%    kctx
+</span></span><span class="line"><span class="cl">7	<span class="m">114</span>   2.5641%     kns
+</span></span><span class="line"><span class="cl">8	<span class="m">80</span>    1.79937%    gcloud-auth
+</span></span><span class="line"><span class="cl">9	<span class="m">78</span>    1.75439%    curl
+</span></span><span class="line"><span class="cl">10	<span class="m">66</span>    1.48448%    docker
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><blockquote>
+<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p></blockquote>
+<p>I use kubectl to check status of the pods, delete orphaned resources, trigger sync on <code>ExternalSecrets</code> and much more. When I realized half my terminal history was just kubectl commands, I thought — there must be a better way to find things in Kubernetes without chaining pipes with <code>grep</code> / <code>awk</code> / <code>xargs</code>. And I imagined how nice it would be to have a UNIX <code>find</code>-like tool — something that lets you search for exactly what you need in the cluster and then perform actions directly on the matching resources. I searched for a krew plugin like this but there was not any. For that reason, I decided to develop <a href="https://github.com/alikhil/kubectl-find">one</a>!</p>
+<h2 id="development">Development</h2>
+<p>I used <a href="https://github.com/kubernetes/sample-cli-plugin">sample-cli-plugin</a> as a starting point. Its clean repository structure and straightforward design make it a great reference for working with the Kubernetes API. Additionally, it allows easy reuse of the extensive Kubernetes client libraries.</p>
+<p>Almost everything in the Kubernetes ecosystem is written in Go, and this plugin is no exception — which is great, as it allows building binaries for a wide range of CPU architectures and operating systems.</p>
+<h2 id="features-overview">Features overview</h2>
+<h3 id="filters">Filters</h3>
+<h4 id="find-by-resource-name-using-regex">Find by resource name using regex</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl fd pods -r dev
+</span></span></code></pre></div><h4 id="find-pods-with-restarted-containers">Find pods with restarted containers</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl fd pods --restarted
+</span></span></code></pre></div><h4 id="find-pods-with-image-matching-regex">Find pods with image matching regex</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl fd pods --image bitnami
+</span></span></code></pre></div><h4 id="find-pods-by-status">Find pods by status</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl fd pods --status Pending
+</span></span></code></pre></div><h4 id="find-pods-running-on-nodes-matching-regex">Find pods running on nodes matching regex</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl fd pods --node <span class="s1">&#39;*spot&#39;</span>
+</span></span></code></pre></div><h4 id="find-any-resource-by-custom-condition">Find any resource by custom condition</h4>
+<p>Use <code>jq</code> filter to find any resource by any custom condition. <code>kubectl-find</code> uses <a href="https://github.com/itchyny/gojq">gojq</a> implementation of <code>jq</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># find Services with trafficDistribution set to PreferClose</span>
+</span></span><span class="line"><span class="cl">kubectl fd svc -j <span class="s1">&#39;.spec.trafficDistribution == &#34;PreferClose&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># find pods with unset nodeSelector</span>
+</span></span><span class="line"><span class="cl">kubectl fd pods -j <span class="s1">&#39;.spec.nodeSelector == null&#39;</span> -A
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># find pods with undefined resources</span>
+</span></span><span class="line"><span class="cl">kubectl fd pods -j <span class="s1">&#39;any( .spec.containers[]; .resources == {} )&#39;</span> -A
+</span></span></code></pre></div><h3 id="actions">Actions</h3>
+<p>By default, <code>fd</code> will print found resources to Stdout. However, there flags that you can provide to perform action on found resources:</p>
+<ul>
+<li><code>--delete</code> - to delete them</li>
+<li><code>--patch</code> - to patch with provided JSON</li>
+<li><code>--exec</code> - to run command on pods</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>Use <a href="https://krew.sigs.k8s.io/">krew</a> to install the plugin:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">krew install fd
+</span></span></code></pre></div><h2 id="whats-next">What’s next</h2>
+<p>I’m currently working on adding:</p>
+<ul>
+<li>JSON/YAML output format</li>
+<li>More filters</li>
+<li>Saved queries</li>
+</ul>
+<p>If you’re tired of writing long <code>kubectl | grep | xargs</code> chains, give <code>kubectl fd</code> a try — it’s already saved me countless keystrokes.</p>
+<p>Check out the repo ⭐ <a href="https://github.com/alikhil/kubectl-find">github.com/alikhil/kubectl-find</a>
+and share your ideas or issues — I’d love to hear how you use it!</p>
+<p><a href="https://github.com/alikhil/kubectl-find">
+  <img loading="lazy" src="https://api.star-history.com/svg?repos=alikhil/kubectl-find&amp;type=date&amp;legend=bottom-right" alt="Star History Chart"  /></a></p>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

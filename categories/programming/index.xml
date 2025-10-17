@@ -21,30 +21,30 @@
 <p>As an SRE at Criteo, I both read and write code. Last week, I worked on patching <a href="https://github.com/updatecli/updatecli">Updatecli</a> — an upgrade automation tool written in Go.</p>
 <p>The <a href="https://github.com/updatecli/updatecli/pull/4432">patch</a> itself was just ~15 lines of code. But then I spent three days debugging a strange authorization bug in an unrelated part of the code.</p>
 <p>It happened because of code like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span>
-</span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Base</span><span class="p">:</span>  <span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Since <code>http.DefaultClient</code> is a reference, not a value:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">DefaultClient</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Client</span><span class="p">{}</span>
-</span></span></code></pre></div><p>The code above is effectively the same as:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Base</span><span class="p">:</span>  <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Later, in a third-party library, I found this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span> <span class="p">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="the-fix">The Fix</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Since <code>http.DefaultClient</code> is a reference, not a value:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">DefaultClient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Client</span><span class="p">{}</span><span class="w">
+</span></span></span></code></pre></div><p>The code above is effectively the same as:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Later, in a third-party library, I found this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="the-fix">The Fix</h2>
 <p>To prevent this, I had to change the code to:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Token</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Base</span><span class="p">:</span>  <span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>As a result, the patched client with the authorization transport got injected into the third-party library, causing unexpected failures.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>As a result, the patched client with the authorization transport got injected into the third-party library, causing unexpected failures.</p>
 <p>Bugs like this are hard to catch just by reading the code, since they involve global state mutation. But could they be detected by linters?</p>
 <p>What do you think? How do you find or prevent such issues in your projects?</p>]]></content:encoded>
     </item>
@@ -94,14 +94,14 @@ It&rsquo;s been a long time since I have published the last post, but now I came
 </span></span></code></pre></div><h3 id="hello-world">Hello World</h3>
 <p>Let&rsquo;s create a file named <code>program.go</code> and put the following code there:</p>
 <p><strong>program.go</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;¡Hola, mundo!&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="run-the-program">Run the program</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;¡Hola, mundo!&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h3 id="run-the-program">Run the program</h3>
 <p>Finally, to run the program by pressing the <code>F5</code> button in VS Code and you should see the message printed to <em>Debug Console</em>.</p>
 <p>That&rsquo;s all! My congratulations, you have just written your first program in Go!</p>
 <h3 id="troubleshooting">Troubleshooting</h3>

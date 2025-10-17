@@ -30,9 +30,9 @@
 <p>To build the binary, we need to know what version of go is used for building binary in original docker image. We can find it in <code>drone.yml</code> <strong>build</strong> step. For version 1.3.1 of drone <code>golang:1.12.9</code> docker image is used for building binaries.</p>
 <p>Then, we use same image to build binary in our dockerfile:</p>
 <p><strong>docker/Dockerfile.server.linux.amd64</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:1.12.9 as builder</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.12.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">builder</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /go/src/github.com/drone/drone</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/go/src/github.com/drone/drone</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOOS linux<span class="err">
@@ -42,12 +42,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GO111MODULE on<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.9 as alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">alpine</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.9</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 80 443</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="s"> /data</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span> <span class="m">443</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="w"> </span><span class="s">/data</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
