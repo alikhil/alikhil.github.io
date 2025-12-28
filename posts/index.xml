@@ -6,7 +6,7 @@
     <description>Recent content in Posts on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Dec 2025 04:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Dec 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
       <link>https://alikhil.dev/posts/graceful-shutdown/</link>
@@ -226,6 +226,107 @@
 <hr>
 <p>For those interested in seeing the actual code I used in my testing lab, I&rsquo;ve published it on <a href="https://github.com/alikhil/gracefull-shutdown-lab">GitHub</a> with instructions for running the demo yourself.</p>
 <p>Have you implemented graceful shutdown in your services? Did you encounter any other edge cases I didn&rsquo;t cover? Let me know in the comments how this pattern has worked for you!</p>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Kubernetes In-Place Pod Resize</title>
+      <link>https://alikhil.dev/posts/in-place-pod-resize/</link>
+      <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/in-place-pod-resize/</guid>
+      <description>&lt;p&gt;About six years ago, while operating a large Java-based platform in Kubernetes, I noticed a recurring problem: our services required significantly higher CPU and memory during application startup. Heavy use of Spring Beans and AutoConfiguration forced us to set inflated resource requests and limits just to survive bootstrap, even though those resources were mostly unused afterwards.&lt;/p&gt;
+&lt;p&gt;This workaround never felt right. As an engineer, I wanted a solution that reflected the actual lifecycle of an application rather than its worst moment.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>About six years ago, while operating a large Java-based platform in Kubernetes, I noticed a recurring problem: our services required significantly higher CPU and memory during application startup. Heavy use of Spring Beans and AutoConfiguration forced us to set inflated resource requests and limits just to survive bootstrap, even though those resources were mostly unused afterwards.</p>
+<p>This workaround never felt right. As an engineer, I wanted a solution that reflected the actual lifecycle of an application rather than its worst moment.</p>
+<p>I opened an <a href="https://github.com/kubernetes/kubernetes/issues/83111">issue</a>  in the Kubernetes repository describing the problem and proposing an approach to adjust pod resources dynamically without restarts. The issue received little discussion but quietly accumulated interest over time (13 👍 emoji reaction). Every few months, an automation bot attempted to mark it as stale, and every time, I removed the label. This went on for nearly six years&hellip;</p>
+<p>Until the release of Kubernetes 1.35 where In-Place Pod Resize feature was <a href="https://kubernetes.io/blog/2025/12/19/kubernetes-v1-35-in-place-pod-resize-ga/">marked as stable</a>.</p>
+<h2 id="what-in-place-pod-resize-brings">What In-Place Pod Resize Brings</h2>
+<p>In-Place Pod Resize allows Kubernetes to update CPU and memory requests and limits without restarting pods, whenever it is safe to do so. This significantly reduces unnecessary restarts caused by resource changes, leading to fewer disruptions and more reliable workloads.</p>
+<p>For applications whose resource needs evolve over time, especially after startup, this feature provides a long-missing building block.</p>
+<h2 id="impact-on-verticalpodautoscaler">Impact on VerticalPodAutoscaler</h2>
+<p>The new <code>resizePolicy</code> field is configured at the pod spec level. While it is technically possible to change pod resources manually, doing so does not scale. In practice, this feature should be driven by a workload controller.</p>
+<p>At the moment, the only controller that supports in-place pod resize is the Vertical Pod Autoscaler (VPA).</p>
+<p>There are two enhancement proposals enable this behavior:</p>
+<ul>
+<li>
+<p><a href="https://github.com/kubernetes/autoscaler/tree/455d29039bf6b1eb9f784f498f28769a8698bc21/vertical-pod-autoscaler/enhancements/4016-in-place-updates-support">AEP-4016: Support for in place updates in VPA</a> which introduces <code>InPlaceOrRecreate</code> update mode</p>
+</li>
+<li>
+<p><a href="https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/enhancements/7862-cpu-startup-boost">AEP-7862: CPU Startup Boost</a> which is about temporarily boosting pod by giving more cpu during pod startup. This is conceptually similar to the approach proposed in my original issue.</p>
+</li>
+</ul>
+<p>Here is an example of Deployment and VPA using both AEP features:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">my-heavy-java-app:stable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">1000m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">1024Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">2000m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">2048Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;autoscaling.k8s.io/v1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">VerticalPodAutoscaler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example-vpa</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">targetRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;apps/v1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">updatePolicy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">updateMode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;InPlaceOrRecreate&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resourcePolicy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">containerPolicies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">containerName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;app&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">minAllowed</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;250m&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;512Mi&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">maxAllowed</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3000m&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;8192Mi&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c"># The CPU boosted resources can go beyond maxAllowed.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">startupBoost</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">cpu</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Factor&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">quantity</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>With such configuration pod will have doubled cpu requests and limits during startup. During the boost period no resizing will happen.</p>
+<p>Once the pod reaches the <code>Ready</code> state, the VPA controller scales CPU down to the currently recommended value.</p>
+<p>After that, VPA continues operating normally, with the key difference that resource updates are applied in place whenever possible.</p>
+<h2 id="limitations">Limitations</h2>
+<p>Does this feature fully solve the problem described above? Only partially.</p>
+<p>First, most application runtimes still impose fundamental constraints. Java and Python runtimes do not currently support resizing memory limits without a restart. This limitation exists outside of Kubernetes itself and is tracked in the OpenJDK project via <a href="https://bugs.openjdk.org/browse/JDK-8359211">an open ticket</a>.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="images/runtimes-supporting-in-place-memory-resize.png#center"/> <figcaption>
+            In-Place Pod Resize in Kubernetes: Dynamic Resource Management Without Restarts - Tim Allclair &amp; Mofi Rahman, Google
+        </figcaption>
+</figure>
+
+<p>Second, Kubernetes does not yet support decreasing memory limits, even with in-place Pod Resize enabled. This is a known limitation documented in the enhancement proposal for <a href="https://github.com/kubernetes/enhancements/tree/758ea034908515a934af09d03a927b24186af04c/keps/sig-node/1287-in-place-update-pod-resources#memory-limit-decreases">memory limit decreases</a>.</p>
+<p>As a result, while in-place Pod Resize effectively addresses CPU-related startup spikes, memory resizing remains an open problem.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>In place Pod Resize gives a foundation for cool new features like StartupBoost and makes use of VPA more reliable. While important gaps remain, such as <a href="https://github.com/kubernetes/kubernetes/issues/135670">memory decrease support</a> and <a href="https://github.com/kubernetes/kubernetes/issues/126891">scheduling race condition</a>, this change represents a meaningful step forward.</p>
+<p>For workloads with distinct startup and steady-state phases, Kubernetes is finally beginning to model reality more closely.</p>]]></content:encoded>
     </item>
     
     <item>
