@@ -339,11 +339,10 @@ function toggleThemeListener() {
 <p>In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.</p>
 <h2 id="the-problem-hidden-errors-during-pod-termination">The Problem: Hidden Errors During Pod Termination<a hidden class="anchor" aria-hidden="true" href="#the-problem-hidden-errors-during-pod-termination">¶</a></h2>
 <figure class="align-center ">
-    <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"/> <figcaption>
+    <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"/><figcaption>
             ChatGPT: draw funny picture of Kubernetes pod gracefully shutting down
         </figcaption>
 </figure>
-
 <p>If you are running services on Kubernetes, you have probably noticed that even with rolling updates (where Kubernetes gradually replaces pods), you might still see errors during deployment. This is especially annoying when you are trying to maintain &ldquo;zero-downtime&rdquo; systems.</p>
 <p>When Kubernetes needs to terminate a pod (for any reason), it follows this sequence:</p>
 <ol>

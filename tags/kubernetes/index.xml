@@ -23,11 +23,10 @@
 <p>In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.</p>
 <h2 id="the-problem-hidden-errors-during-pod-termination">The Problem: Hidden Errors During Pod Termination</h2>
 <figure class="align-center ">
-    <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"/> <figcaption>
+    <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"/><figcaption>
             ChatGPT: draw funny picture of Kubernetes pod gracefully shutting down
         </figcaption>
 </figure>
-
 <p>If you are running services on Kubernetes, you have probably noticed that even with rolling updates (where Kubernetes gradually replaces pods), you might still see errors during deployment. This is especially annoying when you are trying to maintain &ldquo;zero-downtime&rdquo; systems.</p>
 <p>When Kubernetes needs to terminate a pod (for any reason), it follows this sequence:</p>
 <ol>
@@ -317,11 +316,10 @@
 <p>Does this feature fully solve the problem described above? Only partially.</p>
 <p>First, most application runtimes still impose fundamental constraints. Java and Python runtimes do not currently support resizing memory limits without a restart. This limitation exists outside of Kubernetes itself and is tracked in the OpenJDK project via <a href="https://bugs.openjdk.org/browse/JDK-8359211">an open ticket</a>.</p>
 <figure class="align-center ">
-    <img loading="lazy" src="images/runtimes-supporting-in-place-memory-resize.png#center"/> <figcaption>
+    <img loading="lazy" src="/images/posts/in-place-pod-resize/runtimes-supporting-in-place-memory-resize.png#center"/><figcaption>
             In-Place Pod Resize in Kubernetes: Dynamic Resource Management Without Restarts - Tim Allclair &amp; Mofi Rahman, Google
         </figcaption>
 </figure>
-
 <p>Second, Kubernetes does not yet support decreasing memory limits, even with in-place Pod Resize enabled. This is a known limitation documented in the enhancement proposal for <a href="https://github.com/kubernetes/enhancements/tree/758ea034908515a934af09d03a927b24186af04c/keps/sig-node/1287-in-place-update-pod-resources#memory-limit-decreases">memory limit decreases</a>.</p>
 <p>As a result, while in-place Pod Resize effectively addresses CPU-related startup spikes, memory resizing remains an open problem.</p>
 <h2 id="final-thoughts">Final thoughts</h2>
