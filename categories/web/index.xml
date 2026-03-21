@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Web on alikhil</title>
+    <link>https://alikhil.dev/categories/web/</link>
+    <description>Recent content in Web on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Mar 2026 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is a CDN and Why It Matters?</title>
+      <link>https://alikhil.dev/posts/what-is-a-cdn-and-why-it-matters/</link>
+      <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/what-is-a-cdn-and-why-it-matters/</guid>
+      <description>&lt;p&gt;With the rapid growth of GenAI solutions and the continuous launch of new applications, understanding the fundamental challenges and solutions of the web is becoming increasingly important.&lt;/p&gt;
+&lt;p&gt;One of the core challenges is &lt;strong&gt;delivering content quickly to the end user&lt;/strong&gt;. This is where a CDN comes into play.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>With the rapid growth of GenAI solutions and the continuous launch of new applications, understanding the fundamental challenges and solutions of the web is becoming increasingly important.</p>
+<p>One of the core challenges is <strong>delivering content quickly to the end user</strong>. This is where a CDN comes into play.</p>
+<p>A CDN stands for <strong>Content Delivery Network</strong>. Let’s break it down.</p>
+<p><em>(Note: Modern CDN providers often bundle additional services such as WAF, DDoS protection, and bot management. Here, we focus on the static content delivery.)</em></p>
+<h3 id="content">Content</h3>
+<p>Content refers to any asset that needs to be loaded on the user’s device: images, audio/video files, JavaScript, CSS, and more.</p>
+<h3 id="delivery">Delivery</h3>
+<p>Delivery means that this content is not only available but also delivered efficiently and quickly.</p>
+<h3 id="network">Network</h3>
+<p>A CDN is a <strong>network</strong> of distributed nodes that cache content. Instead of fetching files directly from the origin server, users receive them from the nearest node, minimizing latency.</p>
+<hr>
+<h2 id="how-applications-work-without-a-cdn">How Applications Work Without a CDN</h2>
+<p>Consider an online marketplace for digital assets, such as a photo stock or NFT platform. The application stores thousands of images on a central server. Whenever users open the app, those images must load quickly.
+<img loading="lazy" src="/images/posts/cdn/without-cdn-scheme.png" type="" alt="without-cdn-scheme.png"  />
+If the application server is hosted in Paris, users in Paris will experience minimal ping. However:</p>
+<ul>
+<li>Users in Spain may see about 2× ping time.</li>
+<li>Users in the USA may see 6× ping time.</li>
+<li>Users in Australia may see 12× ping time.</li>
+</ul>
+<p>These numbers only reflect simple ICMP ping times. Actual file delivery involves additional overhead such as TCP connections and TLS handshakes, which increase delays even further.</p>
+<hr>
+<h2 id="how-a-cdn-solves-this-problem">How a CDN Solves This Problem</h2>
+<p><img loading="lazy" src="/images/posts/cdn/with-cdn-scheme.png" type="" alt="with-cdn-scheme"  /></p>
+<p>With a CDN, each user connects to the <strong>nearest edge node</strong> instead of the origin server. This is typically achieved via GeoDNS. Importantly, only the CDN knows the actual address of the origin server, which also improves security by reducing exposure to direct DDoS attacks.</p>
+<p>CDN providers usually operate edge nodes in major world cities. When a request is made:</p>
+<ol>
+<li>
+<p>If the requested file is already cached on the edge node (<strong>cache hit</strong>), it is delivered instantly.</p>
+</li>
+<li>
+<p>If not (<strong>cache miss</strong>), the edge node requests it from the <strong>CDN shield</strong>.</p>
+<ul>
+<li>
+<p>If the shield has the file cached, it is returned to the edge and then served to the user.</p>
+</li>
+<li>
+<p>If not, the shield fetches it from the origin server, caching it along the way.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img loading="lazy" src="/images/posts/cdn/request.png" type="" alt="request.png"  /></p>
+<p>For popular websites, the cache hit rate approaches but rarely reaches 100% due to purges, new files, or new users.</p>
+<p>The <strong>shield node</strong> plays a critical role. Without it, each cache miss from any edge node would hit the origin server directly, increasing load. Many providers offer shields as an optional feature, and enabling them can significantly reduce origin stress.</p>
+<h2 id="measuring-cdn-effectiveness">Measuring CDN Effectiveness</h2>
+<p>Beyond cache hits and misses, performance can be measured with concrete indicators:</p>
+<ul>
+<li>
+<p><strong>Time to First Byte (TTFB):</strong> How long it takes for the first data to arrive after a request. CDNs usually reduce TTFB by terminating connections closer to the user.</p>
+</li>
+<li>
+<p><strong>Latency reduction:</strong> The difference in round-trip time between delivery from the origin versus delivery from an edge node.</p>
+</li>
+<li>
+<p><strong>Cache hit ratio:</strong> The percentage of requests served directly from edge caches.</p>
+</li>
+</ul>
+<p>These KPIs provide a real, measurable view of CDN efficiency rather than theoretical assumptions.</p>
+<h2 id="which-cdn-is-best">Which CDN is Best?</h2>
+<p>The closer the edge node is to the end user, the faster the content loads. The key questions are: <strong>Where are the users located? Which CDN providers have the best edge coverage for those locations?</strong></p>
+<p>But don’t rely on maps alone. Measure real performance with Real User Monitoring (RUM) using metrics like TTFB and Core Web Vitals. There are plenty of ready-made tools available. If you’re interested in building your own RUM system, leave a comment or reaction – I can cover that in a follow-up post.</p>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
