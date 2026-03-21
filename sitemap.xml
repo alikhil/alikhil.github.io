@@ -143,7 +143,7 @@
     <loc>https://alikhil.dev/tags/tutorial/</loc>
     <lastmod>2025-06-23T15:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/go/</loc>
+    <loc>https://alikhil.dev/tags/golang/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/sre/</loc>
@@ -258,6 +258,9 @@
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/go-quickstart/</loc>
+    <lastmod>2018-04-06T16:22:35+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/quickstart/</loc>
     <lastmod>2018-04-06T16:22:35+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/vscode/</loc>

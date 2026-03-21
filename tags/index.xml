@@ -248,11 +248,11 @@
     </item>
     
     <item>
-      <title>Go</title>
-      <link>https://alikhil.dev/tags/go/</link>
+      <title>Golang</title>
+      <link>https://alikhil.dev/tags/golang/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
       
-      <guid>https://alikhil.dev/tags/go/</guid>
+      <guid>https://alikhil.dev/tags/golang/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -443,6 +443,16 @@
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
       
       <guid>https://alikhil.dev/tags/hugo/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Quickstart</title>
+      <link>https://alikhil.dev/tags/quickstart/</link>
+      <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/quickstart/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
