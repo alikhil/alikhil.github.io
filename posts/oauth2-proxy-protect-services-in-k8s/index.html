@@ -23,7 +23,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -285,7 +285,7 @@ function toggleThemeListener() {
     </div>
   </header> 
 <figure class="entry-cover">
-        <img loading="lazy" srcset="https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header_hu_7913efb772612c48.png 360w ,https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header_hu_d2889c0e08a22f41.png 480w ,https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header_hu_608abdd07eb22126.png 720w ,https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header.png 1024w" 
+        <img loading="lazy" srcset="https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header_hu_4db0040b558b11f8.png 360w ,https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header_hu_14a731977f498118.png 480w ,https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header_hu_8c733d742305db62.png 720w ,https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header.png 1024w" 
             sizes="(min-width: 768px) 720px, 100vw" src="https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header.png" alt="ChatGPT: oauth2-proxy protecting services in k8s" 
             width="1024" height="1024">
         
@@ -365,7 +365,7 @@ function toggleThemeListener() {
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Specifies whether ingress should be enabled.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress class name.</span><span class="w">
@@ -406,8 +406,8 @@ function toggleThemeListener() {
 </span></span></code></pre></div><details>
     <summary>Adjust domains in values for oauth2-proxy</summary>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Oauth client configuration specifics</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Oauth client configuration specifics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;general-oauth2&#34;</span><span class="w">
@@ -443,7 +443,7 @@ function toggleThemeListener() {
 </span></span></span><span class="line"><span class="cl"><span class="sd">    request_logging = false</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
@@ -465,8 +465,8 @@ function toggleThemeListener() {
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Can be one of the supported session storage cookie|redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
@@ -475,8 +475,8 @@ function toggleThemeListener() {
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-password&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;standalone&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">redis</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># provision an instance of the redis sub-chart</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l">standalone</span><span class="w">

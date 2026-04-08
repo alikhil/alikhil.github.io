@@ -6,10 +6,34 @@
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2026-03-21T14:11:43+03:00</lastmod>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2026-03-21T14:11:43+03:00</lastmod>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/ios/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/ios-shortcut-for-microbin/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/microbin/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/pastebin/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/self-hosting/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/tutorial/</loc>
+    <lastmod>2026-04-06T19:41:44+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/cdn/</loc>
     <lastmod>2026-03-21T14:11:43+03:00</lastmod>
@@ -17,13 +41,7 @@
     <loc>https://alikhil.dev/tags/performance/</loc>
     <lastmod>2026-03-21T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2026-03-21T14:11:43+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/rum/</loc>
-    <lastmod>2026-03-21T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
     <lastmod>2026-03-21T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/web/</loc>
@@ -140,9 +158,6 @@
     <loc>https://alikhil.dev/tags/mac/</loc>
     <lastmod>2025-06-23T15:00:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/tutorial/</loc>
-    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/golang/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
@@ -209,7 +224,7 @@
     <loc>https://alikhil.dev/posts/build-own-drone-image/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/ci/cd/</loc>
+    <loc>https://alikhil.dev/tags/ci-cd/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/docker/</loc>
@@ -230,10 +245,10 @@
     <loc>https://alikhil.dev/tags/gamification/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/language/</loc>
+    <loc>https://alikhil.dev/categories/languages/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/languages/</loc>
+    <loc>https://alikhil.dev/tags/learning/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/spanish/</loc>
@@ -242,7 +257,7 @@
     <loc>https://alikhil.dev/posts/how-to-start-learning-new-language/</loc>
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/google-cloud/</loc>
+    <loc>https://alikhil.dev/tags/google-cloud-platform/</loc>
     <lastmod>2018-05-20T21:30:36+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</loc>

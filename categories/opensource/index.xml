@@ -36,10 +36,10 @@
 </ul>
 <p>Here is an example of Deployment and VPA using both AEP features:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
@@ -62,13 +62,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">2000m</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">2048Mi</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;autoscaling.k8s.io/v1&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">VerticalPodAutoscaler</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;autoscaling.k8s.io/v1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">VerticalPodAutoscaler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example-vpa</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">targetRef</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;apps/v1&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
@@ -177,7 +177,8 @@ Start small, pick a project you love, and take your first step</p>]]></content:e
 </span></span><span class="line"><span class="cl">10	<span class="m">66</span>    1.48448%    docker
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></div><blockquote>
-<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p></blockquote>
+<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p>
+</blockquote>
 <p>I use kubectl to check status of the pods, delete orphaned resources, trigger sync on <code>ExternalSecrets</code> and much more. When I realized half my terminal history was just kubectl commands, I thought — there must be a better way to find things in Kubernetes without chaining pipes with <code>grep</code> / <code>awk</code> / <code>xargs</code>. And I imagined how nice it would be to have a UNIX <code>find</code>-like tool — something that lets you search for exactly what you need in the cluster and then perform actions directly on the matching resources. I searched for a krew plugin like this but there was not any. For that reason, I decided to develop <a href="https://github.com/alikhil/kubectl-find">one</a>!</p>
 <h2 id="development">Development</h2>
 <p>I used <a href="https://github.com/kubernetes/sample-cli-plugin">sample-cli-plugin</a> as a starting point. Its clean repository structure and straightforward design make it a great reference for working with the Kubernetes API. Additionally, it allows easy reuse of the extensive Kubernetes client libraries.</p>
@@ -270,7 +271,7 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Specifies whether ingress should be enabled.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress class name.</span><span class="w">
@@ -311,8 +312,8 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 </span></span></code></pre></div><details>
     <summary>Adjust domains in values for oauth2-proxy</summary>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Oauth client configuration specifics</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Oauth client configuration specifics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;general-oauth2&#34;</span><span class="w">
@@ -348,7 +349,7 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 </span></span></span><span class="line"><span class="cl"><span class="sd">    request_logging = false</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
@@ -370,8 +371,8 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Can be one of the supported session storage cookie|redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
@@ -380,8 +381,8 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-password&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;standalone&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">redis</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># provision an instance of the redis sub-chart</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l">standalone</span><span class="w">
@@ -481,13 +482,15 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 <p><img loading="lazy" src="/images/posts/mikrotik-wg/final.png" type="" alt="Final configuration"  /></p>
 <h2 id="implementation">Implementation</h2>
 <blockquote>
-<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p></blockquote>
+<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p>
+</blockquote>
 <p>Because of last requirement, it&rsquo;s obvious that traffic to home network should be routed though my cloud server.<br>
 So, I will use WireGuard to create a tunnel between mikrotik router and cloud server.<br>
 This way, I can access my home network from anywhere without exposing any ports on my home router.</p>
 <h3 id="i-initial-configuration-of-wireguard-on-cloud-vm">I. Initial configuration of WireGuard on cloud VM</h3>
 <blockquote>
-<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p></blockquote>
+<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p>
+</blockquote>
 <h4 id="1-install-wireguard-on-ubuntu-2204">1. Install wireguard on Ubuntu 22.04</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
 </span></span><span class="line"><span class="cl">sudo apt install wireguard -y
@@ -565,11 +568,11 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.21.0.0/16 - subnet of docker containers on cloud server</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.16.10.0/16 - subnet of wireguard network</span>
 </span></span><span class="line"><span class="cl">/interface wireguard peers add allowed-address<span class="o">=</span>172.16.10.0/24,172.21.0.0/16 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
+</span></span></span><span class="line"><span class="cl">    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
+</span></span></span><span class="line"><span class="cl">    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
+</span></span></span><span class="line"><span class="cl">    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Here is a tricky part</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Routing rule for subnet of wireguard network is added automatically on adding IP address to the interface</span>
@@ -725,28 +728,28 @@ td, th {
 <p>The <a href="https://github.com/updatecli/updatecli/pull/4432">patch</a> itself was just ~15 lines of code. But then I spent three days debugging a strange authorization bug in an unrelated part of the code.</p>
 <p>It happened because of code like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>Since <code>http.DefaultClient</code> is a reference, not a value:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">DefaultClient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Client</span><span class="p">{}</span><span class="w">
 </span></span></span></code></pre></div><p>The code above is effectively the same as:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>Later, in a third-party library, I found this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><h2 id="the-fix">The Fix</h2>
 <p>To prevent this, I had to change the code to:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>As a result, the patched client with the authorization transport got injected into the third-party library, causing unexpected failures.</p>
 <p>Bugs like this are hard to catch just by reading the code, since they involve global state mutation. But could they be detected by linters?</p>
 <p>What do you think? How do you find or prevent such issues in your projects?</p>]]></content:encoded>
@@ -772,7 +775,8 @@ td, th {
 </ul>
 <h2 id="finding-the-right-modem">Finding the Right Modem</h2>
 <blockquote>
-<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p></blockquote>
+<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p>
+</blockquote>
 <p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
 <p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
 <p>For instance:
@@ -782,7 +786,8 @@ td, th {
 <p>If the device meets these requirements, it’s good to go!</p>
 <h2 id="setup-instructions">Setup Instructions</h2>
 <blockquote>
-<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p></blockquote>
+<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p>
+</blockquote>
 <h3 id="identify-device-path">Identify Device Path</h3>
 <p>Run the following command to identify the device path:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
@@ -831,7 +836,8 @@ td, th {
 <p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
 <p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
 <blockquote>
-<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p></blockquote>]]></content:encoded>
+<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p>
+</blockquote>]]></content:encoded>
     </item>
     
   </channel>

@@ -49,7 +49,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Specifies whether ingress should be enabled.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress class name.</span><span class="w">
@@ -90,8 +90,8 @@
 </span></span></code></pre></div><details>
     <summary>Adjust domains in values for oauth2-proxy</summary>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Oauth client configuration specifics</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Oauth client configuration specifics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;general-oauth2&#34;</span><span class="w">
@@ -127,7 +127,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="sd">    request_logging = false</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
@@ -149,8 +149,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Can be one of the supported session storage cookie|redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
@@ -159,8 +159,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-password&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;standalone&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">redis</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># provision an instance of the redis sub-chart</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l">standalone</span><span class="w">
@@ -260,13 +260,15 @@
 <p><img loading="lazy" src="/images/posts/mikrotik-wg/final.png" type="" alt="Final configuration"  /></p>
 <h2 id="implementation">Implementation</h2>
 <blockquote>
-<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p></blockquote>
+<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p>
+</blockquote>
 <p>Because of last requirement, it&rsquo;s obvious that traffic to home network should be routed though my cloud server.<br>
 So, I will use WireGuard to create a tunnel between mikrotik router and cloud server.<br>
 This way, I can access my home network from anywhere without exposing any ports on my home router.</p>
 <h3 id="i-initial-configuration-of-wireguard-on-cloud-vm">I. Initial configuration of WireGuard on cloud VM</h3>
 <blockquote>
-<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p></blockquote>
+<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p>
+</blockquote>
 <h4 id="1-install-wireguard-on-ubuntu-2204">1. Install wireguard on Ubuntu 22.04</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
 </span></span><span class="line"><span class="cl">sudo apt install wireguard -y
@@ -344,11 +346,11 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.21.0.0/16 - subnet of docker containers on cloud server</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.16.10.0/16 - subnet of wireguard network</span>
 </span></span><span class="line"><span class="cl">/interface wireguard peers add allowed-address<span class="o">=</span>172.16.10.0/24,172.21.0.0/16 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
+</span></span></span><span class="line"><span class="cl">    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
+</span></span></span><span class="line"><span class="cl">    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
+</span></span></span><span class="line"><span class="cl">    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Here is a tricky part</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Routing rule for subnet of wireguard network is added automatically on adding IP address to the interface</span>

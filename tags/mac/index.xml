@@ -161,7 +161,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
 <p>Then create a directory <code>~/raycast-scripts</code> and put there a script <code>change-input-source.sh</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># See full documentation here: https://github.com/raycast/script-commands</span>
 </span></span><span class="line"><span class="cl"><span class="c1">#</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Required parameters:</span>

@@ -49,7 +49,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Specifies whether ingress should be enabled.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress class name.</span><span class="w">
@@ -90,8 +90,8 @@
 </span></span></code></pre></div><details>
     <summary>Adjust domains in values for oauth2-proxy</summary>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Oauth client configuration specifics</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Oauth client configuration specifics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;general-oauth2&#34;</span><span class="w">
@@ -127,7 +127,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="sd">    request_logging = false</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
@@ -149,8 +149,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Can be one of the supported session storage cookie|redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
@@ -159,8 +159,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-password&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;standalone&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">redis</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># provision an instance of the redis sub-chart</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l">standalone</span><span class="w">
@@ -264,8 +264,8 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span><span class="line"><span class="cl"><span class="nv">ACCOUNT</span><span class="o">=</span><span class="k">$(</span>gcloud info --format<span class="o">=</span><span class="s1">&#39;value(config.account)&#39;</span><span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl create clusterrolebinding owner-cluster-admin-binding <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --clusterrole cluster-admin <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --user <span class="nv">$ACCOUNT</span>
+</span></span></span><span class="line"><span class="cl">    --clusterrole cluster-admin <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --user <span class="nv">$ACCOUNT</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl -n kube-system create sa tiller
@@ -276,8 +276,8 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h3 id="install-nginx-ingress">Install nginx-ingress</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">helm install stable/nginx-ingress --name nginx-ing --namespace nginx-ing <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set controller.image.repository<span class="o">=</span>gcr.io/google_containers/nginx-ingress-controller <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set controller.image.tag<span class="o">=</span><span class="s2">&#34;0.9.0-beta.15&#34;</span>
+</span></span></span><span class="line"><span class="cl">    --set controller.image.repository<span class="o">=</span>gcr.io/google_containers/nginx-ingress-controller <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set controller.image.tag<span class="o">=</span><span class="s2">&#34;0.9.0-beta.15&#34;</span>
 </span></span><span class="line"><span class="cl">    --set rbac.create<span class="o">=</span><span class="nb">true</span> <span class="c1"># if RBAC is enabled in the cluster</span>
 </span></span><span class="line"><span class="cl">    <span class="c1"># see all options here: https://github.com/kubernetes/charts/blob/master/stable/nginx-ingress/values.yaml</span>
 </span></span></code></pre></div><p>After it&rsquo;s installed we can retrieve controller IP address:</p>
@@ -287,13 +287,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span><span class="line"><span class="cl">CNAME   *.example.com   example.com
 </span></span></code></pre></div><h3 id="install-kube-lego">Install kube-lego</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm install --name kube-lego stable/kube-lego --namespace kube-lego <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_SUPPORTED_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_SUPPORTED_INGRESS_PROVIDER<span class="o">=</span>nginx <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_DEFAULT_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_URL<span class="o">=</span>https://acme-v01.api.letsencrypt.org/directory <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set rbac.create<span class="o">=</span><span class="nb">true</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set image.tag<span class="o">=</span>0.1.5 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_LOG_LEVEL<span class="o">=</span>debug
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_SUPPORTED_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_SUPPORTED_INGRESS_PROVIDER<span class="o">=</span>nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_DEFAULT_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_URL<span class="o">=</span>https://acme-v01.api.letsencrypt.org/directory <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set rbac.create<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set image.tag<span class="o">=</span>0.1.5 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_LOG_LEVEL<span class="o">=</span>debug
 </span></span></code></pre></div><h3 id="test-it">Test it!</h3>
 <p>Let&rsquo;s run simple HTTP server as service and expose it using nginx ingress:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run simple-http --image<span class="o">=</span>strm/helloworld-http --port<span class="o">=</span><span class="m">80</span>
@@ -301,13 +301,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span><span class="line"><span class="cl">kubectl expose deployment simple-http --name example-service --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>NodePort
 </span></span></code></pre></div><p><strong>example-ing.yaml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">service.example.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
@@ -363,11 +363,11 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-secret">Deploy secret</h2>
 <p><strong>secret.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Secret</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy-secret</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">github-client-id</span><span class="p">:</span><span class="w"> </span><span class="l">base64(YOUR_CLIENT_ID)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">github-client-secret</span><span class="p">:</span><span class="w"> </span><span class="l">base64(YOUR_CLIENT_SECRET)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookie-secret</span><span class="p">:</span><span class="w"> </span><span class="l">base64(random_string)</span><span class="w">
@@ -375,13 +375,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-deployment">Deploy deployment</h2>
 <p><strong>oauth-proxy.deployment.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">k8s-app</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
@@ -429,13 +429,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-service">Deploy service</h2>
 <p><strong>oauth-service.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">k8s-app</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
@@ -448,15 +448,15 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-ingress">Deploy ingress</h2>
 <p><strong>oauth-ing.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">auth.example.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
@@ -474,15 +474,15 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 <p>You can update ingress that we used while configuring nginx-ingress or create a new one:</p>
 <p><strong>example-ing.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="l">https://auth.example.com/oauth2/auth</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="l">https://auth.example.com/oauth2/start?rd=https://$host$request_uri$is_args$args</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">service.example.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Monitor input source control on Mac | alikhil | software engineering, kubernetes &amp; self-hosting</title>
-<meta name="keywords" content="Tutorial, Tips, Mac">
+<meta name="keywords" content="tutorial, tips, mac">
 <meta name="description" content="If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.
 In this post I will show you how to configure hotkeys for that.">
 <meta name="author" content="Alik Khilazhev">
@@ -24,7 +24,7 @@ In this post I will show you how to configure hotkeys for that.">
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-RSGLKK3DPR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -76,7 +76,7 @@ In this post I will show you how to configure hotkeys for that." />
   "name": "Monitor input source control on Mac",
   "description": "If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.\nIn this post I will show you how to configure hotkeys for that.\n",
   "keywords": [
-    "Tutorial", "Tips", "Mac"
+    "tutorial", "tips", "mac"
   ],
   "wordCount" : "550",
   "inLanguage": "en-us",
@@ -359,7 +359,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
 <p>Then create a directory <code>~/raycast-scripts</code> and put there a script <code>change-input-source.sh</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># See full documentation here: https://github.com/raycast/script-commands</span>
 </span></span><span class="line"><span class="cl"><span class="c1">#</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Required parameters:</span>

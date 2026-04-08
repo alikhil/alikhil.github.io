@@ -230,7 +230,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
 <p>Then create a directory <code>~/raycast-scripts</code> and put there a script <code>change-input-source.sh</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># See full documentation here: https://github.com/raycast/script-commands</span>
 </span></span><span class="line"><span class="cl"><span class="c1">#</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Required parameters:</span>
@@ -287,7 +287,8 @@ Today I&rsquo;ll share you my experience in learning a new language. I am practi
 <p>As soon as you have learned basics, start listening to podcasts. There are some free audio podcasts oriented for beginners. For example, in Spanish, it&rsquo;s a <a href="https://www.notesinspanish.com/">Notes in Spanish</a>.</p>
 <p>Create a playlist with up to 20 songs you like on language you learn and listen to them regularly. And keep listening until you will understand what a song about. You don&rsquo;t have to translate all the words in each song. In fact, It is not very useful. But opposite, when you learn new words from textbook, tinycard or from anywhere else and you hear this word while you are listening to your playlist you learn better.</p>
 <blockquote>
-<p>&ndash; Oh, wait. I know what this word means &hellip;</p></blockquote>
+<p>&ndash; Oh, wait. I know what this word means &hellip;</p>
+</blockquote>
 <h1 id="watch">Watch</h1>
 <p>If you are fun of TV-shows, you can start watching them in the language you learn. With subtitles or without them. Of course, it requires some basic knowledge. If you care that you will miss some key points of the story and prefer to fully understand it, you can watch sitcoms which don&rsquo;t have almost anything in common between series.</p>]]></content:encoded>
     </item>

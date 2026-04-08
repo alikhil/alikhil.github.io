@@ -32,38 +32,38 @@
 <p><strong>docker/Dockerfile.server.linux.amd64</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.12.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">builder</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/go/src/github.com/drone/drone</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/go/src/github.com/drone/drone</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> . .<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOOS linux<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOARCH amd64<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> CGO_ENABLED <span class="m">1</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> REPO github.com/drone/drone<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GO111MODULE on<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GOOS linux<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GOARCH amd64<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> CGO_ENABLED <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> REPO github.com/drone/drone<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GO111MODULE on<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">alpine</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span> <span class="m">443</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="w"> </span><span class="s">/data</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span> <span class="m">443</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">VOLUME</span><span class="w"> </span><span class="s">/data</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DRIVER sqlite3<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DATASOURCE /data/database.sqlite<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_OS</span><span class="o">=</span>linux
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> DRONE_DATABASE_DRIVER sqlite3<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> DRONE_DATABASE_DATASOURCE /data/database.sqlite<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_OS</span><span class="o">=</span>linux
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_ARCH</span><span class="o">=</span>amd64
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_SERVER_PORT</span><span class="o">=</span>:80<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_SERVER_HOST</span><span class="o">=</span>localhost
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_SERVER_HOST</span><span class="o">=</span>localhost
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENABLED</span><span class="o">=</span><span class="nb">true</span>
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENDPOINT</span><span class="o">=</span>https://stats.drone.ci/api/v1/series<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> --from<span class="o">=</span>alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/drone-server&#34;</span><span class="p">]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> --from<span class="o">=</span>builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/drone-server&#34;</span><span class="p">]</span><span class="err">
 </span></span></span></code></pre></div><p>Also we need to delete .dockerignore file from root of the repo.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .dockerignore
 </span></span></code></pre></div><p>Then we build docker image like:</p>

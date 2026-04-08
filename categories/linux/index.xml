@@ -155,13 +155,15 @@
 <p><img loading="lazy" src="/images/posts/mikrotik-wg/final.png" type="" alt="Final configuration"  /></p>
 <h2 id="implementation">Implementation</h2>
 <blockquote>
-<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p></blockquote>
+<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p>
+</blockquote>
 <p>Because of last requirement, it&rsquo;s obvious that traffic to home network should be routed though my cloud server.<br>
 So, I will use WireGuard to create a tunnel between mikrotik router and cloud server.<br>
 This way, I can access my home network from anywhere without exposing any ports on my home router.</p>
 <h3 id="i-initial-configuration-of-wireguard-on-cloud-vm">I. Initial configuration of WireGuard on cloud VM</h3>
 <blockquote>
-<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p></blockquote>
+<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p>
+</blockquote>
 <h4 id="1-install-wireguard-on-ubuntu-2204">1. Install wireguard on Ubuntu 22.04</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
 </span></span><span class="line"><span class="cl">sudo apt install wireguard -y
@@ -239,11 +241,11 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.21.0.0/16 - subnet of docker containers on cloud server</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.16.10.0/16 - subnet of wireguard network</span>
 </span></span><span class="line"><span class="cl">/interface wireguard peers add allowed-address<span class="o">=</span>172.16.10.0/24,172.21.0.0/16 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
+</span></span></span><span class="line"><span class="cl">    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
+</span></span></span><span class="line"><span class="cl">    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
+</span></span></span><span class="line"><span class="cl">    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Here is a tricky part</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Routing rule for subnet of wireguard network is added automatically on adding IP address to the interface</span>
@@ -404,7 +406,8 @@ td, th {
 </ul>
 <h2 id="finding-the-right-modem">Finding the Right Modem</h2>
 <blockquote>
-<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p></blockquote>
+<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p>
+</blockquote>
 <p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
 <p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
 <p>For instance:
@@ -414,7 +417,8 @@ td, th {
 <p>If the device meets these requirements, it’s good to go!</p>
 <h2 id="setup-instructions">Setup Instructions</h2>
 <blockquote>
-<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p></blockquote>
+<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p>
+</blockquote>
 <h3 id="identify-device-path">Identify Device Path</h3>
 <p>Run the following command to identify the device path:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
@@ -463,7 +467,8 @@ td, th {
 <p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
 <p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
 <blockquote>
-<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p></blockquote>]]></content:encoded>
+<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p>
+</blockquote>]]></content:encoded>
     </item>
     
   </channel>

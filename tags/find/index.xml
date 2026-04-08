@@ -29,7 +29,8 @@
 </span></span><span class="line"><span class="cl">10	<span class="m">66</span>    1.48448%    docker
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></div><blockquote>
-<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p></blockquote>
+<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p>
+</blockquote>
 <p>I use kubectl to check status of the pods, delete orphaned resources, trigger sync on <code>ExternalSecrets</code> and much more. When I realized half my terminal history was just kubectl commands, I thought — there must be a better way to find things in Kubernetes without chaining pipes with <code>grep</code> / <code>awk</code> / <code>xargs</code>. And I imagined how nice it would be to have a UNIX <code>find</code>-like tool — something that lets you search for exactly what you need in the cluster and then perform actions directly on the matching resources. I searched for a krew plugin like this but there was not any. For that reason, I decided to develop <a href="https://github.com/alikhil/kubectl-find">one</a>!</p>
 <h2 id="development">Development</h2>
 <p>I used <a href="https://github.com/kubernetes/sample-cli-plugin">sample-cli-plugin</a> as a starting point. Its clean repository structure and straightforward design make it a great reference for working with the Kubernetes API. Additionally, it allows easy reuse of the extensive Kubernetes client libraries.</p>

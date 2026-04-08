@@ -6,7 +6,37 @@
     <description>Recent content in Tags on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Mar 2026 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Microbin</title>
+      <link>https://alikhil.dev/tags/microbin/</link>
+      <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/microbin/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Pastebin</title>
+      <link>https://alikhil.dev/tags/pastebin/</link>
+      <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/pastebin/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://alikhil.dev/tags/tutorial/</link>
+      <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/tags/tutorial/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Cdn</title>
       <link>https://alikhil.dev/tags/cdn/</link>
@@ -238,16 +268,6 @@
     </item>
     
     <item>
-      <title>Tutorial</title>
-      <link>https://alikhil.dev/tags/tutorial/</link>
-      <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
-      <guid>https://alikhil.dev/tags/tutorial/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Golang</title>
       <link>https://alikhil.dev/tags/golang/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
@@ -348,11 +368,11 @@
     </item>
     
     <item>
-      <title>Ci/Cd</title>
-      <link>https://alikhil.dev/tags/ci/cd/</link>
+      <title>Ci-Cd</title>
+      <link>https://alikhil.dev/tags/ci-cd/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
       
-      <guid>https://alikhil.dev/tags/ci/cd/</guid>
+      <guid>https://alikhil.dev/tags/ci-cd/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -408,11 +428,11 @@
     </item>
     
     <item>
-      <title>Language</title>
-      <link>https://alikhil.dev/tags/language/</link>
+      <title>Learning</title>
+      <link>https://alikhil.dev/tags/learning/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       
-      <guid>https://alikhil.dev/tags/language/</guid>
+      <guid>https://alikhil.dev/tags/learning/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -428,11 +448,11 @@
     </item>
     
     <item>
-      <title>Google Cloud</title>
-      <link>https://alikhil.dev/tags/google-cloud/</link>
+      <title>Google Cloud Platform</title>
+      <link>https://alikhil.dev/tags/google-cloud-platform/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
       
-      <guid>https://alikhil.dev/tags/google-cloud/</guid>
+      <guid>https://alikhil.dev/tags/google-cloud-platform/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

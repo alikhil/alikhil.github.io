@@ -6,7 +6,7 @@
     <description>Recent content on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Mar 2026 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
       <link>https://alikhil.dev/posts/graceful-shutdown/</link>
@@ -91,19 +91,19 @@
 <h3 id="1-listen-for-sigterm-signals">1. Listen for SIGTERM Signals</h3>
 <p>First, your app needs to catch that SIGTERM signal instead of ignoring it:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Set up channel for shutdown signals</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Signal</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">signal</span><span class="p">.</span><span class="nf">Notify</span><span class="p">(</span><span class="nx">stop</span><span class="p">,</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Interrupt</span><span class="p">,</span><span class="w"> </span><span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGTERM</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Signal</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">signal</span><span class="p">.</span><span class="nf">Notify</span><span class="p">(</span><span class="nx">stop</span><span class="p">,</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Interrupt</span><span class="p">,</span><span class="w"> </span><span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGTERM</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Block until we receive a shutdown signal</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;-</span><span class="nx">stop</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Shutdown signal received&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Block until we receive a shutdown signal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="o">&lt;-</span><span class="nx">stop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Shutdown signal received&#34;</span><span class="p">)</span><span class="w">
 </span></span></span></code></pre></div><p>This part is easy - you are just telling your app to wake up when Kubernetes asks it to shut down.</p>
 <h3 id="2-track-your-in-flight-requests">2. Track Your In-Flight Requests</h3>
 <p>You need to know when it is safe to shut down, so keep track of ongoing requests:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Create a request counter</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">inFlightRequests</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int64</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">inFlightRequests</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int64</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/process&#34;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/process&#34;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Increment counter when request starts</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">inFlightRequests</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// do not forget to decrement when done!</span><span class="w">
@@ -111,15 +111,15 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Your normal request handling...</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">  </span><span class="c1">// Simulating long-running work</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">})</span><span class="w">
 </span></span></span></code></pre></div><p>This counter lets you check if there are still requests being processed before shutting down. it is especially important for those long-running operations that users have already waited several seconds for - the last thing they want is to see an error right before completion!</p>
 <h3 id="3-separate-your-health-checks">3. Separate Your Health Checks</h3>
 <p>Here is a commonly overlooked trick - you need different health check endpoints for liveness and readiness:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Track shutdown state</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">isShuttingDown</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Bool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">isShuttingDown</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Bool</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Readiness probe - returns 503 when shutting down</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/ready&#34;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Readiness probe - returns 503 when shutting down</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/ready&#34;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">isShuttingDown</span><span class="p">.</span><span class="nf">Load</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusServiceUnavailable</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Shutting down, not ready&#34;</span><span class="p">)</span><span class="w">
@@ -128,53 +128,53 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Ready for traffic&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">})</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Liveness probe - always returns 200 (we are still alive!)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/alive&#34;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Liveness probe - always returns 200 (we are still alive!)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/alive&#34;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;I&#39;m alive&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">})</span><span class="w">
 </span></span></span></code></pre></div><p>This separation is crucial. The readiness probe tells Kubernetes to stop sending new traffic, while the liveness probe says &ldquo;do not kill me yet, I&rsquo;m still working!&rdquo;</p>
 <h3 id="4-the-shutdown-dance">4. The Shutdown Dance</h3>
 <p>Now for the most important part - the shutdown sequence:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Step 1: Mark service as shutting down</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">isShuttingDown</span><span class="p">.</span><span class="nf">Store</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">isShuttingDown</span><span class="p">.</span><span class="nf">Store</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Step 2: Let Kubernetes notice the readiness probe failing</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Step 2: Let Kubernetes notice the readiness probe failing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Step 3: Wait for in-flight requests to finish</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="nx">inFlightRequests</span><span class="p">.</span><span class="nf">Load</span><span class="p">()</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Step 3: Wait for in-flight requests to finish</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span><span class="w"> </span><span class="nx">inFlightRequests</span><span class="p">.</span><span class="nf">Load</span><span class="p">()</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Step 4: Finally, shut down the server gracefully</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span><span class="w"> </span><span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">defer</span><span class="w"> </span><span class="nf">cancel</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Step 4: Finally, shut down the server gracefully</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span><span class="w"> </span><span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">defer</span><span class="w"> </span><span class="nf">cancel</span><span class="p">()</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">server</span><span class="p">.</span><span class="nf">Shutdown</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">server</span><span class="p">.</span><span class="nf">Shutdown</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Forced shutdown: %v&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>I&rsquo;ve found this sequence to be optimal. First, we mark ourselves as &ldquo;not ready&rdquo; but keep running. We pause to give Kubernetes time to notice and update its routing. Then we patiently wait until all in-flight requests finish before actually shutting down the server.</p>
 <h3 id="5-configure-kubernetes-correctly">5. Configure Kubernetes Correctly</h3>
 <p>Do not forget to adjust your Kubernetes configuration:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Use different probes for liveness and readiness</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/alive </span><span class="w"> </span><span class="c"># Always returns OK</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/ready </span><span class="w"> </span><span class="c"># Returns 503 during shutdown</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Give pods enough time to shut down gracefully</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="c"># Stops routing traffic after 2 failed checks (6 seconds)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Give pods enough time to shut down gracefully</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="c"># Stops routing traffic after 2 failed checks (6 seconds)</span><span class="w">
 </span></span></span></code></pre></div><p>This tells Kubernetes to wait up to 30 seconds for your app to finish processing requests before forcefully terminating it.</p>
 <h2 id="tl-dr-quick-tips">TL; DR; Quick Tips</h2>
 <p>If you are in a hurry, here are the key takeaways:</p>
@@ -225,6 +225,156 @@
 <hr>
 <p>For those interested in seeing the actual code I used in my testing lab, I&rsquo;ve published it on <a href="https://github.com/alikhil/gracefull-shutdown-lab">GitHub</a> with instructions for running the demo yourself.</p>
 <p>Have you implemented graceful shutdown in your services? Did you encounter any other edge cases I didn&rsquo;t cover? Let me know in the comments how this pattern has worked for you!</p>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>iOS shortcuts for microbin</title>
+      <link>https://alikhil.dev/posts/ios-shortcut-for-microbin/</link>
+      <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/ios-shortcut-for-microbin/</guid>
+      <description>&lt;p&gt;Hi there!&lt;/p&gt;
+&lt;p&gt;Recently, I&amp;rsquo;ve deployed &lt;a href=&#34;https://microbin.eu&#34;&gt;microbin&lt;/a&gt;, minimalistic opensource &amp;ldquo;pastebin&amp;rdquo;-like service, into my homelab to share temporal files/text between devices. It works quite well.&lt;/p&gt;
+&lt;p&gt;A few days ago, I started wondering: could I upload files or paste text into Microbin directly from the iOS Share menu?&lt;/p&gt;
+&lt;p&gt;The short answer is yes. It could be done using iOS&amp;rsquo;s builtin &amp;ldquo;Shortcuts&amp;rdquo;.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hi there!</p>
+<p>Recently, I&rsquo;ve deployed <a href="https://microbin.eu">microbin</a>, minimalistic opensource &ldquo;pastebin&rdquo;-like service, into my homelab to share temporal files/text between devices. It works quite well.</p>
+<p>A few days ago, I started wondering: could I upload files or paste text into Microbin directly from the iOS Share menu?</p>
+<p>The short answer is yes. It could be done using iOS&rsquo;s builtin &ldquo;Shortcuts&rdquo;.</p>
+<h2 id="use-cases">Use cases</h2>
+<p>I have two general cases of using microbin from my corporate iPhone to my personal devices:</p>
+<ol>
+<li>Share some text / link</li>
+<li>Share file(s)</li>
+</ol>
+<p>For simplicity, I decided to create dedicated shortcuts for each use case.</p>
+<h2 id="paste-text-into-microbin">Paste text into microbin</h2>
+<ol>
+<li>
+<p>Open <strong>Shortcuts</strong> app and create new empty shortcut, rename it into &ldquo;Paste into microbin&rdquo;.</p>
+</li>
+<li>
+<p>Add <strong>Share</strong> action, click at <em>Input</em> and select <strong>Shortcut Input</strong>. New <strong>Receive</strong> action will pop up.</p>
+<table>
+  <thead>
+      <tr>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-1.png" type="" alt="Share action"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-2.png" type="" alt="Share action"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-3.png" type="" alt="Receive action"  /></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Click at <em>Nowhere</em> in <strong>Receive &hellip; from</strong> action, enable <strong>Show in Share Sheet</strong> toggle and disable <strong>Show in Search</strong>, click ✅ at the top right.</p>
+</li>
+<li>
+<p>Next to the <strong>if there&rsquo;s no input</strong>, click <em>Continue</em> and select <strong>Ask For</strong> and <strong>Text</strong></p>
+</li>
+<li>
+<p>Delete <strong>Share</strong> action, we don&rsquo;t need it anymore.</p>
+<table>
+  <thead>
+      <tr>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-4.png" type="" alt="Share sheet"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-6.png" type="" alt="Ask for Text"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-13.png" type="" alt="Delete share"  /></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Add <strong>Get contents of URL</strong> action.</p>
+</li>
+<li>
+<p>Put your microbin url into <em>URL</em> field. For example <code>https://pub.microbin.eu/upload</code></p>
+</li>
+<li>
+<p>Expand action configuration by clicking ▶︎ button, then:</p>
+<ul>
+<li>Set <em>Method</em> as <strong>POST</strong></li>
+<li>Add <strong>Content-Type</strong> header with value <code>multipart/form-data</code></li>
+<li>Select <strong>Form</strong> as <em>Request Body</em> type</li>
+<li>Add <strong>content</strong> field as <em>File</em> type (important!) and select <strong>Shortcut Input</strong> as value.
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-10.png" type="" alt="Get contents of URL"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-9.png" type="" alt="Configure URL"  /></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>That&rsquo;s all. Test it by clicking ▶︎ Play button in the bottom menu. If you did everything correctly you&rsquo;ll see preview with the link.</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-11.png" type="" alt="Play button"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-12.png" type="" alt="Preview"  /></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+</ol>
+<h2 id="upload-files-into-microbin">Upload files into microbin</h2>
+<p>A shortcut for file upload is configured in very similar way. I won&rsquo;t describe it in detail but mention only notable changes:</p>
+<ul>
+<li>Duplicate the <strong>Paste into Microbin</strong> shortcut to not start from scratch.</li>
+<li>In <strong>Receive</strong> action, select <strong>Files</strong> type and allow <em>multiple files</em></li>
+<li>Add <strong>Repeat with each item</strong> action loop to iterate over <em>Selected input</em></li>
+<li>In <strong>Get Contents of URL</strong> action everything stays the same, except <em>content</em> field - it gets renamed into <em>file</em></li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/files-1.PNG" type="" alt="Play button"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/files-2.PNG" type="" alt="Preview"  /></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h2 id="preview">Preview</h2>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/preview.PNG" type="" alt="Preview"  /></th>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h2 id="summary">Summary</h2>
+<p>If you did everything from above and it did not work, or you don&rsquo;t want to bother with configuring it at all. You can import my shortcuts in your device and override microbin url:</p>
+<ul>
+<li>
+<p>📋 <a href="https://www.icloud.com/shortcuts/8108f92bea454d20b5e68b8bd4f3c8db">Paste Into Microbin</a></p>
+</li>
+<li>
+<p>📤 <a href="https://www.icloud.com/shortcuts/1808fc6036e9436b8534781f7b182ab7">Upload Files to Microbin</a></p>
+</li>
+</ul>]]></content:encoded>
     </item>
     
     <item>
@@ -328,10 +478,10 @@ If the application server is hosted in Paris, users in Paris will experience min
 </ul>
 <p>Here is an example of Deployment and VPA using both AEP features:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
@@ -354,13 +504,13 @@ If the application server is hosted in Paris, users in Paris will experience min
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">2000m</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">2048Mi</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;autoscaling.k8s.io/v1&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">VerticalPodAutoscaler</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;autoscaling.k8s.io/v1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">VerticalPodAutoscaler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example-vpa</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">targetRef</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;apps/v1&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
@@ -469,7 +619,8 @@ Start small, pick a project you love, and take your first step</p>]]></content:e
 </span></span><span class="line"><span class="cl">10	<span class="m">66</span>    1.48448%    docker
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></div><blockquote>
-<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p></blockquote>
+<p>Run <a href="https://superuser.com/a/250230">this command</a> if you are curious what about yours the most popular commands in terminal history.</p>
+</blockquote>
 <p>I use kubectl to check status of the pods, delete orphaned resources, trigger sync on <code>ExternalSecrets</code> and much more. When I realized half my terminal history was just kubectl commands, I thought — there must be a better way to find things in Kubernetes without chaining pipes with <code>grep</code> / <code>awk</code> / <code>xargs</code>. And I imagined how nice it would be to have a UNIX <code>find</code>-like tool — something that lets you search for exactly what you need in the cluster and then perform actions directly on the matching resources. I searched for a krew plugin like this but there was not any. For that reason, I decided to develop <a href="https://github.com/alikhil/kubectl-find">one</a>!</p>
 <h2 id="development">Development</h2>
 <p>I used <a href="https://github.com/kubernetes/sample-cli-plugin">sample-cli-plugin</a> as a starting point. Its clean repository structure and straightforward design make it a great reference for working with the Kubernetes API. Additionally, it allows easy reuse of the extensive Kubernetes client libraries.</p>
@@ -591,7 +742,7 @@ Here are the two main ideas of it:</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Specifies whether ingress should be enabled.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># -- Ingress class name.</span><span class="w">
@@ -632,8 +783,8 @@ Here are the two main ideas of it:</p>
 </span></span></code></pre></div><details>
     <summary>Adjust domains in values for oauth2-proxy</summary>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Oauth client configuration specifics</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Oauth client configuration specifics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;general-oauth2&#34;</span><span class="w">
@@ -669,7 +820,7 @@ Here are the two main ideas of it:</p>
 </span></span></span><span class="line"><span class="cl"><span class="sd">    request_logging = false</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
@@ -691,8 +842,8 @@ Here are the two main ideas of it:</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">k8s.alikhil.dev</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Configure the session storage type, between cookie and redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">sessionStorage</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Can be one of the supported session storage cookie|redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
@@ -701,8 +852,8 @@ Here are the two main ideas of it:</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-password&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;standalone&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># Enables and configure the automatic deployment of the redis subchart</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">redis</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># provision an instance of the redis sub-chart</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l">standalone</span><span class="w">
@@ -974,13 +1125,15 @@ td, th {
 <p><img loading="lazy" src="/images/posts/mikrotik-wg/final.png" type="" alt="Final configuration"  /></p>
 <h2 id="implementation">Implementation</h2>
 <blockquote>
-<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p></blockquote>
+<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p>
+</blockquote>
 <p>Because of last requirement, it&rsquo;s obvious that traffic to home network should be routed though my cloud server.<br>
 So, I will use WireGuard to create a tunnel between mikrotik router and cloud server.<br>
 This way, I can access my home network from anywhere without exposing any ports on my home router.</p>
 <h3 id="i-initial-configuration-of-wireguard-on-cloud-vm">I. Initial configuration of WireGuard on cloud VM</h3>
 <blockquote>
-<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p></blockquote>
+<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p>
+</blockquote>
 <h4 id="1-install-wireguard-on-ubuntu-2204">1. Install wireguard on Ubuntu 22.04</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
 </span></span><span class="line"><span class="cl">sudo apt install wireguard -y
@@ -1058,11 +1211,11 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.21.0.0/16 - subnet of docker containers on cloud server</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 172.16.10.0/16 - subnet of wireguard network</span>
 </span></span><span class="line"><span class="cl">/interface wireguard peers add allowed-address<span class="o">=</span>172.16.10.0/24,172.21.0.0/16 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
+</span></span></span><span class="line"><span class="cl">    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
+</span></span></span><span class="line"><span class="cl">    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
+</span></span></span><span class="line"><span class="cl">    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Here is a tricky part</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Routing rule for subnet of wireguard network is added automatically on adding IP address to the interface</span>
@@ -1328,28 +1481,28 @@ td, th {
 <p>The <a href="https://github.com/updatecli/updatecli/pull/4432">patch</a> itself was just ~15 lines of code. But then I spent three days debugging a strange authorization bug in an unrelated part of the code.</p>
 <p>It happened because of code like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>Since <code>http.DefaultClient</code> is a reference, not a value:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">DefaultClient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Client</span><span class="p">{}</span><span class="w">
 </span></span></span></code></pre></div><p>The code above is effectively the same as:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>Later, in a third-party library, I found this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">opts</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><h2 id="the-fix">The Fix</h2>
 <p>To prevent this, I had to change the code to:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">transport</span><span class="p">.</span><span class="nx">PrivateToken</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Token</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Token</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Base</span><span class="p">:</span><span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">Transport</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>As a result, the patched client with the authorization transport got injected into the third-party library, causing unexpected failures.</p>
 <p>Bugs like this are hard to catch just by reading the code, since they involve global state mutation. But could they be detected by linters?</p>
 <p>What do you think? How do you find or prevent such issues in your projects?</p>]]></content:encoded>
@@ -1375,7 +1528,8 @@ td, th {
 </ul>
 <h2 id="finding-the-right-modem">Finding the Right Modem</h2>
 <blockquote>
-<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p></blockquote>
+<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p>
+</blockquote>
 <p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
 <p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
 <p>For instance:
@@ -1385,7 +1539,8 @@ td, th {
 <p>If the device meets these requirements, it’s good to go!</p>
 <h2 id="setup-instructions">Setup Instructions</h2>
 <blockquote>
-<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p></blockquote>
+<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p>
+</blockquote>
 <h3 id="identify-device-path">Identify Device Path</h3>
 <p>Run the following command to identify the device path:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
@@ -1434,7 +1589,8 @@ td, th {
 <p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
 <p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
 <blockquote>
-<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p></blockquote>]]></content:encoded>
+<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p>
+</blockquote>]]></content:encoded>
     </item>
     
     <item>
@@ -1488,7 +1644,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
 <p>Then create a directory <code>~/raycast-scripts</code> and put there a script <code>change-input-source.sh</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># See full documentation here: https://github.com/raycast/script-commands</span>
 </span></span><span class="line"><span class="cl"><span class="c1">#</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Required parameters:</span>
@@ -1550,38 +1706,38 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p><strong>docker/Dockerfile.server.linux.amd64</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.12.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">builder</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/go/src/github.com/drone/drone</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/go/src/github.com/drone/drone</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> . .<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOOS linux<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GOARCH amd64<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> CGO_ENABLED <span class="m">1</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> REPO github.com/drone/drone<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GO111MODULE on<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GOOS linux<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GOARCH amd64<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> CGO_ENABLED <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> REPO github.com/drone/drone<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GO111MODULE on<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">RUN</span> go build -tags nolimit -ldflags <span class="s2">&#34;-extldflags \&#34;-static\&#34;&#34;</span> -o release/linux/<span class="si">${</span><span class="nv">GOARCH</span><span class="si">}</span>/drone-server <span class="si">${</span><span class="nv">REPO</span><span class="si">}</span>/cmd/drone-server<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">alpine</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">RUN</span> apk add -U --no-cache ca-certificates<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span> <span class="m">443</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="w"> </span><span class="s">/data</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.9</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span> <span class="m">443</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">VOLUME</span><span class="w"> </span><span class="s">/data</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DRIVER sqlite3<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> DRONE_DATABASE_DATASOURCE /data/database.sqlite<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_OS</span><span class="o">=</span>linux
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> GODEBUG <span class="nv">netdns</span><span class="o">=</span>go<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> XDG_CACHE_HOME /data<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> DRONE_DATABASE_DRIVER sqlite3<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> DRONE_DATABASE_DATASOURCE /data/database.sqlite<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_OS</span><span class="o">=</span>linux
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_RUNNER_ARCH</span><span class="o">=</span>amd64
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_SERVER_PORT</span><span class="o">=</span>:80<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DRONE_SERVER_HOST</span><span class="o">=</span>localhost
+</span></span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_SERVER_HOST</span><span class="o">=</span>localhost
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENABLED</span><span class="o">=</span><span class="nb">true</span>
 </span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">DRONE_DATADOG_ENDPOINT</span><span class="o">=</span>https://stats.drone.ci/api/v1/series<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> --from<span class="o">=</span>alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/drone-server&#34;</span><span class="p">]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> --from<span class="o">=</span>builder /go/src/github.com/drone/drone/release/linux/amd64/drone-server /bin/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/drone-server&#34;</span><span class="p">]</span><span class="err">
 </span></span></span></code></pre></div><p>Also we need to delete .dockerignore file from root of the repo.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .dockerignore
 </span></span></code></pre></div><p>Then we build docker image like:</p>
@@ -1611,7 +1767,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p><strong>nginx.conf</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># ...
 </span></span></span><span class="line"><span class="cl"><span class="c1"># other configs
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kn">root</span> <span class="s">/app</span><span class="p">;</span>
@@ -1625,9 +1781,9 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 </span></span></code></pre></div><p>Full config file can be found in <a href="https://github.com/alikhil/vue-realworld-example-app/blob/master/nginx.conf">my fork of the repo</a></p>
 <p>Then, we need to write <strong>Dockerfile</strong> for building image with our application. Here it is:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">nginx</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/root</span>/<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./dist /app<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./nginx.conf /etc/nginx/conf.d/default.conf<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/root</span>/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> ./dist /app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> ./nginx.conf /etc/nginx/conf.d/default.conf<span class="err">
 </span></span></span></code></pre></div><p>We assume that artifacts of build placed in the <code>dist</code> directory and so that during the docker build the content of <code>dist</code> directory copied into containers <code>/app</code> directory.</p>
 <p>Now, we are ready to build it:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t alikhil/my-spa:0.1 .
@@ -1642,12 +1798,12 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p>To run the application in k8s we will use <code>Deployment</code> resource type. Here it is:</p>
 <p><strong>deployment.yaml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
@@ -1670,12 +1826,12 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 </span></span></code></pre></div><p>Then we need to expose our app to the world. It can be done by using service of type NodePort or via Ingress. We will do it with Ingress. For that we will need service:</p>
 <p><strong>service.yaml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterIP</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
@@ -1687,12 +1843,12 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 </span></span></span></code></pre></div><p>And ingress itself:</p>
 <p><strong>ingress.yaml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-spa-ing</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hosts</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">my-spa.example.com</span><span class="w">
@@ -1730,7 +1886,8 @@ Today I&rsquo;ll share you my experience in learning a new language. I am practi
 <p>As soon as you have learned basics, start listening to podcasts. There are some free audio podcasts oriented for beginners. For example, in Spanish, it&rsquo;s a <a href="https://www.notesinspanish.com/">Notes in Spanish</a>.</p>
 <p>Create a playlist with up to 20 songs you like on language you learn and listen to them regularly. And keep listening until you will understand what a song about. You don&rsquo;t have to translate all the words in each song. In fact, It is not very useful. But opposite, when you learn new words from textbook, tinycard or from anywhere else and you hear this word while you are listening to your playlist you learn better.</p>
 <blockquote>
-<p>&ndash; Oh, wait. I know what this word means &hellip;</p></blockquote>
+<p>&ndash; Oh, wait. I know what this word means &hellip;</p>
+</blockquote>
 <h1 id="watch">Watch</h1>
 <p>If you are fun of TV-shows, you can start watching them in the language you learn. With subtitles or without them. Of course, it requires some basic knowledge. If you care that you will miss some key points of the story and prefer to fully understand it, you can watch sitcoms which don&rsquo;t have almost anything in common between series.</p>]]></content:encoded>
     </item>
@@ -1784,8 +1941,8 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span><span class="line"><span class="cl"><span class="nv">ACCOUNT</span><span class="o">=</span><span class="k">$(</span>gcloud info --format<span class="o">=</span><span class="s1">&#39;value(config.account)&#39;</span><span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl create clusterrolebinding owner-cluster-admin-binding <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --clusterrole cluster-admin <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --user <span class="nv">$ACCOUNT</span>
+</span></span></span><span class="line"><span class="cl">    --clusterrole cluster-admin <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --user <span class="nv">$ACCOUNT</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl -n kube-system create sa tiller
@@ -1796,8 +1953,8 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h3 id="install-nginx-ingress">Install nginx-ingress</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">helm install stable/nginx-ingress --name nginx-ing --namespace nginx-ing <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set controller.image.repository<span class="o">=</span>gcr.io/google_containers/nginx-ingress-controller <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set controller.image.tag<span class="o">=</span><span class="s2">&#34;0.9.0-beta.15&#34;</span>
+</span></span></span><span class="line"><span class="cl">    --set controller.image.repository<span class="o">=</span>gcr.io/google_containers/nginx-ingress-controller <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set controller.image.tag<span class="o">=</span><span class="s2">&#34;0.9.0-beta.15&#34;</span>
 </span></span><span class="line"><span class="cl">    --set rbac.create<span class="o">=</span><span class="nb">true</span> <span class="c1"># if RBAC is enabled in the cluster</span>
 </span></span><span class="line"><span class="cl">    <span class="c1"># see all options here: https://github.com/kubernetes/charts/blob/master/stable/nginx-ingress/values.yaml</span>
 </span></span></code></pre></div><p>After it&rsquo;s installed we can retrieve controller IP address:</p>
@@ -1807,13 +1964,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span><span class="line"><span class="cl">CNAME   *.example.com   example.com
 </span></span></code></pre></div><h3 id="install-kube-lego">Install kube-lego</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm install --name kube-lego stable/kube-lego --namespace kube-lego <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_SUPPORTED_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_SUPPORTED_INGRESS_PROVIDER<span class="o">=</span>nginx <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_DEFAULT_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_URL<span class="o">=</span>https://acme-v01.api.letsencrypt.org/directory <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set rbac.create<span class="o">=</span><span class="nb">true</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set image.tag<span class="o">=</span>0.1.5 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --set config.LEGO_LOG_LEVEL<span class="o">=</span>debug
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_SUPPORTED_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_SUPPORTED_INGRESS_PROVIDER<span class="o">=</span>nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_DEFAULT_INGRESS_CLASS<span class="o">=</span>nginx <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_URL<span class="o">=</span>https://acme-v01.api.letsencrypt.org/directory <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set rbac.create<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set image.tag<span class="o">=</span>0.1.5 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --set config.LEGO_LOG_LEVEL<span class="o">=</span>debug
 </span></span></code></pre></div><h3 id="test-it">Test it!</h3>
 <p>Let&rsquo;s run simple HTTP server as service and expose it using nginx ingress:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run simple-http --image<span class="o">=</span>strm/helloworld-http --port<span class="o">=</span><span class="m">80</span>
@@ -1821,13 +1978,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span><span class="line"><span class="cl">kubectl expose deployment simple-http --name example-service --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>NodePort
 </span></span></code></pre></div><p><strong>example-ing.yaml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">service.example.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
@@ -1883,11 +2040,11 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-secret">Deploy secret</h2>
 <p><strong>secret.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Secret</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy-secret</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">data</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">github-client-id</span><span class="p">:</span><span class="w"> </span><span class="l">base64(YOUR_CLIENT_ID)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">github-client-secret</span><span class="p">:</span><span class="w"> </span><span class="l">base64(YOUR_CLIENT_SECRET)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookie-secret</span><span class="p">:</span><span class="w"> </span><span class="l">base64(random_string)</span><span class="w">
@@ -1895,13 +2052,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-deployment">Deploy deployment</h2>
 <p><strong>oauth-proxy.deployment.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">k8s-app</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
@@ -1949,13 +2106,13 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-service">Deploy service</h2>
 <p><strong>oauth-service.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">k8s-app</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
@@ -1968,15 +2125,15 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 </span></span></code></pre></div><h2 id="deploy-ingress">Deploy ingress</h2>
 <p><strong>oauth-ing.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-proxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">auth.example.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w">
@@ -1994,15 +2151,15 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
 <p>You can update ingress that we used while configuring nginx-ingress or create a new one:</p>
 <p><strong>example-ing.yml</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">extensions/v1beta1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="l">https://auth.example.com/oauth2/auth</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="l">https://auth.example.com/oauth2/start?rd=https://$host$request_uri$is_args$args</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">service.example.com</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">http</span><span class="p">:</span><span class="w">
@@ -2098,11 +2255,11 @@ It&rsquo;s been a long time since I have published the last post, but now I came
 <p><strong>program.go</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="s">&#34;fmt&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;¡Hola, mundo!&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><h3 id="run-the-program">Run the program</h3>
 <p>Finally, to run the program by pressing the <code>F5</code> button in VS Code and you should see the message printed to <em>Debug Console</em>.</p>
 <p>That&rsquo;s all! My congratulations, you have just written your first program in Go!</p>

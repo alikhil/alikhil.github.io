@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pastebin on alikhil</title>
+    <link>https://alikhil.dev/tags/pastebin/</link>
+    <description>Recent content in Pastebin on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/pastebin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iOS shortcuts for microbin</title>
+      <link>https://alikhil.dev/posts/ios-shortcut-for-microbin/</link>
+      <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
+      
+      <guid>https://alikhil.dev/posts/ios-shortcut-for-microbin/</guid>
+      <description>&lt;p&gt;Hi there!&lt;/p&gt;
+&lt;p&gt;Recently, I&amp;rsquo;ve deployed &lt;a href=&#34;https://microbin.eu&#34;&gt;microbin&lt;/a&gt;, minimalistic opensource &amp;ldquo;pastebin&amp;rdquo;-like service, into my homelab to share temporal files/text between devices. It works quite well.&lt;/p&gt;
+&lt;p&gt;A few days ago, I started wondering: could I upload files or paste text into Microbin directly from the iOS Share menu?&lt;/p&gt;
+&lt;p&gt;The short answer is yes. It could be done using iOS&amp;rsquo;s builtin &amp;ldquo;Shortcuts&amp;rdquo;.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hi there!</p>
+<p>Recently, I&rsquo;ve deployed <a href="https://microbin.eu">microbin</a>, minimalistic opensource &ldquo;pastebin&rdquo;-like service, into my homelab to share temporal files/text between devices. It works quite well.</p>
+<p>A few days ago, I started wondering: could I upload files or paste text into Microbin directly from the iOS Share menu?</p>
+<p>The short answer is yes. It could be done using iOS&rsquo;s builtin &ldquo;Shortcuts&rdquo;.</p>
+<h2 id="use-cases">Use cases</h2>
+<p>I have two general cases of using microbin from my corporate iPhone to my personal devices:</p>
+<ol>
+<li>Share some text / link</li>
+<li>Share file(s)</li>
+</ol>
+<p>For simplicity, I decided to create dedicated shortcuts for each use case.</p>
+<h2 id="paste-text-into-microbin">Paste text into microbin</h2>
+<ol>
+<li>
+<p>Open <strong>Shortcuts</strong> app and create new empty shortcut, rename it into &ldquo;Paste into microbin&rdquo;.</p>
+</li>
+<li>
+<p>Add <strong>Share</strong> action, click at <em>Input</em> and select <strong>Shortcut Input</strong>. New <strong>Receive</strong> action will pop up.</p>
+<table>
+  <thead>
+      <tr>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-1.png" type="" alt="Share action"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-2.png" type="" alt="Share action"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-3.png" type="" alt="Receive action"  /></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Click at <em>Nowhere</em> in <strong>Receive &hellip; from</strong> action, enable <strong>Show in Share Sheet</strong> toggle and disable <strong>Show in Search</strong>, click ✅ at the top right.</p>
+</li>
+<li>
+<p>Next to the <strong>if there&rsquo;s no input</strong>, click <em>Continue</em> and select <strong>Ask For</strong> and <strong>Text</strong></p>
+</li>
+<li>
+<p>Delete <strong>Share</strong> action, we don&rsquo;t need it anymore.</p>
+<table>
+  <thead>
+      <tr>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-4.png" type="" alt="Share sheet"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-6.png" type="" alt="Ask for Text"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-13.png" type="" alt="Delete share"  /></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Add <strong>Get contents of URL</strong> action.</p>
+</li>
+<li>
+<p>Put your microbin url into <em>URL</em> field. For example <code>https://pub.microbin.eu/upload</code></p>
+</li>
+<li>
+<p>Expand action configuration by clicking ▶︎ button, then:</p>
+<ul>
+<li>Set <em>Method</em> as <strong>POST</strong></li>
+<li>Add <strong>Content-Type</strong> header with value <code>multipart/form-data</code></li>
+<li>Select <strong>Form</strong> as <em>Request Body</em> type</li>
+<li>Add <strong>content</strong> field as <em>File</em> type (important!) and select <strong>Shortcut Input</strong> as value.
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-10.png" type="" alt="Get contents of URL"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-9.png" type="" alt="Configure URL"  /></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>That&rsquo;s all. Test it by clicking ▶︎ Play button in the bottom menu. If you did everything correctly you&rsquo;ll see preview with the link.</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-11.png" type="" alt="Play button"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-12.png" type="" alt="Preview"  /></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</li>
+</ol>
+<h2 id="upload-files-into-microbin">Upload files into microbin</h2>
+<p>A shortcut for file upload is configured in very similar way. I won&rsquo;t describe it in detail but mention only notable changes:</p>
+<ul>
+<li>Duplicate the <strong>Paste into Microbin</strong> shortcut to not start from scratch.</li>
+<li>In <strong>Receive</strong> action, select <strong>Files</strong> type and allow <em>multiple files</em></li>
+<li>Add <strong>Repeat with each item</strong> action loop to iterate over <em>Selected input</em></li>
+<li>In <strong>Get Contents of URL</strong> action everything stays the same, except <em>content</em> field - it gets renamed into <em>file</em></li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/files-1.PNG" type="" alt="Play button"  /></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/files-2.PNG" type="" alt="Preview"  /></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h2 id="preview">Preview</h2>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th></th>
+          <th><img loading="lazy" src="/images/posts/ios-shortcuts/preview.PNG" type="" alt="Preview"  /></th>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h2 id="summary">Summary</h2>
+<p>If you did everything from above and it did not work, or you don&rsquo;t want to bother with configuring it at all. You can import my shortcuts in your device and override microbin url:</p>
+<ul>
+<li>
+<p>📋 <a href="https://www.icloud.com/shortcuts/8108f92bea454d20b5e68b8bd4f3c8db">Paste Into Microbin</a></p>
+</li>
+<li>
+<p>📤 <a href="https://www.icloud.com/shortcuts/1808fc6036e9436b8534781f7b182ab7">Upload Files to Microbin</a></p>
+</li>
+</ul>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
