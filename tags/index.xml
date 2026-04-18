@@ -6,12 +6,13 @@
     <description>Recent content in Tags on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Microbin</title>
       <link>https://alikhil.dev/tags/microbin/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/microbin/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -21,7 +22,7 @@
       <title>Pastebin</title>
       <link>https://alikhil.dev/tags/pastebin/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/pastebin/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -31,7 +32,7 @@
       <title>Tutorial</title>
       <link>https://alikhil.dev/tags/tutorial/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/tutorial/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -41,7 +42,7 @@
       <title>Cdn</title>
       <link>https://alikhil.dev/tags/cdn/</link>
       <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/cdn/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -51,7 +52,7 @@
       <title>Performance</title>
       <link>https://alikhil.dev/tags/performance/</link>
       <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/performance/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -61,7 +62,7 @@
       <title>Rum</title>
       <link>https://alikhil.dev/tags/rum/</link>
       <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/rum/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -71,7 +72,7 @@
       <title>Kubernetes</title>
       <link>https://alikhil.dev/tags/kubernetes/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/kubernetes/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -81,7 +82,7 @@
       <title>Fd</title>
       <link>https://alikhil.dev/tags/fd/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/fd/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -91,7 +92,7 @@
       <title>Find</title>
       <link>https://alikhil.dev/tags/find/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/find/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -101,7 +102,7 @@
       <title>Kubectl</title>
       <link>https://alikhil.dev/tags/kubectl/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/kubectl/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -111,7 +112,7 @@
       <title>Burnout</title>
       <link>https://alikhil.dev/tags/burnout/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/burnout/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -121,7 +122,7 @@
       <title>Flow</title>
       <link>https://alikhil.dev/tags/flow/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/flow/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -131,7 +132,7 @@
       <title>Habit</title>
       <link>https://alikhil.dev/tags/habit/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/habit/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -141,7 +142,7 @@
       <title>Startup</title>
       <link>https://alikhil.dev/tags/startup/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/startup/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -151,7 +152,7 @@
       <title>Work-Life Balance</title>
       <link>https://alikhil.dev/tags/work-life-balance/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/work-life-balance/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -161,7 +162,7 @@
       <title>Authentication</title>
       <link>https://alikhil.dev/tags/authentication/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/authentication/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -171,7 +172,7 @@
       <title>Oauth2-Proxy</title>
       <link>https://alikhil.dev/tags/oauth2-proxy/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/oauth2-proxy/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -181,7 +182,7 @@
       <title>Passkey</title>
       <link>https://alikhil.dev/tags/passkey/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/passkey/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -191,7 +192,7 @@
       <title>Pocket-Id</title>
       <link>https://alikhil.dev/tags/pocket-id/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/pocket-id/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -201,7 +202,7 @@
       <title>Cable Management</title>
       <link>https://alikhil.dev/tags/cable-management/</link>
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/cable-management/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -211,7 +212,7 @@
       <title>Standing Desk</title>
       <link>https://alikhil.dev/tags/standing-desk/</link>
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/standing-desk/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -221,7 +222,7 @@
       <title>Tips</title>
       <link>https://alikhil.dev/tags/tips/</link>
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/tips/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -231,7 +232,7 @@
       <title>DDC</title>
       <link>https://alikhil.dev/tags/ddc/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/ddc/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -241,7 +242,7 @@
       <title>KVM</title>
       <link>https://alikhil.dev/tags/kvm/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/kvm/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -251,7 +252,7 @@
       <title>Linux</title>
       <link>https://alikhil.dev/tags/linux/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/linux/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -261,7 +262,7 @@
       <title>Mac</title>
       <link>https://alikhil.dev/tags/mac/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/mac/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -271,7 +272,7 @@
       <title>Golang</title>
       <link>https://alikhil.dev/tags/golang/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/golang/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -281,7 +282,7 @@
       <title>Mikrotik</title>
       <link>https://alikhil.dev/tags/mikrotik/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/mikrotik/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -291,7 +292,7 @@
       <title>Vpn</title>
       <link>https://alikhil.dev/tags/vpn/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/vpn/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -301,7 +302,7 @@
       <title>Wireguard</title>
       <link>https://alikhil.dev/tags/wireguard/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/wireguard/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -311,7 +312,7 @@
       <title>Routeros</title>
       <link>https://alikhil.dev/tags/routeros/</link>
       <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/routeros/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -321,7 +322,7 @@
       <title>Secrets</title>
       <link>https://alikhil.dev/tags/secrets/</link>
       <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/secrets/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -331,7 +332,7 @@
       <title>Telegram</title>
       <link>https://alikhil.dev/tags/telegram/</link>
       <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/telegram/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -341,7 +342,7 @@
       <title>Http</title>
       <link>https://alikhil.dev/tags/http/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/http/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -351,7 +352,7 @@
       <title>Sim</title>
       <link>https://alikhil.dev/tags/sim/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/sim/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -361,7 +362,7 @@
       <title>Sms</title>
       <link>https://alikhil.dev/tags/sms/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/sms/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -371,7 +372,7 @@
       <title>Ci-Cd</title>
       <link>https://alikhil.dev/tags/ci-cd/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/ci-cd/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -381,7 +382,7 @@
       <title>Docker</title>
       <link>https://alikhil.dev/tags/docker/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/docker/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -391,7 +392,7 @@
       <title>Drone.io</title>
       <link>https://alikhil.dev/tags/drone.io/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/drone.io/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -401,7 +402,7 @@
       <title>K8s</title>
       <link>https://alikhil.dev/tags/k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/k8s/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -411,7 +412,7 @@
       <title>Spa</title>
       <link>https://alikhil.dev/tags/spa/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/spa/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -421,7 +422,7 @@
       <title>Gamification</title>
       <link>https://alikhil.dev/tags/gamification/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/gamification/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -431,7 +432,7 @@
       <title>Learning</title>
       <link>https://alikhil.dev/tags/learning/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/learning/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -441,7 +442,7 @@
       <title>Spanish</title>
       <link>https://alikhil.dev/tags/spanish/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/spanish/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -451,7 +452,7 @@
       <title>Google Cloud Platform</title>
       <link>https://alikhil.dev/tags/google-cloud-platform/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/google-cloud-platform/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -461,7 +462,7 @@
       <title>Hugo</title>
       <link>https://alikhil.dev/tags/hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/hugo/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -471,7 +472,7 @@
       <title>Quickstart</title>
       <link>https://alikhil.dev/tags/quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/quickstart/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -481,7 +482,7 @@
       <title>Vscode</title>
       <link>https://alikhil.dev/tags/vscode/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/vscode/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>

@@ -6,12 +6,13 @@
     <description>Recent content in Find on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Fri, 17 Oct 2025 19:27:24 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/find/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>kubectl-find - UNIX-find-like plugin to find resources and perform action on them</title>
       <link>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</guid>
       <description>&lt;p&gt;Recently, I have developed a plugin for &lt;code&gt;kubectl&lt;/code&gt; inspired by UNIX &lt;code&gt;find&lt;/code&gt; utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&amp;rsquo;s a good moment to tell more about the project.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently, I have developed a plugin for <code>kubectl</code> inspired by UNIX <code>find</code> utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&rsquo;s a good moment to tell more about the project.</p>

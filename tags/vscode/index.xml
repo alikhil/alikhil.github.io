@@ -6,12 +6,13 @@
     <description>Recent content in Vscode on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Fri, 06 Apr 2018 16:22:35 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go Quickstart</title>
       <link>https://alikhil.dev/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;

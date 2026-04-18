@@ -6,12 +6,13 @@
     <description>Recent content in Note on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 28 Dec 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/note/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes In-Place Pod Resize</title>
       <link>https://alikhil.dev/posts/in-place-pod-resize/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/in-place-pod-resize/</guid>
       <description>&lt;p&gt;About six years ago, while operating a large Java-based platform in Kubernetes, I noticed a recurring problem: our services required significantly higher CPU and memory during application startup. Heavy use of Spring Beans and AutoConfiguration forced us to set inflated resource requests and limits just to survive bootstrap, even though those resources were mostly unused afterwards.&lt;/p&gt;
 &lt;p&gt;This workaround never felt right. As an engineer, I wanted a solution that reflected the actual lifecycle of an application rather than its worst moment.&lt;/p&gt;</description>
@@ -111,7 +112,7 @@
       <title>Note on cable management for standing desk</title>
       <link>https://alikhil.dev/posts/cable-management-for-standing-desk/</link>
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/cable-management-for-standing-desk/</guid>
       <description>&lt;p&gt;Hey!
 Eventually, my desk got pretty messy with all the cables and other stuff piled up on it. Also, my cats started playing with and gnawing on wires. So, I decided to reorganize everything on my desk. Check it out!&lt;/p&gt;

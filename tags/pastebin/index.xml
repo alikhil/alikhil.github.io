@@ -6,12 +6,13 @@
     <description>Recent content in Pastebin on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/pastebin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>iOS shortcuts for microbin</title>
       <link>https://alikhil.dev/posts/ios-shortcut-for-microbin/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/ios-shortcut-for-microbin/</guid>
       <description>&lt;p&gt;Hi there!&lt;/p&gt;
 &lt;p&gt;Recently, I&amp;rsquo;ve deployed &lt;a href=&#34;https://microbin.eu&#34;&gt;microbin&lt;/a&gt;, minimalistic opensource &amp;ldquo;pastebin&amp;rdquo;-like service, into my homelab to share temporal files/text between devices. It works quite well.&lt;/p&gt;

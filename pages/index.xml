@@ -6,12 +6,13 @@
     <description>Recent content in Pages on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Wed, 19 Mar 2025 23:10:25 +0300</lastBuildDate><atom:link href="https://alikhil.dev/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Projects</title>
       <link>https://alikhil.dev/pages/projects/</link>
       <pubDate>Wed, 19 Mar 2025 23:10:25 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/pages/projects/</guid>
       <description>&lt;h2 id=&#34;my-projects&#34;&gt;My Projects&lt;/h2&gt;
 &lt;ul&gt;
@@ -75,7 +76,7 @@
       <title>Talks</title>
       <link>https://alikhil.dev/pages/talks/</link>
       <pubDate>Wed, 19 Mar 2025 23:10:25 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/pages/talks/</guid>
       <description>&lt;p&gt;Here is a list of talks I gave in different conferences and meetups:&lt;/p&gt;
 &lt;h4 id=&#34;cicd-for-golang-projects-with-droneio&#34;&gt;CI/CD for golang projects with drone.io&lt;/h4&gt;

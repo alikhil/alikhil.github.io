@@ -6,12 +6,13 @@
     <description>Recent content in Mac on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Mon, 23 Jun 2025 15:00:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch</title>
       <link>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</guid>
       <description>&lt;p&gt;Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.</p>
@@ -114,7 +115,7 @@
       <title>Monitor input source control on Mac</title>
       <link>https://alikhil.dev/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>

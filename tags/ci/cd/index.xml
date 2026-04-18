@@ -6,12 +6,13 @@
     <description>Recent content in Ci/Cd on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 24 May 2020 15:12:41 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introduction to Drone.io</title>
       <link>http://localhost:1313/posts/intro-to-drone/</link>
       <pubDate>Sun, 24 May 2020 15:12:41 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>http://localhost:1313/posts/intro-to-drone/</guid>
       <description>&lt;p&gt;In this post I have tried to structure the content of my talks about &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; CI/CD platform. I hope, this will be useful for those who are not familiar with it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>In this post I have tried to structure the content of my talks about <a href="https://drone.io">drone.io</a> CI/CD platform. I hope, this will be useful for those who are not familiar with it.</p>

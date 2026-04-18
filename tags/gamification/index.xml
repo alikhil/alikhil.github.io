@@ -6,12 +6,13 @@
     <description>Recent content in Gamification on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 21 Oct 2018 22:42:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/gamification/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tips for language learners</title>
       <link>https://alikhil.dev/posts/how-to-start-learning-new-language/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/how-to-start-learning-new-language/</guid>
       <description>&lt;p&gt;If you expected only post on IT topics on this blog, I am sorry :(
 Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;</description>

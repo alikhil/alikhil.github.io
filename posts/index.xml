@@ -6,12 +6,13 @@
     <description>Recent content in Posts on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
       <link>https://alikhil.dev/posts/graceful-shutdown/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/graceful-shutdown/</guid>
       <description>&lt;p&gt;Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.&lt;/p&gt;
 &lt;p&gt;There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/&#34;&gt;documentation&lt;/a&gt; and most guides claim that &amp;ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&amp;rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are &lt;strong&gt;NOT enough&lt;/strong&gt; for true zero-downtime deployments.&lt;/p&gt;
@@ -231,7 +232,7 @@
       <title>iOS shortcuts for microbin</title>
       <link>https://alikhil.dev/posts/ios-shortcut-for-microbin/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/ios-shortcut-for-microbin/</guid>
       <description>&lt;p&gt;Hi there!&lt;/p&gt;
 &lt;p&gt;Recently, I&amp;rsquo;ve deployed &lt;a href=&#34;https://microbin.eu&#34;&gt;microbin&lt;/a&gt;, minimalistic opensource &amp;ldquo;pastebin&amp;rdquo;-like service, into my homelab to share temporal files/text between devices. It works quite well.&lt;/p&gt;
@@ -381,7 +382,7 @@
       <title>What is a CDN and Why It Matters?</title>
       <link>https://alikhil.dev/posts/what-is-a-cdn-and-why-it-matters/</link>
       <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/what-is-a-cdn-and-why-it-matters/</guid>
       <description>&lt;p&gt;With the rapid growth of GenAI solutions and the continuous launch of new applications, understanding the fundamental challenges and solutions of the web is becoming increasingly important.&lt;/p&gt;
 &lt;p&gt;One of the core challenges is &lt;strong&gt;delivering content quickly to the end user&lt;/strong&gt;. This is where a CDN comes into play.&lt;/p&gt;</description>
@@ -453,7 +454,7 @@ If the application server is hosted in Paris, users in Paris will experience min
       <title>Kubernetes In-Place Pod Resize</title>
       <link>https://alikhil.dev/posts/in-place-pod-resize/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/in-place-pod-resize/</guid>
       <description>&lt;p&gt;About six years ago, while operating a large Java-based platform in Kubernetes, I noticed a recurring problem: our services required significantly higher CPU and memory during application startup. Heavy use of Spring Beans and AutoConfiguration forced us to set inflated resource requests and limits just to survive bootstrap, even though those resources were mostly unused afterwards.&lt;/p&gt;
 &lt;p&gt;This workaround never felt right. As an engineer, I wanted a solution that reflected the actual lifecycle of an application rather than its worst moment.&lt;/p&gt;</description>
@@ -553,7 +554,7 @@ If the application server is hosted in Paris, users in Paris will experience min
       <title>Contributing to Open Source: Why It Matters and How to Start</title>
       <link>https://alikhil.dev/posts/contributing-to-open-source-why-it-matters-and-how-to-start/</link>
       <pubDate>Thu, 18 Dec 2025 04:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/contributing-to-open-source-why-it-matters-and-how-to-start/</guid>
       <description>&lt;p&gt;Whether you’re curious about open source or wondering how to make a meaningful impact, this post guides you through the process. You’ll learn why contributing is important, discover the different ways to get involved, and find practical steps to take your first contribution.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Whether you’re curious about open source or wondering how to make a meaningful impact, this post guides you through the process. You’ll learn why contributing is important, discover the different ways to get involved, and find practical steps to take your first contribution.</p>
@@ -601,7 +602,7 @@ Start small, pick a project you love, and take your first step</p>]]></content:e
       <title>kubectl-find - UNIX-find-like plugin to find resources and perform action on them</title>
       <link>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</guid>
       <description>&lt;p&gt;Recently, I have developed a plugin for &lt;code&gt;kubectl&lt;/code&gt; inspired by UNIX &lt;code&gt;find&lt;/code&gt; utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&amp;rsquo;s a good moment to tell more about the project.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently, I have developed a plugin for <code>kubectl</code> inspired by UNIX <code>find</code> utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&rsquo;s a good moment to tell more about the project.</p>
@@ -675,7 +676,7 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
       <title>The Simple Habit That Saves My Evenings</title>
       <link>https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/</guid>
       <description>&lt;p&gt;As a software engineer, I often work on big tasks that require hours of continuous and focused work. However, we have plenty of meetings, colleagues asking us something in Slack, and lunch breaks. Add a colleague who comes to you and calls you for a cup of coffee if you work from the office.&lt;/p&gt;
 &lt;p&gt;And usually, we don’t really have such a luxury as &lt;strong&gt;hours&lt;/strong&gt; of uninterrupted time.&lt;/p&gt;
@@ -704,7 +705,7 @@ Here are the two main ideas of it:</p>
       <title>OAuth2-proxy: protect services in kubernetes</title>
       <link>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
       <description>&lt;p&gt;The original post wrote &lt;a href=&#34;https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/&#34;&gt;about oauth2-proxy&lt;/a&gt; over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>The original post wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
@@ -912,7 +913,7 @@ Here are the two main ideas of it:</p>
       <title>Note on cable management for standing desk</title>
       <link>https://alikhil.dev/posts/cable-management-for-standing-desk/</link>
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/cable-management-for-standing-desk/</guid>
       <description>&lt;p&gt;Hey!
 Eventually, my desk got pretty messy with all the cables and other stuff piled up on it. Also, my cats started playing with and gnawing on wires. So, I decided to reorganize everything on my desk. Check it out!&lt;/p&gt;
@@ -981,7 +982,7 @@ td, th {
       <title>How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch</title>
       <link>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</guid>
       <description>&lt;p&gt;Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.</p>
@@ -1084,7 +1085,7 @@ td, th {
       <title>Remote LAN access with WireGuard and Mikrotik</title>
       <link>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</guid>
       <description>&lt;p&gt;Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.</p>
@@ -1360,7 +1361,7 @@ td, th {
       <title>Storing and using secrets in Mikrotik RouterOS</title>
       <link>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
       <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
       <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;
 &lt;p&gt;When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.&lt;/p&gt;</description>
@@ -1470,7 +1471,7 @@ td, th {
       <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
       <link>https://alikhil.dev/posts/go-global-http-client-gotcha/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/go-global-http-client-gotcha/</guid>
       <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
 &lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
@@ -1512,7 +1513,7 @@ td, th {
       <title>Forwarding SMS to Telegram</title>
       <link>https://alikhil.dev/posts/forwarding-sms-to-telegram/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/forwarding-sms-to-telegram/</guid>
       <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
 &lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
@@ -1597,7 +1598,7 @@ td, th {
       <title>Monitor input source control on Mac</title>
       <link>https://alikhil.dev/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/monitor-input-source-control-mac/</guid>
       <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
@@ -1685,7 +1686,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
       <title>Build own drone.io docker image</title>
       <link>https://alikhil.dev/posts/build-own-drone-image/</link>
       <pubDate>Fri, 20 Sep 2019 10:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/build-own-drone-image/</guid>
       <description>&lt;p&gt;¡Hola, amigos!&lt;/p&gt;
 &lt;p&gt;In this post, I will quickly descibe how you can build your own &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; docker image.&lt;/p&gt;</description>
@@ -1749,7 +1750,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
       <title>Deploy SPA application to Kubernetes</title>
       <link>https://alikhil.dev/posts/deploy-spa-to-k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/deploy-spa-to-k8s/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>
@@ -1870,7 +1871,7 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
       <title>Tips for language learners</title>
       <link>https://alikhil.dev/posts/how-to-start-learning-new-language/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/how-to-start-learning-new-language/</guid>
       <description>&lt;p&gt;If you expected only post on IT topics on this blog, I am sorry :(
 Today I&amp;rsquo;ll share you my experience in learning a new language. I am practicing these techniques and tips for mastering Español, but I am sure that you can apply them to most of the other languages.&lt;/p&gt;</description>
@@ -1896,7 +1897,7 @@ Today I&rsquo;ll share you my experience in learning a new language. I am practi
       <title>Oauth2 Proxy for Kubernetes Services</title>
       <link>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</link>
       <pubDate>Sun, 20 May 2018 21:30:36 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;In this post, I will go through configuring &lt;a href=&#34;https://github.com/bitly/oauth2_proxy&#34;&gt;Bitly OAuth2 proxy&lt;/a&gt; in a kubernetes cluster.&lt;/p&gt;</description>
@@ -2201,7 +2202,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
       <title>Say hello to Hugo</title>
       <link>https://alikhil.dev/posts/say-hello-to-hugo/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/say-hello-to-hugo/</guid>
       <description>&lt;p&gt;Today I migrated my blog to &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; engine. So, it&amp;rsquo;s my first post here, yaay!&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Today I migrated my blog to <a href="https://gohugo.io">Hugo</a> engine. So, it&rsquo;s my first post here, yaay!</p>
@@ -2212,7 +2213,7 @@ It can be <em>kubernetes-dashboard</em> or <em>kibana</em> or anything else.</p>
       <title>Go Quickstart</title>
       <link>https://alikhil.dev/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;

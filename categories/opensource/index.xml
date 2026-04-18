@@ -6,12 +6,13 @@
     <description>Recent content in Opensource on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 28 Dec 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/opensource/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes In-Place Pod Resize</title>
       <link>https://alikhil.dev/posts/in-place-pod-resize/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/in-place-pod-resize/</guid>
       <description>&lt;p&gt;About six years ago, while operating a large Java-based platform in Kubernetes, I noticed a recurring problem: our services required significantly higher CPU and memory during application startup. Heavy use of Spring Beans and AutoConfiguration forced us to set inflated resource requests and limits just to survive bootstrap, even though those resources were mostly unused afterwards.&lt;/p&gt;
 &lt;p&gt;This workaround never felt right. As an engineer, I wanted a solution that reflected the actual lifecycle of an application rather than its worst moment.&lt;/p&gt;</description>
@@ -111,7 +112,7 @@
       <title>Contributing to Open Source: Why It Matters and How to Start</title>
       <link>https://alikhil.dev/posts/contributing-to-open-source-why-it-matters-and-how-to-start/</link>
       <pubDate>Thu, 18 Dec 2025 04:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/contributing-to-open-source-why-it-matters-and-how-to-start/</guid>
       <description>&lt;p&gt;Whether you’re curious about open source or wondering how to make a meaningful impact, this post guides you through the process. You’ll learn why contributing is important, discover the different ways to get involved, and find practical steps to take your first contribution.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Whether you’re curious about open source or wondering how to make a meaningful impact, this post guides you through the process. You’ll learn why contributing is important, discover the different ways to get involved, and find practical steps to take your first contribution.</p>
@@ -159,7 +160,7 @@ Start small, pick a project you love, and take your first step</p>]]></content:e
       <title>kubectl-find - UNIX-find-like plugin to find resources and perform action on them</title>
       <link>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</guid>
       <description>&lt;p&gt;Recently, I have developed a plugin for &lt;code&gt;kubectl&lt;/code&gt; inspired by UNIX &lt;code&gt;find&lt;/code&gt; utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&amp;rsquo;s a good moment to tell more about the project.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently, I have developed a plugin for <code>kubectl</code> inspired by UNIX <code>find</code> utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it&rsquo;s a good moment to tell more about the project.</p>
@@ -233,7 +234,7 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
       <title>OAuth2-proxy: protect services in kubernetes</title>
       <link>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
       <description>&lt;p&gt;The original post wrote &lt;a href=&#34;https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/&#34;&gt;about oauth2-proxy&lt;/a&gt; over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>The original post wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
@@ -441,7 +442,7 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
       <title>Remote LAN access with WireGuard and Mikrotik</title>
       <link>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</guid>
       <description>&lt;p&gt;Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.</p>
@@ -717,7 +718,7 @@ td, th {
       <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
       <link>https://alikhil.dev/posts/go-global-http-client-gotcha/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/go-global-http-client-gotcha/</guid>
       <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
 &lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
@@ -759,7 +760,7 @@ td, th {
       <title>Forwarding SMS to Telegram</title>
       <link>https://alikhil.dev/posts/forwarding-sms-to-telegram/</link>
       <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/forwarding-sms-to-telegram/</guid>
       <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
 &lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>

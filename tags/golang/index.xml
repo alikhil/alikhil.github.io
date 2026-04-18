@@ -6,12 +6,13 @@
     <description>Recent content in Golang on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
       <link>https://alikhil.dev/posts/graceful-shutdown/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/graceful-shutdown/</guid>
       <description>&lt;p&gt;Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.&lt;/p&gt;
 &lt;p&gt;There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/&#34;&gt;documentation&lt;/a&gt; and most guides claim that &amp;ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&amp;rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are &lt;strong&gt;NOT enough&lt;/strong&gt; for true zero-downtime deployments.&lt;/p&gt;
@@ -231,7 +232,7 @@
       <title>Unintended Side Effects of Using http.DefaultClient in Go</title>
       <link>https://alikhil.dev/posts/go-global-http-client-gotcha/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/go-global-http-client-gotcha/</guid>
       <description>&lt;p&gt;The Internet is plenty of articles that telling why you should not be using &lt;code&gt;http.DefaultClient&lt;/code&gt; in Golang (&lt;a href=&#34;https://medium.com/@nate510/don-t-use-go-s-default-http-client-4804cb19f779&#34;&gt;one&lt;/a&gt;, &lt;a href=&#34;https://vishnubharathi.codes/blog/know-when-to-break-up-with-go-http-defaultclient/&#34;&gt;two&lt;/a&gt;) but they refer to &lt;code&gt;Timeout&lt;/code&gt; and &lt;code&gt;MaxIdleConns&lt;/code&gt; settings.&lt;/p&gt;
 &lt;p&gt;Today I want to share with you another reason why you should avoid using &lt;code&gt;http.DefaultClient&lt;/code&gt; in your code.&lt;/p&gt;</description>
@@ -273,7 +274,7 @@
       <title>Go Quickstart</title>
       <link>https://alikhil.dev/posts/go-quickstart/</link>
       <pubDate>Fri, 06 Apr 2018 16:22:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/go-quickstart/</guid>
       <description>&lt;p&gt;Hi folks!
 It&amp;rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;

@@ -6,12 +6,13 @@
     <description>Recent content in Categories on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ios</title>
       <link>https://alikhil.dev/categories/ios/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/ios/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -21,7 +22,7 @@
       <title>Self-Hosting</title>
       <link>https://alikhil.dev/categories/self-hosting/</link>
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/self-hosting/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -31,7 +32,7 @@
       <title>Web</title>
       <link>https://alikhil.dev/categories/web/</link>
       <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/web/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -41,7 +42,7 @@
       <title>Devops</title>
       <link>https://alikhil.dev/categories/devops/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/devops/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -51,7 +52,7 @@
       <title>Note</title>
       <link>https://alikhil.dev/categories/note/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/note/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -61,7 +62,7 @@
       <title>Opensource</title>
       <link>https://alikhil.dev/categories/opensource/</link>
       <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/opensource/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -71,7 +72,7 @@
       <title>Notes</title>
       <link>https://alikhil.dev/categories/notes/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/notes/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -81,7 +82,7 @@
       <title>Productivity</title>
       <link>https://alikhil.dev/categories/productivity/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/productivity/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -91,7 +92,7 @@
       <title>Networking</title>
       <link>https://alikhil.dev/categories/networking/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/networking/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -101,7 +102,7 @@
       <title>Desk</title>
       <link>https://alikhil.dev/categories/desk/</link>
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/desk/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -111,7 +112,7 @@
       <title>Linux</title>
       <link>https://alikhil.dev/categories/linux/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/linux/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -121,7 +122,7 @@
       <title>Mac</title>
       <link>https://alikhil.dev/categories/mac/</link>
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/mac/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -131,7 +132,7 @@
       <title>Sre</title>
       <link>https://alikhil.dev/categories/sre/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/sre/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -141,7 +142,7 @@
       <title>Selfhosting</title>
       <link>https://alikhil.dev/categories/selfhosting/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/selfhosting/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -151,7 +152,7 @@
       <title>Programming</title>
       <link>https://alikhil.dev/categories/programming/</link>
       <pubDate>Wed, 19 Mar 2025 19:20:45 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/programming/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -161,7 +162,7 @@
       <title>Languages</title>
       <link>https://alikhil.dev/categories/languages/</link>
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/languages/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
@@ -171,7 +172,7 @@
       <title>Blogging</title>
       <link>https://alikhil.dev/categories/blogging/</link>
       <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/blogging/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>

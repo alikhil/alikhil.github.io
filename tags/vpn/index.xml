@@ -6,12 +6,13 @@
     <description>Recent content in Vpn on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 13 Apr 2025 14:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/vpn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Remote LAN access with WireGuard and Mikrotik</title>
       <link>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</guid>
       <description>&lt;p&gt;Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.</p>

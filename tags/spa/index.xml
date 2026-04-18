@@ -6,12 +6,13 @@
     <description>Recent content in Spa on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sat, 08 Jun 2019 22:30:00 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/spa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploy SPA application to Kubernetes</title>
       <link>https://alikhil.dev/posts/deploy-spa-to-k8s/</link>
       <pubDate>Sat, 08 Jun 2019 22:30:00 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/deploy-spa-to-k8s/</guid>
       <description>&lt;p&gt;Hello, folks!&lt;/p&gt;
 &lt;p&gt;Today I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don&amp;rsquo;t very familiar with docker and k8s but want their single page application run in k8s.&lt;/p&gt;</description>

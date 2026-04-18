@@ -6,12 +6,13 @@
     <description>Recent content in Sre on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Sun, 01 Jun 2025 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/categories/sre/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Graceful Shutdown Matters in Kubernetes</title>
       <link>https://alikhil.dev/posts/graceful-shutdown/</link>
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/graceful-shutdown/</guid>
       <description>&lt;p&gt;Have you ever deployed a new version of your app in Kubernetes and noticed errors briefly spiking during rollout? Many teams do not even realize this is happening, especially if they are not closely monitoring their error rates during deployments.&lt;/p&gt;
 &lt;p&gt;There is a common misconception in the Kubernetes world that bothers me. The official Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/&#34;&gt;documentation&lt;/a&gt; and most guides claim that &amp;ldquo;if you want zero downtime upgrades, just use rolling update mode on deployments&amp;rdquo;. I have learned the hard way that this simply it is not true - rolling updates alone are &lt;strong&gt;NOT enough&lt;/strong&gt; for true zero-downtime deployments.&lt;/p&gt;

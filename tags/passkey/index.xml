@@ -6,12 +6,13 @@
     <description>Recent content in Passkey on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
     <lastBuildDate>Tue, 05 Aug 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/passkey/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OAuth2-proxy: protect services in kubernetes</title>
       <link>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      
+      <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
       <description>&lt;p&gt;The original post wrote &lt;a href=&#34;https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/&#34;&gt;about oauth2-proxy&lt;/a&gt; over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>The original post wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
