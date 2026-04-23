@@ -7,7 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Mon, 06 Apr 2026 19:41:44 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Apr 2026 00:11:43 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interviews</title>
+      <link>https://alikhil.dev/tags/interviews/</link>
+      <pubDate>Fri, 24 Apr 2026 00:11:43 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/interviews/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>https://alikhil.dev/tags/tips/</link>
+      <pubDate>Fri, 24 Apr 2026 00:11:43 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/tips/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://alikhil.dev/tags/tutorial/</link>
+      <pubDate>Fri, 24 Apr 2026 00:11:43 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/tutorial/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Microbin</title>
       <link>https://alikhil.dev/tags/microbin/</link>
@@ -24,16 +54,6 @@
       <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/pastebin/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Tutorial</title>
-      <link>https://alikhil.dev/tags/tutorial/</link>
-      <pubDate>Mon, 06 Apr 2026 19:41:44 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/tutorial/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -214,16 +234,6 @@
       <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/standing-desk/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Tips</title>
-      <link>https://alikhil.dev/tags/tips/</link>
-      <pubDate>Fri, 11 Jul 2025 20:00:00 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/tips/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
