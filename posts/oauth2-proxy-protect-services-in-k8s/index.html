@@ -44,8 +44,6 @@
     <meta property="og:image" content="https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header.png" /><meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2025-08-05T21:14:12&#43;03:00" />
   <meta property="article:modified_time" content="2025-08-05T21:14:12&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,15 +51,21 @@
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/",
       "name": "OAuth2-proxy: protect services in kubernetes",
-      "item": "https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/"
+      "position": 3
     }
   ]
 }
@@ -69,33 +73,42 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/#blogposting",
   "@type": "BlogPosting",
-  "headline": "OAuth2-proxy: protect services in kubernetes | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "OAuth2-proxy: protect services in kubernetes",
-  "description": "The original post wrote about oauth2-proxy over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.\n",
-  "keywords": [
-    "authentication", "kubernetes", "passkey", "pocket-id", "oauth2-proxy"
-  ],
-  "wordCount" : "793",
-  "inLanguage": "en-us",
-  "image":"https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/images/chatgpt-header.png","datePublished": "2025-08-05T21:14:12+03:00",
-  "dateModified": "2025-08-05T21:14:12+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/"
   },
+  "dateModified": "2025-08-05T21:14:12+03:00",
+  "datePublished": "2025-08-05T21:14:12+03:00",
+  "description": "The original post wrote about oauth2-proxy over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.\n",
+  "headline": "OAuth2-proxy: protect services in kubernetes",
+  "image": [
+    "https://alikhil.dev/images/chatgpt-header.png"
+  ],
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "authentication",
+    "kubernetes",
+    "passkey",
+    "pocket-id",
+    "oauth2-proxy"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/",
+    "@type": "WebPage"
+  },
+  "name": "OAuth2-proxy: protect services in kubernetes",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 793
 }
 </script>
 <noscript>
@@ -247,6 +260,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

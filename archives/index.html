@@ -43,8 +43,6 @@
 <meta property="article:section" content="" />
   
   
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -52,9 +50,15 @@
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/archives/",
       "name": "Archives",
-      "item": "https://alikhil.dev/archives/"
+      "position": 2
     }
   ]
 }
@@ -62,33 +66,19 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Archives | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Archives",
-  "description": "",
-  "keywords": [
-    
-  ],
-  "wordCount" : "0",
-  "inLanguage": "en-us",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":[{
+  "@id": "https://alikhil.dev/archives/#webpage",
+  "@type": "WebPage",
+  "about": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/archives/"
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+  "description": "",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "name": "Archives",
+  "url": "https://alikhil.dev/archives/"
 }
 </script>
 <noscript>
@@ -240,6 +230,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

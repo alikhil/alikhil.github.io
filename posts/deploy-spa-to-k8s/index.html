@@ -46,8 +46,6 @@ Today I want you to share with you tutorial on how to deploy your SPA applicatio
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2019-06-08T22:30:00&#43;03:00" />
   <meta property="article:modified_time" content="2019-06-08T22:30:00&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,15 +53,21 @@ Today I want you to share with you tutorial on how to deploy your SPA applicatio
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/deploy-spa-to-k8s/",
       "name": "Deploy SPA application to Kubernetes",
-      "item": "https://alikhil.dev/posts/deploy-spa-to-k8s/"
+      "position": 3
     }
   ]
 }
@@ -71,33 +75,39 @@ Today I want you to share with you tutorial on how to deploy your SPA applicatio
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/deploy-spa-to-k8s/#blogposting",
   "@type": "BlogPosting",
-  "headline": "Deploy SPA application to Kubernetes | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Deploy SPA application to Kubernetes",
-  "description": "Hello, folks!\nToday I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don\u0026rsquo;t very familiar with docker and k8s but want their single page application run in k8s.\n",
-  "keywords": [
-    "spa", "tutorial", "k8s", "kubernetes", "docker"
-  ],
-  "wordCount" : "521",
-  "inLanguage": "en-us",
-  "datePublished": "2019-06-08T22:30:00+03:00",
-  "dateModified": "2019-06-08T22:30:00+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/deploy-spa-to-k8s/"
   },
+  "dateModified": "2019-06-08T22:30:00+03:00",
+  "datePublished": "2019-06-08T22:30:00+03:00",
+  "description": "Hello, folks!\nToday I want you to share with you tutorial on how to deploy your SPA application to Kubernetes. Tutorial is oriented for those don\u0026rsquo;t very familiar with docker and k8s but want their single page application run in k8s.\n",
+  "headline": "Deploy SPA application to Kubernetes",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "spa",
+    "tutorial",
+    "k8s",
+    "kubernetes",
+    "docker"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/deploy-spa-to-k8s/",
+    "@type": "WebPage"
+  },
+  "name": "Deploy SPA application to Kubernetes",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 521
 }
 </script>
 <noscript>
@@ -249,6 +259,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

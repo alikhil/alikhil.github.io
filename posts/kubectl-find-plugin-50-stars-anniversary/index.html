@@ -43,8 +43,6 @@
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2025-10-17T19:27:24&#43;03:00" />
   <meta property="article:modified_time" content="2025-10-17T19:27:24&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -52,15 +50,21 @@
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/",
       "name": "kubectl-find - UNIX-find-like plugin to find resources and perform action on them",
-      "item": "https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/"
+      "position": 3
     }
   ]
 }
@@ -68,33 +72,38 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/#blogposting",
   "@type": "BlogPosting",
-  "headline": "kubectl-find - UNIX-find-like plugin to find resources and perform action on them | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "kubectl-find - UNIX-find-like plugin to find resources and perform action on them",
-  "description": "Recently, I have developed a plugin for kubectl inspired by UNIX find utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it\u0026rsquo;s a good moment to tell more about the project.\n",
-  "keywords": [
-    "kubernetes", "find", "fd", "kubectl"
-  ],
-  "wordCount" : "554",
-  "inLanguage": "en-us",
-  "datePublished": "2025-10-17T19:27:24+03:00",
-  "dateModified": "2025-10-17T19:27:24+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/"
   },
+  "dateModified": "2025-10-17T19:27:24+03:00",
+  "datePublished": "2025-10-17T19:27:24+03:00",
+  "description": "Recently, I have developed a plugin for kubectl inspired by UNIX find utility to find and perform action on resources. And few days ago number of stars in the repo reached 50! I think it\u0026rsquo;s a good moment to tell more about the project.\n",
+  "headline": "kubectl-find - UNIX-find-like plugin to find resources and perform action on them",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "kubernetes",
+    "find",
+    "fd",
+    "kubectl"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/",
+    "@type": "WebPage"
+  },
+  "name": "kubectl-find - UNIX-find-like plugin to find resources and perform action on them",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 554
 }
 </script>
 <noscript>
@@ -246,6 +255,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

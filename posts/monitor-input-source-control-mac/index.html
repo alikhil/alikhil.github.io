@@ -46,8 +46,6 @@ In this post I will show you how to configure hotkeys for that." />
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2024-10-16T20:31:06&#43;03:00" />
   <meta property="article:modified_time" content="2024-10-16T20:31:06&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,15 +53,21 @@ In this post I will show you how to configure hotkeys for that." />
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/monitor-input-source-control-mac/",
       "name": "Monitor input source control on Mac",
-      "item": "https://alikhil.dev/posts/monitor-input-source-control-mac/"
+      "position": 3
     }
   ]
 }
@@ -71,33 +75,37 @@ In this post I will show you how to configure hotkeys for that." />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/monitor-input-source-control-mac/#blogposting",
   "@type": "BlogPosting",
-  "headline": "Monitor input source control on Mac | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Monitor input source control on Mac",
-  "description": "If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.\nIn this post I will show you how to configure hotkeys for that.\n",
-  "keywords": [
-    "tutorial", "tips", "mac"
-  ],
-  "wordCount" : "550",
-  "inLanguage": "en-us",
-  "datePublished": "2024-10-16T20:31:06+03:00",
-  "dateModified": "2024-10-16T20:31:06+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/monitor-input-source-control-mac/"
   },
+  "dateModified": "2024-10-16T20:31:06+03:00",
+  "datePublished": "2024-10-16T20:31:06+03:00",
+  "description": "If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.\nIn this post I will show you how to configure hotkeys for that.\n",
+  "headline": "Monitor input source control on Mac",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "tutorial",
+    "tips",
+    "mac"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/monitor-input-source-control-mac/",
+    "@type": "WebPage"
+  },
+  "name": "Monitor input source control on Mac",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 550
 }
 </script>
 <noscript>
@@ -249,6 +257,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

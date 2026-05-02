@@ -24,7 +24,11 @@
 <p>In this post, I will share what I have learned about implementing proper graceful shutdown in Kubernetes. I will show you exactly what happens behind the scenes, provide working code examples, and back everything with real test results that clearly demonstrate the difference.</p>
 <h2 id="the-problem-hidden-errors-during-pod-termination">The Problem: Hidden Errors During Pod Termination</h2>
 <figure class="align-center ">
-    <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"/><figcaption>
+    <picture>
+        <source type="image/webp" srcset="/images/posts/k8s-graceful-shutdown_hu_bc6cd8ddc1517085.webp">
+        <img loading="lazy" src="/images/posts/k8s-graceful-shutdown.png#center"
+         alt="ChatGPT: draw funny picture of Kubernetes pod gracefully shutting down"/>
+    </picture><figcaption>
             ChatGPT: draw funny picture of Kubernetes pod gracefully shutting down
         </figcaption>
 </figure>

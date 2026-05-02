@@ -69,16 +69,6 @@
     </item>
     
     <item>
-      <title>Notes</title>
-      <link>https://alikhil.dev/categories/notes/</link>
-      <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/categories/notes/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Productivity</title>
       <link>https://alikhil.dev/categories/productivity/</link>
       <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
@@ -134,16 +124,6 @@
       <pubDate>Sun, 01 Jun 2025 20:31:06 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/sre/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Selfhosting</title>
-      <link>https://alikhil.dev/categories/selfhosting/</link>
-      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/categories/selfhosting/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

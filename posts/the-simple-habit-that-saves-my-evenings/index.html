@@ -49,8 +49,6 @@ Nevertheless, sometimes we catch the flow of productive and focused work at the 
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2025-09-28T19:08:35&#43;03:00" />
   <meta property="article:modified_time" content="2025-09-28T19:08:35&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,15 +56,21 @@ Nevertheless, sometimes we catch the flow of productive and focused work at the 
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/",
       "name": "The Simple Habit That Saves My Evenings",
-      "item": "https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/"
+      "position": 3
     }
   ]
 }
@@ -74,33 +78,39 @@ Nevertheless, sometimes we catch the flow of productive and focused work at the 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/#blogposting",
   "@type": "BlogPosting",
-  "headline": "The Simple Habit That Saves My Evenings | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "The Simple Habit That Saves My Evenings",
-  "description": "As a software engineer, I often work on big tasks that require hours of continuous and focused work. However, we have plenty of meetings, colleagues asking us something in Slack, and lunch breaks. Add a colleague who comes to you and calls you for a cup of coffee if you work from the office.\nAnd usually, we don’t really have such a luxury as hours of uninterrupted time.\nNevertheless, sometimes we catch the flow of productive and focused work at the end of the workday. Imagine you come up with an elegant solution to a problem you’ve been tackling all day, or maybe even the whole past week. You can’t wait to implement and test your solution. And of course, you are so driven by your idea that you decide to continue working despite your working day being over. “20 minutes more and I will finish it,” you think. Obviously, this is not the case; some edge cases and new issues will inevitably arise. You come to your senses only 2–3 hours later—tired, hungry, demotivated, and still struggling with your problem. You just wasted your evening, with nothing to show for it. Worse, you overworked and didn’t recover that night. Thus, you were already exhausted when you started working.\n",
-  "keywords": [
-    "habit", "work-life balance", "startup", "flow", "burnout"
-  ],
-  "wordCount" : "554",
-  "inLanguage": "en-us",
-  "datePublished": "2025-09-28T19:08:35+03:00",
-  "dateModified": "2025-09-28T19:08:35+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/"
   },
+  "dateModified": "2025-09-28T19:08:35+03:00",
+  "datePublished": "2025-09-28T19:08:35+03:00",
+  "description": "As a software engineer, I often work on big tasks that require hours of continuous and focused work. However, we have plenty of meetings, colleagues asking us something in Slack, and lunch breaks. Add a colleague who comes to you and calls you for a cup of coffee if you work from the office.\nAnd usually, we don’t really have such a luxury as hours of uninterrupted time.\nNevertheless, sometimes we catch the flow of productive and focused work at the end of the workday. Imagine you come up with an elegant solution to a problem you’ve been tackling all day, or maybe even the whole past week. You can’t wait to implement and test your solution. And of course, you are so driven by your idea that you decide to continue working despite your working day being over. “20 minutes more and I will finish it,” you think. Obviously, this is not the case; some edge cases and new issues will inevitably arise. You come to your senses only 2–3 hours later—tired, hungry, demotivated, and still struggling with your problem. You just wasted your evening, with nothing to show for it. Worse, you overworked and didn’t recover that night. Thus, you were already exhausted when you started working.\n",
+  "headline": "The Simple Habit That Saves My Evenings",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "habit",
+    "work-life balance",
+    "startup",
+    "flow",
+    "burnout"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/",
+    "@type": "WebPage"
+  },
+  "name": "The Simple Habit That Saves My Evenings",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 554
 }
 </script>
 <noscript>
@@ -252,6 +262,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://alikhil.dev/posts/graceful-shutdown/</loc>
-    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2026-04-24T00:11:43+03:00</lastmod>
+    <lastmod>2026-05-02T17:12:38+00:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/pages/</loc>
+    <lastmod>2026-05-02T17:12:38+00:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
     <lastmod>2026-04-24T00:11:43+03:00</lastmod>
@@ -98,9 +98,6 @@
     <loc>https://alikhil.dev/tags/habit/</loc>
     <lastmod>2025-09-28T19:08:35+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/notes/</loc>
-    <lastmod>2025-09-28T19:08:35+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/categories/productivity/</loc>
     <lastmod>2025-09-28T19:08:35+03:00</lastmod>
   </url><url>
@@ -170,13 +167,13 @@
     <loc>https://alikhil.dev/categories/sre/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
   </url><url>
+    <loc>https://alikhil.dev/posts/graceful-shutdown/</loc>
+    <lastmod>2025-06-01T20:31:06+03:00</lastmod>
+  </url><url>
     <loc>https://alikhil.dev/tags/mikrotik/</loc>
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</loc>
-    <lastmod>2025-04-13T14:11:43+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/selfhosting/</loc>
     <lastmod>2025-04-13T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/vpn/</loc>
@@ -196,9 +193,6 @@
   </url><url>
     <loc>https://alikhil.dev/tags/telegram/</loc>
     <lastmod>2025-03-30T16:01:25+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/pages/</loc>
-    <lastmod>2025-03-19T23:10:25+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/pages/projects/</loc>
     <lastmod>2025-03-19T23:10:25+03:00</lastmod>

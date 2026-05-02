@@ -49,8 +49,6 @@ In this tutorial, we will configure Go environment in VS Code and write our firs
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2018-04-06T16:22:35&#43;03:00" />
   <meta property="article:modified_time" content="2018-04-06T16:22:35&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,15 +56,21 @@ In this tutorial, we will configure Go environment in VS Code and write our firs
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/go-quickstart/",
       "name": "Go Quickstart",
-      "item": "https://alikhil.dev/posts/go-quickstart/"
+      "position": 3
     }
   ]
 }
@@ -74,33 +78,38 @@ In this tutorial, we will configure Go environment in VS Code and write our firs
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/go-quickstart/#blogposting",
   "@type": "BlogPosting",
-  "headline": "Go Quickstart | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Go Quickstart",
-  "description": "Hi folks! It\u0026rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.\nIn this tutorial, we will configure Go environment in VS Code and write our first program in Go.\n",
-  "keywords": [
-    "golang", "vscode", "tutorial", "quickstart"
-  ],
-  "wordCount" : "343",
-  "inLanguage": "en-us",
-  "datePublished": "2018-04-06T16:22:35+03:00",
-  "dateModified": "2018-04-06T16:22:35+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/go-quickstart/"
   },
+  "dateModified": "2018-04-06T16:22:35+03:00",
+  "datePublished": "2018-04-06T16:22:35+03:00",
+  "description": "Hi folks! It\u0026rsquo;s been a long time since I have published the last post, but now I came back with short quickstart guide in Go.\nIn this tutorial, we will configure Go environment in VS Code and write our first program in Go.\n",
+  "headline": "Go Quickstart",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "golang",
+    "vscode",
+    "tutorial",
+    "quickstart"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/go-quickstart/",
+    "@type": "WebPage"
+  },
+  "name": "Go Quickstart",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 343
 }
 </script>
 <noscript>
@@ -252,6 +261,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

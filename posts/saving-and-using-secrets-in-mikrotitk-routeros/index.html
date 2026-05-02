@@ -47,8 +47,6 @@ When I started writing my first scripts I faced a problem: how to store and use 
     <meta property="og:image" content="https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/https:/en.meming.world/images/en/8/8e/All_Right_Then,_Keep_Your_Secrets.jpg" /><meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2025-03-30T16:01:25&#43;03:00" />
   <meta property="article:modified_time" content="2025-03-30T16:01:25&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,15 +54,21 @@ When I started writing my first scripts I faced a problem: how to store and use 
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/",
       "name": "Storing and using secrets in Mikrotik RouterOS",
-      "item": "https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/"
+      "position": 3
     }
   ]
 }
@@ -72,33 +76,42 @@ When I started writing my first scripts I faced a problem: how to store and use 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/#blogposting",
   "@type": "BlogPosting",
-  "headline": "Storing and using secrets in Mikrotik RouterOS | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Storing and using secrets in Mikrotik RouterOS",
-  "description": "Recently I have replaced my stock ISP router with Mikrotik Hex S. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.\nWhen I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.\n",
-  "keywords": [
-    "routeros", "mikrotik", "secrets", "tutorial", "telegram"
-  ],
-  "wordCount" : "553",
-  "inLanguage": "en-us",
-  "image":"https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/https:/en.meming.world/images/en/8/8e/All_Right_Then,_Keep_Your_Secrets.jpg","datePublished": "2025-03-30T16:01:25+03:00",
-  "dateModified": "2025-03-30T16:01:25+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/"
   },
+  "dateModified": "2025-03-30T16:01:25+03:00",
+  "datePublished": "2025-03-30T16:01:25+03:00",
+  "description": "Recently I have replaced my stock ISP router with Mikrotik Hex S. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.\nWhen I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.\n",
+  "headline": "Storing and using secrets in Mikrotik RouterOS",
+  "image": [
+    "https:/en.meming.world/images/en/8/8e/All_Right_Then%2C_Keep_Your_Secrets.jpg"
+  ],
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "routeros",
+    "mikrotik",
+    "secrets",
+    "tutorial",
+    "telegram"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/",
+    "@type": "WebPage"
+  },
+  "name": "Storing and using secrets in Mikrotik RouterOS",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 553
 }
 </script>
 <noscript>
@@ -250,6 +263,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

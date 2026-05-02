@@ -42,8 +42,6 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://alikhil.dev/pages/" />
 
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,9 +49,15 @@
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/pages/",
       "name": "Pages",
-      "item": "https://alikhil.dev/pages/"
+      "position": 2
     }
   ]
 }
@@ -210,6 +214,11 @@ function toggleThemeListener() {
                 </a>
             </li>
             <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
+                </a>
+            </li>
+            <li>
                 <a href="https://alikhil.dev/pages/talks/" title="Talks"
                 >Talks
                 </a>
@@ -248,12 +257,7 @@ function toggleThemeListener() {
   </header>
   <section class="entry-content">
     
-      <p>My Projects 1mgr.xyz - On-demand mirror for images from dockerhub based on GitHub Actions and GitHub package registry.
-kubectl-find - missing plugin for kubectl to find resources in k8s using name pattern, age and many other properties.
-Open Source Contributions Here is a list of opensource projects I’ve worked on:
-PostgreSQL - implemented random numbers generator from Zipfian distribution for pgbench and psql command to show access methods info.
-updatecli - enhanced helm chart changelog generation and GitLab plugin.
-...</p>
+      <p>Open source projects, tools, and infrastructure work by Alik Khilazhev.</p>
     
   </section>
   <footer class="entry-footer"><span class="meta-item">
@@ -272,11 +276,7 @@ updatecli - enhanced helm chart changelog generation and GitLab plugin.
   </header>
   <section class="entry-content">
     
-      <p>Here is a list of talks I gave in different conferences and meetups:
-CI/CD for golang projects with drone.io Avito.Tech meetup in Kazan, 2020
-A deep dive into building efficient CI/CD pipelines for Go using drone.io, featuring Docker-in-Docker workflows, custom plugins, and caching strategies that cut build times by 40%.
-Drone.io #101 Golang Meetup in Yoshkar-Ola, 2020
-...</p>
+      <p>Conference and meetup talks by Alik Khilazhev on Go, CI/CD, Drone.io, Terraform, and infrastructure automation.</p>
     
   </section>
   <footer class="entry-footer"><span class="meta-item">

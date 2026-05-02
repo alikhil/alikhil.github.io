@@ -46,8 +46,6 @@ If you’re dealing with multiple SIM cards and want to receive SMS in Telegram,
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2024-10-26T14:11:43&#43;03:00" />
   <meta property="article:modified_time" content="2024-10-26T14:11:43&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,15 +53,21 @@ If you’re dealing with multiple SIM cards and want to receive SMS in Telegram,
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/forwarding-sms-to-telegram/",
       "name": "Forwarding SMS to Telegram",
-      "item": "https://alikhil.dev/posts/forwarding-sms-to-telegram/"
+      "position": 3
     }
   ]
 }
@@ -71,33 +75,37 @@ If you’re dealing with multiple SIM cards and want to receive SMS in Telegram,
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/forwarding-sms-to-telegram/#blogposting",
   "@type": "BlogPosting",
-  "headline": "Forwarding SMS to Telegram | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Forwarding SMS to Telegram",
-  "description": "After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.\nIf you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.\n",
-  "keywords": [
-    "sim", "sms", "telegram"
-  ],
-  "wordCount" : "581",
-  "inLanguage": "en-us",
-  "datePublished": "2024-10-26T14:11:43+03:00",
-  "dateModified": "2024-10-26T14:11:43+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/forwarding-sms-to-telegram/"
   },
+  "dateModified": "2024-10-26T14:11:43+03:00",
+  "datePublished": "2024-10-26T14:11:43+03:00",
+  "description": "After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.\nIf you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.\n",
+  "headline": "Forwarding SMS to Telegram",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "sim",
+    "sms",
+    "telegram"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/forwarding-sms-to-telegram/",
+    "@type": "WebPage"
+  },
+  "name": "Forwarding SMS to Telegram",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 581
 }
 </script>
 <noscript>
@@ -249,6 +257,11 @@ function toggleThemeListener() {
             <li>
                 <a href="https://alikhil.dev/pages/projects/" title="Projects"
                 >Projects
+                </a>
+            </li>
+            <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
                 </a>
             </li>
             <li>

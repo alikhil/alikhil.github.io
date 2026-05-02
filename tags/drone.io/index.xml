@@ -20,7 +20,7 @@
 <p>In this post, I will quickly descibe how you can build your own <a href="https://drone.io">drone.io</a> docker image.</p>
 <p>Drone is very popular container native CI/CD platform. Not long time ago, there was release of new <a href="https://blog.drone.io/drone-1/">1.0 version</a> of drone. Which brang a lot of cool features and new <a href="https://discourse.drone.io/t/licensing-and-subscription-faq/3839">license</a>. The license tells that we can use Enterprise version of drone for free without any limits by building our own docker image if we are individuals or startup (read the licence for more detail).</p>
 <p>So, how to build it?</p>
-<h1 id="instructions">Instructions</h1>
+<h2 id="instructions">Instructions</h2>
 <p>First, clone the drone repo to your local machine.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git@github.com:drone/drone.git
 </span></span></code></pre></div><p>Second, checkout to version of drone you want to build. For example, I want to build <a href="https://github.com/drone/drone/tag/v1.3.1">v1.3.1</a>:</p>

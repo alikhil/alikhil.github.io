@@ -46,8 +46,6 @@ In this post, I will quickly descibe how you can build your own drone.io docker 
 <meta property="article:section" content="posts" />
   <meta property="article:published_time" content="2019-09-20T10:30:00&#43;03:00" />
   <meta property="article:modified_time" content="2019-09-20T10:30:00&#43;03:00" />
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,15 +53,21 @@ In this post, I will quickly descibe how you can build your own drone.io docker 
   "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://alikhil.dev/posts/"
-    }, 
+      "item": "https://alikhil.dev/",
+      "name": "Home",
+      "position": 1
+    },
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "item": "https://alikhil.dev/posts/",
+      "name": "Posts",
+      "position": 2
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://alikhil.dev/posts/build-own-drone-image/",
       "name": "Build own drone.io docker image",
-      "item": "https://alikhil.dev/posts/build-own-drone-image/"
+      "position": 3
     }
   ]
 }
@@ -71,33 +75,38 @@ In this post, I will quickly descibe how you can build your own drone.io docker 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@id": "https://alikhil.dev/posts/build-own-drone-image/#blogposting",
   "@type": "BlogPosting",
-  "headline": "Build own drone.io docker image | alikhil | software engineering, kubernetes \u0026 self-hosting",
-  "name": "Build own drone.io docker image",
-  "description": "¡Hola, amigos!\nIn this post, I will quickly descibe how you can build your own drone.io docker image.\n",
-  "keywords": [
-    "ci-cd", "tutorial", "drone.io", "docker"
-  ],
-  "wordCount" : "395",
-  "inLanguage": "en-us",
-  "datePublished": "2019-09-20T10:30:00+03:00",
-  "dateModified": "2019-09-20T10:30:00+03:00",
-  "author":[{
+  "author": {
+    "@id": "https://alikhil.dev/#person",
     "@type": "Person",
     "name": "Alik Khilazhev"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://alikhil.dev/posts/build-own-drone-image/"
   },
+  "dateModified": "2019-09-20T10:30:00+03:00",
+  "datePublished": "2019-09-20T10:30:00+03:00",
+  "description": "¡Hola, amigos!\nIn this post, I will quickly descibe how you can build your own drone.io docker image.\n",
+  "headline": "Build own drone.io docker image",
+  "inLanguage": "en-us",
+  "isPartOf": {
+    "@id": "https://alikhil.dev/#website"
+  },
+  "keywords": [
+    "ci-cd",
+    "tutorial",
+    "drone.io",
+    "docker"
+  ],
+  "mainEntityOfPage": {
+    "@id": "https://alikhil.dev/posts/build-own-drone-image/",
+    "@type": "WebPage"
+  },
+  "name": "Build own drone.io docker image",
   "publisher": {
-    "@type": "Organization",
-    "name": "alikhil",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://alikhil.dev/favicon.ico"
-    }
-  }
+    "@id": "https://alikhil.dev/#person",
+    "@type": "Person",
+    "name": "Alik Khilazhev"
+  },
+  "wordCount": 395
 }
 </script>
 <noscript>
@@ -252,6 +261,11 @@ function toggleThemeListener() {
                 </a>
             </li>
             <li>
+                <a href="https://alikhil.dev/topics/" title="Topics"
+                >Topics
+                </a>
+            </li>
+            <li>
                 <a href="https://alikhil.dev/pages/talks/" title="Talks"
                 >Talks
                 </a>
@@ -304,7 +318,7 @@ function toggleThemeListener() {
 <p>In this post, I will quickly descibe how you can build your own <a href="https://drone.io">drone.io</a> docker image.</p>
 <p>Drone is very popular container native CI/CD platform. Not long time ago, there was release of new <a href="https://blog.drone.io/drone-1/">1.0 version</a> of drone. Which brang a lot of cool features and new <a href="https://discourse.drone.io/t/licensing-and-subscription-faq/3839">license</a>. The license tells that we can use Enterprise version of drone for free without any limits by building our own docker image if we are individuals or startup (read the licence for more detail).</p>
 <p>So, how to build it?</p>
-<h1 id="instructions">Instructions<a hidden class="anchor" aria-hidden="true" href="#instructions">¶</a></h1>
+<h2 id="instructions">Instructions<a hidden class="anchor" aria-hidden="true" href="#instructions">¶</a></h2>
 <p>First, clone the drone repo to your local machine.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git@github.com:drone/drone.git
 </span></span></code></pre></div><p>Second, checkout to version of drone you want to build. For example, I want to build <a href="https://github.com/drone/drone/tag/v1.3.1">v1.3.1</a>:</p>

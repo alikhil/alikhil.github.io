@@ -158,5 +158,476 @@
 </ul>]]></content:encoded>
     </item>
     
+    <item>
+      <title>Remote LAN access with WireGuard and Mikrotik</title>
+      <link>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</link>
+      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</guid>
+      <description>&lt;p&gt;Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.</p>
+<h2 id="requirements">Requirements</h2>
+<h3 id="what-i-have">What I have</h3>
+<ul>
+<li>
+<p>A Mikrotik Hex S router with a dynamic public IP address.</p>
+</li>
+<li>
+<p>Services in a cloud VM (Ubuntu 22) with a static public IP address.</p>
+</li>
+<li>
+<p>Services in a VM on my home network.</p>
+</li>
+<li>
+<p>Clients - laptops and phones - that need to access the services in my home and cloud network.</p>
+</li>
+</ul>
+<h3 id="what-i-want">What I want</h3>
+<ul>
+<li>
+<p>Clients outside of my home network should be able to access services both on my home and cloud network.</p>
+</li>
+<li>
+<p>Only traffic to my home and cloud network should be routed through the VPN.</p>
+</li>
+<li>
+<p>Clients inside my home network should be able to access services on my cloud network without additional configuration.</p>
+</li>
+<li>
+<p>No external centralized service should be used.</p>
+</li>
+<li>
+<p>No open ports on my home router.</p>
+</li>
+</ul>
+<p><img loading="lazy" src="/images/posts/mikrotik-wg/final.png" type="" alt="Final configuration"  /></p>
+<h2 id="implementation">Implementation</h2>
+<blockquote>
+<p>Nowadays, there are plenty of VPN solutions like zero-tier and tailscale. However, I think they are too bloated for my humble needs and WireGuard is more than enough for that.</p>
+</blockquote>
+<p>Because of last requirement, it&rsquo;s obvious that traffic to home network should be routed though my cloud server.<br>
+So, I will use WireGuard to create a tunnel between mikrotik router and cloud server.<br>
+This way, I can access my home network from anywhere without exposing any ports on my home router.</p>
+<h3 id="i-initial-configuration-of-wireguard-on-cloud-vm">I. Initial configuration of WireGuard on cloud VM</h3>
+<blockquote>
+<p><em>For the sake of reproducibility and simplicity I will use <a href="https://www.wireguard.com/">vanilla wireguard</a> and configure it on OS level, not in docker container.</em></p>
+</blockquote>
+<h4 id="1-install-wireguard-on-ubuntu-2204">1. Install wireguard on Ubuntu 22.04</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install wireguard -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Edit the configuration file</span>
+</span></span><span class="line"><span class="cl">sudo nano /etc/sysctl.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Find and uncomment the line:</span>
+</span></span><span class="line"><span class="cl">net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Then apply the changes:</span>
+</span></span><span class="line"><span class="cl">sudo sysctl -p
+</span></span></code></pre></div><h4 id="2-create-public-and-private-key">2. Create public and private key</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo su -
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /etc/wireguard
+</span></span><span class="line"><span class="cl"><span class="c1"># Generate private and public keys</span>
+</span></span><span class="line"><span class="cl">wg genkey <span class="p">|</span> tee privatekey <span class="p">|</span> wg pubkey &gt; publickey
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check the keys</span>
+</span></span><span class="line"><span class="cl">cat privatekey
+</span></span><span class="line"><span class="cl">cat publickey
+</span></span></code></pre></div><h4 id="3-create-the-configuration-file">3. Create the configuration file</h4>
+<p>I will use <code>172.16.10.0/24</code> subnet for Wireguard network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the following lines:</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Interface<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Address</span> <span class="o">=</span> 172.16.10.1/24
+</span></span><span class="line"><span class="cl"><span class="nv">ListenPort</span> <span class="o">=</span> <span class="m">27277</span> <span class="c1"># You can choose any port you want</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Privatekey</span> <span class="o">=</span> &lt;your_private_key&gt; <span class="c1"># from previous step</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># These are placeholder lines for next steps, keep them commented for now</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># # Mikrotik peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># [Peer]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># AllowedIPs = 172.16.10.0/24,192.168.0.0/16</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># PublicKey = mikrotik public key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># # client peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># [Peer]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># AllowedIPs = 172.16.10.2/32</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># PublicKey = first client device public key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># CRTL+X: save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Change the permissions of the configuration file</span>
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> wg0.conf
+</span></span></code></pre></div><h4 id="4-start-the-wireguard-interface">4. Start the WireGuard interface</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Enable service to start on boot</span>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> wg-quick@wg0.service
+</span></span><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Start the service</span>
+</span></span><span class="line"><span class="cl">systemctl start wg-quick@wg0
+</span></span><span class="line"><span class="cl"><span class="c1"># Check wg status</span>
+</span></span><span class="line"><span class="cl">wg
+</span></span></code></pre></div><p>It should show the interface is up like this</p>
+<p><img loading="lazy" src="/images/posts/mikrotik-wg/wg.png" type="" alt="WireGuard status"  /></p>
+<p>More commands to check the status of the service:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check the status of the service</span>
+</span></span><span class="line"><span class="cl">systemctl status wg-quick@wg0
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the service if needed</span>
+</span></span><span class="line"><span class="cl">systemctl restart wg-quick@wg0
+</span></span></code></pre></div><h3 id="ii-mikrotik-configuration">II. Mikrotik configuration</h3>
+<p>I will use Mikrotik command line interface (CLI) to configure the router. You can use Winbox or WebFig if you prefer.</p>
+<h4 id="1-create-wireguard-interface">1. Create WireGuard interface</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create WireGuard interface and it will automatically generate private and public keys</span>
+</span></span><span class="line"><span class="cl">/interface wireguard add listen-port<span class="o">=</span><span class="m">13231</span> <span class="nv">mtu</span><span class="o">=</span><span class="m">1420</span> <span class="nv">name</span><span class="o">=</span>cloud-wg
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the IP address to the interface</span>
+</span></span><span class="line"><span class="cl">/ip add <span class="nv">address</span><span class="o">=</span>172.16.10.3/24 <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="nv">network</span><span class="o">=</span>172.16.10.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Print the keys, you will need only the public key later</span>
+</span></span><span class="line"><span class="cl">/interface/wireguard/print
+</span></span></code></pre></div><h4 id="2-create-the-peer">2. Create the peer</h4>
+<p>Here we add cloud vm as a peer to the Mikrotik router&rsquo;s wireguard. The public key of the cloud server is needed here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># In allowed-address we add IP ranges which will be routed through this peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 172.21.0.0/16 - subnet of docker containers on cloud server</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 172.16.10.0/16 - subnet of wireguard network</span>
+</span></span><span class="line"><span class="cl">/interface wireguard peers add allowed-address<span class="o">=</span>172.16.10.0/24,172.21.0.0/16 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    endpoint-address<span class="o">=</span>cloud.vm.ip.address <span class="se">\
+</span></span></span><span class="line"><span class="cl">    endpoint-port<span class="o">=</span><span class="m">27277</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">interface</span><span class="o">=</span>cloud-wg <span class="se">\
+</span></span></span><span class="line"><span class="cl">    public-key<span class="o">=</span><span class="s2">&#34;PUT CLOUD SERVER PUBLIC KEY HERE&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">    <span class="nv">name</span><span class="o">=</span>peer1 persistent-keepalive<span class="o">=</span>25s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Here is a tricky part</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Routing rule for subnet of wireguard network is added automatically on adding IP address to the interface</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># But we need to add explicitly the route for docker containers subnet</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># You may need to adjust the distance and routing-table values</span>
+</span></span><span class="line"><span class="cl">/ip route <span class="nv">disabled</span><span class="o">=</span>no <span class="nv">distance</span><span class="o">=</span><span class="m">1</span> dst-address<span class="o">=</span>172.21.0.0/16 <span class="nv">gateway</span><span class="o">=</span>cloud-wg routing-table<span class="o">=</span>main <span class="nv">scope</span><span class="o">=</span><span class="m">30</span> suppress-hw-offload<span class="o">=</span>no target-scope<span class="o">=</span><span class="m">10</span>
+</span></span></code></pre></div><h3 id="3-add-wireguard-peer-vm">3. Add WireGuard peer (VM)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Uncomment the lines for Mikrotik peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Mikrotik peer</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Peer<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">AllowedIPs</span> <span class="o">=</span> 172.16.10.0/24,192.168.0.0/16
+</span></span><span class="line"><span class="cl"><span class="nv">PublicKey</span> <span class="o">=</span> mikrotik public key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the WireGuard service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl restart wg-quick@wg0
+</span></span><span class="line"><span class="cl"><span class="c1"># Check if changes are applied</span>
+</span></span><span class="line"><span class="cl">wg show
+</span></span></code></pre></div><p>You should see the Mikrotik peer in the list of peers.
+<img loading="lazy" src="/images/posts/mikrotik-wg/wg-show-2.png" type="" alt="WireGuard peers"  /></p>
+<details>
+<summary>More commands to tests connection between cloud vm and mikrotik wg</summary>
+<h5 id="run-in-mikrotik-cli">Run in mikrotik CLI</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ping wireguard IP of cloud server</span>
+</span></span><span class="line"><span class="cl">ping 172.16.10.1
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mikrotik-ping.png" type="" alt="WireGuard ping"  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># resolve google.com via adguard container on cloud vm</span>
+</span></span><span class="line"><span class="cl">put <span class="o">[</span>resolve google.com server 172.21.0.114<span class="o">]</span>
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mikrotik-resolve.png" type="" alt="Wireguard resolve"  /></p>
+<h5 id="run-in-cloud-server">Run in cloud server</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ping wireguard IP of Mikrotik router</span>
+</span></span><span class="line"><span class="cl">ping 172.168.10.3
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/vm-ping.png" type="" alt="VM ping"  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># resolve google.com via adguard container on home adguard</span>
+</span></span><span class="line"><span class="cl">dig google.com @192.168.11.2
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/vm-resolve.png" type="" alt="VM resolve"  /></p>
+<h5 id="run-on-my-mac-connected-to-home-network">Run on my Mac connected to home network</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ping wireguard IP of cloud server</span>
+</span></span><span class="line"><span class="cl">ping 172.16.10.1
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mac-ping.png" type="" alt="mac ping"  /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># resolve google.com via adguard container on cloud adguard</span>
+</span></span><span class="line"><span class="cl">dig google.com @172.121.0.114
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mac-resolve.png" type="" alt="mac resolve"  /></p>
+</details>
+<h2 id="iv-add-first-client-device-as-a-peer">IV. Add first client device as a peer</h2>
+<p>I recommend you to use your smartphone as first client device, because it can work from both home WiFi and mobile data. This way you can test the connection from both networks.</p>
+<p>Also, install on your smartphone:</p>
+<ul>
+<li>WireGuard app (<a href="https://apps.apple.com/us/app/wireguard/id1441195209">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.wireguard.android&amp;hl=en&amp;pli=1">Android</a>)</li>
+<li>Network debugging app (<a href="https://apps.apple.com/bo/app/inettools-ping-dns-port-scan/id561659975">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.ulfdittmer.android.ping&amp;hl=en">Android</a>)</li>
+</ul>
+<h3 id="1-create-keys-for-the-client">1. Create keys for the client</h3>
+<p>Install Wireguard app for your client OS.</p>
+<p>Then, generate public and private keys on the device, for that create config from scratch in the app and then click on <strong>Generate keypair</strong> button.</p>
+<p>Or you can generate keys on the cloud server and then copy them to the client device.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wg genkey <span class="p">|</span> tee peer-privatekey <span class="p">|</span> wg pubkey &gt; peer-publickey
+</span></span></code></pre></div><h3 id="2-add-the-client-as-a-peer-to-wireguard-config-on-cloud-server">2. Add the client as a peer to WireGuard config on cloud server</h3>
+<p>On the cloud server, edit the WireGuard config file and add the client as a peer.</p>
+<p>Each time increment previous peer address by 1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># Uncomment the lines for client peer</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># client peer</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Peer<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">AllowedIPs</span> <span class="o">=</span> 172.16.10.2/32
+</span></span><span class="line"><span class="cl"><span class="nv">PublicKey</span> <span class="o">=</span> put public key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># CRTL+X: save and exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the WireGuard service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl restart wg-quick@wg0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check if changes are applied</span>
+</span></span><span class="line"><span class="cl">wg show
+</span></span></code></pre></div><h3 id="3-continue-configuring-the-client-device">3. Continue configuring the client device</h3>
+<p>You already have public and private keys for the client device, other configuration parameters are:</p>
+<h4 id="interface">Interface</h4>
+<ul>
+<li><strong>Address</strong> - It&rsquo;s address of peer in wireguard subnet. Put the same address you set in <code>AllowedIPs</code> field in previous step.</li>
+<li><strong>DNS servers</strong> - if you have adguard/pihole running on the cloud server, you can use it as a DNS server. Put it&rsquo;s IP address here.</li>
+<li><strong>MTU</strong> and <strong>ListenPort</strong> - you can leave them empty, they will be set automatically.</li>
+</ul>
+<h4 id="peer">Peer</h4>
+<ul>
+<li><strong>Endpoint</strong> - cloud server IP address and port (27277)</li>
+<li><strong>Public key</strong> - public key of the cloud server</li>
+<li><strong>AllowedIPs</strong> - here we put all subnets that we want to access from this current client device</li>
+</ul>
+<p>Here is an example of the configuration file for the client device:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Interface]</span>
+</span></span><span class="line"><span class="cl"><span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">private-key-of-client-device</span>
+</span></span><span class="line"><span class="cl"><span class="na">Address</span> <span class="o">=</span> <span class="s">172.16.10.2/32</span>
+</span></span><span class="line"><span class="cl"><span class="na">DNS</span> <span class="o">=</span> <span class="s">172.21.0.114 # IP of adguard container on cloud server</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Peer]</span>
+</span></span><span class="line"><span class="cl"><span class="na">PublicKey</span> <span class="o">=</span> <span class="s">public-key-of-cloud-server</span>
+</span></span><span class="line"><span class="cl"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.168.0.0/16, 172.16.10.0/24, 172.21.0.0/16 # subnets of home, cloud and wireguard network</span>
+</span></span><span class="line"><span class="cl"><span class="na">Endpoint</span> <span class="o">=</span> <span class="s">ip.of.cloud.servner:27277</span>
+</span></span></code></pre></div><p>That&rsquo;s it! Disconnect your device from the home Wi-Fi, switch to mobile data and connect to the VPN.</p>
+<p>Then try to:</p>
+<ul>
+<li>ping the cloud server and Mikrotik router IP addresses in wireguard subnet.</li>
+<li>check ports of services in docker containers on cloud and home server VM.</li>
+</ul>
+<style>
+td, th {
+   border: none!important;
+}
+</style>
+<table>
+  <thead>
+      <tr>
+          <th>ping cloud</th>
+          <th>ping home</th>
+          <th>check adguard port</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-vm.jpeg" type="" alt="ping cloud"  /></td>
+          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-home.jpeg" type="" alt="ping home"  /></td>
+          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-port-scan.jpeg" type="" alt="port scan"  /></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="v-bonus-dns-configuration">V. Bonus. DNS configuration</h2>
+<p>Since I have 2 adguard instances and I use them as DNS servers everywhere, I will add DNS records for accessing my services:</p>
+<ul>
+<li>*<strong>.cloud.domain.com</strong> - pointing to traefik docker container on cloud server</li>
+<li>*<strong>.home.domain.com</strong> - pointing to traefik docker container on home server</li>
+</ul>
+<p>Thus, I can access my services using domain names instead of IP addresses.</p>
+<img src="/images/posts/mikrotik-wg/dns.png" width="30%">
+<h2 id="vi-final-thoughts">VI. Final thoughts</h2>
+<p>I hope this tutorial was helpful for you. I will keep it updated if I find any issues or improvements.</p>
+<p>If you have any questions or suggestions, feel free to leave a comment below.</p>
+<p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Storing and using secrets in Mikrotik RouterOS</title>
+      <link>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
+      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
+      <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;
+&lt;p&gt;When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Recently I have replaced my stock ISP router with <a href="https://mikrotik.com/product/hex_s">Mikrotik Hex S</a>. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.</p>
+<p>When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.</p>
+<h2 id="the-problem">The problem</h2>
+<p>Let&rsquo;s say I want to write a script that will send me telegram notifications. To do so I need to store my telegram bot token and chat id. Since I keep my RouterOS configuration in a git repository, I don&rsquo;t want to hardcode my secrets in the script.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">:</span><span class="n">global</span> <span class="n">sendTelegramMessage</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">botToken</span> <span class="s2">&#34;1234567890:ABCDEFGHIJKLMN&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">chatId</span> <span class="s2">&#34;10000000&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">message</span> <span class="s2">&#34;$1&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># telegram notification</span>
+</span></span><span class="line"><span class="cl">    <span class="o">/</span><span class="k">tool</span> <span class="n">fetch</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://api.telegram.org/bot$botToken/sendMessage\?chat_id=$chatId&amp;text=$message&#34;</span> <span class="n">keep</span><span class="o">-</span><span class="n">result</span><span class="o">=</span><span class="n">no</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="the-solution">The solution</h2>
+<p>RouterOS has low level feature <code>/ppp secret</code> which can be used to store secrets. However, it could be inconvenient and a bit messy to use it directly in scripts. Instead, I would like to have more high level API to store and use secrets.</p>
+<p>And, I have one. There is post in <a href="https://forum.mikrotik.com/viewtopic.php?p=916159#p916159">mikrotik forum</a> by user with nickname <strong>Amm0</strong>. Ammo has shared a script of global function which can be used to store and retrieve secrets like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$SECRET set mySecret password=&#34;mySecretPassword&#34;
+</span></span><span class="line"><span class="cl">:put [$SECRET get mySecret]
+</span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mirotik-secrets/terminal.png" type="" alt="Terminal Screenshot"  /></p>
+<p>Now, I modify my script to use this function to keep it clean and secure:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">:</span><span class="n">global</span> <span class="n">sendTelegramMessage</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">botToken</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">set</span> <span class="n">botToken</span> <span class="s2">&#34;$[$SECRET get TELEGRAM_TOKEN]&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">chatId</span> <span class="s2">&#34;$[$SECRET get CHAT_ID]&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="n">local</span> <span class="n">message</span> <span class="s2">&#34;$1&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># telegram notification</span>
+</span></span><span class="line"><span class="cl">    <span class="o">/</span><span class="k">tool</span> <span class="n">fetch</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://api.telegram.org/bot$botToken/sendMessage\?chat_id=$chatId&amp;text=$message&#34;</span> <span class="n">keep</span><span class="o">-</span><span class="n">result</span><span class="o">=</span><span class="n">no</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><details>
+  <summary>global SECRET function source code</summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">### $SECRET
+</span></span><span class="line"><span class="cl">#   get &lt;name&gt;
+</span></span><span class="line"><span class="cl">#   set &lt;name&gt; password=&lt;password&gt;
+</span></span><span class="line"><span class="cl">#   remove &lt;name
+</span></span><span class="line"><span class="cl">#   print
+</span></span><span class="line"><span class="cl">:global SECRET
+</span></span><span class="line"><span class="cl">:set $SECRET do={
+</span></span><span class="line"><span class="cl">    :global SECRET
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # helpers
+</span></span><span class="line"><span class="cl">    :local fixprofile do={
+</span></span><span class="line"><span class="cl">        :if ([/ppp profile find name=&#34;null&#34;]) do={:put &#34;nothing&#34;} else={
+</span></span><span class="line"><span class="cl">            /ppp profile add bridge-learning=no change-tcp-mss=no local-address=0.0.0.0 name=&#34;null&#34; only-one=yes remote-address=0.0.0.0 session-timeout=1s use-compression=no use-encryption=no use-mpls=no use-upnp=no
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    :local lppp [:len [/ppp secret find where name=$2]]
+</span></span><span class="line"><span class="cl">    :local checkexist do={
+</span></span><span class="line"><span class="cl">        :if (lppp=0) do={
+</span></span><span class="line"><span class="cl">            :error &#34;\$SECRET: cannot find $2 in secret store&#34;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # $SECRET
+</span></span><span class="line"><span class="cl">    :if ([:typeof $1]!=&#34;str&#34;) do={
+</span></span><span class="line"><span class="cl">        :put &#34;\$SECRET&#34;
+</span></span><span class="line"><span class="cl">        :put &#34;   uses /ppp/secrets to store stuff like REST apikeys, or other sensative data&#34;
+</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET print - prints stored secret passwords&#34;
+</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET get &lt;name&gt; - gets a stored secret&#34;
+</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET set &lt;name&gt; password=\&#34;YOUR_SECRET\&#34; - sets a secret password&#34;
+</span></span><span class="line"><span class="cl">        :put &#34;\t\$SECRET remove &lt;name&gt; - removes a secret&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # $SECRET print
+</span></span><span class="line"><span class="cl">    :if ($1~&#34;^pr&#34;) do={
+</span></span><span class="line"><span class="cl">        /ppp secret print where comment~&#34;\\\$SECRET&#34;
+</span></span><span class="line"><span class="cl">        :return [:nothing]
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # $SECRET get
+</span></span><span class="line"><span class="cl">    :if ($1~&#34;get&#34;) do={
+</span></span><span class="line"><span class="cl">        $checkexist
+</span></span><span class="line"><span class="cl">       :return [/ppp secret get $2 password]
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # $SECRET set
+</span></span><span class="line"><span class="cl">    :if ($1~&#34;set|add&#34;) do={
+</span></span><span class="line"><span class="cl">        :if ([:typeof $password]=&#34;str&#34;) do={} else={:error &#34;\$SECRET: password= required&#34;}
+</span></span><span class="line"><span class="cl">        :if (lppp=0) do={
+</span></span><span class="line"><span class="cl">            /ppp secret add name=$2 password=$password
+</span></span><span class="line"><span class="cl">        } else={
+</span></span><span class="line"><span class="cl">            /ppp secret set $2 password=$password
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        $fixprofile
+</span></span><span class="line"><span class="cl">        /ppp secret set $2 comment=&#34;used by \$SECRET&#34;
+</span></span><span class="line"><span class="cl">        /ppp secret set $2 profile=&#34;null&#34;
+</span></span><span class="line"><span class="cl">        /ppp secret set $2 service=&#34;async&#34;
+</span></span><span class="line"><span class="cl">        :return [$SECRET get $2]
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # $SECRET remove
+</span></span><span class="line"><span class="cl">    :if ($1~&#34;rm|rem|del&#34;) do={
+</span></span><span class="line"><span class="cl">        $checkexist
+</span></span><span class="line"><span class="cl">        :return [/ppp secret remove $2]
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    :error &#34;\$SECRET: bad command&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></details>
+<h2 id="conclusion">Conclusion</h2>
+<p>The good thing about this approach is that secrets storing and retrieving mechanism encapsulated and can be easily changed in the future without changing the scripts. Also, it is easy to use and understand.</p>
+<p>Keep your secrets safe and happy scripting!</p>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Forwarding SMS to Telegram</title>
+      <link>https://alikhil.dev/posts/forwarding-sms-to-telegram/</link>
+      <pubDate>Sat, 26 Oct 2024 14:11:43 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/forwarding-sms-to-telegram/</guid>
+      <description>&lt;p&gt;After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.&lt;/p&gt;
+&lt;p&gt;If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>After extensive travel, I’ve accumulated several mobile numbers and, naturally, physical SIM cards. Switching them out each time became tedious, even after buying a basic Nokia with two SIM slots, which only helped temporarily. When a friend asked if I could set up a Spanish number for account registrations, I realized it was time to automate the process.</p>
+<p>If you’re dealing with multiple SIM cards and want to receive SMS in Telegram, I have a straightforward approach. You’ll need a Linux machine that’s always online, connected to the internet, and about $10.</p>
+<h2 id="what-youll-need">What You’ll Need</h2>
+<ul>
+<li>A physical SIM card</li>
+<li>A USB modem that’s supported by the <a href="https://wammu.eu/phones/">Gammu library</a></li>
+<li>A Telegram bot token, chat or channel ID</li>
+<li>A Linux machine with a free USB port</li>
+<li>Docker and Docker Compose installed</li>
+</ul>
+<h2 id="finding-the-right-modem">Finding the Right Modem</h2>
+<blockquote>
+<p>If you have a USB modem at home, check if it’s supported by <a href="https://wammu.eu/phones/">Gammu</a>.</p>
+</blockquote>
+<p>For our purposes, we don’t need an expensive 4G modem with advanced features. Any basic 2G/3G modem will work, and these are easy to find at a discounted price on sites like eBay or Wallapop.</p>
+<p>Search for “Huawei USB modem,” sort by price, and look for unlocked options or ones with compatible firmware.</p>
+<p>For instance:
+<img loading="lazy" src="/images/posts/sms-to-telegram/ebay.png" type="" alt="Ebay Screenshot"  /></p>
+<p>Next, go to the <a href="https://wammu.eu/phones/">Gammu</a> website and look up the device. Make sure it appears on the list and that “SMS” is included in the &ldquo;Supported features&rdquo; column:</p>
+<p><img loading="lazy" src="/images/posts/sms-to-telegram/e3131.png" type="" alt="E3131"  /></p>
+<p>If the device meets these requirements, it’s good to go!</p>
+<h2 id="setup-instructions">Setup Instructions</h2>
+<blockquote>
+<p>Before starting the setup, it’s best to connect the modem with the SIM card already inserted to your PC and check that it’s functioning properly.</p>
+</blockquote>
+<h3 id="identify-device-path">Identify Device Path</h3>
+<p>Run the following command to identify the device path:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tree /dev/serial/by-id/
+</span></span></code></pre></div><p>You should see a paths similar to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">/dev/serial/by-id
+</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if00-port0 -&gt; ../../ttyUSB0
+</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if02-port0 -&gt; ../../ttyUSB1
+</span></span><span class="line"><span class="cl">├── usb-HUAWEI_HUAWEI_Mobile-if03-port0 -&gt; ../../ttyUSB2
+</span></span></code></pre></div><p>Choose a path that ends with <code>ttyUSB0</code>, in my case it&rsquo;s <code>/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</code>.</p>
+<h3 id="running-the-service">Running the Service</h3>
+<p>Using Docker Compose, set up your configuration:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gammu</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ghcr.io/alikhil/sms-to-telegram:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">bind</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0</span><span class="w"> </span><span class="c"># Change this to your device path</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l">/dev/modem</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">BOT_TOKEN=&lt;put your telegram bot token here&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PIN=&lt;your sim card pin&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">CHAT_ID=&lt;telegram chat/channel ID&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DEVICE=/dev/modem</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PROTOCOL=at</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">SYS_MODULE</span><span class="w">
+</span></span></span></code></pre></div><p>Save the configuration to a <code>docker-compose.yml</code> file and run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose up -d
+</span></span><span class="line"><span class="cl">docker compose logs -f gammu
+</span></span></code></pre></div><p>If everything is set up correctly, you should see the following log messages:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:50:56 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Created POSIX RW shared memory at 0x7fcf90b21000
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:50:56 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Starting phone communication...
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:30 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Ignoring incoming SMS info as not a Status Report in SR memory.
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Read <span class="m">1</span> messages
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Received IN20241004_195517_00_Celerity_00.txt
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>13<span class="o">]</span>: Starting run on receive: /etc/sms_to_telegram.sh IN20241004_195517_00_Celerity_00.txt
+</span></span><span class="line"><span class="cl">gammu-1  <span class="p">|</span> Fri 2024/10/04 17:55:33 gammu-smsd<span class="o">[</span>12<span class="o">]</span>: Process finished successfully
+</span></span></code></pre></div><p>To test SMS reception, you can use free online SMS-sending services (search for &ldquo;send SMS for free&rdquo;) or try logging into Telegram, your bank account, etc.</p>
+<p><img loading="lazy" src="/images/posts/sms-to-telegram/screenshot.png" type="" alt="Telegram Screenshot"  /></p>
+<h2 id="how-it-works">How It Works</h2>
+<p>The <a href="https://wammu.eu/libgammu/">Gammu library</a> provides a unified interface for working with phones and modems from various manufacturers.</p>
+<p>On top of that, there&rsquo;s the <a href="https://wammu.eu/smsd/">Gammu SMS Daemon</a>, which receives SMS messages and triggers a custom script—in our case, <a href="https://github.com/alikhil/sms-to-telegram/blob/main/sms_to_telegram.sh">script</a> to send the messages to Telegram.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Thanks to <a href="https://github.com/kutovoys">@kutovoys</a> for the idea and <a href="https://github.com/kutovoys/sms-to-telegram">Docker image</a>!</p>
+<p>This is a simple, affordable, and scalable solution—especially if you’re into self-hosting.</p>
+<blockquote>
+<p>This post was originally written for <a href="https://vas3k.club/post/25926/">vas3k.club</a>.</p>
+</blockquote>]]></content:encoded>
+    </item>
+    
   </channel>
 </rss>
