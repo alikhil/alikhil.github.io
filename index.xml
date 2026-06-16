@@ -1152,8 +1152,9 @@ td, th {
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/</guid>
-      <description>&lt;p&gt;Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.&lt;/p&gt;</description>
+      <description>Step-by-step guide to setting up remote LAN access using WireGuard on a MikroTik hEX S router and a cloud VM. Covers RouterOS CLI, firewall rules, routing, and client configuration.</description>
       <content:encoded><![CDATA[<p>Recently I have configured out how to access my home and cloud network remotely using WireGuard and Mikrotik Hex S router. With this step-by-step tutorial I will show you (and perhaps my future self) how to do it.</p>
+<p><strong>Tested with</strong>: MikroTik hEX S (RB760iGS) · RouterOS 7.x · Ubuntu 22.04 LTS · WireGuard hub-and-spoke topology</p>
 <h2 id="requirements">Requirements</h2>
 <h3 id="what-i-have">What I have</h3>
 <ul>
@@ -1261,7 +1262,7 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl">systemctl status wg-quick@wg0
 </span></span><span class="line"><span class="cl"><span class="c1"># Restart the service if needed</span>
 </span></span><span class="line"><span class="cl">systemctl restart wg-quick@wg0
-</span></span></code></pre></div><h3 id="ii-mikrotik-configuration">II. Mikrotik configuration</h3>
+</span></span></code></pre></div><h3 id="ii-mikrotik-hex-s-wireguard-setup">II. MikroTik hEX S WireGuard setup</h3>
 <p>I will use Mikrotik command line interface (CLI) to configure the router. You can use Winbox or WebFig if you prefer.</p>
 <h4 id="1-create-wireguard-interface">1. Create WireGuard interface</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create WireGuard interface and it will automatically generate private and public keys</span>
@@ -1288,7 +1289,7 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl"><span class="c1"># But we need to add explicitly the route for docker containers subnet</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># You may need to adjust the distance and routing-table values</span>
 </span></span><span class="line"><span class="cl">/ip route <span class="nv">disabled</span><span class="o">=</span>no <span class="nv">distance</span><span class="o">=</span><span class="m">1</span> dst-address<span class="o">=</span>172.21.0.0/16 <span class="nv">gateway</span><span class="o">=</span>cloud-wg routing-table<span class="o">=</span>main <span class="nv">scope</span><span class="o">=</span><span class="m">30</span> suppress-hw-offload<span class="o">=</span>no target-scope<span class="o">=</span><span class="m">10</span>
-</span></span></code></pre></div><h3 id="3-add-wireguard-peer-vm">3. Add WireGuard peer (VM)</h3>
+</span></span></code></pre></div><h3 id="iii-add-wireguard-peer-vm">III. Add WireGuard peer (VM)</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
 </span></span><span class="line"><span class="cl"><span class="c1"># Uncomment the lines for Mikrotik peer</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Mikrotik peer</span>
@@ -1328,19 +1329,19 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl">dig google.com @172.121.0.114
 </span></span></code></pre></div><p><img loading="lazy" src="/images/posts/mikrotik-wg/mac-resolve.png" type="" alt="mac resolve"  /></p>
 </details>
-<h2 id="iv-add-first-client-device-as-a-peer">IV. Add first client device as a peer</h2>
+<h3 id="iv-add-first-client-device-as-a-peer">IV. Add first client device as a peer</h3>
 <p>I recommend you to use your smartphone as first client device, because it can work from both home WiFi and mobile data. This way you can test the connection from both networks.</p>
 <p>Also, install on your smartphone:</p>
 <ul>
 <li>WireGuard app (<a href="https://apps.apple.com/us/app/wireguard/id1441195209">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.wireguard.android&amp;hl=en&amp;pli=1">Android</a>)</li>
 <li>Network debugging app (<a href="https://apps.apple.com/bo/app/inettools-ping-dns-port-scan/id561659975">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.ulfdittmer.android.ping&amp;hl=en">Android</a>)</li>
 </ul>
-<h3 id="1-create-keys-for-the-client">1. Create keys for the client</h3>
+<h4 id="1-create-keys-for-the-client">1. Create keys for the client</h4>
 <p>Install Wireguard app for your client OS.</p>
 <p>Then, generate public and private keys on the device, for that create config from scratch in the app and then click on <strong>Generate keypair</strong> button.</p>
 <p>Or you can generate keys on the cloud server and then copy them to the client device.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wg genkey <span class="p">|</span> tee peer-privatekey <span class="p">|</span> wg pubkey &gt; peer-publickey
-</span></span></code></pre></div><h3 id="2-add-the-client-as-a-peer-to-wireguard-config-on-cloud-server">2. Add the client as a peer to WireGuard config on cloud server</h3>
+</span></span></code></pre></div><h4 id="2-add-the-client-as-a-peer-to-wireguard-config-on-cloud-server">2. Add the client as a peer to WireGuard config on cloud server</h4>
 <p>On the cloud server, edit the WireGuard config file and add the client as a peer.</p>
 <p>Each time increment previous peer address by 1.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/wireguard/wg0.conf
@@ -1357,15 +1358,15 @@ This way, I can access my home network from anywhere without exposing any ports 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Check if changes are applied</span>
 </span></span><span class="line"><span class="cl">wg show
-</span></span></code></pre></div><h3 id="3-continue-configuring-the-client-device">3. Continue configuring the client device</h3>
+</span></span></code></pre></div><h4 id="3-continue-configuring-the-client-device">3. Continue configuring the client device</h4>
 <p>You already have public and private keys for the client device, other configuration parameters are:</p>
-<h4 id="interface">Interface</h4>
+<h5 id="interface">Interface</h5>
 <ul>
 <li><strong>Address</strong> - It&rsquo;s address of peer in wireguard subnet. Put the same address you set in <code>AllowedIPs</code> field in previous step.</li>
 <li><strong>DNS servers</strong> - if you have adguard/pihole running on the cloud server, you can use it as a DNS server. Put it&rsquo;s IP address here.</li>
 <li><strong>MTU</strong> and <strong>ListenPort</strong> - you can leave them empty, they will be set automatically.</li>
 </ul>
-<h4 id="peer">Peer</h4>
+<h5 id="peer">Peer</h5>
 <ul>
 <li><strong>Endpoint</strong> - cloud server IP address and port (27277)</li>
 <li><strong>Public key</strong> - public key of the cloud server</li>
@@ -1408,7 +1409,44 @@ td, th {
       </tr>
   </tbody>
 </table>
-<h2 id="v-bonus-dns-configuration">V. Bonus. DNS configuration</h2>
+<h3 id="v-troubleshooting">V. Troubleshooting</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Symptom</th>
+          <th>Likely cause</th>
+          <th>Fix</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Handshake shows &ldquo;never&rdquo;</td>
+          <td>Firewall blocks UDP port on cloud VM, or wrong public key</td>
+          <td>Check <code>ufw</code>/<code>iptables</code> allows the WireGuard UDP port; verify both peers have each other&rsquo;s correct public key</td>
+      </tr>
+      <tr>
+          <td>Peer handshakes OK but home LAN is unreachable</td>
+          <td>Missing route or <code>AllowedIPs</code> too narrow</td>
+          <td>On cloud VM, ensure MikroTik peer <code>AllowedIPs</code> includes <code>192.168.0.0/16</code>; on MikroTik, add a route for cloud subnets via <code>cloud-wg</code></td>
+      </tr>
+      <tr>
+          <td>Handshake works but DNS fails</td>
+          <td>Wrong DNS IP in client config, or AdGuard not listening on WireGuard interface</td>
+          <td>Confirm DNS container IP is reachable over WireGuard (<code>ping</code> it); check AdGuard binds to <code>0.0.0.0</code> not just <code>localhost</code></td>
+      </tr>
+      <tr>
+          <td><code>AllowedIPs</code> routing mistake</td>
+          <td>Client routes all traffic through VPN</td>
+          <td>Set <code>AllowedIPs</code> to specific subnets only (split-tunnel), not <code>0.0.0.0/0</code>, unless you want full-tunnel</td>
+      </tr>
+      <tr>
+          <td>MikroTik shows peer but no traffic</td>
+          <td><code>persistent-keepalive</code> not set, NAT drops idle UDP</td>
+          <td>Add <code>persistent-keepalive=25s</code> to the MikroTik peer config</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="vi-bonus-dns-configuration">VI. Bonus. DNS configuration</h3>
 <p>Since I have 2 adguard instances and I use them as DNS servers everywhere, I will add DNS records for accessing my services:</p>
 <ul>
 <li>*<strong>.cloud.domain.com</strong> - pointing to traefik docker container on cloud server</li>
@@ -1416,7 +1454,7 @@ td, th {
 </ul>
 <p>Thus, I can access my services using domain names instead of IP addresses.</p>
 <img src="/images/posts/mikrotik-wg/dns.png" width="30%">
-<h2 id="vi-final-thoughts">VI. Final thoughts</h2>
+<h2 id="final-thoughts">Final thoughts</h2>
 <p>I hope this tutorial was helpful for you. I will keep it updated if I find any issues or improvements.</p>
 <p>If you have any questions or suggestions, feel free to leave a comment below.</p>
 <p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>]]></content:encoded>
