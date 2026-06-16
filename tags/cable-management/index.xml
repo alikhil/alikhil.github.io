@@ -24,7 +24,7 @@ Eventually, my desk got pretty messy with all the cables and other stuff piled u
 <p>I&rsquo;ve got a medium-sized table, about 120 by 80 cm. It&rsquo;s wide (deep) but not too long. I need to keep everything in order and clean so I can work comfortably.</p>
 <p>Here&rsquo;s what my setup looked like before I made all the changes I mentioned.</p>
 <p><img loading="lazy" src="/images/posts/cable-management/before-front.jpg" type="" alt="setup before reorganization"  /></p>
-<p>As you can see, I&rsquo;ve got a work laptop, a Mac mini, a monitor on its own stand, a journal, AirPods, and a few other things. I also bought a USB switch at some point because I got tired of plugging and unplugging my webcam manually in my <a href="https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/">KVM-less setup</a>.</p>
+<p>As you can see, I&rsquo;ve got a work laptop, a Mac mini, a monitor on its own stand, a journal, AirPods, and a few other things. I also bought a USB switch at some point because I got tired of plugging and unplugging my webcam manually in my <a href="https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/">KVM-less setup</a>. For switching the monitor between computers without touching any buttons, I use BetterDisplay with DDC/CI hotkeys — details in <a href="https://alikhil.dev/posts/monitor-input-source-control-mac/">Control Monitor Input Source on macOS with BetterDisplay and DDC</a>.</p>
 <h2 id="heres-what-ive-done">Here&rsquo;s what I&rsquo;ve done</h2>
 <ul>
 <li>I mounted the monitor to the arm, which freed up space below the screen.</li>

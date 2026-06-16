@@ -929,15 +929,22 @@ td, th {
     </item>
     
     <item>
-      <title>Monitor input source control on Mac</title>
+      <title>Control Monitor Input Source on macOS with BetterDisplay and DDC</title>
       <link>https://alikhil.dev/posts/monitor-input-source-control-mac/</link>
       <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/monitor-input-source-control-mac/</guid>
-      <description>&lt;p&gt;If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.&lt;/p&gt;
-&lt;p&gt;In this post I will show you how to configure hotkeys for that.&lt;/p&gt;</description>
+      <description>Learn how to switch monitor input sources on macOS using BetterDisplay, DDC/CI, and CLI commands. Configure keyboard hotkeys via the paid app or free Raycast scripts.</description>
       <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
 <p>In this post I will show you how to configure hotkeys for that.</p>
+<blockquote>
+<p><strong>Quick answer</strong></p>
+<ul>
+<li><strong>App</strong>: Use <a href="https://github.com/waydabber/BetterDisplay">BetterDisplay</a> — it exposes a CLI and GUI to switch monitor inputs via DDC/CI.</li>
+<li><strong>When DDC/CI works</strong>: Your monitor must support the DDC/CI protocol and have it enabled. Most modern displays (Dell, LG, BenQ, etc.) support it.</li>
+<li><strong>When it won&rsquo;t work</strong>: Some monitors, USB-C hubs, or cheap HDMI adapters block DDC signals. If BetterDisplay shows no DDC Input Sources, your hardware path doesn&rsquo;t pass DDC — try a direct cable instead of a hub or adapter.</li>
+</ul>
+</blockquote>
 <h2 id="hardware">Hardware</h2>
 <p>You will need a monitor with <strong>multiple input sources</strong>.
 For example, I have Dell S2722QC tt has 2 HDMI ports and 1 USB-C port where:</p>
@@ -973,6 +980,20 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <h3 id="free-option">Free option</h3>
 <p>If you like me don&rsquo;t want to pay for 40$ for single feature there is a hacky way to do it.</p>
 <p>We need an app that can handle hotkeys and run shell commands. I use <a href="https://www.raycast.com/">Raycast</a>, so called &ldquo;Spotlight on steroids&rdquo; and it can handle custom hotkeys. Or you can use any other app you like.</p>
+<h4 id="betterdisplay-cli-commands">BetterDisplay CLI commands</h4>
+<p>BetterDisplay ships a CLI you can call from any script or terminal. Here are the most useful commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># List all detected monitors and their current input source</span>
+</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay get -vcp<span class="o">=</span>inputSelect
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Switch to a specific input by DDC value (replace 18 with your value)</span>
+</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -ddc<span class="o">=</span><span class="m">18</span> -vcp<span class="o">=</span>inputSelect
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Cycle to the next available input source</span>
+</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -nextDDCInput -vcp<span class="o">=</span>inputSelect
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Target a specific monitor by display index (0-based) when you have several</span>
+</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -ddc<span class="o">=</span><span class="m">18</span> -vcp<span class="o">=</span>inputSelect -displayIndex<span class="o">=</span><span class="m">0</span>
+</span></span></code></pre></div><p>The DDC value (<code>-ddc=</code>) maps to the physical port. You can find the right values in <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em> (see the <strong>Value</strong> column).</p>
 <h4 id="configuring-shell-command">Configuring shell command</h4>
 <p>Before configuring <strong>Raycast</strong> we need to know <code>ddc</code> value for each input source. To do so, go to <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em>, and save IDs from <strong>Value</strong> column for each input source:</p>
 <p><img loading="lazy" src="/images/posts/ddc-input-sources.png" type="" alt="alt text"  /></p>
