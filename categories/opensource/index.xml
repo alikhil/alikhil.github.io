@@ -790,7 +790,11 @@ td, th {
 <h2 id="final-thoughts">Final thoughts</h2>
 <p>I hope this tutorial was helpful for you. I will keep it updated if I find any issues or improvements.</p>
 <p>If you have any questions or suggestions, feel free to leave a comment below.</p>
-<p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>]]></content:encoded>
+<p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>
+<h2 id="recommended-reading">Recommended reading</h2>
+<ul>
+<li><a href="/posts/saving-and-using-secrets-in-mikrotitk-routeros/">Storing and Using Secrets in MikroTik RouterOS</a> — how to avoid hardcoding passwords and tokens in your RouterOS scripts.</li>
+</ul>]]></content:encoded>
     </item>
     
     <item>

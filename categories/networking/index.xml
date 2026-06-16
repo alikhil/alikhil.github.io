@@ -564,17 +564,20 @@ td, th {
 <h2 id="final-thoughts">Final thoughts</h2>
 <p>I hope this tutorial was helpful for you. I will keep it updated if I find any issues or improvements.</p>
 <p>If you have any questions or suggestions, feel free to leave a comment below.</p>
-<p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>]]></content:encoded>
+<p>Credits to <a href="https://www.laroberto.com/">@laroberto</a> for their <a href="https://www.laroberto.com/remote-lan-access-with-wireguard/">guide on LAN access with WireGuard</a>. I followed it to set up the initial configuration and then adapted it to my needs.</p>
+<h2 id="recommended-reading">Recommended reading</h2>
+<ul>
+<li><a href="/posts/saving-and-using-secrets-in-mikrotitk-routeros/">Storing and Using Secrets in MikroTik RouterOS</a> — how to avoid hardcoding passwords and tokens in your RouterOS scripts.</li>
+</ul>]]></content:encoded>
     </item>
     
     <item>
-      <title>Storing and using secrets in Mikrotik RouterOS</title>
-      <link>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</link>
+      <title>Storing and Using Secrets in MikroTik RouterOS</title>
+      <link>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotik-routeros/</link>
       <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
       <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotitk-routeros/</guid>
-      <description>&lt;p&gt;Recently I have replaced my stock ISP router with &lt;a href=&#34;https://mikrotik.com/product/hex_s&#34;&gt;Mikrotik Hex S&lt;/a&gt;. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.&lt;/p&gt;
-&lt;p&gt;When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.&lt;/p&gt;</description>
+      <guid>https://alikhil.dev/posts/saving-and-using-secrets-in-mikrotik-routeros/</guid>
+      <description>How to securely store and use secrets (passwords, tokens, API keys) in MikroTik RouterOS scripts without hardcoding them in plain text.</description>
       <content:encoded><![CDATA[<p>Recently I have replaced my stock ISP router with <a href="https://mikrotik.com/product/hex_s">Mikrotik Hex S</a>. I have been using it for a while and I am very happy with it. It is a very powerful device which can be programmed and automated with built-in scripting language.</p>
 <p>When I started writing my first scripts I faced a problem: how to store and use secrets in my scripts. I have found a solution and I want to share it with you.</p>
 <h2 id="the-problem">The problem</h2>
