@@ -78,10 +78,10 @@
     <lastmod>2026-03-21T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/devops/</loc>
-    <lastmod>2025-12-28T21:14:12+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/kubernetes/</loc>
-    <lastmod>2025-12-28T21:14:12+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/in-place-pod-resize/</loc>
     <lastmod>2025-12-28T21:14:12+03:00</lastmod>
@@ -126,22 +126,22 @@
     <lastmod>2025-09-28T19:08:35+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/authentication/</loc>
-    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/networking/</loc>
     <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/oauth2-proxy/</loc>
-    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</loc>
-    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/passkey/</loc>
-    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/pocket-id/</loc>
-    <lastmod>2025-08-05T21:14:12+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</loc>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/cable-management/</loc>
     <lastmod>2026-06-16T20:31:06+03:00</lastmod>
@@ -273,10 +273,10 @@
     <lastmod>2018-10-21T22:42:44+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/google-cloud-platform/</loc>
-    <lastmod>2018-05-20T21:30:36+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/</loc>
-    <lastmod>2018-05-20T21:30:36+03:00</lastmod>
+    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/blogging/</loc>
     <lastmod>2018-05-17T16:03:44+03:00</lastmod>
