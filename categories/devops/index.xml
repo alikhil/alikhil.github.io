@@ -388,40 +388,40 @@ and share your ideas or issues — I’d love to hear how you use it!</p>
 <p><img loading="lazy" src="/images/posts/oauth2-proxy/demo.gif" type="" alt="Demo"  /></p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <table>
-  <thead>
-      <tr>
-          <th>Symptom</th>
-          <th>Likely cause</th>
-          <th>Fix</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Redirect loops back to login after successful auth</td>
-          <td><code>redirect_url</code> in oauth2-proxy config doesn&rsquo;t match the callback URL registered in Pocket ID</td>
-          <td>Set both to exactly <code>https://k8s.alikhil.dev/oauth2/callback</code></td>
-      </tr>
-      <tr>
-          <td><code>cookie_secret</code> error on startup</td>
-          <td>Cookie secret is not exactly 16, 24, or 32 bytes after base64 decode</td>
-          <td>Regenerate: <code>openssl rand -base64 32 | head -c 32 | base64</code></td>
-      </tr>
-      <tr>
-          <td>401 on every request despite logging in</td>
-          <td><code>cookie_domains</code> / <code>whitelist_domains</code> doesn&rsquo;t cover the protected service domain</td>
-          <td>Add <code>.k8s.alikhil.dev</code> to both <code>cookie_domains</code> and <code>whitelist_domains</code> in the config</td>
-      </tr>
-      <tr>
-          <td>Protected service returns 401, not redirecting</td>
-          <td><code>auth-url</code> annotation points to wrong service name or namespace</td>
-          <td>Use the in-cluster DNS form: <code>http://oauth2-proxy.&lt;namespace&gt;.svc.cluster.local:80/oauth2/auth</code></td>
-      </tr>
-      <tr>
-          <td>Auth works but Pocket ID group check fails</td>
-          <td><code>allowed_groups</code> set but <code>scope</code> doesn&rsquo;t include <code>groups</code></td>
-          <td>Add <code>groups</code> to the <code>scope</code> config option and ensure the Pocket ID client returns group claims</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Symptom</th>
+					<th>Likely cause</th>
+					<th>Fix</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Redirect loops back to login after successful auth</td>
+					<td><code>redirect_url</code> in oauth2-proxy config doesn&rsquo;t match the callback URL registered in Pocket ID</td>
+					<td>Set both to exactly <code>https://k8s.alikhil.dev/oauth2/callback</code></td>
+			</tr>
+			<tr>
+					<td><code>cookie_secret</code> error on startup</td>
+					<td>Cookie secret is not exactly 16, 24, or 32 bytes after base64 decode</td>
+					<td>Regenerate: <code>openssl rand -base64 32 | head -c 32 | base64</code></td>
+			</tr>
+			<tr>
+					<td>401 on every request despite logging in</td>
+					<td><code>cookie_domains</code> / <code>whitelist_domains</code> doesn&rsquo;t cover the protected service domain</td>
+					<td>Add <code>.k8s.alikhil.dev</code> to both <code>cookie_domains</code> and <code>whitelist_domains</code> in the config</td>
+			</tr>
+			<tr>
+					<td>Protected service returns 401, not redirecting</td>
+					<td><code>auth-url</code> annotation points to wrong service name or namespace</td>
+					<td>Use the in-cluster DNS form: <code>http://oauth2-proxy.&lt;namespace&gt;.svc.cluster.local:80/oauth2/auth</code></td>
+			</tr>
+			<tr>
+					<td>Auth works but Pocket ID group check fails</td>
+					<td><code>allowed_groups</code> set but <code>scope</code> doesn&rsquo;t include <code>groups</code></td>
+					<td>Add <code>groups</code> to the <code>scope</code> config option and ensure the Pocket ID client returns group claims</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="takeaways">Takeaways</h2>
 <p>Later, when you need to protect any service in Kubernetes with oauth2-proxy, you simply need to add two annotations to your Ingress resource:</p>

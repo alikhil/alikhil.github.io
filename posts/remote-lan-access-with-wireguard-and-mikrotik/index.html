@@ -619,57 +619,57 @@ td, th {
 }
 </style>
 <table>
-  <thead>
-      <tr>
-          <th>ping cloud</th>
-          <th>ping home</th>
-          <th>check adguard port</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-vm.jpeg" type="" alt="ping cloud"  /></td>
-          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-home.jpeg" type="" alt="ping home"  /></td>
-          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-port-scan.jpeg" type="" alt="port scan"  /></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>ping cloud</th>
+					<th>ping home</th>
+					<th>check adguard port</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-vm.jpeg" type="" alt="ping cloud"  /></td>
+					<td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-home.jpeg" type="" alt="ping home"  /></td>
+					<td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-port-scan.jpeg" type="" alt="port scan"  /></td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="v-troubleshooting">V. Troubleshooting<a hidden class="anchor" aria-hidden="true" href="#v-troubleshooting">¶</a></h3>
 <table>
-  <thead>
-      <tr>
-          <th>Symptom</th>
-          <th>Likely cause</th>
-          <th>Fix</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Handshake shows &ldquo;never&rdquo;</td>
-          <td>Firewall blocks UDP port on cloud VM, or wrong public key</td>
-          <td>Check <code>ufw</code>/<code>iptables</code> allows the WireGuard UDP port; verify both peers have each other&rsquo;s correct public key</td>
-      </tr>
-      <tr>
-          <td>Peer handshakes OK but home LAN is unreachable</td>
-          <td>Missing route or <code>AllowedIPs</code> too narrow</td>
-          <td>On cloud VM, ensure MikroTik peer <code>AllowedIPs</code> includes <code>192.168.0.0/16</code>; on MikroTik, add a route for cloud subnets via <code>cloud-wg</code></td>
-      </tr>
-      <tr>
-          <td>Handshake works but DNS fails</td>
-          <td>Wrong DNS IP in client config, or AdGuard not listening on WireGuard interface</td>
-          <td>Confirm DNS container IP is reachable over WireGuard (<code>ping</code> it); check AdGuard binds to <code>0.0.0.0</code> not just <code>localhost</code></td>
-      </tr>
-      <tr>
-          <td><code>AllowedIPs</code> routing mistake</td>
-          <td>Client routes all traffic through VPN</td>
-          <td>Set <code>AllowedIPs</code> to specific subnets only (split-tunnel), not <code>0.0.0.0/0</code>, unless you want full-tunnel</td>
-      </tr>
-      <tr>
-          <td>MikroTik shows peer but no traffic</td>
-          <td><code>persistent-keepalive</code> not set, NAT drops idle UDP</td>
-          <td>Add <code>persistent-keepalive=25s</code> to the MikroTik peer config</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Symptom</th>
+					<th>Likely cause</th>
+					<th>Fix</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Handshake shows &ldquo;never&rdquo;</td>
+					<td>Firewall blocks UDP port on cloud VM, or wrong public key</td>
+					<td>Check <code>ufw</code>/<code>iptables</code> allows the WireGuard UDP port; verify both peers have each other&rsquo;s correct public key</td>
+			</tr>
+			<tr>
+					<td>Peer handshakes OK but home LAN is unreachable</td>
+					<td>Missing route or <code>AllowedIPs</code> too narrow</td>
+					<td>On cloud VM, ensure MikroTik peer <code>AllowedIPs</code> includes <code>192.168.0.0/16</code>; on MikroTik, add a route for cloud subnets via <code>cloud-wg</code></td>
+			</tr>
+			<tr>
+					<td>Handshake works but DNS fails</td>
+					<td>Wrong DNS IP in client config, or AdGuard not listening on WireGuard interface</td>
+					<td>Confirm DNS container IP is reachable over WireGuard (<code>ping</code> it); check AdGuard binds to <code>0.0.0.0</code> not just <code>localhost</code></td>
+			</tr>
+			<tr>
+					<td><code>AllowedIPs</code> routing mistake</td>
+					<td>Client routes all traffic through VPN</td>
+					<td>Set <code>AllowedIPs</code> to specific subnets only (split-tunnel), not <code>0.0.0.0/0</code>, unless you want full-tunnel</td>
+			</tr>
+			<tr>
+					<td>MikroTik shows peer but no traffic</td>
+					<td><code>persistent-keepalive</code> not set, NAT drops idle UDP</td>
+					<td>Add <code>persistent-keepalive=25s</code> to the MikroTik peer config</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="vi-bonus-dns-configuration">VI. Bonus. DNS configuration<a hidden class="anchor" aria-hidden="true" href="#vi-bonus-dns-configuration">¶</a></h3>
 <p>Since I have 2 adguard instances and I use them as DNS servers everywhere, I will add DNS records for accessing my services:</p>

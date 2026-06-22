@@ -94,15 +94,15 @@ When I found out I would have this interview, I was initially shocked and unsure
 <li>
 <p>Add <strong>Share</strong> action, click at <em>Input</em> and select <strong>Shortcut Input</strong>. New <strong>Receive</strong> action will pop up.</p>
 <table>
-  <thead>
-      <tr>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-1.png" type="" alt="Share action"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-2.png" type="" alt="Share action"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-3.png" type="" alt="Receive action"  /></th>
-      </tr>
-  </thead>
-  <tbody>
-  </tbody>
+	<thead>
+			<tr>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-1.png" type="" alt="Share action"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-2.png" type="" alt="Share action"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-3.png" type="" alt="Receive action"  /></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
 </li>
 <li>
@@ -114,15 +114,15 @@ When I found out I would have this interview, I was initially shocked and unsure
 <li>
 <p>Delete <strong>Share</strong> action, we don&rsquo;t need it anymore.</p>
 <table>
-  <thead>
-      <tr>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-4.png" type="" alt="Share sheet"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-6.png" type="" alt="Ask for Text"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-13.png" type="" alt="Delete share"  /></th>
-      </tr>
-  </thead>
-  <tbody>
-  </tbody>
+	<thead>
+			<tr>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-4.png" type="" alt="Share sheet"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-6.png" type="" alt="Ask for Text"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-13.png" type="" alt="Delete share"  /></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
 </li>
 <li>
@@ -139,16 +139,16 @@ When I found out I would have this interview, I was initially shocked and unsure
 <li>Select <strong>Form</strong> as <em>Request Body</em> type</li>
 <li>Add <strong>content</strong> field as <em>File</em> type (important!) and select <strong>Shortcut Input</strong> as value.
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-10.png" type="" alt="Get contents of URL"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-9.png" type="" alt="Configure URL"  /></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-10.png" type="" alt="Get contents of URL"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-9.png" type="" alt="Configure URL"  /></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
 </li>
 </ul>
@@ -156,16 +156,16 @@ When I found out I would have this interview, I was initially shocked and unsure
 <li>
 <p>That&rsquo;s all. Test it by clicking ▶︎ Play button in the bottom menu. If you did everything correctly you&rsquo;ll see preview with the link.</p>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-11.png" type="" alt="Play button"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-12.png" type="" alt="Preview"  /></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-11.png" type="" alt="Play button"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/paste-12.png" type="" alt="Preview"  /></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
 </li>
 </ol>
@@ -178,30 +178,30 @@ When I found out I would have this interview, I was initially shocked and unsure
 <li>In <strong>Get Contents of URL</strong> action everything stays the same, except <em>content</em> field - it gets renamed into <em>file</em></li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/files-1.PNG" type="" alt="Play button"  /></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/files-2.PNG" type="" alt="Preview"  /></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/files-1.PNG" type="" alt="Play button"  /></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/files-2.PNG" type="" alt="Preview"  /></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
 <h2 id="preview">Preview</h2>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th></th>
-          <th><img loading="lazy" src="/images/posts/ios-shortcuts/preview.PNG" type="" alt="Preview"  /></th>
-          <th></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th></th>
+					<th><img loading="lazy" src="/images/posts/ios-shortcuts/preview.PNG" type="" alt="Preview"  /></th>
+					<th></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
 <h2 id="summary">Summary</h2>
 <p>If you did everything from above and it did not work, or you don&rsquo;t want to bother with configuring it at all. You can import my shortcuts in your device and override microbin url:</p>
@@ -252,8 +252,8 @@ When I found out I would have this interview, I was initially shocked and unsure
 <p>The first connection of the Ugreen mouse is reserved for the 2.4 GHz USB dongle. I plugged it into my uConsole, and then my MacBook Air and Mac mini connected as the second and third devices, respectively.</p>
 <p>To switch devices with the mouse, press the red button on the bottom.</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Dk_LNbkvECs?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+			<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Dk_LNbkvECs?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+		</div>
 
 <h3 id="monitor">Monitor</h3>
 <p>The MacBook Air is connected to the USB-C port, which charges the computer.</p>
@@ -298,8 +298,8 @@ When I found out I would have this interview, I was initially shocked and unsure
 </ol>
 <p>Here is a demo video:</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/NgVESzIzpw4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+			<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/NgVESzIzpw4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+		</div>
 
 <h2 id="pros-and-cons">Pros and Cons</h2>
 <h3 id="pros">Pros</h3>
@@ -790,57 +790,57 @@ td, th {
 }
 </style>
 <table>
-  <thead>
-      <tr>
-          <th>ping cloud</th>
-          <th>ping home</th>
-          <th>check adguard port</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-vm.jpeg" type="" alt="ping cloud"  /></td>
-          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-home.jpeg" type="" alt="ping home"  /></td>
-          <td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-port-scan.jpeg" type="" alt="port scan"  /></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>ping cloud</th>
+					<th>ping home</th>
+					<th>check adguard port</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-vm.jpeg" type="" alt="ping cloud"  /></td>
+					<td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-ping-home.jpeg" type="" alt="ping home"  /></td>
+					<td><img loading="lazy" src="/images/posts/mikrotik-wg/screen-port-scan.jpeg" type="" alt="port scan"  /></td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="v-troubleshooting">V. Troubleshooting</h3>
 <table>
-  <thead>
-      <tr>
-          <th>Symptom</th>
-          <th>Likely cause</th>
-          <th>Fix</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Handshake shows &ldquo;never&rdquo;</td>
-          <td>Firewall blocks UDP port on cloud VM, or wrong public key</td>
-          <td>Check <code>ufw</code>/<code>iptables</code> allows the WireGuard UDP port; verify both peers have each other&rsquo;s correct public key</td>
-      </tr>
-      <tr>
-          <td>Peer handshakes OK but home LAN is unreachable</td>
-          <td>Missing route or <code>AllowedIPs</code> too narrow</td>
-          <td>On cloud VM, ensure MikroTik peer <code>AllowedIPs</code> includes <code>192.168.0.0/16</code>; on MikroTik, add a route for cloud subnets via <code>cloud-wg</code></td>
-      </tr>
-      <tr>
-          <td>Handshake works but DNS fails</td>
-          <td>Wrong DNS IP in client config, or AdGuard not listening on WireGuard interface</td>
-          <td>Confirm DNS container IP is reachable over WireGuard (<code>ping</code> it); check AdGuard binds to <code>0.0.0.0</code> not just <code>localhost</code></td>
-      </tr>
-      <tr>
-          <td><code>AllowedIPs</code> routing mistake</td>
-          <td>Client routes all traffic through VPN</td>
-          <td>Set <code>AllowedIPs</code> to specific subnets only (split-tunnel), not <code>0.0.0.0/0</code>, unless you want full-tunnel</td>
-      </tr>
-      <tr>
-          <td>MikroTik shows peer but no traffic</td>
-          <td><code>persistent-keepalive</code> not set, NAT drops idle UDP</td>
-          <td>Add <code>persistent-keepalive=25s</code> to the MikroTik peer config</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Symptom</th>
+					<th>Likely cause</th>
+					<th>Fix</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Handshake shows &ldquo;never&rdquo;</td>
+					<td>Firewall blocks UDP port on cloud VM, or wrong public key</td>
+					<td>Check <code>ufw</code>/<code>iptables</code> allows the WireGuard UDP port; verify both peers have each other&rsquo;s correct public key</td>
+			</tr>
+			<tr>
+					<td>Peer handshakes OK but home LAN is unreachable</td>
+					<td>Missing route or <code>AllowedIPs</code> too narrow</td>
+					<td>On cloud VM, ensure MikroTik peer <code>AllowedIPs</code> includes <code>192.168.0.0/16</code>; on MikroTik, add a route for cloud subnets via <code>cloud-wg</code></td>
+			</tr>
+			<tr>
+					<td>Handshake works but DNS fails</td>
+					<td>Wrong DNS IP in client config, or AdGuard not listening on WireGuard interface</td>
+					<td>Confirm DNS container IP is reachable over WireGuard (<code>ping</code> it); check AdGuard binds to <code>0.0.0.0</code> not just <code>localhost</code></td>
+			</tr>
+			<tr>
+					<td><code>AllowedIPs</code> routing mistake</td>
+					<td>Client routes all traffic through VPN</td>
+					<td>Set <code>AllowedIPs</code> to specific subnets only (split-tunnel), not <code>0.0.0.0/0</code>, unless you want full-tunnel</td>
+			</tr>
+			<tr>
+					<td>MikroTik shows peer but no traffic</td>
+					<td><code>persistent-keepalive</code> not set, NAT drops idle UDP</td>
+					<td>Add <code>persistent-keepalive=25s</code> to the MikroTik peer config</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="vi-bonus-dns-configuration">VI. Bonus. DNS configuration</h3>
 <p>Since I have 2 adguard instances and I use them as DNS servers everywhere, I will add DNS records for accessing my services:</p>
@@ -999,18 +999,18 @@ For example, I have Dell S2722QC tt has 2 HDMI ports and 1 USB-C port where:</p>
 <p><strong>Enable Accessibility for BetterDisplay in System Settings -&gt; Privacy &amp; Security -&gt; Accessibility.</strong></p>
 <p>Then try to switch input source by clicking on BetterDisplay icon in the menu bar -&gt; <em>DDC Input Source -&gt; Select next port.</em></p>
 <table>
-  <thead>
-      <tr>
-          <th></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
-          <td><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
+					<td><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
+			</tr>
+	</tbody>
 </table>
 <p>If it works, you can continue to the next step.
 Otherwise check if your monitor supports DDC protocol and ensure Accessibility is enabled for BetterDisplay.</p>
