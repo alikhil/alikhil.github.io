@@ -7,7 +7,147 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Mon, 22 Jun 2026 20:00:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jul 2026 12:00:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Forward SMS to Telegram with Android</title>
+      <link>https://alikhil.dev/posts/forward-sms-to-telegram-with-android/</link>
+      <pubDate>Sat, 11 Jul 2026 12:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/forward-sms-to-telegram-with-android/</guid>
+      <description>How I forward SMS to Telegram using a dedicated Android phone.</description>
+      <content:encoded><![CDATA[<p>A few years ago, I wrote a <a href="/posts/forwarding-sms-to-telegram/">post</a> on how I automated SMS forwarding using second-hand 3G modems and a Gammu SMS daemon running on a Linux server.</p>
+<p>This setup worked well for a while, but then became outdated due to the instability of USB dongles and the planned deprecation of 2G and 3G networks in Europe.</p>
+<p>One day, I got tired of replugging USB modems and manually restarting containers, so I decided to look for a new solution.</p>
+<p>First, I thought I would build my own device using existing 4G modules for an ESP32 or a Raspberry Pi, but I quickly discovered it would cost me a fortune to support two or more SIM cards.</p>
+<p>Then I looked for off-the-shelf solutions. I found some cool 8/16/32+ SIM support boxes from Chinese vendors. But again, they were pricey, and I didn’t need so many SIM cards.</p>
+<p>After that letdown, I returned to the old, forgotten idea of using a dedicated Android device for my task.</p>
+<h2 id="device">Device</h2>
+<p>I didn’t have a spare Android device at home, so I looked for a second-hand working one with two SIM slots on Wallapop.</p>
+<p>I ended up buying a Moto E14 for €25.</p>
+<p>I tried to root it as soon as I received it, mostly out of curiosity and to gain better control over my device. But I was unable to find a working solution for that.</p>
+<p>So I gave up and tried to configure everything without root access.</p>
+<p>Spoiler: I succeeded. No root was needed.</p>
+<h2 id="software">Software</h2>
+<p>I had two SIM cards, and the current setup forwarded SMS messages to different Telegram channels.</p>
+<p>I looked for an app that would allow me to do so. I considered the <a href="https://github.com/telegram-sms/telegram-sms">telegram-sms</a> app, but after a quick look, it <a href="https://config.telegram-sms.com/">seemed not to support</a> splitting SMS messages into separate chats.</p>
+<p>In the end, I chose to go with an <a href="https://github.com/bogkonstantin/android_income_sms_gateway_webhook">android_income_sms_gateway_webhook</a>. It does not support Telegram specifically, but it lets you configure a webhook that can call any service, including Telegram.</p>
+<p>However, to split SMS messages from different SIM cards into separate channels, I needed to implement a webhook handler, which took Codex about five minutes.</p>
+<p>Here is a link to the GitHub repository: <a href="https://github.com/alikhil/sms-forwarder-telegram-webhook">github.com/alikhil/sms-forwarder-telegram-webhook</a></p>
+<p>It is a simple, stupid Python web server that parses the JSON and sends two JSON requests to Telegram servers for the right channel.</p>
+<p>I deployed the webhook handler in my homelab using Docker Compose, and it became the bridge between the Android app and Telegram:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sms-webhook</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/alikhil/sms-forwarder-telegram-webhook.git#main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">DEFAULT_TARGET_CHAT_ID</span><span class="p">:</span><span class="w"> </span>-<span class="m">88005553535</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SIM1_TARGET_CHAT_ID</span><span class="p">:</span><span class="w"> </span>-<span class="m">100500</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SIM2_TARGET_CHAT_ID</span><span class="p">:</span><span class="w"> </span>-<span class="m">100500800</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env_file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.env</span><span class="w"> </span><span class="c"># includes TELEGRAM_BOT_TOKEN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8000:8000&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>I configured the app to send SMS messages:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th></th>
+					<th><img loading="lazy" src="/posts/forward-sms-to-telegram-with-android/images/sms-config.png" type="" alt="android_income_sms_gateway_webhook app configuration"  /></th>
+					<th></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+<p>That’s it. The SMS forwarding path was working end-to-end.</p>
+<p><img loading="lazy" src="/posts/forward-sms-to-telegram-with-android/images/sms-tg.png" type="" alt="forwarded sms notification in telegram"  /></p>
+<h2 id="monitoring">Monitoring</h2>
+<p>After the pain of previous solutions, I wanted to be notified if something failed.</p>
+<p>If I did not receive an SMS that I was expecting, I would not know that I had missed it. The app might crash, or the battery might run low.</p>
+<p>Fortunately, the SMS gateway app supports sending heartbeats.</p>
+<p>I set up a Uptime Kuma monitor and configured the app to send heartbeats every 5 minutes. Kuma expects a heartbeat every 5 hours.</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th></th>
+					<th><img loading="lazy" src="/posts/forward-sms-to-telegram-with-android/images/sms-kuma.png" type="" alt="configuring heartbeats"  /></th>
+					<th></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+<p>The values were tuned empirically because the app does not strictly follow the schedule. As I understand it, this is a technical limitation of the app running in the background.</p>
+<p>But it is okay for me, even if I learn about a failure after twice the normal interval.</p>
+<p><img loading="lazy" src="/posts/forward-sms-to-telegram-with-android/images/kuma.png" type="" alt="kuma dashboard"  /></p>
+<h2 id="power-management">Power management</h2>
+<p>I didn’t want my Android device connected to a power supply all the time because I believed the battery health would suffer as a result.</p>
+<p>Also, I didn’t want to connect and disconnect it manually every time. I’m an engineer, after all. It must be automated.</p>
+<p>I wanted it to work like this:</p>
+<ul>
+<li>If the battery level is below 20%, connect the power.</li>
+<li>If the battery level is above 90%, disconnect the power.</li>
+</ul>
+<p>I had a spare smart and controllable Shelly Plug that I could use for such automation.</p>
+<p>I could probably use one of the Home Assistant plugins to implement it, but I don’t use Home Assistant and didn’t want to install it just for this small use case. That would be overkill.</p>
+<p>The next step was to find Android apps that could send a webhook when the battery reached a certain level.</p>
+<p>There were surprisingly few decent apps for this. It seems like a very niche use case.</p>
+<p>The only thing I found was <a href="https://github.com/hossain-khan/android-remote-notify">Android Remote Notify</a>. And, of course, I couldn’t configure Shelly automation directly there.</p>
+<p>So, Codex handled <a href="https://github.com/alikhil/android-remote-notify-webhook-handler">another simple webhook handler</a> that calls the Shelly Plug API when the battery reaches a certain level.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">battery-webhook</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/alikhil/android-remote-notify-webhook-handler.git#main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SHELLY_PLUG_URL</span><span class="p">:</span><span class="w"> </span><span class="l">http://192.168.99.88</span><span class="w"> </span><span class="c"># Your shelly plug IP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">PORT</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LOW_BATTERY_THRESHOLD</span><span class="p">:</span><span class="w"> </span><span class="m">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">HIGH_BATTERY_THRESHOLD</span><span class="p">:</span><span class="w"> </span><span class="m">90</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="m">8080</span><span class="w">
+</span></span></span></code></pre></div><p>Only after I had configured and deployed everything did I realize the app had a major limitation: it did not have a way to trigger an alert when the battery level exceeded 90%. It only supported a lower-bound threshold.</p>
+<p>I didn’t want to search for another solution when I was so close to completing the current one. Luckily for me, the app was open source.</p>
+<p>I concluded that a simpler approach would be to send battery level periodically, and the webhook handler controlled the plug based on those reports.</p>
+<p>I prompted Codex in the repository to develop the new feature.</p>
+<p>After 15 minutes of hacking, it produced a solution. I didn’t have a full Android development setup, and I didn’t want to bloat my Mac with it.</p>
+<p>So I asked Codex to build the APK inside Docker. Five more minutes and it was done.</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th></th>
+					<th><img loading="lazy" src="/posts/forward-sms-to-telegram-with-android/images/battery-periodic.png" type="" alt="configuring periodic checks"  /></th>
+					<th></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+<p>I replaced the app with the custom patched build, and it worked.</p>
+<p>I went ahead and created a <a href="https://github.com/hossain-khan/android-remote-notify/pull/451">pull request to upstream</a>, and it was accepted. As a nice bonus, I no longer need to maintain a fork.</p>
+<p>To be fair, heartbeats and battery-level webhooks were not coming on a strict schedule.</p>
+<p>To monitor the webhook handler, I built a page that reports things like:</p>
+<ul>
+<li>When the last state was reported</li>
+<li>What the battery level was at that time</li>
+<li>The last command sent to Shelly.</li>
+<li>Etc.</li>
+</ul>
+<p><img loading="lazy" src="/posts/forward-sms-to-telegram-with-android/images/status.png" type="" alt="Webhook handler status"  /></p>
+<h2 id="caveats">Caveats</h2>
+<p>During webhook testing, I encountered an issue where both Android apps struggled to send requests to an insecure HTTP endpoint.</p>
+<p>There is probably a configuration option somewhere that allows such behavior.</p>
+<p>I simply routed the traffic through my custom domain with Let’s Encrypt certificates.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>It was my first time tinkering with Android, and I enjoyed it. I expected it to require more hassle.</p>
+<p>Happy hacking!</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Goodbye, nix-darwin!</title>
       <link>https://alikhil.dev/posts/goodbye-nix-darwin/</link>
