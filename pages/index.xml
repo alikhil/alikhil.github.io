@@ -23,6 +23,9 @@
 <li>
 <p><a href="https://1mgr.xyz">1mgr.xyz</a> - on-demand mirror for Docker Hub images based on GitHub Actions and GitHub package registry. I use it to make image pulls more repeatable when working with containers.</p>
 </li>
+<li>
+<p><a href="https://www.raycast.com/alikhil/singularityapp">Raycast Plugin for SingularityApp</a> - opinionated Raycast plugin for <a href="https://singularity-app.com/">SingularityApp</a> with features like quick task creation, task lists, zen mode.</p>
+</li>
 </ul>
 <h2 id="open-source-contributions">Open Source Contributions</h2>
 <p>Here is a list of opensource projects I&rsquo;ve worked on:</p>
@@ -50,6 +53,12 @@
 </li>
 <li>
 <p><a href="https://github.com/prometheus-community/helm-charts/pull/5650">prometheus-community/helm-charts</a> - fixed PodDisruption Budget for <code>kube-prometheus-stack</code> chart.</p>
+</li>
+<li>
+<p><a href="https://github.com/argoproj/argo-helm/pull/3934">argoproj/argo-helm</a> - added startup probes and allowed overriding httpGet path for health checks.</p>
+</li>
+<li>
+<p><a href="https://github.com/kubernetes-sigs/scheduler-plugins/pull/942">kubernetes-sigs/scheduler-plugins</a> - added KEP for NodeMetadata scoring plugin.</p>
 </li>
 </ul>
 <p>See all my contributions on <a href="https://github.com/pulls?page=1&amp;q=is%3Amerged+is%3Apr+author%3Aalikhil+archived%3Afalse+-user%3AKazanExpress+-user%3Aalikhil+-user%3ADayMarket">GitHub</a>.</p>
