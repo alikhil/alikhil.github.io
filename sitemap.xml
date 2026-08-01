@@ -3,22 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/control-rgb-lights-with-openrgb/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/linux/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/mac/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/openrgb/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/opensource/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/rgb/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/windows/</loc>
+    <lastmod>2026-08-01T23:51:12+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/android/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/posts/forward-sms-to-telegram-with-android/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/opensource/</loc>
-    <lastmod>2026-07-11T12:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/self-hosting/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
@@ -31,9 +52,6 @@
   </url><url>
     <loc>https://alikhil.dev/tags/sms/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/telegram/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
@@ -208,12 +226,6 @@
   </url><url>
     <loc>https://alikhil.dev/categories/linux/</loc>
     <lastmod>2026-06-16T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/linux/</loc>
-    <lastmod>2025-06-23T15:00:00+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/mac/</loc>
-    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/golang/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>

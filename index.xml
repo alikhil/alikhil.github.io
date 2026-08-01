@@ -7,7 +7,52 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Sat, 11 Jul 2026 12:00:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Aug 2026 23:51:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to control RGB on RAM sticks, motherboards, coolers, graphics cards programmatically with OpenRGB.</title>
+      <link>https://alikhil.dev/posts/control-rgb-lights-with-openrgb/</link>
+      <pubDate>Sat, 01 Aug 2026 23:51:12 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/control-rgb-lights-with-openrgb/</guid>
+      <description>Install OpenRGB on Linux and use a systemd service to turn off RGB lighting on every boot.</description>
+      <content:encoded><![CDATA[<p>When I was building my gaming PC a few years ago, I bought a second-hand pair of RAM sticks with RGB lights. It was entertaining to see them glowing and changing colors. I did not bother myself to control them.</p>
+<p>Some time later, I got sick of gaming and made a decision to rebuild it into a self-hosting server. The PC moved from my table to an under-TV shelf in the living room. And here, glowing lights became distracting during watching TV or when we have guests sleeping in the living room. Therefore, I started searching for ways to control/disable RGB lights.</p>
+<p>After some search, I encountered <a href="https://openrgb.org/">OpenRGB</a>. It&rsquo;s open-source RGB control software that is independent from manufacturer software. It supports color syncing across several devices and has a community-managed <a href="https://gitlab.com/OpenRGBDevelopers/OpenRGBEffectsPlugin">effects library</a>. It has a long list of more than 2,500 <a href="https://openrgb.org/devices.html">supported devices</a> and, hopefully for me, my Corsair Vengeance was there!</p>
+<p>What a great piece of software, right?</p>
+<p>It&rsquo;s a shame that I needed this software only to <strong>disable RGB</strong>.</p>
+<h2 id="installing-openrgb">Installing OpenRGB</h2>
+<p>OpenRGB runs on Linux, macOS, and Windows. You can download the package for your operating system from the <a href="https://openrgb.org/releases.html">releases page</a>.</p>
+<p>On my Debian-based server, I downloaded the <code>.deb</code> package and installed it with:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install ./OpenRGB-&lt;version&gt;-x86_64.deb
+</span></span></code></pre></div><p>The package includes the required udev rules. If you use an AppImage, Flatpak, or a build from source, install the <a href="https://openrgb.org/udev.html">udev rules</a> too. Without them, OpenRGB may not be able to access the RGB hardware without running as root.</p>
+<p>Before creating the service, check that OpenRGB can detect your devices:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo openrgb --list-devices
+</span></span></code></pre></div><p>Make a note of the device numbers you want to control. Mine were <code>0</code> and <code>1</code>.</p>
+<h2 id="configuring">Configuring</h2>
+<p>I needed the RGB to turn off every time the system starts. So I ended up with the following systemd service.</p>
+<p>First, test the command manually. <code>000000</code> is black, which turns the LEDs off. The <code>direct</code> mode is supported by my devices; use the output of <code>--list-devices</code> to check which modes yours support.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo openrgb -d <span class="m">0</span> -c <span class="m">000000</span> -m direct -d <span class="m">1</span> -c <span class="m">000000</span> -m direct
+</span></span></code></pre></div><p>When that worked, I created the service below.</p>
+<p><code>/etc/systemd/system/openrgb.service</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=OpenRGB control
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Service]
+</span></span><span class="line"><span class="cl">Type=oneshot
+</span></span><span class="line"><span class="cl">ExecStart=/usr/bin/openrgb -d 0 -c 000000 -m direct -d 1 -c 000000 -m direct
+</span></span><span class="line"><span class="cl">User=root
+</span></span><span class="line"><span class="cl">Group=i2c
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=multi-user.target
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> openrgb
+</span></span><span class="line"><span class="cl">systemctl start openrgb
+</span></span></code></pre></div><p>Now the RAM lights turn off automatically on every boot. No proprietary RGB application, no running desktop session, and no bright lights in the living room.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>If you have devices with RGB lights, check whether they are <a href="https://openrgb.org/devices.html">supported by OpenRGB</a>. You might find a more creative use for it than I did and build some nice RGB animations.</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Forward SMS to Telegram with Android</title>
       <link>https://alikhil.dev/posts/forward-sms-to-telegram-with-android/</link>
