@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Skhd on alikhil</title>
+    <link>https://alikhil.dev/tags/skhd/</link>
+    <description>Recent content in Skhd on alikhil</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>Alik Khilazhev</managingEditor>
+    <lastBuildDate>Wed, 16 Oct 2024 20:31:06 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/skhd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control Monitor Input Source on macOS with BetterDisplay and DDC</title>
+      <link>https://alikhil.dev/posts/monitor-input-source-control-mac/</link>
+      <pubDate>Wed, 16 Oct 2024 20:31:06 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/monitor-input-source-control-mac/</guid>
+      <description>Learn how to switch monitor input sources on macOS using BetterDisplay, DDC/CI, and CLI commands. Configure keyboard hotkeys via the paid app or free Raycast scripts.</description>
+      <content:encoded><![CDATA[<p>If you as me have single monitor and 2 Mac devices (for example, I have corporate Macbook and personal Mac Mini) you may want to use the same monitor for both devices. And you may want to switch between them without unplugging and plugging cables or selecting input source using monitor buttons.</p>
+<p>In this post I will show you how to configure hotkeys for that.</p>
+<blockquote>
+<p><strong>Quick answer</strong></p>
+<ul>
+<li><strong>App</strong>: Use <a href="https://github.com/waydabber/BetterDisplay">BetterDisplay</a> — it exposes a CLI and GUI to switch monitor inputs via DDC/CI.</li>
+<li><strong>When DDC/CI works</strong>: Your monitor must support the DDC/CI protocol and have it enabled. Most modern displays (Dell, LG, BenQ, etc.) support it.</li>
+<li><strong>When it won&rsquo;t work</strong>: Some monitors, USB-C hubs, or cheap HDMI adapters block DDC signals. If BetterDisplay shows no DDC Input Sources, your hardware path doesn&rsquo;t pass DDC — try a direct cable instead of a hub or adapter.</li>
+</ul>
+</blockquote>
+<h2 id="hardware">Hardware</h2>
+<p>You will need a monitor with <strong>multiple input sources</strong>.
+For example, I have Dell S2722QC tt has 2 HDMI ports and 1 USB-C port where:</p>
+<ul>
+<li>Macbook Air connected to port HDMI-2</li>
+<li>Mac Mini connected to port USB-C-1</li>
+</ul>
+<h2 id="software">Software</h2>
+<p>There is app called <a href="https://github.com/waydabber/BetterDisplay">BetterDisplay</a> that has a lot of powerful features. But for our case we need only one feature - <strong>change display inputs using DDC</strong>.</p>
+<p>Install it on both Macs. You will have 14 days trial period with all PRO features.</p>
+<p><strong>Enable Accessibility for BetterDisplay in System Settings -&gt; Privacy &amp; Security -&gt; Accessibility.</strong></p>
+<p>Then try to switch input source by clicking on BetterDisplay icon in the menu bar -&gt; <em>DDC Input Source -&gt; Select next port.</em></p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><img loading="lazy" src="/images/posts/menu-shot.png" type="" alt="Menu Shot"  /></td>
+					<td><img loading="lazy" src="/images/posts/input-choose.png" type="" alt="Input Choose"  /></td>
+			</tr>
+	</tbody>
+</table>
+<p>If it works, you can continue to the next step.
+Otherwise check if your monitor supports DDC protocol and ensure Accessibility is enabled for BetterDisplay.</p>
+<h3 id="paid-option">Paid option</h3>
+<p>If you are ready to pay 19$/19€ x2 for both Macs you can <a href="https://betterdisplay.pro/buy/">buy BetterDisplay</a>. And then configure hotkeys in the app settings <em>Settings -&gt; Keyboards -&gt; Custom keyboard shortcuts -&gt; DDC Input Source</em>.</p>
+<p>Click &ldquo;Record Shortcut&rdquo; and press the key combination you want to use, for example <code>CMD + F1</code> and <code>CMD + F2</code>.</p>
+<p><img loading="lazy" src="/images/posts/shortcuts.png" type="" alt="alt text"  /></p>
+<h3 id="free-option">Free option</h3>
+<p>If you like me don&rsquo;t want to pay for 40$ for single feature there is a hacky way to do it.</p>
+<p>We need an app that can handle hotkeys and run shell commands. I use <a href="https://github.com/jackielii/skhd.zig">skhd</a>, Simple Hotkey Daemon for macOS and it can handle custom hotkeys. Or you can use any other app you like.</p>
+<h4 id="installing-skhd">Installing skhd</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install jackielii/tap/skhd-zig
+</span></span><span class="line"><span class="cl">skhd --install-service
+</span></span></code></pre></div><h4 id="configuring-skhd">Configuring skhd</h4>
+<p>Before configuring <strong>skhd</strong> we need to know <code>ddc</code> value for each input source. To do so, go to <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em>, and save IDs from <strong>Value</strong> column for each input source:</p>
+<p><img loading="lazy" src="/images/posts/ddc-input-sources.png" type="" alt="alt text"  /></p>
+<p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
+<p>Then I add next lines into <code>~/.config/skhd/skhdrc</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cmd - f2 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=25 -vcp=inputSelect
+</span></span><span class="line"><span class="cl">cmd - f1 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=18 -vcp=inputSelect
+</span></span></code></pre></div><p>And that&rsquo;s it! Now you can switch input source using hotkeys <code>CMD + F1/F2</code>.</p>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

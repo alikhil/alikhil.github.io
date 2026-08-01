@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/android/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/forward-sms-to-telegram-with-android/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
@@ -18,7 +18,7 @@
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/self-hosting/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
@@ -33,7 +33,7 @@
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/telegram/</loc>
     <lastmod>2026-07-11T12:00:00+02:00</lastmod>
@@ -54,7 +54,7 @@
     <lastmod>2026-06-22T20:00:00+02:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/mac/</loc>
-    <lastmod>2026-06-22T20:00:00+02:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/nix/</loc>
     <lastmod>2026-06-22T20:00:00+02:00</lastmod>
@@ -90,10 +90,10 @@
     <lastmod>2026-07-18T17:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/tips/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/tutorial/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/ios/</loc>
     <lastmod>2026-04-06T19:41:44+03:00</lastmod>
@@ -213,7 +213,7 @@
     <lastmod>2025-06-23T15:00:00+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/mac/</loc>
-    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/golang/</loc>
     <lastmod>2025-06-01T20:31:06+03:00</lastmod>
@@ -264,7 +264,10 @@
     <lastmod>2024-10-26T14:11:43+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/monitor-input-source-control-mac/</loc>
-    <lastmod>2026-06-16T20:31:06+03:00</lastmod>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/skhd/</loc>
+    <lastmod>2026-08-01T23:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/build-own-drone-image/</loc>
     <lastmod>2019-09-20T10:30:00+03:00</lastmod>

@@ -289,62 +289,18 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p><img loading="lazy" src="/images/posts/shortcuts.png" type="" alt="alt text"  /></p>
 <h3 id="free-option">Free option</h3>
 <p>If you like me don&rsquo;t want to pay for 40$ for single feature there is a hacky way to do it.</p>
-<p>We need an app that can handle hotkeys and run shell commands. I use <a href="https://www.raycast.com/">Raycast</a>, so called &ldquo;Spotlight on steroids&rdquo; and it can handle custom hotkeys. Or you can use any other app you like.</p>
-<h4 id="betterdisplay-cli-commands">BetterDisplay CLI commands</h4>
-<p>BetterDisplay ships a CLI you can call from any script or terminal. Here are the most useful commands:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># List all detected monitors and their current input source</span>
-</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay get -vcp<span class="o">=</span>inputSelect
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Switch to a specific input by DDC value (replace 18 with your value)</span>
-</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -ddc<span class="o">=</span><span class="m">18</span> -vcp<span class="o">=</span>inputSelect
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Cycle to the next available input source</span>
-</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -nextDDCInput -vcp<span class="o">=</span>inputSelect
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Target a specific monitor by display index (0-based) when you have several</span>
-</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -ddc<span class="o">=</span><span class="m">18</span> -vcp<span class="o">=</span>inputSelect -displayIndex<span class="o">=</span><span class="m">0</span>
-</span></span></code></pre></div><p>The DDC value (<code>-ddc=</code>) maps to the physical port. You can find the right values in <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em> (see the <strong>Value</strong> column).</p>
-<h4 id="configuring-shell-command">Configuring shell command</h4>
-<p>Before configuring <strong>Raycast</strong> we need to know <code>ddc</code> value for each input source. To do so, go to <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em>, and save IDs from <strong>Value</strong> column for each input source:</p>
+<p>We need an app that can handle hotkeys and run shell commands. I use <a href="https://github.com/jackielii/skhd.zig">skhd</a>, Simple Hotkey Daemon for macOS and it can handle custom hotkeys. Or you can use any other app you like.</p>
+<h4 id="installing-skhd">Installing skhd</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install jackielii/tap/skhd-zig
+</span></span><span class="line"><span class="cl">skhd --install-service
+</span></span></code></pre></div><h4 id="configuring-skhd">Configuring skhd</h4>
+<p>Before configuring <strong>skhd</strong> we need to know <code>ddc</code> value for each input source. To do so, go to <em>Settings -&gt; Displays -&gt; &ldquo;Your monitor name&rdquo; -&gt; DDC Input Sources</em>, and save IDs from <strong>Value</strong> column for each input source:</p>
 <p><img loading="lazy" src="/images/posts/ddc-input-sources.png" type="" alt="alt text"  /></p>
 <p>In my case it&rsquo;s <code>18</code> for HDMI-2 and <code>25</code> for USB-C-1.</p>
-<p>Then create a directory <code>~/raycast-scripts</code> and put there a script <code>change-input-source.sh</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># See full documentation here: https://github.com/raycast/script-commands</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Required parameters:</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.schemaVersion 1</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.title Switch Monitor Input Source</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.mode silent</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Optional parameters:</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.icon 🖥️</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># @raycast.packageName Raycast Scripts</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">DEST_ID</span><span class="o">=</span><span class="m">18</span> &lt;PUT YOUR DDC ID HERE&gt;
-</span></span><span class="line"><span class="cl"><span class="nv">DEST_NAME</span><span class="o">=</span><span class="s2">&#34;Home Mac Mini&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># PUT YOUR ACTUAL HOSTNAME</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>hostname<span class="sb">`</span> <span class="o">==</span> <span class="s2">&#34;Aliks-Mac-mini.local&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">DEST_ID</span><span class="o">=</span><span class="m">25</span> &lt;PUT YOUR SECOND DDC ID HERE&gt;
-</span></span><span class="line"><span class="cl">  <span class="nv">DEST_NAME</span><span class="o">=</span><span class="s2">&#34;Work Macbook Air&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Switching monitor input source to </span><span class="nv">$DEST_NAME</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">/Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay <span class="nb">set</span> -ddc<span class="o">=</span><span class="nv">$DEST_ID</span> -vcp<span class="o">=</span>inputSelect
-</span></span></code></pre></div><p>After that try to run it in terminal:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x ~/raycast-scripts/change-input-source.sh
-</span></span><span class="line"><span class="cl">~/raycast-scripts/change-input-source.sh
-</span></span></code></pre></div><p>If it works, you can continue to the next step.</p>
-<h4 id="configuring-raycast">Configuring Raycast</h4>
-<ol>
-<li>Open Raycast and go to <em>Settings -&gt; Extensions -&gt; Search for Scripts</em></li>
-<li>Click on <em>Add Script Directory</em> and select <code>~/raycast-scripts</code></li>
-<li>Click on <em>Record Shortcut</em> for newly added script and press the key combination you want to use, for example <code>CMD + F1</code> on first Mac and <code>CMD + F2</code> on second.</li>
-</ol>
-<p><img loading="lazy" src="/images/posts/raycast-settings.png" type="" alt="alt text"  /></p>
-<p>And that&rsquo;s it! Now you can switch input source using hotkeys.</p>]]></content:encoded>
+<p>Then I add next lines into <code>~/.config/skhd/skhdrc</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cmd - f2 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=25 -vcp=inputSelect
+</span></span><span class="line"><span class="cl">cmd - f1 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=18 -vcp=inputSelect
+</span></span></code></pre></div><p>And that&rsquo;s it! Now you can switch input source using hotkeys <code>CMD + F1/F2</code>.</p>]]></content:encoded>
     </item>
     
     <item>
