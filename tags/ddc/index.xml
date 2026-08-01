@@ -14,7 +14,7 @@
       <pubDate>Mon, 23 Jun 2025 15:00:00 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/how-to-use-3-computers-without-kvm/</guid>
-      <description>&lt;p&gt;Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.&lt;/p&gt;</description>
+      <description>Learn how to use three computers with one monitor, keyboard, and mouse without a KVM switch, including easy device switching with Bluetooth and DDC/CI.</description>
       <content:encoded><![CDATA[<p>Hi there! Today, I want to share how I organize my three-computer setup (MacBook Air, Mac mini, and Raspberry Pi) without a KVM switch, using a single keyboard, mouse, and monitor.</p>
 <h2 id="my-devices">My devices</h2>
 <h3 id="computers">Computers</h3>
@@ -60,18 +60,22 @@
 <h4 id="the-comfortable-way-to-switch-devices">The comfortable way to switch devices</h4>
 <p>Instead of pressing buttons on the monitor and navigating its menu, I could press a hotkey on my keyboard to trigger the monitor to change input sources via its API (Display Data Channel/Command Interface Standard (DDC/CI).).</p>
 <p>I have explained in detail how one could do it on a Mac in my another post - <a href="https://alikhil.dev/posts/monitor-input-source-control-mac/">Monitor input source control on Mac</a>.</p>
-<p>I won&rsquo;t go into detail here. I&rsquo;ll just say that on my Mac Mini and MacBook Air, I have configured the following:</p>
+<p>I won&rsquo;t go into detail here. I&rsquo;ll just say that on my Mac Mini and MacBook Air, I have the following configuration with <a href="https://github.com/jackielii/skhd.zig">skhd</a>:</p>
 <p><strong>Mac Mini (#3)</strong></p>
 <ul>
-<li>On <code>CMD + F1</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor-to-uconsole.sh">uConsole</a></li>
-<li>On <code>CMD + F2</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor.sh">Macbook Air</a></li>
+<li>On <code>CMD + F1</code> triggers switch to uConsole</li>
+<li>On <code>CMD + F2</code> triggers switch to Macbook Air</li>
 </ul>
-<p><strong>Macbook Air (#2)</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cmd - f2 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=25 -vcp=inputSelect
+</span></span><span class="line"><span class="cl">cmd - f1 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=18 -vcp=inputSelect
+</span></span></code></pre></div><p><strong>Macbook Air (#2)</strong></p>
 <ul>
-<li>On <code>CMD + F1</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor-to-uconsole.sh">uConsole</a></li>
-<li>On <code>CMD + F3</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/raycast/switch-monitor.sh">Mac mini</a></li>
+<li>On <code>CMD + F1</code> triggers switch to uConsole</li>
+<li>On <code>CMD + F3</code> triggers switch to Mac mini</li>
 </ul>
-<p>For <strong>uConsole Linux machine (#1)</strong> I used <a href="https://github.com/rockowitz/ddcutil">ddcutil</a> and configured the following hotkeys:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cmd - f3 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=17 -vcp=inputSelect
+</span></span><span class="line"><span class="cl">cmd - f1 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=18 -vcp=inputSelect
+</span></span></code></pre></div><p>For <strong>uConsole Linux machine (#1)</strong> I used <a href="https://github.com/rockowitz/ddcutil">ddcutil</a> and configured the following hotkeys:</p>
 <ul>
 <li><code>Ctrl + F2</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/linux/switch-to-macbook.sh">Macbook Air</a></li>
 <li><code>Ctrl + F3</code> triggers switch to <a href="https://github.com/alikhil/configs/blob/master/linux/switch-to-mac-mini.sh">Mac Mini</a></li>

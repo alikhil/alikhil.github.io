@@ -70,7 +70,9 @@ Otherwise check if your monitor supports DDC protocol and ensure Accessibility i
 <p>Then I add next lines into <code>~/.config/skhd/skhdrc</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cmd - f2 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=25 -vcp=inputSelect
 </span></span><span class="line"><span class="cl">cmd - f1 : /Applications/BetterDisplay.app/Contents/MacOS/BetterDisplay set -ddc=18 -vcp=inputSelect
-</span></span></code></pre></div><p>And that&rsquo;s it! Now you can switch input source using hotkeys <code>CMD + F1/F2</code>.</p>]]></content:encoded>
+</span></span></code></pre></div><p>And that&rsquo;s it! Now you can switch input source using hotkeys <code>CMD + F1/F2</code>.</p>
+<h2 id="further-reading">Further reading</h2>
+<p>If you found this setup useful, you may also be interested in my guide on <a href="/posts/how-to-use-3-computers-without-kvm/">How to Use 3 Computers with One Monitor, Keyboard and Mouse – Without a KVM Switch</a>.</p>]]></content:encoded>
     </item>
     
   </channel>
