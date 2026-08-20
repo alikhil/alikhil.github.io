@@ -7,55 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Thu, 20 Aug 2026 23:51:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/flow/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>How to not burnout</title>
-      <link>https://alikhil.dev/posts/how-to-not-burnout/</link>
-      <pubDate>Thu, 20 Aug 2026 23:51:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/posts/how-to-not-burnout/</guid>
-      <description>Burnout prevention for software engineers: practical ways to set work-life boundaries, recharge, and protect your motivation</description>
-      <content:encoded><![CDATA[<p>As someone who has experienced burnout, and has talked to many people who have experienced it, I can tell you that it&rsquo;s tough to recover from burnout. It may take a lot of time and money and can cost you your job or even your profession.</p>
-<p>However, it&rsquo;s much better to prevent it by taking some precautions and following simple rules. It requires less effort, helps prevent burnout and costs less.</p>
-<p>You won&rsquo;t find a secret recipe or a silver bullet here.</p>
-<p>I genuinely believe that burnout can be prevented by following a few simple rules, or better yet, by treating them as hygiene.</p>
-<h2 id="motivation">Motivation</h2>
-<p>Doing the same thing every day can become extremely boring. It&rsquo;ll slowly kill your motivation and you start hating your job.</p>
-<p><strong>Automate repetitive work</strong>. Reduce the maintenance burden. For example, if you find yourself handling the same type of ticket over and over, build self-service workflows, or at least write instructions so other engineers can handle it without bothering you or your team.</p>
-<p>After you spend enough time repeating the same action many times, you&rsquo;ll likely end up being good at it. Your colleagues will notice that and you&rsquo;ll be asked to do this action even more. Boredom is another risk of repetitive tasks. If you find yourself bored with the same work, problem, technology or anything else, find a new challenge: something new to discover and solve, a new problem, a new tool or skill to learn.</p>
-<p>Remote work, lack of verbal communication, and absence of feedback could lead to loss of sense of reality, causing you to start doubting our skills, competence, and impact. <strong>Ask your manager and your peers for honest feedback</strong>. Accept it. Your self-doubt will likely disappear and you&rsquo;ll get some direction on how to improve your skills and grow.</p>
-<h2 id="work-life-boundaries">Work-Life Boundaries</h2>
-<p>Being motivated and productive at work will lead to big results, doubtlessly. However, for most people, life is not limited only by work. Chronic overworking will damage other areas of your life. While your productivity could benefit in the short term, in the long term you&rsquo;ll suffer from tiredness, lack of motivation, and bad sleep. So <strong>try not to overwork when you can</strong>.</p>
-<p>If you had to overwork because of a strict deadline or an urgent delivery, try to compensate it by taking days off soon afterward to recover.</p>
-<p><strong>Don&rsquo;t check your Slack/email after working hours</strong>. You need a real pause. Reading work-related messages will keep your brain focused on solving problems instead of resting and being present with your friends and family. You are still working, and, in fact, overworking.</p>
-<p>If you can, I&rsquo;d recommend <strong>having a separate smartphone</strong> for work-related things. You may say: “But if I don&rsquo;t check Slack/email, I might miss something important and urgent.”</p>
-<p>I believe this concern is overestimated. Most communication can wait until the next morning. For really urgent matters, on-call practices should be in place, and another tool should be used, like PagerDuty.</p>
-<h2 id="recharge">Recharge</h2>
-<p><strong>Use your paid time off days</strong>. I&rsquo;ve met people who don&rsquo;t use their PTO days; they stack up until they vanish.</p>
-<p><img loading="lazy" src="/images/posts/burnout/summer-vacation-post.png" type="" alt="A post about needing a summer vacation"  /></p>
-<p>Disconnect from your work, get new ideas, travel and catch up with other areas of your life. Visit friends and family. It&rsquo;s a basic necessity.</p>
-<p>It&rsquo;s not surprising that minimum vacation days are required by law in many countries.</p>
-<p><strong>Get regular physical activity.</strong></p>
-<p>I&rsquo;m not saying you should master volleyball or run 10 km every day. It could be anything convenient for you, like swimming in the sea, doing yoga, walking 10,000 steps, hiking – whatever suits you best.</p>
-<p>It can help to relieve stress and clear your mind. It&rsquo;s especially useful to do it just after you finish your working day, to switch contexts. Physical activity can be a smooth bridge from your work back to your life.</p>
-<p><strong>Have a hobby.</strong> Find something you&rsquo;ll enjoy doing. It&rsquo;s better if your hobby has nothing to do with your job – ideally, it should be something totally different.</p>
-<p>For example, I spend all day sitting at home in front of my computer as a software engineer. So as a hobby I&rsquo;d choose something I&rsquo;ll do away from home and with other people.</p>
-<p>Like going to improv comedy classes, or playing padel, or playing board games.</p>
-<p>Imagine loosing your job or burning out and when work is the main part of your self-identity. The crisis will hit you hard.</p>
-<p>If you have no idea what could be your hobby, go and try new things. Ask your friends about their hobbies, ask whether you can join them. Look for activities online, on platforms like Meetup. Think of things you enjoyed doing in your childhood.</p>
-<h2 id="final-thoughts">Final thoughts</h2>
-<p>It&rsquo;s easy to fall into workaholism, start overworking, forget to recharge and neglect other aspects of your life.</p>
-<p>Keeping work and life balanced takes effort.</p>
-<p>Find what works for you.</p>
-<hr>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">What do you do / don&#39;t do to not burn out at work?</p>&mdash; Alik Khilazhev (@akhilazhev) <a href="https://x.com/akhilazhev/status/2088585362033557901?ref_src=twsrc%5Etfw">August 15, 2026</a></blockquote>
-<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
-
-
-<p>Tell the world!</p>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Sun, 28 Sep 2025 19:08:35 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/flow/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Simple Habit That Saves My Evenings</title>
       <link>https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/</link>

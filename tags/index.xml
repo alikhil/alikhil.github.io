@@ -19,16 +19,6 @@
     </item>
     
     <item>
-      <title>Flow</title>
-      <link>https://alikhil.dev/tags/flow/</link>
-      <pubDate>Thu, 20 Aug 2026 23:51:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/flow/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Habit</title>
       <link>https://alikhil.dev/tags/habit/</link>
       <pubDate>Thu, 20 Aug 2026 23:51:12 +0300</pubDate>
@@ -324,6 +314,16 @@
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/kubectl/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Flow</title>
+      <link>https://alikhil.dev/tags/flow/</link>
+      <pubDate>Sun, 28 Sep 2025 19:08:35 +0300</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/flow/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
