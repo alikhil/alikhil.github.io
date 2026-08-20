@@ -3,10 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alikhil.dev/</loc>
-    <lastmod>2026-08-02T00:55:06+03:00</lastmod>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/burnout/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
-    <lastmod>2026-08-02T00:55:06+03:00</lastmod>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/flow/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/habit/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/how-to-not-burnout/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/note/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/productivity/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/work-life-balance/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/control-rgb-lights-with-openrgb/</loc>
     <lastmod>2026-08-01T23:51:12+03:00</lastmod>
@@ -23,14 +50,8 @@
     <loc>https://alikhil.dev/categories/opensource/</loc>
     <lastmod>2026-08-01T23:51:12+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2026-08-02T00:55:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/rgb/</loc>
     <lastmod>2026-08-01T23:51:12+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2026-08-02T00:55:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/windows/</loc>
     <lastmod>2026-08-01T23:51:12+03:00</lastmod>
@@ -79,9 +100,6 @@
   </url><url>
     <loc>https://alikhil.dev/tags/nix-darwin/</loc>
     <lastmod>2026-06-22T20:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/note/</loc>
-    <lastmod>2026-07-18T17:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tools/kubectl-find/</loc>
     <lastmod>2026-05-02T17:12:38+00:00</lastmod>
@@ -164,25 +182,10 @@
     <loc>https://alikhil.dev/posts/kubectl-find-plugin-50-stars-anniversary/</loc>
     <lastmod>2025-10-17T19:27:24+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/burnout/</loc>
-    <lastmod>2025-09-28T19:08:35+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/flow/</loc>
-    <lastmod>2025-09-28T19:08:35+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/habit/</loc>
-    <lastmod>2025-09-28T19:08:35+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/categories/productivity/</loc>
-    <lastmod>2025-09-28T19:08:35+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/startup/</loc>
     <lastmod>2025-09-28T19:08:35+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/</loc>
-    <lastmod>2025-09-28T19:08:35+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/work-life-balance/</loc>
     <lastmod>2025-09-28T19:08:35+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/authentication/</loc>
