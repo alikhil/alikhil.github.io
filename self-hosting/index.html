@@ -319,16 +319,52 @@ function toggleThemeListener() {
 
 
   </footer>
-    <div class="comments-separator"></div>
+    <div class="comments-separator"></div><div id="utterances-comments">
+  <script src="https://utteranc.es/client.js"
+          repo="alikhil/alikhil.github.io"
+          issue-term="pathname"
+          label="comment"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+  </script>
+  <script>
+    (function () {
+      const container = document.getElementById('utterances-comments');
+      const utterancesOrigin = 'https://utteranc.es';
 
-<script src="https://utteranc.es/client.js"
-        repo="alikhil/alikhil.github.io"
-        issue-term="pathname"
-        label="comment"
-        theme="preferred-color-scheme"
-        crossorigin="anonymous"
-        async>
-</script>
+      function syncTheme(isDark) {
+        const frame = container.querySelector('.utterances-frame');
+        if (frame && frame.contentWindow) {
+          frame.contentWindow.postMessage({
+            type: 'set-theme',
+            theme: isDark ? 'github-dark' : 'github-light',
+          }, utterancesOrigin);
+        }
+      }
+
+      
+      
+      const observer = new MutationObserver(function () {
+        const frame = container.querySelector('.utterances-frame');
+        if (!frame) return;
+
+        frame.addEventListener('load', function () {
+          syncTheme(isDarkTheme());
+        }, { once: true });
+        observer.disconnect();
+      });
+      observer.observe(container, { childList: true });
+
+      
+      
+      toggleThemeCallbacks.utterances = function (isDark) {
+        syncTheme(!isDark);
+      };
+    })();
+  </script>
+</div>
+
 </article>
     </main>
     
