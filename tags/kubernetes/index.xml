@@ -7,7 +7,323 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Sun, 28 Dec 2025 21:14:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Aug 2026 00:30:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Protect Kubernetes Services with OAuth2 Proxy, Gateway API, Traefik, and Pocket ID</title>
+      <link>https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/</guid>
+      <description>A practical Gateway API replacement for ingress-nginx auth annotations: protect Kubernetes services with Traefik ForwardAuth, OAuth2 Proxy, and Pocket ID.</description>
+      <content:encoded><![CDATA[<p>My previous <a href="/posts/oauth2-proxy-protect-services-in-k8s/">guide</a> used ingress-nginx annotations to put internal Kubernetes services behind OAuth2 Proxy. It was written for an ingress-nginx setup. That controller is being retired, and Gateway API is the direction Kubernetes recommends for new traffic management work. This post rebuilds the same authentication flow with Gateway API, Traefik, OAuth2 Proxy, and Pocket ID.</p>
+<blockquote>
+<p><strong>Why Traefik?</strong> Gateway API standardizes <code>Gateway</code> and <code>HTTPRoute</code>, but it does not standardize browser-based OIDC login or an external-auth filter. This setup uses Traefik&rsquo;s <code>Middleware</code> CRD for those pieces. With Envoy Gateway, Kong, Cilium, or another implementation, the Gateway API resources can stay, but the authentication adapter must change.</p>
+</blockquote>
+<h2 id="what-we-are-building">What we are building</h2>
+<p>This setup exposes three HTTPS hostnames below one domain:</p>
+<ul>
+<li><code>pocket-id.k8s.example.com</code> is the Pocket ID UI and OIDC issuer.</li>
+<li><code>auth.k8s.example.com</code> serves OAuth2 Proxy endpoints.</li>
+<li><code>whoami.k8s.example.com</code> is a protected demo service.</li>
+</ul>
+<p>One parent domain lets OAuth2 Proxy use a narrowly scoped shared session cookie, such as <code>.k8s.example.com</code>. Do not set the cookie domain to a wider parent domain when unrelated applications use it.</p>
+<pre class="mermaid">sequenceDiagram
+    autonumber
+    participant B as Browser
+    participant T as Traefik Gateway
+    participant O as OAuth2 Proxy
+    participant P as Pocket ID
+    participant S as whoami
+
+    B->>T: GET whoami.k8s.example.com
+    T->>O: ForwardAuth /oauth2/auth
+    O-->>T: 401 (no session)
+    T-->>B: 302 /oauth2/sign_in?rd=...
+    B->>O: Start sign-in
+    O->>P: OIDC authorization request
+    P-->>B: Authenticate with passkey
+    P-->>O: Callback with authorization code
+    O-->>B: Set session cookie and redirect back
+    B->>T: Repeat original request
+    T->>O: ForwardAuth /oauth2/auth
+    O-->>T: 202 + identity headers
+    T->>S: Forward authenticated request
+    S-->>B: Protected response</pre>
+<p><code>/oauth2/auth</code> only checks a session: it returns <code>202</code> when one is valid and <code>401</code> otherwise. Traefik&rsquo;s <code>Errors</code> middleware turns that <code>401</code> into the browser redirect to OAuth2 Proxy. That separate redirect step is the most important difference from the old ingress-nginx annotations.</p>
+<h2 id="before-you-start">Before you start</h2>
+<p>I verified the authentication flow on a local K3s cluster. The commands below use standard Kubernetes and Helm commands, so they are not tied to that local environment. Start with a running cluster, <code>kubectl</code>, and Helm. You also need DNS for <code>*.k8s.example.com</code> pointing to the endpoint that accepts HTTPS traffic for Traefik.</p>
+<p>Gateway is only routing configuration; Traefik is the process that accepts the traffic. On a managed cloud cluster, expose Traefik through a <code>Service</code> of type <code>LoadBalancer</code>. On bare metal, use MetalLB or your existing external load balancer. A local cluster normally uses its own port mapping or local load-balancer mechanism.</p>
+<p>Replace <code>k8s.example.com</code> with a domain you control before applying any manifest. The login callback and session cookie need HTTPS.</p>
+<h2 id="step-0-install-gateway-api">Step 0: install Gateway API</h2>
+<p>Gateway API is an add-on API, not a resource installed in every Kubernetes cluster. Install its standard CRDs before installing a Gateway implementation. If your platform manages Gateway API already, check its documentation before applying another version.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.6.1/standard-install.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get crd gatewayclasses.gateway.networking.k8s.io <span class="se">\
+</span></span></span><span class="line"><span class="cl">  gateways.gateway.networking.k8s.io <span class="se">\
+</span></span></span><span class="line"><span class="cl">  httproutes.gateway.networking.k8s.io
+</span></span></code></pre></div><p>The standard channel is enough here. It contains the stable <code>Gateway</code>, <code>GatewayClass</code>, and <code>HTTPRoute</code> APIs.</p>
+<h2 id="step-1-install-traefik-and-create-a-gateway">Step 1: install Traefik and create a Gateway</h2>
+<p>This guide uses Traefik&rsquo;s Gateway API provider plus its Kubernetes CRD provider. The first handles standard <code>Gateway</code> and <code>HTTPRoute</code> objects. The second is required because the authentication middleware is a Traefik CRD.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add traefik https://traefik.github.io/charts
+</span></span><span class="line"><span class="cl">helm repo update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm upgrade --install traefik traefik/traefik <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --namespace traefik <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --create-namespace <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --set providers.kubernetesGateway.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --set service.spec.type<span class="o">=</span>LoadBalancer <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --wait
+</span></span></code></pre></div><p>The <code>LoadBalancer</code> setting above is the common managed-cluster case: the cloud controller creates an external address for the Traefik Service. If your cluster uses another traffic-entry mechanism, adapt this one setting and point DNS at that endpoint. The <code>Gateway</code> resource below does not create the external listener by itself.</p>
+<p>Check that Traefik registered a <code>GatewayClass</code> and that its Service has an address before adding DNS:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get gatewayclass
+</span></span><span class="line"><span class="cl">kubectl get svc -n traefik
+</span></span></code></pre></div><p>I assume cert-manager and a working <code>ClusterIssuer</code> named <code>letsencrypt-prod</code> already exist. A DNS-01 issuer is usually the simplest way to obtain a wildcard certificate. If you use HTTP-01, request the individual names instead.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">cert-manager.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Certificate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">k8s-example-com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l">k8s-example-com-tls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">issuerRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterIssuer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">letsencrypt-prod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">dnsNames</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;*.k8s.example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">gateway.networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">internal-gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gatewayClassName</span><span class="p">:</span><span class="w"> </span><span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">https</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">HTTPS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">443</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;*.k8s.example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l">Terminate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">certificateRefs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">k8s-example-com-tls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">allowedRoutes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">namespaces</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l">Same</span><span class="w">
+</span></span></span></code></pre></div><p>Apply it and wait for both the certificate and Gateway:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f gateway.yaml
+</span></span><span class="line"><span class="cl">kubectl get certificate,gateway -n oauth-example -w
+</span></span></code></pre></div><p>Do not continue until the Certificate is <code>Ready=True</code> and the Gateway is <code>Programmed=True</code>.</p>
+<h2 id="step-2-install-and-configure-pocket-id">Step 2: install and configure Pocket ID</h2>
+<p>I use <a href="https://pocket-id.org/">Pocket ID</a> as the OIDC provider because passkeys make a small personal or team setup simple. You can substitute another OIDC provider; only the OAuth2 Proxy provider settings change.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add anza-labs https://anza-labs.github.io/charts
+</span></span><span class="line"><span class="cl">helm repo update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm upgrade --install pocket-id anza-labs/pocket-id <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --namespace oauth-example <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --create-namespace <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --set ingress.enabled<span class="o">=</span><span class="nb">false</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --set persistence.data.enabled<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></div><p>Expose it with a standard <code>HTTPRoute</code> rather than an Ingress. The chart&rsquo;s Service listens on port <code>80</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">gateway.networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">HTTPRoute</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pocket-id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">parentRefs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">internal-gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">sectionName</span><span class="p">:</span><span class="w"> </span><span class="l">https</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostnames</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">pocket-id.k8s.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">backendRefs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pocket-id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div><p>Apply it, then open <code>https://pocket-id.k8s.example.com/signup/setup</code>. Complete Pocket ID&rsquo;s initial setup. Create a user with a passkey and make sure its email address is verified.</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-setup.png" type="" alt="Initial Pocket ID setup"  /></p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-pass.png" type="" alt="Add a passkey"  /></p>
+<p>Create a <code>developers</code> group and add the user to it.</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/pocket-id-groups.png" type="" alt="Create the developers group"  /></p>
+<p>Then create an OIDC client named <code>OAuth2 Proxy</code> with this redirect URL:</p>
+<ul>
+<li><code>https://auth.k8s.example.com/oauth2/callback</code></li>
+</ul>
+<p>Save its client ID and client secret. OAuth2 Proxy will allow only members of <code>developers</code>; Pocket ID must therefore send the <code>groups</code> claim. <strong>Verified email is also required</strong>: OAuth2 Proxy rejects Pocket ID&rsquo;s ID token if its email is not verified.</p>
+<h2 id="step-3-install-oauth2-proxy">Step 3: install OAuth2 Proxy</h2>
+<p>Create a Kubernetes Secret with the OIDC client credentials and a 32-byte cookie secret:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CLIENT_ID</span><span class="o">=</span><span class="s2">&#34;replace-me&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CLIENT_SECRET</span><span class="o">=</span><span class="s2">&#34;replace-me&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">COOKIE_SECRET</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>openssl rand -base64 <span class="m">32</span> <span class="p">|</span> tr -d <span class="s1">&#39;\n&#39;</span><span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl -n oauth-example create secret generic oauth2-proxy-secrets <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --from-literal<span class="o">=</span>client-id<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$CLIENT_ID</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --from-literal<span class="o">=</span>client-secret<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$CLIENT_SECRET</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --from-literal<span class="o">=</span>cookie-secret<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$COOKIE_SECRET</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><p>Use the official chart&rsquo;s <code>gatewayApi</code> values to create OAuth2 Proxy&rsquo;s <code>HTTPRoute</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># oauth2-proxy-values.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecret</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy-secrets</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cookieName</span><span class="p">:</span><span class="w"> </span><span class="l">general-oauth2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">configFile</span><span class="p">:</span><span class="w"> </span><span class="p">|-</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    provider = &#34;oidc&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    provider_display_name = &#34;Pocket ID&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    oidc_issuer_url = &#34;https://pocket-id.k8s.example.com&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    redirect_url = &#34;https://auth.k8s.example.com/oauth2/callback&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    scope = &#34;openid profile email groups&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    allowed_groups = [ &#34;developers&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    email_domains = [ &#34;*&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    upstreams = [ &#34;file:///dev/null&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    reverse_proxy = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    skip_provider_button = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_secure = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_samesite = &#34;lax&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_domains = [ &#34;.k8s.example.com&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    whitelist_domains = [ &#34;.k8s.example.com&#34; ]
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_csrf_per_request = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    cookie_csrf_expire = &#34;15m&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    set_xauthrequest = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    set_authorization_header = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    pass_authorization_header = true
+</span></span></span><span class="line"><span class="cl"><span class="sd">    pass_access_token = true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">gatewayApi</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gatewayRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">internal-gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sectionName</span><span class="p">:</span><span class="w"> </span><span class="l">https</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostnames</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">auth.k8s.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">matches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">PathPrefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">/oauth2</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm repo add oauth2-proxy https://oauth2-proxy.github.io/manifests
+</span></span><span class="line"><span class="cl">helm repo update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm upgrade --install oauth2-proxy oauth2-proxy/oauth2-proxy <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --namespace oauth-example <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --values oauth2-proxy-values.yaml
+</span></span></code></pre></div><p>Open <code>https://auth.k8s.example.com/oauth2/sign_in</code> now. You should reach Pocket ID and return to OAuth2 Proxy. Fix the issuer URL, callback URL, client secret, or TLS before adding an application route.</p>
+<h2 id="step-4-protect-a-service-with-forwardauth">Step 4: protect a service with ForwardAuth</h2>
+<p>The protected service needs an <code>HTTPRoute</code>, a <code>ForwardAuth</code> middleware that calls OAuth2 Proxy, and an <code>Errors</code> middleware that changes an unauthenticated <code>401</code> into a browser redirect.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">traefik.io/v1alpha1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Middleware</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-auth</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">forwardAuth</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">http://oauth2-proxy.oauth-example.svc.cluster.local:80/oauth2/auth</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">trustForwardHeader</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">authResponseHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Authorization</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">X-Auth-Request-User</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">X-Auth-Request-Email</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">X-Auth-Request-Groups</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">traefik.io/v1alpha1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Middleware</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-errors</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">errors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">status</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;401-403&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">query</span><span class="p">:</span><span class="w"> </span><span class="l">/oauth2/sign_in?rd={url}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">statusRewrites</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">&#34;401&#34;: </span><span class="m">302</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">traefik/whoami:v1.11.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">gateway.networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">HTTPRoute</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">oauth-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">parentRefs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">internal-gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">sectionName</span><span class="p">:</span><span class="w"> </span><span class="l">https</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostnames</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">whoami.k8s.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">filters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ExtensionRef</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">extensionRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">traefik.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Middleware</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-errors</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ExtensionRef</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">extensionRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">traefik.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Middleware</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">oauth2-auth</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">backendRefs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div><p>Keep the middleware order: ForwardAuth returns the <code>401</code>, then Errors changes it into a login redirect while preserving the original URL.</p>
+<p><code>trustForwardHeader: false</code> is the safe default for a direct public entry point. A production setup behind Cloudflare or a cloud load balancer must define its trusted proxy boundary before accepting forwarded headers.</p>
+<h2 id="test-the-flow">Test the flow</h2>
+<p>Use a private browser window so that an old cookie cannot hide a problem:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl apply -f whoami.yaml
+</span></span><span class="line"><span class="cl">open https://whoami.k8s.example.com
+</span></span></code></pre></div><p>You should be redirected to Pocket ID. After authentication, <code>whoami</code> loads and displays the headers that OAuth2 Proxy passed through Traefik.</p>
+<p><img loading="lazy" src="/images/posts/oauth2-proxy/demo.gif" type="" alt="The OAuth2 Proxy flow"  /></p>
+<p>If the browser receives a plain <code>401</code>, check that both middleware resources are attached to the <code>HTTPRoute</code> and that <code>statusRewrites</code> maps <code>401</code> to <code>302</code>. If the login works but access is denied, check the user&rsquo;s verified email and membership in <code>developers</code>. Gateway and route status are useful for routing problems:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl describe gateway,httproute -n oauth-example
+</span></span></code></pre></div><h2 id="where-to-go-next">Where to go next</h2>
+<p>These steps demonstrate the authentication flow. A production deployment still needs a secret store, network policies, a session store when needed, and explicit trusted proxy configuration.</p>
+<p>If a local Kubernetes detail is unclear or the steps above do not work as expected, see <a href="https://github.com/alikhil/oauth2-proxy-k8s-lab">alikhil/oauth2-proxy-k8s-lab</a>. It contains the k3d configuration I used, including traffic entry, DNS, certificates, and cleanup. The old ingress-nginx guide remains available for existing installations; migrate one hostname at a time after verifying login, logout, deep links, and an expired session.</p>]]></content:encoded>
+    </item>
+    
     <item>
       <title>Kubernetes In-Place Pod Resize</title>
       <link>https://alikhil.dev/posts/in-place-pod-resize/</link>

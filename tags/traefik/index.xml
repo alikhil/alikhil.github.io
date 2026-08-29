@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Sat, 29 Aug 2026 11:30:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/tags/traefik/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Aug 2026 00:30:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/tags/traefik/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Protect Kubernetes Services with OAuth2 Proxy, Gateway API, Traefik, and Pocket ID</title>
       <link>https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/</link>
-      <pubDate>Sat, 29 Aug 2026 11:30:00 +0200</pubDate>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/</guid>
       <description>A practical Gateway API replacement for ingress-nginx auth annotations: protect Kubernetes services with Traefik ForwardAuth, OAuth2 Proxy, and Pocket ID.</description>

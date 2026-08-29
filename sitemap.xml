@@ -5,11 +5,44 @@
     <loc>https://alikhil.dev/</loc>
     <lastmod>2026-08-29T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/burnout/</loc>
-    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
+    <loc>https://alikhil.dev/tags/authentication/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/categories/</loc>
     <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/devops/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/gateway-api/</loc>
+    <lastmod>2026-08-29T00:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/categories/kubernetes/</loc>
+    <lastmod>2026-08-29T00:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/kubernetes/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/oauth2-proxy/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/pocket-id/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/</loc>
+    <lastmod>2026-08-29T00:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/</loc>
+    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/traefik/</loc>
+    <lastmod>2026-08-29T00:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://alikhil.dev/tags/burnout/</loc>
+    <lastmod>2026-08-20T23:51:12+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/habit/</loc>
     <lastmod>2026-08-20T23:51:12+03:00</lastmod>
@@ -20,14 +53,8 @@
     <loc>https://alikhil.dev/categories/note/</loc>
     <lastmod>2026-08-20T23:51:12+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/posts/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/categories/productivity/</loc>
     <lastmod>2026-08-20T23:51:12+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/tags/work-life-balance/</loc>
     <lastmod>2026-08-20T23:51:12+03:00</lastmod>
@@ -155,12 +182,6 @@
     <loc>https://alikhil.dev/posts/what-is-a-cdn-and-why-it-matters/</loc>
     <lastmod>2026-03-21T14:11:43+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/categories/devops/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/kubernetes/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/posts/in-place-pod-resize/</loc>
     <lastmod>2025-12-28T21:14:12+03:00</lastmod>
   </url><url>
@@ -188,19 +209,10 @@
     <loc>https://alikhil.dev/posts/the-simple-habit-that-saves-my-evenings/</loc>
     <lastmod>2025-09-28T19:08:35+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/authentication/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/categories/networking/</loc>
     <lastmod>2026-08-29T20:31:06+03:00</lastmod>
   </url><url>
-    <loc>https://alikhil.dev/tags/oauth2-proxy/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
-  </url><url>
     <loc>https://alikhil.dev/tags/passkey/</loc>
-    <lastmod>2026-08-29T20:31:06+03:00</lastmod>
-  </url><url>
-    <loc>https://alikhil.dev/tags/pocket-id/</loc>
     <lastmod>2026-08-29T20:31:06+03:00</lastmod>
   </url><url>
     <loc>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</loc>

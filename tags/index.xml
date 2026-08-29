@@ -7,7 +7,67 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Thu, 20 Aug 2026 23:51:12 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Aug 2026 00:30:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Authentication</title>
+      <link>https://alikhil.dev/tags/authentication/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/authentication/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Gateway-Api</title>
+      <link>https://alikhil.dev/tags/gateway-api/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/gateway-api/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>https://alikhil.dev/tags/kubernetes/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/kubernetes/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Oauth2-Proxy</title>
+      <link>https://alikhil.dev/tags/oauth2-proxy/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/oauth2-proxy/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Pocket-Id</title>
+      <link>https://alikhil.dev/tags/pocket-id/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/pocket-id/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Traefik</title>
+      <link>https://alikhil.dev/tags/traefik/</link>
+      <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/traefik/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Burnout</title>
       <link>https://alikhil.dev/tags/burnout/</link>
@@ -279,16 +339,6 @@
     </item>
     
     <item>
-      <title>Kubernetes</title>
-      <link>https://alikhil.dev/tags/kubernetes/</link>
-      <pubDate>Sun, 28 Dec 2025 21:14:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/kubernetes/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Fd</title>
       <link>https://alikhil.dev/tags/fd/</link>
       <pubDate>Fri, 17 Oct 2025 19:27:24 +0300</pubDate>
@@ -339,41 +389,11 @@
     </item>
     
     <item>
-      <title>Authentication</title>
-      <link>https://alikhil.dev/tags/authentication/</link>
-      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/authentication/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Oauth2-Proxy</title>
-      <link>https://alikhil.dev/tags/oauth2-proxy/</link>
-      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/oauth2-proxy/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Passkey</title>
       <link>https://alikhil.dev/tags/passkey/</link>
       <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/passkey/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Pocket-Id</title>
-      <link>https://alikhil.dev/tags/pocket-id/</link>
-      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/pocket-id/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
