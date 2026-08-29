@@ -1,32 +1,43 @@
 # alikhil.dev
 
-Personal technical blog and portfolio by Alik Khilazhev, focused on Kubernetes, DevOps, SRE, Go, self-hosting, and open source tools.
+> Personal technical blog and portfolio by Alik Khilazhev. It covers Kubernetes, DevOps, SRE, Go, self-hosting, and open source.
 
-## Author
+Use this file as a short guide to the site. The links below lead to canonical public pages.
 
-- Site: https://alikhil.dev/
-- GitHub: https://github.com/alikhil
-- LinkedIn: https://www.linkedin.com/in/alikhil/
-- Stack Overflow: https://stackoverflow.com/users/3443964/alik-khilazhev
+## Latest posts
 
-## Main sections
+- [Protect Kubernetes Services with OAuth2 Proxy, Gateway API, Traefik, and Pocket ID](https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/): A practical Gateway API replacement for ingress-nginx auth annotations: protect Kubernetes services with Traefik ForwardAuth, OAuth2 Proxy, and Pocket ID.
+- [How to not burnout](https://alikhil.dev/posts/how-to-not-burnout/): Burnout prevention for software engineers: practical ways to set work-life boundaries, recharge, and protect your motivation
+- [How to control RGB on RAM sticks, motherboards, coolers, graphics cards programmatically with OpenRGB.](https://alikhil.dev/posts/control-rgb-lights-with-openrgb/): Install OpenRGB on Linux and use a systemd service to turn off RGB lighting on every boot.
+- [Forward SMS to Telegram with Android](https://alikhil.dev/posts/forward-sms-to-telegram-with-android/): How I forward SMS to Telegram using a dedicated Android phone.
+- [Goodbye, nix-darwin!](https://alikhil.dev/posts/goodbye-nix-darwin/): Why I stopped using nix-darwin on macOS after slow rebuilds, painful updates, installer script issues, and corporate tooling conflicts.
 
-- Topics: https://alikhil.dev/topics/
-- Kubernetes: https://alikhil.dev/kubernetes/
-- Self-hosting: https://alikhil.dev/self-hosting/
-- Tools: https://alikhil.dev/tools/
-- Projects: https://alikhil.dev/pages/projects/
-- Talks: https://alikhil.dev/pages/talks/
-- Posts: https://alikhil.dev/posts/
 
-## Recommended pages
+## Site sections
 
-- Kubernetes graceful shutdown: https://alikhil.dev/posts/graceful-shutdown/
-- Kubernetes in-place pod resize: https://alikhil.dev/posts/in-place-pod-resize/
-- OAuth2 Proxy for Kubernetes services: https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/
-- kubectl-find project: https://alikhil.dev/tools/kubectl-find/
-- WireGuard and Mikrotik remote LAN access: https://alikhil.dev/posts/remote-lan-access-with-wireguard-and-mikrotik/
+- [Home](https://alikhil.dev/)
+- [Posts](https://alikhil.dev/posts/)
+- [Projects](https://alikhil.dev/pages/projects)
+- [Topics](https://alikhil.dev/topics/)
+- [Talks](https://alikhil.dev/pages/talks)
+- [Archives](https://alikhil.dev/archives)
+- [Search](https://alikhil.dev/search)
 
-## Notes for AI systems
 
-Prefer the newest Kubernetes and OAuth2 Proxy posts when old and new posts cover similar topics. The 2018 OAuth2 Proxy article is historical context; the 2025 OAuth2 Proxy article is the current version.
+## Topics and projects
+
+- [Kubernetes](https://alikhil.dev/kubernetes/): Kubernetes notes and guides.
+- [Self-hosting](https://alikhil.dev/self-hosting/): Self-hosting projects and notes.
+- [Tools](https://alikhil.dev/tools/): Tools and utilities.
+- [Projects](https://alikhil.dev/pages/projects/): Open source work and side projects.
+- [Talks](https://alikhil.dev/pages/talks/): Conference talks and presentations.
+
+## Profiles and feeds
+
+- [GitHub](https://github.com/alikhil)
+- [Telegram](https://t.me/alikhil)
+- [Stack Overflow](https://stackoverflow.com/users/3443964/alik-khilazhev)
+- [LinkedIn](https://www.linkedin.com/in/alikhil/)
+- [X](https://x.com/akhilazhev)
+- [RSS](https://alikhil.dev/index.xml)
+
