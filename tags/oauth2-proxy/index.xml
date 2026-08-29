@@ -16,6 +16,9 @@
       <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
       <description>Step-by-step guide to protecting internal Kubernetes services using OAuth2 Proxy, ingress-nginx auth annotations, and Pocket ID as the OIDC provider. Covers Helm values, cookie config, ingress annotations, and troubleshooting.</description>
       <content:encoded><![CDATA[<p>The original post wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
+<blockquote>
+<p><strong>Update (August 2026):</strong> ingress-nginx is being retired. For a new installation, use the <a href="/posts/oauth2-proxy-gateway-api-traefik/">Gateway API, Traefik, OAuth2 Proxy, and Pocket ID version of this guide</a>. Keep reading only if you are maintaining an existing ingress-nginx setup.</p>
+</blockquote>
 <h2 id="what-we-have">What we have</h2>
 <p>We have a Kubernetes cluster with several web services deployed for internal use.</p>
 <h2 id="what-we-want-to-achieve">What we want to achieve</h2>

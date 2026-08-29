@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Ci/Cd on alikhil</title>
-    <link>http://localhost:1313/tags/ci/cd/</link>
+    <link>https://alikhil.dev/tags/ci/cd/</link>
     <description>Recent content in Ci/Cd on alikhil</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Sun, 24 May 2020 15:12:41 +0300</lastBuildDate><atom:link href="http://localhost:1313/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 May 2020 15:12:41 +0300</lastBuildDate><atom:link href="https://alikhil.dev/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introduction to Drone.io</title>
-      <link>http://localhost:1313/posts/intro-to-drone/</link>
+      <link>https://alikhil.dev/posts/intro-to-drone/</link>
       <pubDate>Sun, 24 May 2020 15:12:41 +0300</pubDate>
       <author>Alik Khilazhev</author>
-      <guid>http://localhost:1313/posts/intro-to-drone/</guid>
+      <guid>https://alikhil.dev/posts/intro-to-drone/</guid>
       <description>&lt;p&gt;In this post I have tried to structure the content of my talks about &lt;a href=&#34;https://drone.io&#34;&gt;drone.io&lt;/a&gt; CI/CD platform. I hope, this will be useful for those who are not familiar with it.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>In this post I have tried to structure the content of my talks about <a href="https://drone.io">drone.io</a> CI/CD platform. I hope, this will be useful for those who are not familiar with it.</p>
 <p>If you know Russian language, you can watch one of my talks about drone.io <a href="https://www.youtube.com/watch?v=MSsHRo9CYvk">here</a> or <a href="https://www.youtube.com/watch?v=mKT-bLdRGvQ">there</a>.</p>

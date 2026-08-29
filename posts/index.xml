@@ -830,6 +830,9 @@ Here are the two main ideas of it:</p>
       <guid>https://alikhil.dev/posts/oauth2-proxy-protect-services-in-k8s/</guid>
       <description>Step-by-step guide to protecting internal Kubernetes services using OAuth2 Proxy, ingress-nginx auth annotations, and Pocket ID as the OIDC provider. Covers Helm values, cookie config, ingress annotations, and troubleshooting.</description>
       <content:encoded><![CDATA[<p>The original post wrote <a href="https://alikhil.dev/posts/oauth2-proxy-for-kubernetes-services/">about oauth2-proxy</a> over seven years ago was quite popular at the time and attracted a lot of organic traffic to my blog, which still benefits my SEO today. Since the tutorial had become outdated, I decided to rewrite it.</p>
+<blockquote>
+<p><strong>Update (August 2026):</strong> ingress-nginx is being retired. For a new installation, use the <a href="/posts/oauth2-proxy-gateway-api-traefik/">Gateway API, Traefik, OAuth2 Proxy, and Pocket ID version of this guide</a>. Keep reading only if you are maintaining an existing ingress-nginx setup.</p>
+</blockquote>
 <h2 id="what-we-have">What we have</h2>
 <p>We have a Kubernetes cluster with several web services deployed for internal use.</p>
 <h2 id="what-we-want-to-achieve">What we want to achieve</h2>
@@ -1683,8 +1686,8 @@ This way, I can access my home network from anywhere without exposing any ports 
 <p>You already have public and private keys for the client device, other configuration parameters are:</p>
 <h5 id="interface">Interface</h5>
 <ul>
-<li><strong>Address</strong> - It&rsquo;s address of peer in wireguard subnet. Put the same address you set in <code>AllowedIPs</code> field in previous step.</li>
-<li><strong>DNS servers</strong> - if you have adguard/pihole running on the cloud server, you can use it as a DNS server. Put it&rsquo;s IP address here.</li>
+<li><strong>Address</strong> - Its address in the WireGuard subnet. Put the same address you set in the <code>AllowedIPs</code> field in the previous step.</li>
+<li><strong>DNS servers</strong> - if you have adguard/pihole running on the cloud server, you can use it as a DNS server. Put its IP address here.</li>
 <li><strong>MTU</strong> and <strong>ListenPort</strong> - you can leave them empty, they will be set automatically.</li>
 </ul>
 <h5 id="peer">Peer</h5>
