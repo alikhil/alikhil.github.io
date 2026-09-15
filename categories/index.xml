@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Sat, 29 Aug 2026 00:30:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Sep 2026 23:47:28 +0200</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blogging</title>
+      <link>https://alikhil.dev/categories/blogging/</link>
+      <pubDate>Tue, 15 Sep 2026 23:47:28 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/categories/blogging/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Note</title>
+      <link>https://alikhil.dev/categories/note/</link>
+      <pubDate>Tue, 15 Sep 2026 23:47:28 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/categories/note/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Devops</title>
       <link>https://alikhil.dev/categories/devops/</link>
@@ -24,16 +44,6 @@
       <pubDate>Sat, 29 Aug 2026 00:30:00 +0200</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/kubernetes/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Note</title>
-      <link>https://alikhil.dev/categories/note/</link>
-      <pubDate>Thu, 20 Aug 2026 23:51:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/categories/note/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
@@ -154,16 +164,6 @@
       <pubDate>Sun, 21 Oct 2018 22:42:44 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/languages/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Blogging</title>
-      <link>https://alikhil.dev/categories/blogging/</link>
-      <pubDate>Thu, 17 May 2018 16:03:44 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/categories/blogging/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
