@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Tue, 15 Sep 2026 23:47:28 +0200</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Sep 2026 23:00:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Networking</title>
+      <link>https://alikhil.dev/categories/networking/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/categories/networking/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Self-Hosting</title>
+      <link>https://alikhil.dev/categories/self-hosting/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/categories/self-hosting/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Blogging</title>
       <link>https://alikhil.dev/categories/blogging/</link>
@@ -69,16 +89,6 @@
     </item>
     
     <item>
-      <title>Self-Hosting</title>
-      <link>https://alikhil.dev/categories/self-hosting/</link>
-      <pubDate>Sat, 11 Jul 2026 12:00:00 +0200</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/categories/self-hosting/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Mac</title>
       <link>https://alikhil.dev/categories/mac/</link>
       <pubDate>Mon, 22 Jun 2026 20:00:00 +0200</pubDate>
@@ -104,16 +114,6 @@
       <pubDate>Sat, 21 Mar 2026 14:11:43 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/categories/web/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Networking</title>
-      <link>https://alikhil.dev/categories/networking/</link>
-      <pubDate>Tue, 05 Aug 2025 21:14:12 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/categories/networking/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

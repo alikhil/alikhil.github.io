@@ -6,11 +6,11 @@ Use this file as a short guide to the site. The links below lead to canonical pu
 
 ## Latest posts
 
+- [My MikroTik workaround for LaLiga Cloudflare blocks](https://alikhil.dev/posts/mikrotik-workaround-laliga-cloudflare-blocks/): I got tired of manually sending Cloudflare traffic through a VPN whenever LaLiga blocks shared IP addresses during a match. So I taught my MikroTik to do it for me.
 - [What Stops Me from Posting Publicly](https://alikhil.dev/posts/what-stops-me-from-posting-publicly/): Why familiar ideas can still be worth writing about, and how the search for novelty makes us discard potentially useful posts.
 - [Protect Kubernetes Services with OAuth2 Proxy, Gateway API, Traefik, and Pocket ID](https://alikhil.dev/posts/oauth2-proxy-gateway-api-traefik/): A practical Gateway API replacement for ingress-nginx auth annotations: protect Kubernetes services with Traefik ForwardAuth, OAuth2 Proxy, and Pocket ID.
 - [How to not burnout](https://alikhil.dev/posts/how-to-not-burnout/): Burnout prevention for software engineers: practical ways to set work-life boundaries, recharge, and protect your motivation
 - [How to control RGB on RAM sticks, motherboards, coolers, graphics cards programmatically with OpenRGB.](https://alikhil.dev/posts/control-rgb-lights-with-openrgb/): Install OpenRGB on Linux and use a systemd service to turn off RGB lighting on every boot.
-- [Forward SMS to Telegram with Android](https://alikhil.dev/posts/forward-sms-to-telegram-with-android/): How I forward SMS to Telegram using a dedicated Android phone.
 
 
 ## Site sections

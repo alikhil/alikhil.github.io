@@ -7,7 +7,67 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>Alik Khilazhev</managingEditor>
-    <lastBuildDate>Tue, 15 Sep 2026 23:47:28 +0200</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Sep 2026 23:00:00 +0200</lastBuildDate><atom:link href="https://alikhil.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloudflare</title>
+      <link>https://alikhil.dev/tags/cloudflare/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/cloudflare/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Laliga</title>
+      <link>https://alikhil.dev/tags/laliga/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/laliga/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Mikrotik</title>
+      <link>https://alikhil.dev/tags/mikrotik/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/mikrotik/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Routeros</title>
+      <link>https://alikhil.dev/tags/routeros/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/routeros/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Spain</title>
+      <link>https://alikhil.dev/tags/spain/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/spain/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Vpn</title>
+      <link>https://alikhil.dev/tags/vpn/</link>
+      <pubDate>Wed, 23 Sep 2026 23:00:00 +0200</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/tags/vpn/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
     <item>
       <title>Writing</title>
       <link>https://alikhil.dev/tags/writing/</link>
@@ -459,41 +519,11 @@
     </item>
     
     <item>
-      <title>Mikrotik</title>
-      <link>https://alikhil.dev/tags/mikrotik/</link>
-      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/mikrotik/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vpn</title>
-      <link>https://alikhil.dev/tags/vpn/</link>
-      <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/vpn/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Wireguard</title>
       <link>https://alikhil.dev/tags/wireguard/</link>
       <pubDate>Sun, 13 Apr 2025 14:11:43 +0300</pubDate>
       <author>Alik Khilazhev</author>
       <guid>https://alikhil.dev/tags/wireguard/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Routeros</title>
-      <link>https://alikhil.dev/tags/routeros/</link>
-      <pubDate>Sun, 30 Mar 2025 16:01:25 +0300</pubDate>
-      <author>Alik Khilazhev</author>
-      <guid>https://alikhil.dev/tags/routeros/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
