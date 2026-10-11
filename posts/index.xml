@@ -3083,5 +3083,100 @@ Try to add to your <code>PATH</code> envar with path directory where <code>go</c
 </span></span></code></pre></div>]]></content:encoded>
     </item>
     
+    <item>
+      <title>How to Avoid YouTube Ads Using MikroTik and a VPN</title>
+      <link>https://alikhil.dev/posts/how-to-avoid-youtube-ads-using-mikrotik-and-vpn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>Alik Khilazhev</author>
+      <guid>https://alikhil.dev/posts/how-to-avoid-youtube-ads-using-mikrotik-and-vpn/</guid>
+      <description>How I got around YouTube ads without paying for Premium by routing YT traffic through a VPN on my MikroTik router.</description>
+      <content:encoded><![CDATA[<p>I do not watch YouTube that often, but the ads get on my nerves whenever I do. For a while, I paid for Turkish YouTube Premium through my Apple account. That worked until recently, when I could no longer renew it. I did not feel like paying more for Premium, so I decided to try a nerdier way around the ads. And it seems to work.</p>
+<p>In some countries YouTube serves fewer or no ads. My workaround is to send only YouTube traffic through a VPN endpoint in one of them. I chose Andorra because it is the closest to where I live, and it worked for me. The rest of the network still uses my normal internet connection (ah, <a href="/posts/mikrotik-workaround-laliga-cloudflare-blocks/">except Cloudflare during LaLiga football matches</a>). I used NordVPN with IKEv2/IPsec on my MikroTik router. You can use another VPN provider or protocol too.</p>
+<h2 id="get-the-vpn-working-first">Get the VPN working first</h2>
+<p>You need a MikroTik router running RouterOS 7 and a VPN provider that supports manual connections through IKEv2/IPsec, WireGuard, or OpenVPN.</p>
+<p>Honestly, OpenVPN on MikroTik was a pain for me. I could not get it working with my provider. RouterOS has its own OpenVPN implementation with <a href="https://help.mikrotik.com/docs/spaces/ROS/pages/2031655/OpenVPN#Limitations">documented limitations</a>, including missing NCP cipher negotiation. That does not explain every connection problem, but for this setup I would choose WireGuard or IKEv2/IPsec.</p>
+<p>I used IKEv2/IPsec. Here is an example based on my NordVPN configuration, with the endpoint and credentials replaced by placeholders. Use an actual IKEv2 hostname from your provider. For NordVPN, follow the certificate import steps in <a href="https://help.mikrotik.com/docs/spaces/ROS/pages/125992982/IKEv2%2BEAP%2Bbetween%2BNordVPN%2Band%2BRouterOS">MikroTik&rsquo;s official setup guide</a> first; other providers have their own instructions. Bring up the tunnel before adding the YouTube rules below.</p>
+<details>
+<summary>My IKEv2/IPsec configuration</summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ip ipsec mode-config
+</span></span><span class="line"><span class="cl">add connection-mark=VPNYouTube name=VPNYouTube responder=no use-responder-dns=no
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ip ipsec policy group
+</span></span><span class="line"><span class="cl">add name=VPNYouTube
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ip ipsec profile
+</span></span><span class="line"><span class="cl">add name=VPNYouTube
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ip ipsec peer
+</span></span><span class="line"><span class="cl">add address=&#34;&lt;IKEV2_SERVER_HOSTNAME&gt;&#34; exchange-mode=ike2 \
+</span></span><span class="line"><span class="cl">    name=VPNYouTube profile=VPNYouTube
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ip ipsec proposal
+</span></span><span class="line"><span class="cl">add name=VPNYouTube pfs-group=none
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ip ipsec identity
+</span></span><span class="line"><span class="cl">add auth-method=eap eap-methods=eap-mschapv2 \
+</span></span><span class="line"><span class="cl">    generate-policy=port-strict mode-config=VPNYouTube peer=VPNYouTube \
+</span></span><span class="line"><span class="cl">    policy-template-group=VPNYouTube \
+</span></span><span class="line"><span class="cl">    username=&#34;&lt;VPN_SERVICE_USERNAME&gt;&#34; password=&#34;&lt;VPN_SERVICE_PASSWORD&gt;&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ip ipsec policy
+</span></span><span class="line"><span class="cl">add dst-address=0.0.0.0/0 src-address=0.0.0.0/0 template=yes \
+</span></span><span class="line"><span class="cl">    group=VPNYouTube proposal=VPNYouTube
+</span></span></code></pre></div><p>The identity uses EAP-MSCHAPv2 and the provider&rsquo;s service credentials. Other providers may need different authentication or encryption settings. The <code>VPNYouTube</code> connection mark is what ties this configuration to the firewall rule below.</p>
+</details>
+<h2 id="the-traffic-split">The traffic split</h2>
+<p>With the VPN connected, the next job is to send YouTube traffic through it. To do that, the router needs to know which destination IP addresses belong to YouTube. I have not found a complete official list from Google, but there are open-source projects that collect these addresses and update their lists automatically.</p>
+<p>My network uses only IPv4, so the commands below cover IPv4. If you use IPv6, you will also need an IPv6 address list and matching firewall and VPN routing settings. Otherwise those connections can still go through your normal internet connection.</p>
+<h3 id="download-the-youtube-ip-ranges">Download the YouTube IP ranges</h3>
+<p>I chose <a href="https://github.com/touhidurrr/iplist-youtube">touhidurrr/iplist-youtube</a>. It collects addresses through DNS lookups and automatically updates the lists. It also provides a RouterOS script, so I can import the addresses directly into my router.</p>
+<p>These lists can miss addresses or include unrelated ones. Shared CDN ranges can also send other traffic through the VPN. Choose a source you trust and check its contents before using it.</p>
+<p>There is another risk here: <code>/import</code> executes RouterOS commands. The example below downloads a script from the internet and runs it on the router every day. A malicious change to that file could change your router configuration with the permissions granted to the script. HTTPS verifies the connection, not whether the downloaded commands are safe. Review the source before enabling automatic imports; for more control, use a reviewed copy that you update yourself.</p>
+<p>My refresh script downloads the file and imports it into the <code>youtube</code> firewall address list. The scheduler runs it once a day at 00:20, and the last command runs it immediately for the initial setup. The upstream file currently clears and rebuilds <code>youtube</code>, leaving separate lists such as my <code>cloudflare-ips</code> alone.</p>
+<p>Paste this into the RouterOS terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="n">system</span> <span class="n">script</span>
+</span></span><span class="line"><span class="cl"><span class="n">add</span> <span class="n">name</span><span class="o">=</span><span class="n">youtube</span><span class="o">-</span><span class="n">iplist</span><span class="o">-</span><span class="n">refresh</span> <span class="n">policy</span><span class="o">=</span><span class="n">ftp</span><span class="p">,</span><span class="n">read</span><span class="p">,</span><span class="n">write</span><span class="p">,</span><span class="n">policy</span><span class="p">,</span><span class="n">test</span> <span class="n">source</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">:</span><span class="nb">log</span> <span class="n">info</span> <span class="s2">&#34;Refreshing YouTube IP list&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">/</span><span class="k">tool</span> <span class="n">fetch</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://raw.githubusercontent.com/touhidurrr/iplist-youtube/main/lists/routeros.rsc&#34;</span> \
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span><span class="o">=</span><span class="n">https</span> <span class="n">check</span><span class="o">-</span><span class="n">certificate</span><span class="o">=</span><span class="n">yes</span> <span class="n">dst</span><span class="o">-</span><span class="n">path</span><span class="o">=</span><span class="n">youtube</span><span class="o">-</span><span class="n">iplist</span><span class="o">.</span><span class="n">rsc</span>
+</span></span><span class="line"><span class="cl">    <span class="o">/</span><span class="n">import</span> <span class="n">file</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">youtube</span><span class="o">-</span><span class="n">iplist</span><span class="o">.</span><span class="n">rsc</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">system</span> <span class="n">scheduler</span>
+</span></span><span class="line"><span class="cl"><span class="n">add</span> <span class="n">name</span><span class="o">=</span><span class="n">youtube</span><span class="o">-</span><span class="n">iplist</span><span class="o">-</span><span class="n">refresh</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="n">d</span> <span class="n">start</span><span class="o">-</span><span class="n">time</span><span class="o">=</span><span class="mi">00</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">00</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">on</span><span class="o">-</span><span class="n">event</span><span class="o">=</span><span class="n">youtube</span><span class="o">-</span><span class="n">iplist</span><span class="o">-</span><span class="n">refresh</span> <span class="n">policy</span><span class="o">=</span><span class="n">ftp</span><span class="p">,</span><span class="n">read</span><span class="p">,</span><span class="n">write</span><span class="p">,</span><span class="n">policy</span><span class="p">,</span><span class="n">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">system</span> <span class="n">script</span> <span class="n">run</span> <span class="n">youtube</span><span class="o">-</span><span class="n">iplist</span><span class="o">-</span><span class="n">refresh</span>
+</span></span></code></pre></div><p>After it completes, check that the list has entries:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ip firewall address-list print count-only where list=youtube
+</span></span></code></pre></div><h3 id="mark-youtube-before-the-general-routing-rules">Mark YouTube before the general routing rules</h3>
+<p>Now the router has the destination list. The next rule checks connections coming from the LAN: if the destination is in <code>youtube</code> and the connection has no mark yet, it labels that connection <code>VPNYouTube</code>.</p>
+<p>The IPsec mode config above uses the same label to generate a dynamic source NAT rule. That rule translates marked connections to the address assigned by the VPN server, so they match the tunnel&rsquo;s IPsec policy.</p>
+<p>The example assumes you already have an interface list named <code>LAN</code> containing your home network interfaces, such as your LAN bridge. Check it in WinBox under Interfaces → Interface List, or with <code>/interface list member print</code>. If your list has a different name, replace <code>LAN</code> below.</p>
+<p>Add this rule, then move it above any general load-balancing or policy-routing rules in your mangle list:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ip firewall mangle
+</span></span><span class="line"><span class="cl">add chain=prerouting action=mark-connection \
+</span></span><span class="line"><span class="cl">    comment=&#34;route YouTube through VPN&#34; \
+</span></span><span class="line"><span class="cl">    in-interface-list=LAN connection-mark=no-mark \
+</span></span><span class="line"><span class="cl">    dst-address-list=youtube dst-address-type=!local \
+</span></span><span class="line"><span class="cl">    new-connection-mark=VPNYouTube
+</span></span></code></pre></div><p>The mark belongs to the connection, so subsequent packets keep it. Connections to destinations outside the list continue to follow your usual routing rules.</p>
+<p>If you already use rules to split traffic between multiple internet connections, put the YouTube rule above them. Otherwise those rules may assign a different connection mark first.</p>
+<p>Also check your firewall&rsquo;s FastTrack rules before testing. FastTrack speeds up forwarding but bypasses IPsec processing, so exclude connections marked <code>VPNYouTube</code>. If your FastTrack rule already matches only <code>connection-mark=no-mark</code>, these connections are excluded. Otherwise adjust its conditions in WinBox, or temporarily disable FastTrack while testing. MikroTik explains this behavior in its <a href="https://help.mikrotik.com/docs/spaces/ROS/pages/130220087/Connection%2Btracking">connection tracking documentation</a>.</p>
+<h2 id="check-that-it-is-working">Check that it is working</h2>
+<p>First, clear the router&rsquo;s tracked connections so YouTube starts new ones with the new rules. This interrupts active connections across your network and may disconnect your router management session, so run it from your local network when you can tolerate a brief interruption:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ip firewall connection remove [find]
+</span></span></code></pre></div><p>Then open YouTube and play a few videos. Check whether they load and whether you still see ads. While a video is playing, you can check the router too:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ip firewall mangle print stats where comment=&#34;route YouTube through VPN&#34;
+</span></span><span class="line"><span class="cl">/ip firewall connection print where connection-mark=VPNYouTube
+</span></span><span class="line"><span class="cl">/ip ipsec active-peers print
+</span></span></code></pre></div><p>The first command shows how much traffic has matched the YouTube rule. The second shows connections marked <code>VPNYouTube</code>, and the third shows active IPsec peers. These checks help confirm that traffic is being selected and the tunnel is connected; watching videos is still the test for ads.</p>
+<p>If the rule&rsquo;s counter stays at zero, check that the <code>youtube</code> list has entries and that the rule is above your general routing rules. If YouTube stops loading, check that the tunnel is up and that VPN traffic is excluded from FastTrack.</p>
+<p>You may also need to clear YouTube&rsquo;s cache on your device, or clear YouTube cookies and site data in your browser. That can sign you out. For a mobile app, try clearing its data or reinstalling it, then signing in again.</p>
+<p>Android TV took me much longer to get working. As soon as I sent YouTube through the VPN, it stopped opening entirely, both in the YouTube app and in the TV&rsquo;s browser. Clearing the cache did not help. I eventually removed the YouTube app and all its cached data, installed it again, and signed in again. Only then did it work for me.</p>
+<p>To undo this later, disable or remove the mangle rules and the VPN policy. The default route for the rest of the network does not need to change.</p>
+<p>Happy adless watching!</p>]]></content:encoded>
+    </item>
+    
   </channel>
 </rss>
